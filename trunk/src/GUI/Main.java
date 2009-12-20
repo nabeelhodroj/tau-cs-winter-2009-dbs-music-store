@@ -1,25 +1,13 @@
 package GUI;
+import java.util.ListIterator;
+import java.util.Observable;
+
+import org.eclipse.jface.viewers.*;
 import com.cloudgarden.resource.SWTResourceManager;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.*;
+import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.graphics.*;
+import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
 
 /**
@@ -44,6 +32,14 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	private Group mainHeaderContainer;
 	private Menu mainMenuBar;
+	private Label searchLabelSaleInfoQuantity;
+	private Button searchButtonSaleInfoSale;
+	private Text searchTextBoxSaleInfoQuantity;
+	private Label searchLabelStockInfoPrice;
+	private Button searchButtonStockInfoOrder;
+	private Label searchLabelStockInfoLocation;
+	private Label searchLabelStockInfoStoreStock;
+	private Group searchGroupSaleInfo;
 	private Button searchCheckBoxYear;
 	private Label searchLabelStock;
 	private Button searchCheckBoxGenreOther;
@@ -59,6 +55,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Button searchBulletInStockInNetwork;
 	private Button searchBulletInStockAll;
 	private Button searchCheckBoxGenreJazz;
+	private ProgressBar searchProgressBar;
+	private Table searchTableAlbumResults;
+	private Table searchTableSongResults;
+	private Group searchGroupStockInfo;
+	private Button searchButtonSearch;
+	private Button searchButtonClear;
 	private Text searchTextBoxGenreOther;
 	private Button searchCheckBoxGenreRock;
 	private Text searchTextBoxSongNames;
@@ -105,7 +107,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	*/
 	public static void showGUI() {
 		Display display = Display.getDefault();
-		Shell shell = new Shell(display);
+		Shell shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		Main inst = new Main(shell, SWT.NULL);
 		Point size = inst.getSize();
 		shell.setLayout(new FillLayout());
@@ -187,7 +189,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupOptions = new Group(searchTabComposite, SWT.NONE);
 							searchGroupOptions.setLayout(null);
 							searchGroupOptions.setText("Search by");
-							searchGroupOptions.setBounds(5, 0, 355, 315);
+							searchGroupOptions.setBounds(5, 0, 355, 280);
 							{
 								searchBulletByAlbum = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
 								searchBulletByAlbum.setText("Search by album ID:");
@@ -281,47 +283,47 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCheckBoxGenre03 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre03.setText("Genre03");
-								searchCheckBoxGenre03.setBounds(12, 227, 60, 16);
+								searchCheckBoxGenre03.setBounds(76, 187, 60, 16);
 							}
 							{
 								searchCheckBoxGenre04 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre04.setText("Genre04");
-								searchCheckBoxGenre04.setBounds(12, 247, 60, 16);
+								searchCheckBoxGenre04.setBounds(76, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre05 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre05.setText("Genre05");
-								searchCheckBoxGenre05.setBounds(12, 267, 60, 16);
+								searchCheckBoxGenre05.setBounds(141, 187, 60, 16);
 							}
 							{
 								searchCheckBoxGenre06 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre06.setText("Genre06");
-								searchCheckBoxGenre06.setBounds(78, 187, 60, 16);
+								searchCheckBoxGenre06.setBounds(141, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre07 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre07.setText("Genre07");
-								searchCheckBoxGenre07.setBounds(78, 207, 60, 16);
+								searchCheckBoxGenre07.setBounds(205, 187, 60, 16);
 							}
 							{
 								searchCheckBoxGenre08 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre08.setText("Genre08");
-								searchCheckBoxGenre08.setBounds(78, 227, 60, 16);
+								searchCheckBoxGenre08.setBounds(205, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre09 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre09.setText("Genre09");
-								searchCheckBoxGenre09.setBounds(78, 247, 60, 16);
+								searchCheckBoxGenre09.setBounds(270, 187, 60, 16);
 							}
 							{
 								searchCheckBoxGenre10 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre10.setText("Genre10");
-								searchCheckBoxGenre10.setBounds(78, 267, 60, 16);
+								searchCheckBoxGenre10.setBounds(270, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenreOther = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreOther.setText("Other:");
-								searchCheckBoxGenreOther.setBounds(12, 283, 54, 22);
+								searchCheckBoxGenreOther.setBounds(12, 223, 54, 22);
 							}
 							{
 								searchLabelStock = new Label(searchGroupOptions, SWT.NONE);
@@ -330,16 +332,110 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchTextBoxGenreOther = new Text(searchGroupOptions, SWT.BORDER);
-								searchTextBoxGenreOther.setBounds(66, 283, 74, 22);
+								searchTextBoxGenreOther.setBounds(70, 223, 273, 22);
+							}
+							{
+								searchButtonClear = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
+								searchButtonClear.setText("Clear fields");
+								searchButtonClear.setBounds(12, 251, 156, 22);
+							}
+							{
+								searchButtonSearch = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
+								searchButtonSearch.setText("Search");
+								searchButtonSearch.setBounds(174, 251, 169, 22);
 							}
 						}
 						{
 							searchGroupResults = new Group(searchTabComposite, SWT.NONE);
-							GridLayout searchGroupResultsLayout = new GridLayout();
-							searchGroupResultsLayout.makeColumnsEqualWidth = true;
-							searchGroupResults.setLayout(searchGroupResultsLayout);
+							searchGroupResults.setLayout(null);
 							searchGroupResults.setText("Seach Results");
 							searchGroupResults.setBounds(366, 0, 419, 465);
+							{
+								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
+										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+								searchTableAlbumResults.setBounds(12, 20, 395, 225);
+								
+								String[] albumResultTitles = {"Album ID","Album name","Artist","Year","Genre","Length"};
+								int tableWidth = searchTableAlbumResults.getClientArea().width - getBorderWidth()*2;
+								for (int i = 0; i < albumResultTitles.length; i++) {
+									TableColumn column = new TableColumn(searchTableAlbumResults, SWT.NONE);
+									column.setText(albumResultTitles[i]);
+									column.setResizable(true);
+									column.setMoveable(true);
+									column.setWidth(tableWidth / albumResultTitles.length);
+								}
+								searchTableAlbumResults.setHeaderVisible(true);
+								searchTableAlbumResults.setLinesVisible(true);
+							}
+							{
+								searchProgressBar = new ProgressBar(searchGroupResults, SWT.NONE);
+								searchProgressBar.setBounds(15, 251, 392, 22);
+							}
+							{
+								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
+										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+								searchTableSongResults.setBounds(12, 286, 395, 170);
+								
+								String[] albumResultTitles = {"Song name","Artist","Length"};
+								int tableWidth = searchTableSongResults.getClientArea().width - getBorderWidth()*2;
+								for (int i = 0; i < albumResultTitles.length; i++) {
+									TableColumn column = new TableColumn(searchTableSongResults, SWT.NONE);
+									column.setText(albumResultTitles[i]);
+									column.setResizable(true);
+									column.setMoveable(true);
+									column.setWidth(tableWidth / albumResultTitles.length);
+								}
+								searchTableSongResults.setHeaderVisible(true);
+								searchTableSongResults.setLinesVisible(true);
+							}
+							
+						}
+						{
+							searchGroupStockInfo = new Group(searchTabComposite, SWT.NONE);
+							searchGroupStockInfo.setLayout(null);
+							searchGroupStockInfo.setText("Stock Information");
+							searchGroupStockInfo.setBounds(5, 280, 171, 185);
+							{
+								searchLabelStockInfoStoreStock = new Label(searchGroupStockInfo, SWT.NONE);
+								searchLabelStockInfoStoreStock.setText("Store stock:");
+								searchLabelStockInfoStoreStock.setBounds(12, 22, 152, 22);
+							}
+							{
+								searchLabelStockInfoLocation = new Label(searchGroupStockInfo, SWT.NONE);
+								searchLabelStockInfoLocation.setText("Storage location: ");
+								searchLabelStockInfoLocation.setBounds(12, 44, 152, 22);
+							}
+							{
+								searchLabelStockInfoPrice = new Label(searchGroupStockInfo, SWT.NONE);
+								searchLabelStockInfoPrice.setText("Price:");
+								searchLabelStockInfoPrice.setBounds(12, 66, 152, 22);
+							}
+							{
+								searchButtonStockInfoOrder = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
+								searchButtonStockInfoOrder.setText("Place an order...");
+								searchButtonStockInfoOrder.setBounds(12, 94, 147, 85);
+							}
+						}
+						{
+							searchGroupSaleInfo = new Group(searchTabComposite, SWT.NONE);
+							searchGroupSaleInfo.setLayout(null);
+							searchGroupSaleInfo.setText("Sale");
+							searchGroupSaleInfo.setBounds(182, 280, 177, 185);
+							{
+								searchLabelSaleInfoQuantity = new Label(searchGroupSaleInfo, SWT.NONE);
+								searchLabelSaleInfoQuantity.setText("Add to sale with quantity:");
+								searchLabelSaleInfoQuantity.setBounds(8, 22, 127, 22);
+							}
+							{
+								searchTextBoxSaleInfoQuantity = new Text(searchGroupSaleInfo, SWT.BORDER);
+								searchTextBoxSaleInfoQuantity.setText("1");
+								searchTextBoxSaleInfoQuantity.setBounds(137, 19, 28, 22);
+							}
+							{
+								searchButtonSaleInfoSale = new Button(searchGroupSaleInfo, SWT.PUSH | SWT.CENTER);
+								searchButtonSaleInfoSale.setText("Add to sale...");
+								searchButtonSaleInfoSale.setBounds(8, 55, 157, 124);
+							}
 						}
 					}
 				}
