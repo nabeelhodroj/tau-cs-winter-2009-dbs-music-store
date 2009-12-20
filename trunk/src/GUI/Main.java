@@ -1,6 +1,9 @@
 package GUI;
 import java.util.ListIterator;
 import java.util.Observable;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import org.eclipse.jface.viewers.*;
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
@@ -29,9 +32,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		SWTResourceManager.registerResourceUser(this);
 	}
 	
-	private Group mainHeaderContainer;
+	private Composite mainHeaderContainer;
 	private Menu mainMenuBar;
 	private Label searchLabelSaleInfoQuantity;
+	private Label mainHeaderLabelDateTime;
+	private Composite saleCompositeMain;
+	private Composite searchCompositeStockField;
 	private Button searchButtonSaleInfoSale;
 	private Text searchTextBoxSaleInfoQuantity;
 	private Label searchLabelStockInfoPrice;
@@ -159,17 +165,25 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				}
 			}
 			{
-				mainHeaderContainer = new Group(this, SWT.NONE);
-				GridLayout MainHeaderLayout = new GridLayout();
-				MainHeaderLayout.makeColumnsEqualWidth = true;
-				mainHeaderContainer.setLayout(MainHeaderLayout);
+				mainHeaderContainer = new Composite(this, SWT.NONE);
+				mainHeaderContainer.setLayout(null);
 				GridData MainHeaderLData = new GridData();
 				MainHeaderLData.widthHint = 785;
 				MainHeaderLData.heightHint = 80;
 				mainHeaderContainer.setLayoutData(MainHeaderLData);
-				mainHeaderContainer.setText("Store Information");
+				{
+					mainHeaderLabelDateTime = new Label(mainHeaderContainer, SWT.NONE);
+					mainHeaderLabelDateTime.setBounds(0, 0, 195, 20);
+					mainHeaderLabelDateTime.setSize(195, 22);
+					mainHeaderLabelDateTime.setText("");
+				}
 			}
 			{
+				/**
+				 * Search Tab
+				 * ==========
+				 * Contains search fields, results and stock and sale actions
+				 */
 				mainTabFolder = new TabFolder(this, SWT.NONE);
 				GridData mainTabFolderLData = new GridData();
 				mainTabFolderLData.widthHint = 785;
@@ -188,11 +202,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupOptions = new Group(searchTabComposite, SWT.NONE);
 							searchGroupOptions.setLayout(null);
 							searchGroupOptions.setText("Search by");
-							searchGroupOptions.setBounds(5, 0, 355, 280);
+							searchGroupOptions.setBounds(5, 0, 355, 313);
 							{
 								searchBulletByAlbum = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
 								searchBulletByAlbum.setText("Search by album ID:");
 								searchBulletByAlbum.setBounds(12, 16, 118, 22);
+								searchBulletByAlbum.setSelection(true);
 							}
 							{
 								searchBulletOtherParameters = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
@@ -227,7 +242,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCheckBoxGenres = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenres.setText("Genre(s):");
-								searchCheckBoxGenres.setBounds(12, 166, 82, 22);
+								searchCheckBoxGenres.setBounds(12, 186, 82, 22);
 							}
 							{
 								searchTextBoxAlbumName = new Text(searchGroupOptions, SWT.BORDER);
@@ -257,91 +272,97 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCheckBoxGenreRock = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreRock.setText("Rock");
-								searchCheckBoxGenreRock.setBounds(12, 187, 60, 16);
+								searchCheckBoxGenreRock.setBounds(12, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenreJazz = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreJazz.setText("Jazz");
-								searchCheckBoxGenreJazz.setBounds(12, 207, 60, 16);
-							}
-							{
-								searchBulletInStockAll = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
-								searchBulletInStockAll.setText("All");
-								searchBulletInStockAll.setBounds(154, 166, 33, 22);
-							}
-							{
-								searchBulletInStockInNetwork = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
-								searchBulletInStockInNetwork.setText("In network");
-								searchBulletInStockInNetwork.setBounds(193, 166, 76, 22);
-							}
-							{
-								searchBulletInStockInStore = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
-								searchBulletInStockInStore.setText("In store");
-								searchBulletInStockInStore.setBounds(269, 166, 60, 22);
+								searchCheckBoxGenreJazz.setBounds(12, 227, 60, 16);
 							}
 							{
 								searchCheckBoxGenre03 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre03.setText("Genre03");
-								searchCheckBoxGenre03.setBounds(76, 187, 60, 16);
+								searchCheckBoxGenre03.setBounds(76, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre04 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre04.setText("Genre04");
-								searchCheckBoxGenre04.setBounds(76, 207, 60, 16);
+								searchCheckBoxGenre04.setBounds(76, 227, 60, 16);
 							}
 							{
 								searchCheckBoxGenre05 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre05.setText("Genre05");
-								searchCheckBoxGenre05.setBounds(141, 187, 60, 16);
+								searchCheckBoxGenre05.setBounds(141, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre06 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre06.setText("Genre06");
-								searchCheckBoxGenre06.setBounds(141, 207, 60, 16);
+								searchCheckBoxGenre06.setBounds(141, 227, 60, 16);
 							}
 							{
 								searchCheckBoxGenre07 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre07.setText("Genre07");
-								searchCheckBoxGenre07.setBounds(205, 187, 60, 16);
+								searchCheckBoxGenre07.setBounds(205, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre08 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre08.setText("Genre08");
-								searchCheckBoxGenre08.setBounds(205, 207, 60, 16);
+								searchCheckBoxGenre08.setBounds(205, 227, 60, 16);
 							}
 							{
 								searchCheckBoxGenre09 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre09.setText("Genre09");
-								searchCheckBoxGenre09.setBounds(270, 187, 60, 16);
+								searchCheckBoxGenre09.setBounds(270, 207, 60, 16);
 							}
 							{
 								searchCheckBoxGenre10 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenre10.setText("Genre10");
-								searchCheckBoxGenre10.setBounds(270, 207, 60, 16);
+								searchCheckBoxGenre10.setBounds(270, 227, 60, 16);
 							}
 							{
 								searchCheckBoxGenreOther = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreOther.setText("Other:");
-								searchCheckBoxGenreOther.setBounds(12, 223, 54, 22);
-							}
-							{
-								searchLabelStock = new Label(searchGroupOptions, SWT.NONE);
-								searchLabelStock.setText("Stock:");
-								searchLabelStock.setBounds(106, 169, 36, 16);
+								searchCheckBoxGenreOther.setBounds(12, 243, 54, 22);
 							}
 							{
 								searchTextBoxGenreOther = new Text(searchGroupOptions, SWT.BORDER);
-								searchTextBoxGenreOther.setBounds(70, 223, 273, 22);
+								searchTextBoxGenreOther.setBounds(74, 243, 273, 22);
 							}
 							{
 								searchButtonClear = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
 								searchButtonClear.setText("Clear fields");
-								searchButtonClear.setBounds(12, 251, 156, 22);
+								searchButtonClear.setBounds(12, 273, 156, 33);
 							}
 							{
 								searchButtonSearch = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
 								searchButtonSearch.setText("Search");
-								searchButtonSearch.setBounds(174, 251, 169, 22);
+								searchButtonSearch.setBounds(174, 273, 169, 33);
+							}
+							{
+								searchCompositeStockField = new Composite(searchGroupOptions, SWT.NONE);
+								searchCompositeStockField.setLayout(null);
+								searchCompositeStockField.setBounds(12, 166, 331, 20);
+								{
+									searchLabelStock = new Label(searchCompositeStockField, SWT.NONE);
+									searchLabelStock.setText("Stock:");
+									searchLabelStock.setBounds(0, 2, 36, 16);
+								}
+								{
+									searchBulletInStockInStore = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
+									searchBulletInStockInStore.setText("In store");
+									searchBulletInStockInStore.setBounds(223, -1, 60, 22);
+								}
+								{
+									searchBulletInStockInNetwork = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
+									searchBulletInStockInNetwork.setText("In network");
+									searchBulletInStockInNetwork.setBounds(147, -1, 76, 22);
+								}
+								{
+									searchBulletInStockAll = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
+									searchBulletInStockAll.setText("All");
+									searchBulletInStockAll.setBounds(96, -1, 33, 22);
+									searchBulletInStockAll.setSelection(true);
+								}
 							}
 						}
 						{
@@ -393,33 +414,33 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupStockInfo = new Group(searchTabComposite, SWT.NONE);
 							searchGroupStockInfo.setLayout(null);
 							searchGroupStockInfo.setText("Stock Information");
-							searchGroupStockInfo.setBounds(5, 280, 171, 185);
+							searchGroupStockInfo.setBounds(5, 319, 171, 146);
 							{
 								searchLabelStockInfoStoreStock = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoStoreStock.setText("Store stock:");
-								searchLabelStockInfoStoreStock.setBounds(12, 22, 152, 22);
+								searchLabelStockInfoStoreStock.setBounds(12, 22, 152, 19);
 							}
 							{
 								searchLabelStockInfoLocation = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoLocation.setText("Storage location: ");
-								searchLabelStockInfoLocation.setBounds(12, 44, 152, 22);
+								searchLabelStockInfoLocation.setBounds(12, 44, 152, 19);
 							}
 							{
 								searchLabelStockInfoPrice = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoPrice.setText("Price:");
-								searchLabelStockInfoPrice.setBounds(12, 66, 152, 22);
+								searchLabelStockInfoPrice.setBounds(12, 66, 152, 19);
 							}
 							{
 								searchButtonStockInfoOrder = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonStockInfoOrder.setText("Place an order...");
-								searchButtonStockInfoOrder.setBounds(12, 94, 147, 85);
+								searchButtonStockInfoOrder.setBounds(12, 91, 147, 45);
 							}
 						}
 						{
 							searchGroupSaleInfo = new Group(searchTabComposite, SWT.NONE);
 							searchGroupSaleInfo.setLayout(null);
 							searchGroupSaleInfo.setText("Sale");
-							searchGroupSaleInfo.setBounds(182, 280, 177, 185);
+							searchGroupSaleInfo.setBounds(182, 319, 177, 146);
 							{
 								searchLabelSaleInfoQuantity = new Label(searchGroupSaleInfo, SWT.NONE);
 								searchLabelSaleInfoQuantity.setText("Add to sale with quantity:");
@@ -433,15 +454,26 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchButtonSaleInfoSale = new Button(searchGroupSaleInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonSaleInfoSale.setText("Add to sale...");
-								searchButtonSaleInfoSale.setBounds(8, 55, 157, 124);
+								searchButtonSaleInfoSale.setBounds(8, 91, 157, 45);
 							}
 						}
 					}
 				}
 				{
+					/**
+					 * Sale tab
+					 * ========
+					 * Manage current sale
+					 * 
+					 */
 					saleTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					saleTabItem.setText("Sale");
 					saleTabItem.setToolTipText("Manage current sale");
+					{
+						saleCompositeMain = new Composite(mainTabFolder, SWT.NONE);
+						saleCompositeMain.setLayout(null);
+						saleTabItem.setControl(saleCompositeMain);
+					}
 				}
 				{
 					stockTabItem = new TabItem(mainTabFolder, SWT.NONE);
@@ -459,9 +491,4 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			e.printStackTrace();
 		}
 	}
-	
-	public Group getMainHeaderContainer() {
-		return mainHeaderContainer;
-	}
-
 }
