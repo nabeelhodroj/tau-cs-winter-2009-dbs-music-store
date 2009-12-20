@@ -1,7 +1,6 @@
 package GUI;
 import java.util.ListIterator;
 import java.util.Observable;
-
 import org.eclipse.jface.viewers.*;
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
