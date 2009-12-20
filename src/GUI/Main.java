@@ -1,4 +1,5 @@
 package GUI;
+
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Date;
@@ -31,11 +32,17 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		//handle the obtaining and disposing of resources
 		SWTResourceManager.registerResourceUser(this);
 	}
-	
-	private Composite mainHeaderContainer;
+
 	private Menu mainMenuBar;
 	private Label searchLabelSaleInfoQuantity;
-	private Label mainHeaderLabelDateTime;
+	private Label mainLabelStoreDetailsDateTime;
+	private Label mainLabelQuickTipsTip;
+	private Group mainGroupHeaderText;
+	private Label mainLabelStoreDetailsStoreID;
+	private Label mainLabelStoreDetailsStoreManager;
+	private Label mainLabelStoreDetailsStorePhone;
+	private Label mainLabelStoreDetailsStoreAddress;
+	private Group mainGroupStoreDetails;
 	private Composite saleCompositeMain;
 	private Composite searchCompositeStockField;
 	private Button searchButtonSaleInfoSale;
@@ -97,6 +104,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	* org.eclipse.swt.widgets.Composite inside a new Shell.
 	*/
 	public static void main(String[] args) {
+		// generate Quick Tips
+		MainFuncs.generateTips();
+		// Start GUI
 		showGUI();
 	}
 	
@@ -146,12 +156,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	 */
 	private void initGUI() {
 		try {
-			GridLayout thisLayout = new GridLayout();
-			thisLayout.makeColumnsEqualWidth = true;
-			this.setLayout(thisLayout);
+			this.setLayout(null);
 			this.layout();
 			pack();
-			this.setSize(800, 600);
+			this.setSize(800, 590);
 			{
 				mainMenuBar = new Menu(getShell(), SWT.BAR);
 				getShell().setMenuBar(mainMenuBar);
@@ -165,31 +173,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				}
 			}
 			{
-				mainHeaderContainer = new Composite(this, SWT.NONE);
-				mainHeaderContainer.setLayout(null);
-				GridData MainHeaderLData = new GridData();
-				MainHeaderLData.widthHint = 785;
-				MainHeaderLData.heightHint = 80;
-				mainHeaderContainer.setLayoutData(MainHeaderLData);
-				{
-					mainHeaderLabelDateTime = new Label(mainHeaderContainer, SWT.NONE);
-					mainHeaderLabelDateTime.setBounds(0, 0, 195, 20);
-					mainHeaderLabelDateTime.setSize(195, 22);
-					mainHeaderLabelDateTime.setText("");
-				}
-			}
-			{
 				/**
 				 * Search Tab
 				 * ==========
 				 * Contains search fields, results and stock and sale actions
 				 */
 				mainTabFolder = new TabFolder(this, SWT.NONE);
-				GridData mainTabFolderLData = new GridData();
-				mainTabFolderLData.widthHint = 785;
-				mainTabFolderLData.heightHint = 465;
-				mainTabFolder.setLayoutData(mainTabFolderLData);
-				
+
 				{
 					searchTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					searchTabItem.setText("Search");
@@ -486,6 +476,49 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					managementTabItem.setToolTipText("View and manage HR");
 				}
 				mainTabFolder.setSelection(0);
+				mainTabFolder.setBounds(7, 92, 793, 491);
+			}
+			{
+				mainGroupStoreDetails = new Group(this, SWT.NONE);
+				mainGroupStoreDetails.setLayout(null);
+				mainGroupStoreDetails.setText("Store Details");
+				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
+				{
+					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreID.setText("Store: "+MainFuncs.getStoreID());
+					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
+				}
+				{
+					mainLabelStoreDetailsStoreAddress = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreAddress.setText("Address: "+MainFuncs.getStoreAddress()+", "+MainFuncs.getStoreCity());
+					mainLabelStoreDetailsStoreAddress.setBounds(5, 41, 245, 20);
+				}
+				{
+					mainLabelStoreDetailsStorePhone = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStorePhone.setText("Phone: "+MainFuncs.getStorePhone());
+					mainLabelStoreDetailsStorePhone.setBounds(5, 63, 133, 20);
+				}
+				{
+					mainLabelStoreDetailsStoreManager = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreManager.setText("Manager: "+MainFuncs.getStoreManager());
+					mainLabelStoreDetailsStoreManager.setBounds(150, 62, 162, 22);
+				}
+				{
+					mainLabelStoreDetailsDateTime = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsDateTime.setBounds(150, 19, 139, 20);
+					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
+				}
+			}
+			{
+				mainGroupHeaderText = new Group(this, SWT.NONE);
+				mainGroupHeaderText.setLayout(null);
+				mainGroupHeaderText.setBounds(337, 0, 460, 86);
+				mainGroupHeaderText.setText("Quick Tips");
+				{
+					mainLabelQuickTipsTip = new Label(mainGroupHeaderText, SWT.NONE);
+					mainLabelQuickTipsTip.setBounds(8, 19, 445, 61);
+					mainLabelQuickTipsTip.setText(MainFuncs.getTip());
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
