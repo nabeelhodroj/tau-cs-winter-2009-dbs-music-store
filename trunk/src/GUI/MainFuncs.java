@@ -133,7 +133,7 @@ public class MainFuncs {
 	private static Iterator<String> quickTipsIter;
 	public static void generateTips(){
 		String tip;
-		
+				
 		tip =	"For adding an album to current sale, search album by album ID or other parameters,\n"+
 				"go to the \"Sale\" box on the bottom of the search tab, enter wanted quantity and\n"+
 				"click the \"Add to sale\" button.";
