@@ -84,7 +84,16 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Button searchCheckBoxGenreJazz;
 	private ProgressBar searchProgressBar;
 	private Table searchTableAlbumResults;
+	private TableColumn searchTableColumnAlbumID;
+	private TableColumn searchTableColumnAlbumName;
+	private TableColumn searchTableColumnAlbumArtist;
+	private TableColumn searchTableColumnAlbumYear;
+	private TableColumn searchTableColumnAlbumGenre;
+	private TableColumn searchTableColumnAlbumLength;
 	private Table searchTableSongResults;
+	private TableColumn searchTableColumnSongName;
+	private TableColumn searchTableColumnSongArtist;
+	private TableColumn searchTableColumnSongLength;
 	private Group searchGroupStockInfo;
 	private Button searchButtonSearch;
 	private Button searchButtonClear;
@@ -379,18 +388,46 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 								searchTableAlbumResults.setBounds(12, 20, 395, 225);
-								
-								String[] albumResultTitles = {"Album ID","Album name","Artist","Year","Genre","Length"};
-								int tableWidth = searchTableAlbumResults.getClientArea().width - getBorderWidth()*2;
-								for (int i = 0; i < albumResultTitles.length; i++) {
-									TableColumn column = new TableColumn(searchTableAlbumResults, SWT.NONE);
-									column.setText(albumResultTitles[i]);
-									column.setResizable(true);
-									column.setMoveable(true);
-									column.setWidth(tableWidth / albumResultTitles.length);
-								}
 								searchTableAlbumResults.setHeaderVisible(true);
 								searchTableAlbumResults.setLinesVisible(true);
+								int numOfColumns = 6;
+								int tableWidth = searchTableAlbumResults.getClientArea().width - getBorderWidth()*2;
+								
+								searchTableColumnAlbumID = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumID.setText("Album ID");
+								searchTableColumnAlbumID.setResizable(true);
+								searchTableColumnAlbumID.setMoveable(true);
+								searchTableColumnAlbumID.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnAlbumName = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumName.setText("Album Name");
+								searchTableColumnAlbumName.setResizable(true);
+								searchTableColumnAlbumName.setMoveable(true);
+								searchTableColumnAlbumName.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnAlbumArtist = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumArtist.setText("Artist");
+								searchTableColumnAlbumArtist.setResizable(true);
+								searchTableColumnAlbumArtist.setMoveable(true);
+								searchTableColumnAlbumArtist.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnAlbumYear = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumYear.setText("Year");
+								searchTableColumnAlbumYear.setResizable(true);
+								searchTableColumnAlbumYear.setMoveable(true);
+								searchTableColumnAlbumYear.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnAlbumGenre = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumGenre.setText("Genre");
+								searchTableColumnAlbumGenre.setResizable(true);
+								searchTableColumnAlbumGenre.setMoveable(true);
+								searchTableColumnAlbumGenre.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnAlbumLength = new TableColumn(searchTableAlbumResults, SWT.NONE);
+								searchTableColumnAlbumLength.setText("Length");
+								searchTableColumnAlbumLength.setResizable(true);
+								searchTableColumnAlbumLength.setMoveable(true);
+								searchTableColumnAlbumLength.setWidth(tableWidth / numOfColumns);
 							}
 							{
 								searchProgressBar = new ProgressBar(searchGroupResults, SWT.NONE);
@@ -400,18 +437,29 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 								searchTableSongResults.setBounds(12, 286, 395, 170);
-								
-								String[] albumResultTitles = {"Song name","Artist","Length"};
-								int tableWidth = searchTableSongResults.getClientArea().width - getBorderWidth()*2;
-								for (int i = 0; i < albumResultTitles.length; i++) {
-									TableColumn column = new TableColumn(searchTableSongResults, SWT.NONE);
-									column.setText(albumResultTitles[i]);
-									column.setResizable(true);
-									column.setMoveable(true);
-									column.setWidth(tableWidth / albumResultTitles.length);
-								}
 								searchTableSongResults.setHeaderVisible(true);
 								searchTableSongResults.setLinesVisible(true);
+								
+								int tableWidth = searchTableSongResults.getClientArea().width - getBorderWidth()*2;
+								int numOfColumns = 3;
+								
+								searchTableColumnSongName = new TableColumn(searchTableSongResults, SWT.NONE);
+								searchTableColumnSongName.setText("Song name");
+								searchTableColumnSongName.setResizable(true);
+								searchTableColumnSongName.setMoveable(true);
+								searchTableColumnSongName.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnSongArtist = new TableColumn(searchTableSongResults, SWT.NONE);
+								searchTableColumnSongArtist.setText("Artist");
+								searchTableColumnSongArtist.setResizable(true);
+								searchTableColumnSongArtist.setMoveable(true);
+								searchTableColumnSongArtist.setWidth(tableWidth / numOfColumns);
+								
+								searchTableColumnSongLength = new TableColumn(searchTableSongResults, SWT.NONE);
+								searchTableColumnSongLength.setText("Length");
+								searchTableColumnSongLength.setResizable(true);
+								searchTableColumnSongLength.setMoveable(true);
+								searchTableColumnSongLength.setWidth(tableWidth / numOfColumns);
 							}
 							
 						}
@@ -536,32 +584,33 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							// adding columns
 							saleTableColumnAlbumID = new TableColumn(saleTableSaleItems, SWT.NONE);
 							saleTableColumnAlbumID.setText("Album ID");
-							saleTableColumnAlbumID.setResizable(false);
-							saleTableColumnAlbumID.setMoveable(false);
+							saleTableColumnAlbumID.setResizable(true);
+							saleTableColumnAlbumID.setMoveable(true);
 							saleTableColumnAlbumID.setWidth(tableWidth / numOfColumns);
 							
 							saleTableColumnAlbumName = new TableColumn(saleTableSaleItems, SWT.NONE);
 							saleTableColumnAlbumName.setText("Album name");
-							saleTableColumnAlbumName.setResizable(false);
-							saleTableColumnAlbumName.setMoveable(false);
+							saleTableColumnAlbumName.setResizable(true);
+							saleTableColumnAlbumName.setMoveable(true);
+							saleTableColumnAlbumName.setWidth(111);
 							saleTableColumnAlbumName.setWidth(tableWidth / numOfColumns);
 							
 							saleTableColumnQuantity = new TableColumn(saleTableSaleItems, SWT.NONE);
 							saleTableColumnQuantity.setText("Quantity");
-							saleTableColumnQuantity.setResizable(false);
-							saleTableColumnQuantity.setMoveable(false);
+							saleTableColumnQuantity.setResizable(true);
+							saleTableColumnQuantity.setMoveable(true);
 							saleTableColumnQuantity.setWidth(tableWidth / numOfColumns);
 							
 							saleTableColumnPricePerItem = new TableColumn(saleTableSaleItems, SWT.NONE);
 							saleTableColumnPricePerItem.setText("Price per item");
-							saleTableColumnPricePerItem.setResizable(false);
-							saleTableColumnPricePerItem.setMoveable(false);
+							saleTableColumnPricePerItem.setResizable(true);
+							saleTableColumnPricePerItem.setMoveable(true);
 							saleTableColumnPricePerItem.setWidth(tableWidth / numOfColumns);
 							
 							saleTableColumnPriceTotal = new TableColumn(saleTableSaleItems, SWT.NONE);
 							saleTableColumnPriceTotal.setText("Total price");
-							saleTableColumnPriceTotal.setResizable(false);
-							saleTableColumnPriceTotal.setMoveable(false);
+							saleTableColumnPriceTotal.setResizable(true);
+							saleTableColumnPriceTotal.setMoveable(true);
 							saleTableColumnPriceTotal.setWidth(tableWidth / numOfColumns);
 						}
 					}
