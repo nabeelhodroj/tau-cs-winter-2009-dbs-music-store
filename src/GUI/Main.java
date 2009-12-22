@@ -72,6 +72,28 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Text searchTextBoxSaleInfoQuantity;
 	private Label searchLabelStockInfoPrice;
 	private Button stockButtonClearOrder;
+	private Button stockButtonRemoveOrder;
+	private Button stockButtonCancelOrder;
+	private Label stockLabelOrders;
+	private Button stockButtonDenyRequest;
+	private Button stockButtonApproveRequest;
+	private Label stockLabelRequests;
+	private Table stockTableOrders;
+	private TableColumn stockTableColumnOrdersOrderID;
+	private TableColumn stockTableColumnOrdersSupplierID;
+	private TableColumn stockTableColumnOrdersAlbumID;
+	private TableColumn stockTableColumnOrdersQuantity;
+	private TableColumn stockTableColumnOrdersDate;
+	private TableColumn stockTableColumnOrdersStatus;
+	private TableColumn stockTableColumnOrdersCompletionDate;
+	private Table stockTableRequests;
+	private TableColumn stockTableColumnRequestsOrderID;
+	private TableColumn stockTableColumnRequestsOrderingStoreID;
+	private TableColumn stockTableColumnRequestsAlbumID;
+	private TableColumn stockTableColumnRequestsQuantity;
+	private TableColumn stockTableColumnRequestsDate;
+	private TableColumn stockTableColumnRequestsStatus;
+	private TableColumn stockTableColumnRequestsCompletionDate;
 	private Text stockTextBoxQuantityToOrder;
 	private Label stockLabelQuantityToOrder;
 	private Button stockButtonPlaceOrder;
@@ -808,6 +830,138 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								stockTextBoxQuantityToOrder.setText("1");
 								stockTextBoxQuantityToOrder.setBounds(665, 82, 100, 22);
 							}
+						}
+						{
+							stockTableOrders = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI
+									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+							stockTableOrders.setBounds(5, 174, 770, 110);
+							stockTableOrders.setHeaderVisible(true);
+							stockTableOrders.setLinesVisible(true);
+							int numOfColumns = 7;
+							int tableWidth = stockTableOrders.getClientArea().width - getBorderWidth()*2;
+							
+							stockTableColumnOrdersOrderID = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersOrderID.setText("Order ID");
+							stockTableColumnOrdersOrderID.setResizable(true);
+							stockTableColumnOrdersOrderID.setMoveable(true);
+							stockTableColumnOrdersOrderID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersSupplierID = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersSupplierID.setText("Supplier ID");
+							stockTableColumnOrdersSupplierID.setResizable(true);
+							stockTableColumnOrdersSupplierID.setMoveable(true);
+							stockTableColumnOrdersSupplierID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersAlbumID = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersAlbumID.setText("Album ID");
+							stockTableColumnOrdersAlbumID.setResizable(true);
+							stockTableColumnOrdersAlbumID.setMoveable(true);
+							stockTableColumnOrdersAlbumID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersQuantity = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersQuantity.setText("Quantity");
+							stockTableColumnOrdersQuantity.setResizable(true);
+							stockTableColumnOrdersQuantity.setMoveable(true);
+							stockTableColumnOrdersQuantity.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersDate = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersDate.setText("Date");
+							stockTableColumnOrdersDate.setResizable(true);
+							stockTableColumnOrdersDate.setMoveable(true);
+							stockTableColumnOrdersDate.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersStatus = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersStatus.setText("Status");
+							stockTableColumnOrdersStatus.setResizable(true);
+							stockTableColumnOrdersStatus.setMoveable(true);
+							stockTableColumnOrdersStatus.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnOrdersCompletionDate = new TableColumn(stockTableOrders, SWT.NONE);
+							stockTableColumnOrdersCompletionDate.setText("Completion Date");
+							stockTableColumnOrdersCompletionDate.setResizable(true);
+							stockTableColumnOrdersCompletionDate.setMoveable(true);
+							stockTableColumnOrdersCompletionDate.setWidth(tableWidth / numOfColumns);
+						}
+						{
+							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI
+									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+							stockTableRequests.setBounds(4, 317, 770, 104);
+							stockTableRequests.setHeaderVisible(true);
+							stockTableRequests.setLinesVisible(true);
+							int numOfColumns = 7;
+							int tableWidth = stockTableRequests.getClientArea().width - getBorderWidth()*2;
+							
+							stockTableColumnRequestsOrderID = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsOrderID.setText("Order ID");
+							stockTableColumnRequestsOrderID.setResizable(true);
+							stockTableColumnRequestsOrderID.setMoveable(true);
+							stockTableColumnRequestsOrderID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsOrderingStoreID = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsOrderingStoreID.setText("Requesting Store ID");
+							stockTableColumnRequestsOrderingStoreID.setResizable(true);
+							stockTableColumnRequestsOrderingStoreID.setMoveable(true);
+							stockTableColumnRequestsOrderingStoreID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsAlbumID = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsAlbumID.setText("Album ID");
+							stockTableColumnRequestsAlbumID.setResizable(true);
+							stockTableColumnRequestsAlbumID.setMoveable(true);
+							stockTableColumnRequestsAlbumID.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsQuantity = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsQuantity.setText("Quantity");
+							stockTableColumnRequestsQuantity.setResizable(true);
+							stockTableColumnRequestsQuantity.setMoveable(true);
+							stockTableColumnRequestsQuantity.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsDate = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsDate.setText("Date");
+							stockTableColumnRequestsDate.setResizable(true);
+							stockTableColumnRequestsDate.setMoveable(true);
+							stockTableColumnRequestsDate.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsStatus = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsStatus.setText("Status");
+							stockTableColumnRequestsStatus.setResizable(true);
+							stockTableColumnRequestsStatus.setMoveable(true);
+							stockTableColumnRequestsStatus.setWidth(tableWidth / numOfColumns);
+							
+							stockTableColumnRequestsCompletionDate = new TableColumn(stockTableRequests, SWT.NONE);
+							stockTableColumnRequestsCompletionDate.setText("Completion Date");
+							stockTableColumnRequestsCompletionDate.setResizable(true);
+							stockTableColumnRequestsCompletionDate.setMoveable(true);
+							stockTableColumnRequestsCompletionDate.setWidth(tableWidth / numOfColumns);
+						}
+						{
+							stockLabelRequests = new Label(stockTabComposite, SWT.NONE);
+							stockLabelRequests.setText("Requests:");
+							stockLabelRequests.setBounds(6, 295, 64, 20);
+						}
+						{
+							stockButtonApproveRequest = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonApproveRequest.setText("Approve Request");
+							stockButtonApproveRequest.setBounds(674, 429, 101, 24);
+						}
+						{
+							stockButtonDenyRequest = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonDenyRequest.setText("Deny Request");
+							stockButtonDenyRequest.setBounds(567, 429, 101, 24);
+						}
+						{
+							stockLabelOrders = new Label(stockTabComposite, SWT.NONE);
+							stockLabelOrders.setText("Orders:");
+							stockLabelOrders.setBounds(7, 153, 60, 20);
+						}
+						{
+							stockButtonCancelOrder = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonCancelOrder.setText("Cancel Order");
+							stockButtonCancelOrder.setBounds(672, 286, 101, 24);
+						}
+						{
+							stockButtonRemoveOrder = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonRemoveOrder.setText("Remove Order");
+							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
 						}
 					}
 				}
