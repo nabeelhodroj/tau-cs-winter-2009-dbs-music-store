@@ -35,6 +35,15 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	private Menu mainMenuBar;
 	private Label searchLabelSaleInfoQuantity;
+	private Label saleLabelDateInput;
+	private Label saleLabelTimeInput;
+	private Label saleLabelSaleTime;
+	private Label saleLabelSaleDate;
+	private Combo saleComboSalesmanIDNameInput;
+	private Label saleLabelSalesmanIDName;
+	private Label saleLabelSaleIDInput;
+	private Label saleLabelSaleID;
+	private Group saleGroupSaleDetails;
 	private Label mainLabelStoreDetailsDateTime;
 	private Label mainLabelQuickTipsTip;
 	private Group mainGroupHeaderText;
@@ -463,6 +472,52 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						saleCompositeMain = new Composite(mainTabFolder, SWT.NONE);
 						saleCompositeMain.setLayout(null);
 						saleTabItem.setControl(saleCompositeMain);
+						{
+							saleGroupSaleDetails = new Group(saleCompositeMain, SWT.NONE);
+							saleGroupSaleDetails.setLayout(null);
+							saleGroupSaleDetails.setText("Manage Current Sale");
+							saleGroupSaleDetails.setBounds(0, 0, 773, 90);
+							{
+								saleLabelSaleID = new Label(saleGroupSaleDetails, SWT.NONE);
+								saleLabelSaleID.setText("Sale ID:");
+								saleLabelSaleID.setBounds(7, 24, 47, 21);
+								saleLabelSaleID.setSize(47, 18);
+							}
+							{
+								saleLabelSaleIDInput = new Label(saleGroupSaleDetails, SWT.BORDER);
+								saleLabelSaleIDInput.setText("STR0000-000000-0000");
+								saleLabelSaleIDInput.setBounds(66, 24, 126, 18);
+							}
+							{
+								saleLabelSalesmanIDName = new Label(saleGroupSaleDetails, SWT.NONE);
+								saleLabelSalesmanIDName.setText("Salesman:");
+								saleLabelSalesmanIDName.setBounds(7, 54, 47, 18);
+							}
+							{
+								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.NONE);
+								saleComboSalesmanIDNameInput.setBounds(66, 53, 191, 21);
+							}
+							{
+								saleLabelSaleDate = new Label(saleGroupSaleDetails, SWT.NONE);
+								saleLabelSaleDate.setText("Date of sale:");
+								saleLabelSaleDate.setBounds(269, 24, 73, 18);
+							}
+							{
+								saleLabelSaleTime = new Label(saleGroupSaleDetails, SWT.NONE);
+								saleLabelSaleTime.setText("Time of sale:");
+								saleLabelSaleTime.setBounds(269, 54, 73, 18);
+							}
+							{
+								saleLabelDateInput = new Label(saleGroupSaleDetails, SWT.BORDER);
+								saleLabelDateInput.setBounds(343, 24, 69, 18);
+								saleLabelDateInput.setText(MainFuncs.getDate());
+							}
+							{
+								saleLabelTimeInput = new Label(saleGroupSaleDetails, SWT.BORDER);
+								saleLabelTimeInput.setBounds(343, 54, 69, 18);
+								saleLabelTimeInput.setText(MainFuncs.getTime());
+							}
+						}
 					}
 				}
 				{
