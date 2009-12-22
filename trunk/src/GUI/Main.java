@@ -36,6 +36,14 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Menu mainMenuBar;
 	private Label searchLabelSaleInfoQuantity;
 	private Label saleLabelDateInput;
+	private Label stockLabelOrderID;
+	private Group stockGroupOrderForm;
+	private Composite stockTabComposite;
+	private Button saleButtonMakeSale;
+	private Button saleButtonClearSale;
+	private Button saleButtonRemoveItem;
+	private Label saleLabelTotalPrice;
+	private Label saleLabelTotalPriceValue;
 	private Table saleTableSaleItems;
 	private TableColumn saleTableColumnAlbumID;
 	private TableColumn saleTableColumnAlbumName;
@@ -63,6 +71,28 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Button searchButtonSaleInfoSale;
 	private Text searchTextBoxSaleInfoQuantity;
 	private Label searchLabelStockInfoPrice;
+	private Button stockButtonClearOrder;
+	private Text stockTextBoxQuantityToOrder;
+	private Label stockLabelQuantityToOrder;
+	private Button stockButtonPlaceOrder;
+	private Label stockLabelStorageLocationInput;
+	private Label stockLabelStorageLocation;
+	private Label stockLabelStorePriceInput;
+	private Label stockLabelPrice;
+	private Label stockLabelQuantityInStockInput;
+	private Label stockLabelQuantityInStock;
+	private Table stockTableOrderAvailableStores;
+	private TableColumn stockTableColumnStoreID;
+	private TableColumn stockTableColumnStoreCity;
+	private TableColumn stockTableColumnQuantity;
+	private TableColumn stockTableColumnPrice;
+	private Label stockLabelOrderFromStore;
+	private Button stockButtonCheckAvailability;
+	private Label stockLabelOrderDateInput;
+	private Label stockLabelDate;
+	private Text stockTextBoxAlbumIDInput;
+	private Label stockLabelAlbumID;
+	private Label stockLabelOrderIDInput;
 	private Button searchButtonStockInfoOrder;
 	private Label searchLabelStockInfoLocation;
 	private Label searchLabelStockInfoStoreStock;
@@ -575,7 +605,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						{
 							saleTableSaleItems = new Table(saleCompositeMain, SWT.BORDER | SWT.MULTI
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
-							saleTableSaleItems.setBounds(14, 106, 759, 201);
+							saleTableSaleItems.setBounds(16, 108, 759, 267);
 							saleTableSaleItems.setHeaderVisible(true);
 							saleTableSaleItems.setLinesVisible(true);
 							int tableWidth = saleTableSaleItems.getClientArea().width - getBorderWidth()*2;
@@ -613,12 +643,173 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleTableColumnPriceTotal.setMoveable(true);
 							saleTableColumnPriceTotal.setWidth(tableWidth / numOfColumns);
 						}
+						{
+							saleLabelTotalPriceValue = new Label(saleCompositeMain, SWT.BORDER);
+							saleLabelTotalPriceValue.setBounds(679, 383, 94, 22);
+						}
+						{
+							saleLabelTotalPrice = new Label(saleCompositeMain, SWT.NONE);
+							saleLabelTotalPrice.setText("Total price:");
+							saleLabelTotalPrice.setBounds(598, 384, 76, 22);
+							saleLabelTotalPrice.setAlignment(SWT.RIGHT);
+						}
+						{
+							saleButtonRemoveItem = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
+							saleButtonRemoveItem.setText("Remove item");
+							saleButtonRemoveItem.setBounds(18, 384, 110, 30);
+						}
+						{
+							saleButtonClearSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
+							saleButtonClearSale.setText("Clear sale");
+							saleButtonClearSale.setBounds(134, 384, 110, 30);
+						}
+						{
+							saleButtonMakeSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
+							saleButtonMakeSale.setText("Make sale");
+							saleButtonMakeSale.setBounds(680, 412, 93, 41);
+						}
 					}
 				}
 				{
+					/**
+					 * Stock tab
+					 * =========
+					 * Manage Stock, orders and requests
+					 * 
+					 */
 					stockTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					stockTabItem.setText("Stock");
 					stockTabItem.setToolTipText("View and manage orders and requests");
+					{
+						stockTabComposite = new Composite(mainTabFolder, SWT.NONE);
+						stockTabComposite.setLayout(null);
+						stockTabItem.setControl(stockTabComposite);
+						{
+							stockGroupOrderForm = new Group(stockTabComposite, SWT.NONE);
+							stockGroupOrderForm.setLayout(null);
+							stockGroupOrderForm.setText("Order Albums");
+							stockGroupOrderForm.setBounds(2, 0, 779, 147);
+							{
+								stockLabelOrderID = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelOrderID.setText("Order ID:");
+								stockLabelOrderID.setBounds(8, 19, 74, 22);
+							}
+							{
+								stockLabelOrderIDInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelOrderIDInput.setBounds(88, 18, 153, 22);
+								stockLabelOrderIDInput.setText("ORD-0000-0000-000000-000");
+							}
+							{
+								stockLabelAlbumID = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelAlbumID.setText("Album ID:");
+								stockLabelAlbumID.setBounds(8, 49, 74, 22);
+							}
+							{
+								stockTextBoxAlbumIDInput = new Text(stockGroupOrderForm, SWT.BORDER);
+								stockTextBoxAlbumIDInput.setBounds(87, 47, 154, 22);
+							}
+							{
+								stockLabelDate = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelDate.setText("Order date:");
+								stockLabelDate.setBounds(8, 79, 74, 22);
+							}
+							{
+								stockLabelOrderDateInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelOrderDateInput.setBounds(86, 79, 70, 22);
+								stockLabelOrderDateInput.setText(MainFuncs.getDate());
+							}
+							{
+								stockButtonCheckAvailability = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
+								stockButtonCheckAvailability.setText("Check Availability");
+								stockButtonCheckAvailability.setBounds(8, 108, 235, 30);
+							}
+							{
+								stockLabelOrderFromStore = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelOrderFromStore.setText("Order from:");
+								stockLabelOrderFromStore.setBounds(254, 12, 79, 24);
+							}
+							{
+								stockTableOrderAvailableStores = new Table(stockGroupOrderForm, SWT.BORDER | SWT.MULTI
+										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+								stockTableOrderAvailableStores.setBounds(254, 42, 284, 94);
+								stockTableOrderAvailableStores.setHeaderVisible(true);
+								stockTableOrderAvailableStores.setLinesVisible(true);
+								int numOfColumns = 3;
+								int tableWidth = stockTableOrderAvailableStores.getClientArea().width - getBorderWidth()*2;
+								
+								stockTableColumnStoreID = new TableColumn(stockTableOrderAvailableStores, SWT.NONE);
+								stockTableColumnStoreID.setText("Store ID");
+								stockTableColumnStoreID.setResizable(true);
+								stockTableColumnStoreID.setMoveable(true);
+								stockTableColumnStoreID.setWidth(tableWidth / numOfColumns);
+								
+								stockTableColumnStoreCity = new TableColumn(stockTableOrderAvailableStores, SWT.NONE);
+								stockTableColumnStoreCity.setText("City");
+								stockTableColumnStoreCity.setResizable(true);
+								stockTableColumnStoreCity.setMoveable(true);
+								stockTableColumnStoreCity.setWidth(tableWidth / numOfColumns);
+								
+								stockTableColumnQuantity = new TableColumn(stockTableOrderAvailableStores, SWT.NONE);
+								stockTableColumnQuantity.setText("Quantity");
+								stockTableColumnQuantity.setResizable(true);
+								stockTableColumnQuantity.setMoveable(true);
+								stockTableColumnQuantity.setWidth(tableWidth / numOfColumns);
+								
+								stockTableColumnPrice = new TableColumn(stockTableOrderAvailableStores, SWT.NONE);
+								stockTableColumnPrice.setText("Price");
+								stockTableColumnPrice.setResizable(true);
+								stockTableColumnPrice.setMoveable(true);
+								stockTableColumnPrice.setWidth(tableWidth / numOfColumns);
+							}
+							{
+								stockLabelQuantityInStock = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelQuantityInStock.setText("Quantity:");
+								stockLabelQuantityInStock.setBounds(656, 19, 52, 22);
+							}
+							{
+								stockLabelQuantityInStockInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelQuantityInStockInput.setBounds(709, 18, 57, 22);
+							}
+							{
+								stockLabelPrice = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelPrice.setText("Price:");
+								stockLabelPrice.setBounds(552, 20, 52, 22);
+							}
+							{
+								stockLabelStorePriceInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelStorePriceInput.setBounds(604, 18, 46, 22);
+							}
+							{
+								stockLabelStorageLocation = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelStorageLocation.setText("Location:");
+								stockLabelStorageLocation.setBounds(551, 50, 52, 22);
+							}
+							{
+								stockLabelStorageLocationInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelStorageLocationInput.setBounds(605, 49, 161, 22);
+							}
+							{
+								stockButtonPlaceOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
+								stockButtonPlaceOrder.setText("Place order");
+								stockButtonPlaceOrder.setBounds(665, 109, 102, 30);
+							}
+							{
+								stockButtonClearOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
+								stockButtonClearOrder.setText("Clear fields");
+								stockButtonClearOrder.setBounds(551, 109, 108, 30);
+							}
+							{
+								stockLabelQuantityToOrder = new Label(stockGroupOrderForm, SWT.NONE);
+								stockLabelQuantityToOrder.setText("Quantity to order:");
+								stockLabelQuantityToOrder.setBounds(551, 83, 108, 22);
+							}
+							{
+								stockTextBoxQuantityToOrder = new Text(stockGroupOrderForm, SWT.BORDER);
+								stockTextBoxQuantityToOrder.setText("1");
+								stockTextBoxQuantityToOrder.setBounds(665, 82, 100, 22);
+							}
+						}
+					}
 				}
 				{
 					managementTabItem = new TabItem(mainTabFolder, SWT.NONE);
