@@ -36,6 +36,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Menu mainMenuBar;
 	private Label searchLabelSaleInfoQuantity;
 	private Label saleLabelDateInput;
+	private Table saleTableSaleItems;
+	private TableColumn saleTableColumnAlbumID;
+	private TableColumn saleTableColumnAlbumName;
+	private TableColumn saleTableColumnQuantity;
+	private TableColumn saleTableColumnPricePerItem;
+	private TableColumn saleTableColumnPriceTotal;
 	private Label saleLabelTimeInput;
 	private Label saleLabelSaleTime;
 	private Label saleLabelSaleDate;
@@ -476,7 +482,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleGroupSaleDetails = new Group(saleCompositeMain, SWT.NONE);
 							saleGroupSaleDetails.setLayout(null);
 							saleGroupSaleDetails.setText("Manage Current Sale");
-							saleGroupSaleDetails.setBounds(0, 0, 773, 90);
+							saleGroupSaleDetails.setBounds(0, 0, 423, 90);
 							{
 								saleLabelSaleID = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleID.setText("Sale ID:");
@@ -517,6 +523,46 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								saleLabelTimeInput.setBounds(343, 54, 69, 18);
 								saleLabelTimeInput.setText(MainFuncs.getTime());
 							}
+						}
+						{
+							saleTableSaleItems = new Table(saleCompositeMain, SWT.BORDER | SWT.MULTI
+									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+							saleTableSaleItems.setBounds(14, 106, 759, 201);
+							saleTableSaleItems.setHeaderVisible(true);
+							saleTableSaleItems.setLinesVisible(true);
+							int tableWidth = saleTableSaleItems.getClientArea().width - getBorderWidth()*2;
+							int numOfColumns = 5;
+							
+							// adding columns
+							saleTableColumnAlbumID = new TableColumn(saleTableSaleItems, SWT.NONE);
+							saleTableColumnAlbumID.setText("Album ID");
+							saleTableColumnAlbumID.setResizable(false);
+							saleTableColumnAlbumID.setMoveable(false);
+							saleTableColumnAlbumID.setWidth(tableWidth / numOfColumns);
+							
+							saleTableColumnAlbumName = new TableColumn(saleTableSaleItems, SWT.NONE);
+							saleTableColumnAlbumName.setText("Album name");
+							saleTableColumnAlbumName.setResizable(false);
+							saleTableColumnAlbumName.setMoveable(false);
+							saleTableColumnAlbumName.setWidth(tableWidth / numOfColumns);
+							
+							saleTableColumnQuantity = new TableColumn(saleTableSaleItems, SWT.NONE);
+							saleTableColumnQuantity.setText("Quantity");
+							saleTableColumnQuantity.setResizable(false);
+							saleTableColumnQuantity.setMoveable(false);
+							saleTableColumnQuantity.setWidth(tableWidth / numOfColumns);
+							
+							saleTableColumnPricePerItem = new TableColumn(saleTableSaleItems, SWT.NONE);
+							saleTableColumnPricePerItem.setText("Price per item");
+							saleTableColumnPricePerItem.setResizable(false);
+							saleTableColumnPricePerItem.setMoveable(false);
+							saleTableColumnPricePerItem.setWidth(tableWidth / numOfColumns);
+							
+							saleTableColumnPriceTotal = new TableColumn(saleTableSaleItems, SWT.NONE);
+							saleTableColumnPriceTotal.setText("Total price");
+							saleTableColumnPriceTotal.setResizable(false);
+							saleTableColumnPriceTotal.setMoveable(false);
+							saleTableColumnPriceTotal.setWidth(tableWidth / numOfColumns);
 						}
 					}
 				}
