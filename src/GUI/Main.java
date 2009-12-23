@@ -33,9 +33,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		SWTResourceManager.registerResourceUser(this);
 	}
 
-	//////////////////////////////
-	//	Variables definitions	//
-	//////////////////////////////
+	//////////////////////////////////
+	//	Class Fields definitions	//
+	//////////////////////////////////
 	
 	// Main Menu
 	private Menu mainMenuBar;
@@ -1492,5 +1492,1768 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected Menu getMainMenuBar() {
+		return mainMenuBar;
+	}
+
+	protected void setMainMenuBar(Menu mainMenuBar) {
+		this.mainMenuBar = mainMenuBar;
+	}
+
+	protected MenuItem getMenuItemSeperator() {
+		return menuItemSeperator;
+	}
+
+	protected void setMenuItemSeperator(MenuItem menuItemSeperator) {
+		this.menuItemSeperator = menuItemSeperator;
+	}
+
+	protected MenuItem getMainMenuItemFile() {
+		return mainMenuItemFile;
+	}
+
+	protected void setMainMenuItemFile(MenuItem mainMenuItemFile) {
+		this.mainMenuItemFile = mainMenuItemFile;
+	}
+
+	protected Menu getFileMenu() {
+		return fileMenu;
+	}
+
+	protected void setFileMenu(Menu fileMenu) {
+		this.fileMenu = fileMenu;
+	}
+
+	protected MenuItem getFileMenuItemExit() {
+		return fileMenuItemExit;
+	}
+
+	protected void setFileMenuItemExit(MenuItem fileMenuItemExit) {
+		this.fileMenuItemExit = fileMenuItemExit;
+	}
+
+	protected MenuItem getMainMenuItemSearch() {
+		return mainMenuItemSearch;
+	}
+
+	protected void setMainMenuItemSearch(MenuItem mainMenuItemSearch) {
+		this.mainMenuItemSearch = mainMenuItemSearch;
+	}
+
+	protected Menu getSearchMenu() {
+		return searchMenu;
+	}
+
+	protected void setSearchMenu(Menu searchMenu) {
+		this.searchMenu = searchMenu;
+	}
+
+	protected MenuItem getSearchMenuItemAddToSale() {
+		return searchMenuItemAddToSale;
+	}
+
+	protected void setSearchMenuItemAddToSale(MenuItem searchMenuItemAddToSale) {
+		this.searchMenuItemAddToSale = searchMenuItemAddToSale;
+	}
+
+	protected MenuItem getSearchMenuItemPlaceOrder() {
+		return searchMenuItemPlaceOrder;
+	}
+
+	protected void setSearchMenuItemPlaceOrder(MenuItem searchMenuItemPlaceOrder) {
+		this.searchMenuItemPlaceOrder = searchMenuItemPlaceOrder;
+	}
+
+	protected MenuItem getSearchMenuItemSearch() {
+		return searchMenuItemSearch;
+	}
+
+	protected void setSearchMenuItemSearch(MenuItem searchMenuItemSearch) {
+		this.searchMenuItemSearch = searchMenuItemSearch;
+	}
+
+	protected MenuItem getSearchMenuItemClear() {
+		return searchMenuItemClear;
+	}
+
+	protected void setSearchMenuItemClear(MenuItem searchMenuItemClear) {
+		this.searchMenuItemClear = searchMenuItemClear;
+	}
+
+	protected MenuItem getMainMenuItemSale() {
+		return mainMenuItemSale;
+	}
+
+	protected void setMainMenuItemSale(MenuItem mainMenuItemSale) {
+		this.mainMenuItemSale = mainMenuItemSale;
+	}
+
+	protected Menu getSaleMenu() {
+		return saleMenu;
+	}
+
+	protected void setSaleMenu(Menu saleMenu) {
+		this.saleMenu = saleMenu;
+	}
+
+	protected MenuItem getSaleMenuItemRemove() {
+		return saleMenuItemRemove;
+	}
+
+	protected void setSaleMenuItemRemove(MenuItem saleMenuItemRemove) {
+		this.saleMenuItemRemove = saleMenuItemRemove;
+	}
+
+	protected MenuItem getSaleMenuItemClear() {
+		return saleMenuItemClear;
+	}
+
+	protected void setSaleMenuItemClear(MenuItem saleMenuItemClear) {
+		this.saleMenuItemClear = saleMenuItemClear;
+	}
+
+	protected MenuItem getSaleMenuItemMakeSale() {
+		return saleMenuItemMakeSale;
+	}
+
+	protected void setSaleMenuItemMakeSale(MenuItem saleMenuItemMakeSale) {
+		this.saleMenuItemMakeSale = saleMenuItemMakeSale;
+	}
+
+	protected MenuItem getMainMenuItemStock() {
+		return mainMenuItemStock;
+	}
+
+	protected void setMainMenuItemStock(MenuItem mainMenuItemStock) {
+		this.mainMenuItemStock = mainMenuItemStock;
+	}
+
+	protected Menu getStockMenu() {
+		return stockMenu;
+	}
+
+	protected void setStockMenu(Menu stockMenu) {
+		this.stockMenu = stockMenu;
+	}
+
+	protected MenuItem getStockMenuItemCheckAvailability() {
+		return stockMenuItemCheckAvailability;
+	}
+
+	protected void setStockMenuItemCheckAvailability(
+			MenuItem stockMenuItemCheckAvailability) {
+		this.stockMenuItemCheckAvailability = stockMenuItemCheckAvailability;
+	}
+
+	protected MenuItem getStockMenuItemClear() {
+		return stockMenuItemClear;
+	}
+
+	protected void setStockMenuItemClear(MenuItem stockMenuItemClear) {
+		this.stockMenuItemClear = stockMenuItemClear;
+	}
+
+	protected MenuItem getStockMenuItemPlaceOrder() {
+		return stockMenuItemPlaceOrder;
+	}
+
+	protected void setStockMenuItemPlaceOrder(MenuItem stockMenuItemPlaceOrder) {
+		this.stockMenuItemPlaceOrder = stockMenuItemPlaceOrder;
+	}
+
+	protected MenuItem getStockMenuItemRemoveOrder() {
+		return stockMenuItemRemoveOrder;
+	}
+
+	protected void setStockMenuItemRemoveOrder(MenuItem stockMenuItemRemoveOrder) {
+		this.stockMenuItemRemoveOrder = stockMenuItemRemoveOrder;
+	}
+
+	protected MenuItem getStockMenuItemCancelOrder() {
+		return stockMenuItemCancelOrder;
+	}
+
+	protected void setStockMenuItemCancelOrder(MenuItem stockMenuItemCancelOrder) {
+		this.stockMenuItemCancelOrder = stockMenuItemCancelOrder;
+	}
+
+	protected MenuItem getStockMenuItemDenyRequest() {
+		return stockMenuItemDenyRequest;
+	}
+
+	protected void setStockMenuItemDenyRequest(MenuItem stockMenuItemDenyRequest) {
+		this.stockMenuItemDenyRequest = stockMenuItemDenyRequest;
+	}
+
+	protected MenuItem getStockMenuItemApproveRequest() {
+		return stockMenuItemApproveRequest;
+	}
+
+	protected void setStockMenuItemApproveRequest(
+			MenuItem stockMenuItemApproveRequest) {
+		this.stockMenuItemApproveRequest = stockMenuItemApproveRequest;
+	}
+
+	protected MenuItem getMainMenuItemManage() {
+		return mainMenuItemManage;
+	}
+
+	protected void setMainMenuItemManage(MenuItem mainMenuItemManage) {
+		this.mainMenuItemManage = mainMenuItemManage;
+	}
+
+	protected Menu getManageMenu() {
+		return manageMenu;
+	}
+
+	protected void setManageMenu(Menu manageMenu) {
+		this.manageMenu = manageMenu;
+	}
+
+	protected MenuItem getManageMenuItemBrowse() {
+		return manageMenuItemBrowse;
+	}
+
+	protected void setManageMenuItemBrowse(MenuItem manageMenuItemBrowse) {
+		this.manageMenuItemBrowse = manageMenuItemBrowse;
+	}
+
+	protected MenuItem getManageMenuItemUpdateDBS() {
+		return manageMenuItemUpdateDBS;
+	}
+
+	protected void setManageMenuItemUpdateDBS(MenuItem manageMenuItemUpdateDBS) {
+		this.manageMenuItemUpdateDBS = manageMenuItemUpdateDBS;
+	}
+
+	protected MenuItem getManageMenuItemNew() {
+		return manageMenuItemNew;
+	}
+
+	protected void setManageMenuItemNew(MenuItem manageMenuItemNew) {
+		this.manageMenuItemNew = manageMenuItemNew;
+	}
+
+	protected MenuItem getManageMenuItemInsert() {
+		return manageMenuItemInsert;
+	}
+
+	protected void setManageMenuItemInsert(MenuItem manageMenuItemInsert) {
+		this.manageMenuItemInsert = manageMenuItemInsert;
+	}
+
+	protected MenuItem getManageMenuItemEdit() {
+		return manageMenuItemEdit;
+	}
+
+	protected void setManageMenuItemEdit(MenuItem manageMenuItemEdit) {
+		this.manageMenuItemEdit = manageMenuItemEdit;
+	}
+
+	protected MenuItem getManageMenuItemSave() {
+		return manageMenuItemSave;
+	}
+
+	protected void setManageMenuItemSave(MenuItem manageMenuItemSave) {
+		this.manageMenuItemSave = manageMenuItemSave;
+	}
+
+	protected MenuItem getManageMenuItemExitNoSave() {
+		return manageMenuItemExitNoSave;
+	}
+
+	protected void setManageMenuItemExitNoSave(MenuItem manageMenuItemExitNoSave) {
+		this.manageMenuItemExitNoSave = manageMenuItemExitNoSave;
+	}
+
+	protected MenuItem getManageMenuItemRemoveEmployee() {
+		return manageMenuItemRemoveEmployee;
+	}
+
+	protected void setManageMenuItemRemoveEmployee(
+			MenuItem manageMenuItemRemoveEmployee) {
+		this.manageMenuItemRemoveEmployee = manageMenuItemRemoveEmployee;
+	}
+
+	protected Group getMainGroupStoreDetails() {
+		return mainGroupStoreDetails;
+	}
+
+	protected void setMainGroupStoreDetails(Group mainGroupStoreDetails) {
+		this.mainGroupStoreDetails = mainGroupStoreDetails;
+	}
+
+	protected Label getMainLabelStoreDetailsStoreID() {
+		return mainLabelStoreDetailsStoreID;
+	}
+
+	protected void setMainLabelStoreDetailsStoreID(
+			Label mainLabelStoreDetailsStoreID) {
+		this.mainLabelStoreDetailsStoreID = mainLabelStoreDetailsStoreID;
+	}
+
+	protected Label getMainLabelStoreDetailsDateTime() {
+		return mainLabelStoreDetailsDateTime;
+	}
+
+	protected void setMainLabelStoreDetailsDateTime(
+			Label mainLabelStoreDetailsDateTime) {
+		this.mainLabelStoreDetailsDateTime = mainLabelStoreDetailsDateTime;
+	}
+
+	protected Label getMainLabelStoreDetailsStoreAddress() {
+		return mainLabelStoreDetailsStoreAddress;
+	}
+
+	protected void setMainLabelStoreDetailsStoreAddress(
+			Label mainLabelStoreDetailsStoreAddress) {
+		this.mainLabelStoreDetailsStoreAddress = mainLabelStoreDetailsStoreAddress;
+	}
+
+	protected Label getMainLabelStoreDetailsStorePhone() {
+		return mainLabelStoreDetailsStorePhone;
+	}
+
+	protected void setMainLabelStoreDetailsStorePhone(
+			Label mainLabelStoreDetailsStorePhone) {
+		this.mainLabelStoreDetailsStorePhone = mainLabelStoreDetailsStorePhone;
+	}
+
+	protected Label getMainLabelStoreDetailsStoreManager() {
+		return mainLabelStoreDetailsStoreManager;
+	}
+
+	protected void setMainLabelStoreDetailsStoreManager(
+			Label mainLabelStoreDetailsStoreManager) {
+		this.mainLabelStoreDetailsStoreManager = mainLabelStoreDetailsStoreManager;
+	}
+
+	protected Group getMainGroupQuickTips() {
+		return mainGroupQuickTips;
+	}
+
+	protected void setMainGroupQuickTips(Group mainGroupQuickTips) {
+		this.mainGroupQuickTips = mainGroupQuickTips;
+	}
+
+	protected Label getMainLabelQuickTipsTip() {
+		return mainLabelQuickTipsTip;
+	}
+
+	protected void setMainLabelQuickTipsTip(Label mainLabelQuickTipsTip) {
+		this.mainLabelQuickTipsTip = mainLabelQuickTipsTip;
+	}
+
+	protected TabFolder getMainTabFolder() {
+		return mainTabFolder;
+	}
+
+	protected void setMainTabFolder(TabFolder mainTabFolder) {
+		this.mainTabFolder = mainTabFolder;
+	}
+
+	protected TabItem getSearchTabItem() {
+		return searchTabItem;
+	}
+
+	protected void setSearchTabItem(TabItem searchTabItem) {
+		this.searchTabItem = searchTabItem;
+	}
+
+	protected Composite getSearchTabComposite() {
+		return searchTabComposite;
+	}
+
+	protected void setSearchTabComposite(Composite searchTabComposite) {
+		this.searchTabComposite = searchTabComposite;
+	}
+
+	protected Group getSearchGroupOptions() {
+		return searchGroupOptions;
+	}
+
+	protected void setSearchGroupOptions(Group searchGroupOptions) {
+		this.searchGroupOptions = searchGroupOptions;
+	}
+
+	protected Button getSearchBulletByAlbum() {
+		return searchBulletByAlbum;
+	}
+
+	protected void setSearchBulletByAlbum(Button searchBulletByAlbum) {
+		this.searchBulletByAlbum = searchBulletByAlbum;
+	}
+
+	protected Text getSearchTextBoxAlbumID() {
+		return searchTextBoxAlbumID;
+	}
+
+	protected void setSearchTextBoxAlbumID(Text searchTextBoxAlbumID) {
+		this.searchTextBoxAlbumID = searchTextBoxAlbumID;
+	}
+
+	protected Button getSearchBulletOtherParameters() {
+		return searchBulletOtherParameters;
+	}
+
+	protected void setSearchBulletOtherParameters(Button searchBulletOtherParameters) {
+		this.searchBulletOtherParameters = searchBulletOtherParameters;
+	}
+
+	protected Button getSearchCheckBoxAlbumName() {
+		return searchCheckBoxAlbumName;
+	}
+
+	protected void setSearchCheckBoxAlbumName(Button searchCheckBoxAlbumName) {
+		this.searchCheckBoxAlbumName = searchCheckBoxAlbumName;
+	}
+
+	protected Text getSearchTextBoxAlbumName() {
+		return searchTextBoxAlbumName;
+	}
+
+	protected void setSearchTextBoxAlbumName(Text searchTextBoxAlbumName) {
+		this.searchTextBoxAlbumName = searchTextBoxAlbumName;
+	}
+
+	protected Button getSearchCheckBoxArtist() {
+		return searchCheckBoxArtist;
+	}
+
+	protected void setSearchCheckBoxArtist(Button searchCheckBoxArtist) {
+		this.searchCheckBoxArtist = searchCheckBoxArtist;
+	}
+
+	protected Text getSearchTextBoxArtist() {
+		return searchTextBoxArtist;
+	}
+
+	protected void setSearchTextBoxArtist(Text searchTextBoxArtist) {
+		this.searchTextBoxArtist = searchTextBoxArtist;
+	}
+
+	protected Button getSearchCheckBoxYear() {
+		return searchCheckBoxYear;
+	}
+
+	protected void setSearchCheckBoxYear(Button searchCheckBoxYear) {
+		this.searchCheckBoxYear = searchCheckBoxYear;
+	}
+
+	protected Text getSearchTextBoxYearFrom() {
+		return searchTextBoxYearFrom;
+	}
+
+	protected void setSearchTextBoxYearFrom(Text searchTextBoxYearFrom) {
+		this.searchTextBoxYearFrom = searchTextBoxYearFrom;
+	}
+
+	protected Label getSearchLabelYearTo() {
+		return searchLabelYearTo;
+	}
+
+	protected void setSearchLabelYearTo(Label searchLabelYearTo) {
+		this.searchLabelYearTo = searchLabelYearTo;
+	}
+
+	protected Text getSearchTextBoxYearTo() {
+		return searchTextBoxYearTo;
+	}
+
+	protected void setSearchTextBoxYearTo(Text searchTextBoxYearTo) {
+		this.searchTextBoxYearTo = searchTextBoxYearTo;
+	}
+
+	protected Button getSearchCheckBoxSongNames() {
+		return searchCheckBoxSongNames;
+	}
+
+	protected void setSearchCheckBoxSongNames(Button searchCheckBoxSongNames) {
+		this.searchCheckBoxSongNames = searchCheckBoxSongNames;
+	}
+
+	protected Text getSearchTextBoxSongNames() {
+		return searchTextBoxSongNames;
+	}
+
+	protected void setSearchTextBoxSongNames(Text searchTextBoxSongNames) {
+		this.searchTextBoxSongNames = searchTextBoxSongNames;
+	}
+
+	protected Composite getSearchCompositeStockField() {
+		return searchCompositeStockField;
+	}
+
+	protected void setSearchCompositeStockField(Composite searchCompositeStockField) {
+		this.searchCompositeStockField = searchCompositeStockField;
+	}
+
+	protected Label getSearchLabelStock() {
+		return searchLabelStock;
+	}
+
+	protected void setSearchLabelStock(Label searchLabelStock) {
+		this.searchLabelStock = searchLabelStock;
+	}
+
+	protected Button getSearchBulletInStockAll() {
+		return searchBulletInStockAll;
+	}
+
+	protected void setSearchBulletInStockAll(Button searchBulletInStockAll) {
+		this.searchBulletInStockAll = searchBulletInStockAll;
+	}
+
+	protected Button getSearchBulletInStockInStore() {
+		return searchBulletInStockInStore;
+	}
+
+	protected void setSearchBulletInStockInStore(Button searchBulletInStockInStore) {
+		this.searchBulletInStockInStore = searchBulletInStockInStore;
+	}
+
+	protected Button getSearchBulletInStockInNetwork() {
+		return searchBulletInStockInNetwork;
+	}
+
+	protected void setSearchBulletInStockInNetwork(
+			Button searchBulletInStockInNetwork) {
+		this.searchBulletInStockInNetwork = searchBulletInStockInNetwork;
+	}
+
+	protected Button getSearchCheckBoxGenres() {
+		return searchCheckBoxGenres;
+	}
+
+	protected void setSearchCheckBoxGenres(Button searchCheckBoxGenres) {
+		this.searchCheckBoxGenres = searchCheckBoxGenres;
+	}
+
+	protected Button getSearchCheckBoxGenreJazz() {
+		return searchCheckBoxGenreJazz;
+	}
+
+	protected void setSearchCheckBoxGenreJazz(Button searchCheckBoxGenreJazz) {
+		this.searchCheckBoxGenreJazz = searchCheckBoxGenreJazz;
+	}
+
+	protected Button getSearchCheckBoxGenreRock() {
+		return searchCheckBoxGenreRock;
+	}
+
+	protected void setSearchCheckBoxGenreRock(Button searchCheckBoxGenreRock) {
+		this.searchCheckBoxGenreRock = searchCheckBoxGenreRock;
+	}
+
+	protected Button getSearchCheckBoxGenre03() {
+		return searchCheckBoxGenre03;
+	}
+
+	protected void setSearchCheckBoxGenre03(Button searchCheckBoxGenre03) {
+		this.searchCheckBoxGenre03 = searchCheckBoxGenre03;
+	}
+
+	protected Button getSearchCheckBoxGenre04() {
+		return searchCheckBoxGenre04;
+	}
+
+	protected void setSearchCheckBoxGenre04(Button searchCheckBoxGenre04) {
+		this.searchCheckBoxGenre04 = searchCheckBoxGenre04;
+	}
+
+	protected Button getSearchCheckBoxGenre05() {
+		return searchCheckBoxGenre05;
+	}
+
+	protected void setSearchCheckBoxGenre05(Button searchCheckBoxGenre05) {
+		this.searchCheckBoxGenre05 = searchCheckBoxGenre05;
+	}
+
+	protected Button getSearchCheckBoxGenre06() {
+		return searchCheckBoxGenre06;
+	}
+
+	protected void setSearchCheckBoxGenre06(Button searchCheckBoxGenre06) {
+		this.searchCheckBoxGenre06 = searchCheckBoxGenre06;
+	}
+
+	protected Button getSearchCheckBoxGenre07() {
+		return searchCheckBoxGenre07;
+	}
+
+	protected void setSearchCheckBoxGenre07(Button searchCheckBoxGenre07) {
+		this.searchCheckBoxGenre07 = searchCheckBoxGenre07;
+	}
+
+	protected Button getSearchCheckBoxGenre08() {
+		return searchCheckBoxGenre08;
+	}
+
+	protected void setSearchCheckBoxGenre08(Button searchCheckBoxGenre08) {
+		this.searchCheckBoxGenre08 = searchCheckBoxGenre08;
+	}
+
+	protected Button getSearchCheckBoxGenre09() {
+		return searchCheckBoxGenre09;
+	}
+
+	protected void setSearchCheckBoxGenre09(Button searchCheckBoxGenre09) {
+		this.searchCheckBoxGenre09 = searchCheckBoxGenre09;
+	}
+
+	protected Button getSearchCheckBoxGenre10() {
+		return searchCheckBoxGenre10;
+	}
+
+	protected void setSearchCheckBoxGenre10(Button searchCheckBoxGenre10) {
+		this.searchCheckBoxGenre10 = searchCheckBoxGenre10;
+	}
+
+	protected Button getSearchCheckBoxGenreOther() {
+		return searchCheckBoxGenreOther;
+	}
+
+	protected void setSearchCheckBoxGenreOther(Button searchCheckBoxGenreOther) {
+		this.searchCheckBoxGenreOther = searchCheckBoxGenreOther;
+	}
+
+	protected Text getSearchTextBoxGenreOther() {
+		return searchTextBoxGenreOther;
+	}
+
+	protected void setSearchTextBoxGenreOther(Text searchTextBoxGenreOther) {
+		this.searchTextBoxGenreOther = searchTextBoxGenreOther;
+	}
+
+	protected Button getSearchButtonClear() {
+		return searchButtonClear;
+	}
+
+	protected void setSearchButtonClear(Button searchButtonClear) {
+		this.searchButtonClear = searchButtonClear;
+	}
+
+	protected Button getSearchButtonSearch() {
+		return searchButtonSearch;
+	}
+
+	protected void setSearchButtonSearch(Button searchButtonSearch) {
+		this.searchButtonSearch = searchButtonSearch;
+	}
+
+	protected Group getSearchGroupResults() {
+		return searchGroupResults;
+	}
+
+	protected void setSearchGroupResults(Group searchGroupResults) {
+		this.searchGroupResults = searchGroupResults;
+	}
+
+	protected Table getSearchTableAlbumResults() {
+		return searchTableAlbumResults;
+	}
+
+	protected void setSearchTableAlbumResults(Table searchTableAlbumResults) {
+		this.searchTableAlbumResults = searchTableAlbumResults;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumID() {
+		return searchTableColumnAlbumID;
+	}
+
+	protected void setSearchTableColumnAlbumID(TableColumn searchTableColumnAlbumID) {
+		this.searchTableColumnAlbumID = searchTableColumnAlbumID;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumName() {
+		return searchTableColumnAlbumName;
+	}
+
+	protected void setSearchTableColumnAlbumName(
+			TableColumn searchTableColumnAlbumName) {
+		this.searchTableColumnAlbumName = searchTableColumnAlbumName;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumArtist() {
+		return searchTableColumnAlbumArtist;
+	}
+
+	protected void setSearchTableColumnAlbumArtist(
+			TableColumn searchTableColumnAlbumArtist) {
+		this.searchTableColumnAlbumArtist = searchTableColumnAlbumArtist;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumYear() {
+		return searchTableColumnAlbumYear;
+	}
+
+	protected void setSearchTableColumnAlbumYear(
+			TableColumn searchTableColumnAlbumYear) {
+		this.searchTableColumnAlbumYear = searchTableColumnAlbumYear;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumGenre() {
+		return searchTableColumnAlbumGenre;
+	}
+
+	protected void setSearchTableColumnAlbumGenre(
+			TableColumn searchTableColumnAlbumGenre) {
+		this.searchTableColumnAlbumGenre = searchTableColumnAlbumGenre;
+	}
+
+	protected TableColumn getSearchTableColumnAlbumLength() {
+		return searchTableColumnAlbumLength;
+	}
+
+	protected void setSearchTableColumnAlbumLength(
+			TableColumn searchTableColumnAlbumLength) {
+		this.searchTableColumnAlbumLength = searchTableColumnAlbumLength;
+	}
+
+	protected ProgressBar getSearchProgressBar() {
+		return searchProgressBar;
+	}
+
+	protected void setSearchProgressBar(ProgressBar searchProgressBar) {
+		this.searchProgressBar = searchProgressBar;
+	}
+
+	protected Table getSearchTableSongResults() {
+		return searchTableSongResults;
+	}
+
+	protected void setSearchTableSongResults(Table searchTableSongResults) {
+		this.searchTableSongResults = searchTableSongResults;
+	}
+
+	protected TableColumn getSearchTableColumnSongName() {
+		return searchTableColumnSongName;
+	}
+
+	protected void setSearchTableColumnSongName(
+			TableColumn searchTableColumnSongName) {
+		this.searchTableColumnSongName = searchTableColumnSongName;
+	}
+
+	protected TableColumn getSearchTableColumnSongArtist() {
+		return searchTableColumnSongArtist;
+	}
+
+	protected void setSearchTableColumnSongArtist(
+			TableColumn searchTableColumnSongArtist) {
+		this.searchTableColumnSongArtist = searchTableColumnSongArtist;
+	}
+
+	protected TableColumn getSearchTableColumnSongLength() {
+		return searchTableColumnSongLength;
+	}
+
+	protected void setSearchTableColumnSongLength(
+			TableColumn searchTableColumnSongLength) {
+		this.searchTableColumnSongLength = searchTableColumnSongLength;
+	}
+
+	protected Group getSearchGroupStockInfo() {
+		return searchGroupStockInfo;
+	}
+
+	protected void setSearchGroupStockInfo(Group searchGroupStockInfo) {
+		this.searchGroupStockInfo = searchGroupStockInfo;
+	}
+
+	protected Label getSearchLabelStockInfoStoreStock() {
+		return searchLabelStockInfoStoreStock;
+	}
+
+	protected void setSearchLabelStockInfoStoreStock(
+			Label searchLabelStockInfoStoreStock) {
+		this.searchLabelStockInfoStoreStock = searchLabelStockInfoStoreStock;
+	}
+
+	protected Label getSearchLabelStockInfoLocation() {
+		return searchLabelStockInfoLocation;
+	}
+
+	protected void setSearchLabelStockInfoLocation(
+			Label searchLabelStockInfoLocation) {
+		this.searchLabelStockInfoLocation = searchLabelStockInfoLocation;
+	}
+
+	protected Label getSearchLabelStockInfoPrice() {
+		return searchLabelStockInfoPrice;
+	}
+
+	protected void setSearchLabelStockInfoPrice(Label searchLabelStockInfoPrice) {
+		this.searchLabelStockInfoPrice = searchLabelStockInfoPrice;
+	}
+
+	protected Button getSearchButtonStockInfoOrder() {
+		return searchButtonStockInfoOrder;
+	}
+
+	protected void setSearchButtonStockInfoOrder(Button searchButtonStockInfoOrder) {
+		this.searchButtonStockInfoOrder = searchButtonStockInfoOrder;
+	}
+
+	protected Group getSearchGroupSaleInfo() {
+		return searchGroupSaleInfo;
+	}
+
+	protected void setSearchGroupSaleInfo(Group searchGroupSaleInfo) {
+		this.searchGroupSaleInfo = searchGroupSaleInfo;
+	}
+
+	protected Label getSearchLabelSaleInfoQuantity() {
+		return searchLabelSaleInfoQuantity;
+	}
+
+	protected void setSearchLabelSaleInfoQuantity(Label searchLabelSaleInfoQuantity) {
+		this.searchLabelSaleInfoQuantity = searchLabelSaleInfoQuantity;
+	}
+
+	protected Text getSearchTextBoxSaleInfoQuantity() {
+		return searchTextBoxSaleInfoQuantity;
+	}
+
+	protected void setSearchTextBoxSaleInfoQuantity(
+			Text searchTextBoxSaleInfoQuantity) {
+		this.searchTextBoxSaleInfoQuantity = searchTextBoxSaleInfoQuantity;
+	}
+
+	protected Button getSearchButtonSaleInfoSale() {
+		return searchButtonSaleInfoSale;
+	}
+
+	protected void setSearchButtonSaleInfoSale(Button searchButtonSaleInfoSale) {
+		this.searchButtonSaleInfoSale = searchButtonSaleInfoSale;
+	}
+
+	protected TabItem getSaleTabItem() {
+		return saleTabItem;
+	}
+
+	protected void setSaleTabItem(TabItem saleTabItem) {
+		this.saleTabItem = saleTabItem;
+	}
+
+	protected Composite getSaleCompositeMain() {
+		return saleCompositeMain;
+	}
+
+	protected void setSaleCompositeMain(Composite saleCompositeMain) {
+		this.saleCompositeMain = saleCompositeMain;
+	}
+
+	protected Group getSaleGroupSaleDetails() {
+		return saleGroupSaleDetails;
+	}
+
+	protected void setSaleGroupSaleDetails(Group saleGroupSaleDetails) {
+		this.saleGroupSaleDetails = saleGroupSaleDetails;
+	}
+
+	protected Label getSaleLabelSaleID() {
+		return saleLabelSaleID;
+	}
+
+	protected void setSaleLabelSaleID(Label saleLabelSaleID) {
+		this.saleLabelSaleID = saleLabelSaleID;
+	}
+
+	protected Label getSaleLabelSaleIDInput() {
+		return saleLabelSaleIDInput;
+	}
+
+	protected void setSaleLabelSaleIDInput(Label saleLabelSaleIDInput) {
+		this.saleLabelSaleIDInput = saleLabelSaleIDInput;
+	}
+
+	protected Label getSaleLabelSaleDate() {
+		return saleLabelSaleDate;
+	}
+
+	protected void setSaleLabelSaleDate(Label saleLabelSaleDate) {
+		this.saleLabelSaleDate = saleLabelSaleDate;
+	}
+
+	protected Label getSaleLabelDateInput() {
+		return saleLabelDateInput;
+	}
+
+	protected void setSaleLabelDateInput(Label saleLabelDateInput) {
+		this.saleLabelDateInput = saleLabelDateInput;
+	}
+
+	protected Label getSaleLabelSalesmanIDName() {
+		return saleLabelSalesmanIDName;
+	}
+
+	protected void setSaleLabelSalesmanIDName(Label saleLabelSalesmanIDName) {
+		this.saleLabelSalesmanIDName = saleLabelSalesmanIDName;
+	}
+
+	protected Combo getSaleComboSalesmanIDNameInput() {
+		return saleComboSalesmanIDNameInput;
+	}
+
+	protected void setSaleComboSalesmanIDNameInput(
+			Combo saleComboSalesmanIDNameInput) {
+		this.saleComboSalesmanIDNameInput = saleComboSalesmanIDNameInput;
+	}
+
+	protected Label getSaleLabelSaleTime() {
+		return saleLabelSaleTime;
+	}
+
+	protected void setSaleLabelSaleTime(Label saleLabelSaleTime) {
+		this.saleLabelSaleTime = saleLabelSaleTime;
+	}
+
+	protected Label getSaleLabelTimeInput() {
+		return saleLabelTimeInput;
+	}
+
+	protected void setSaleLabelTimeInput(Label saleLabelTimeInput) {
+		this.saleLabelTimeInput = saleLabelTimeInput;
+	}
+
+	protected Table getSaleTableSaleItems() {
+		return saleTableSaleItems;
+	}
+
+	protected void setSaleTableSaleItems(Table saleTableSaleItems) {
+		this.saleTableSaleItems = saleTableSaleItems;
+	}
+
+	protected TableColumn getSaleTableColumnAlbumID() {
+		return saleTableColumnAlbumID;
+	}
+
+	protected void setSaleTableColumnAlbumID(TableColumn saleTableColumnAlbumID) {
+		this.saleTableColumnAlbumID = saleTableColumnAlbumID;
+	}
+
+	protected TableColumn getSaleTableColumnAlbumName() {
+		return saleTableColumnAlbumName;
+	}
+
+	protected void setSaleTableColumnAlbumName(TableColumn saleTableColumnAlbumName) {
+		this.saleTableColumnAlbumName = saleTableColumnAlbumName;
+	}
+
+	protected TableColumn getSaleTableColumnQuantity() {
+		return saleTableColumnQuantity;
+	}
+
+	protected void setSaleTableColumnQuantity(TableColumn saleTableColumnQuantity) {
+		this.saleTableColumnQuantity = saleTableColumnQuantity;
+	}
+
+	protected TableColumn getSaleTableColumnPricePerItem() {
+		return saleTableColumnPricePerItem;
+	}
+
+	protected void setSaleTableColumnPricePerItem(
+			TableColumn saleTableColumnPricePerItem) {
+		this.saleTableColumnPricePerItem = saleTableColumnPricePerItem;
+	}
+
+	protected TableColumn getSaleTableColumnPriceTotal() {
+		return saleTableColumnPriceTotal;
+	}
+
+	protected void setSaleTableColumnPriceTotal(
+			TableColumn saleTableColumnPriceTotal) {
+		this.saleTableColumnPriceTotal = saleTableColumnPriceTotal;
+	}
+
+	protected Button getSaleButtonRemoveItem() {
+		return saleButtonRemoveItem;
+	}
+
+	protected void setSaleButtonRemoveItem(Button saleButtonRemoveItem) {
+		this.saleButtonRemoveItem = saleButtonRemoveItem;
+	}
+
+	protected Button getSaleButtonClearSale() {
+		return saleButtonClearSale;
+	}
+
+	protected void setSaleButtonClearSale(Button saleButtonClearSale) {
+		this.saleButtonClearSale = saleButtonClearSale;
+	}
+
+	protected Label getSaleLabelTotalPrice() {
+		return saleLabelTotalPrice;
+	}
+
+	protected void setSaleLabelTotalPrice(Label saleLabelTotalPrice) {
+		this.saleLabelTotalPrice = saleLabelTotalPrice;
+	}
+
+	protected Label getSaleLabelTotalPriceValue() {
+		return saleLabelTotalPriceValue;
+	}
+
+	protected void setSaleLabelTotalPriceValue(Label saleLabelTotalPriceValue) {
+		this.saleLabelTotalPriceValue = saleLabelTotalPriceValue;
+	}
+
+	protected Button getSaleButtonMakeSale() {
+		return saleButtonMakeSale;
+	}
+
+	protected void setSaleButtonMakeSale(Button saleButtonMakeSale) {
+		this.saleButtonMakeSale = saleButtonMakeSale;
+	}
+
+	protected TabItem getStockTabItem() {
+		return stockTabItem;
+	}
+
+	protected void setStockTabItem(TabItem stockTabItem) {
+		this.stockTabItem = stockTabItem;
+	}
+
+	protected Composite getStockTabComposite() {
+		return stockTabComposite;
+	}
+
+	protected void setStockTabComposite(Composite stockTabComposite) {
+		this.stockTabComposite = stockTabComposite;
+	}
+
+	protected Group getStockGroupOrderForm() {
+		return stockGroupOrderForm;
+	}
+
+	protected void setStockGroupOrderForm(Group stockGroupOrderForm) {
+		this.stockGroupOrderForm = stockGroupOrderForm;
+	}
+
+	protected Label getStockLabelOrderID() {
+		return stockLabelOrderID;
+	}
+
+	protected void setStockLabelOrderID(Label stockLabelOrderID) {
+		this.stockLabelOrderID = stockLabelOrderID;
+	}
+
+	protected Label getStockLabelOrderIDInput() {
+		return stockLabelOrderIDInput;
+	}
+
+	protected void setStockLabelOrderIDInput(Label stockLabelOrderIDInput) {
+		this.stockLabelOrderIDInput = stockLabelOrderIDInput;
+	}
+
+	protected Label getStockLabelAlbumID() {
+		return stockLabelAlbumID;
+	}
+
+	protected void setStockLabelAlbumID(Label stockLabelAlbumID) {
+		this.stockLabelAlbumID = stockLabelAlbumID;
+	}
+
+	protected Text getStockTextBoxAlbumIDInput() {
+		return stockTextBoxAlbumIDInput;
+	}
+
+	protected void setStockTextBoxAlbumIDInput(Text stockTextBoxAlbumIDInput) {
+		this.stockTextBoxAlbumIDInput = stockTextBoxAlbumIDInput;
+	}
+
+	protected Label getStockLabelDate() {
+		return stockLabelDate;
+	}
+
+	protected void setStockLabelDate(Label stockLabelDate) {
+		this.stockLabelDate = stockLabelDate;
+	}
+
+	protected Label getStockLabelOrderDateInput() {
+		return stockLabelOrderDateInput;
+	}
+
+	protected void setStockLabelOrderDateInput(Label stockLabelOrderDateInput) {
+		this.stockLabelOrderDateInput = stockLabelOrderDateInput;
+	}
+
+	protected Button getStockButtonCheckAvailability() {
+		return stockButtonCheckAvailability;
+	}
+
+	protected void setStockButtonCheckAvailability(
+			Button stockButtonCheckAvailability) {
+		this.stockButtonCheckAvailability = stockButtonCheckAvailability;
+	}
+
+	protected Label getStockLabelOrderFromStore() {
+		return stockLabelOrderFromStore;
+	}
+
+	protected void setStockLabelOrderFromStore(Label stockLabelOrderFromStore) {
+		this.stockLabelOrderFromStore = stockLabelOrderFromStore;
+	}
+
+	protected Table getStockTableOrderAvailableStores() {
+		return stockTableOrderAvailableStores;
+	}
+
+	protected void setStockTableOrderAvailableStores(
+			Table stockTableOrderAvailableStores) {
+		this.stockTableOrderAvailableStores = stockTableOrderAvailableStores;
+	}
+
+	protected TableColumn getStockTableColumnStoreID() {
+		return stockTableColumnStoreID;
+	}
+
+	protected void setStockTableColumnStoreID(TableColumn stockTableColumnStoreID) {
+		this.stockTableColumnStoreID = stockTableColumnStoreID;
+	}
+
+	protected TableColumn getStockTableColumnStoreCity() {
+		return stockTableColumnStoreCity;
+	}
+
+	protected void setStockTableColumnStoreCity(
+			TableColumn stockTableColumnStoreCity) {
+		this.stockTableColumnStoreCity = stockTableColumnStoreCity;
+	}
+
+	protected TableColumn getStockTableColumnQuantity() {
+		return stockTableColumnQuantity;
+	}
+
+	protected void setStockTableColumnQuantity(TableColumn stockTableColumnQuantity) {
+		this.stockTableColumnQuantity = stockTableColumnQuantity;
+	}
+
+	protected TableColumn getStockTableColumnPrice() {
+		return stockTableColumnPrice;
+	}
+
+	protected void setStockTableColumnPrice(TableColumn stockTableColumnPrice) {
+		this.stockTableColumnPrice = stockTableColumnPrice;
+	}
+
+	protected Label getStockLabelPrice() {
+		return stockLabelPrice;
+	}
+
+	protected void setStockLabelPrice(Label stockLabelPrice) {
+		this.stockLabelPrice = stockLabelPrice;
+	}
+
+	protected Label getStockLabelStorePriceInput() {
+		return stockLabelStorePriceInput;
+	}
+
+	protected void setStockLabelStorePriceInput(Label stockLabelStorePriceInput) {
+		this.stockLabelStorePriceInput = stockLabelStorePriceInput;
+	}
+
+	protected Label getStockLabelQuantityInStock() {
+		return stockLabelQuantityInStock;
+	}
+
+	protected void setStockLabelQuantityInStock(Label stockLabelQuantityInStock) {
+		this.stockLabelQuantityInStock = stockLabelQuantityInStock;
+	}
+
+	protected Label getStockLabelQuantityInStockInput() {
+		return stockLabelQuantityInStockInput;
+	}
+
+	protected void setStockLabelQuantityInStockInput(
+			Label stockLabelQuantityInStockInput) {
+		this.stockLabelQuantityInStockInput = stockLabelQuantityInStockInput;
+	}
+
+	protected Label getStockLabelStorageLocation() {
+		return stockLabelStorageLocation;
+	}
+
+	protected void setStockLabelStorageLocation(Label stockLabelStorageLocation) {
+		this.stockLabelStorageLocation = stockLabelStorageLocation;
+	}
+
+	protected Label getStockLabelStorageLocationInput() {
+		return stockLabelStorageLocationInput;
+	}
+
+	protected void setStockLabelStorageLocationInput(
+			Label stockLabelStorageLocationInput) {
+		this.stockLabelStorageLocationInput = stockLabelStorageLocationInput;
+	}
+
+	protected Label getStockLabelQuantityToOrder() {
+		return stockLabelQuantityToOrder;
+	}
+
+	protected void setStockLabelQuantityToOrder(Label stockLabelQuantityToOrder) {
+		this.stockLabelQuantityToOrder = stockLabelQuantityToOrder;
+	}
+
+	protected Text getStockTextBoxQuantityToOrder() {
+		return stockTextBoxQuantityToOrder;
+	}
+
+	protected void setStockTextBoxQuantityToOrder(Text stockTextBoxQuantityToOrder) {
+		this.stockTextBoxQuantityToOrder = stockTextBoxQuantityToOrder;
+	}
+
+	protected Button getStockButtonClearOrder() {
+		return stockButtonClearOrder;
+	}
+
+	protected void setStockButtonClearOrder(Button stockButtonClearOrder) {
+		this.stockButtonClearOrder = stockButtonClearOrder;
+	}
+
+	protected Button getStockButtonPlaceOrder() {
+		return stockButtonPlaceOrder;
+	}
+
+	protected void setStockButtonPlaceOrder(Button stockButtonPlaceOrder) {
+		this.stockButtonPlaceOrder = stockButtonPlaceOrder;
+	}
+
+	protected Label getStockLabelOrders() {
+		return stockLabelOrders;
+	}
+
+	protected void setStockLabelOrders(Label stockLabelOrders) {
+		this.stockLabelOrders = stockLabelOrders;
+	}
+
+	protected Table getStockTableOrders() {
+		return stockTableOrders;
+	}
+
+	protected void setStockTableOrders(Table stockTableOrders) {
+		this.stockTableOrders = stockTableOrders;
+	}
+
+	protected TableColumn getStockTableColumnOrdersOrderID() {
+		return stockTableColumnOrdersOrderID;
+	}
+
+	protected void setStockTableColumnOrdersOrderID(
+			TableColumn stockTableColumnOrdersOrderID) {
+		this.stockTableColumnOrdersOrderID = stockTableColumnOrdersOrderID;
+	}
+
+	protected TableColumn getStockTableColumnOrdersSupplierID() {
+		return stockTableColumnOrdersSupplierID;
+	}
+
+	protected void setStockTableColumnOrdersSupplierID(
+			TableColumn stockTableColumnOrdersSupplierID) {
+		this.stockTableColumnOrdersSupplierID = stockTableColumnOrdersSupplierID;
+	}
+
+	protected TableColumn getStockTableColumnOrdersAlbumID() {
+		return stockTableColumnOrdersAlbumID;
+	}
+
+	protected void setStockTableColumnOrdersAlbumID(
+			TableColumn stockTableColumnOrdersAlbumID) {
+		this.stockTableColumnOrdersAlbumID = stockTableColumnOrdersAlbumID;
+	}
+
+	protected TableColumn getStockTableColumnOrdersQuantity() {
+		return stockTableColumnOrdersQuantity;
+	}
+
+	protected void setStockTableColumnOrdersQuantity(
+			TableColumn stockTableColumnOrdersQuantity) {
+		this.stockTableColumnOrdersQuantity = stockTableColumnOrdersQuantity;
+	}
+
+	protected TableColumn getStockTableColumnOrdersDate() {
+		return stockTableColumnOrdersDate;
+	}
+
+	protected void setStockTableColumnOrdersDate(
+			TableColumn stockTableColumnOrdersDate) {
+		this.stockTableColumnOrdersDate = stockTableColumnOrdersDate;
+	}
+
+	protected TableColumn getStockTableColumnOrdersStatus() {
+		return stockTableColumnOrdersStatus;
+	}
+
+	protected void setStockTableColumnOrdersStatus(
+			TableColumn stockTableColumnOrdersStatus) {
+		this.stockTableColumnOrdersStatus = stockTableColumnOrdersStatus;
+	}
+
+	protected TableColumn getStockTableColumnOrdersCompletionDate() {
+		return stockTableColumnOrdersCompletionDate;
+	}
+
+	protected void setStockTableColumnOrdersCompletionDate(
+			TableColumn stockTableColumnOrdersCompletionDate) {
+		this.stockTableColumnOrdersCompletionDate = stockTableColumnOrdersCompletionDate;
+	}
+
+	protected Button getStockButtonRemoveOrder() {
+		return stockButtonRemoveOrder;
+	}
+
+	protected void setStockButtonRemoveOrder(Button stockButtonRemoveOrder) {
+		this.stockButtonRemoveOrder = stockButtonRemoveOrder;
+	}
+
+	protected Button getStockButtonCancelOrder() {
+		return stockButtonCancelOrder;
+	}
+
+	protected void setStockButtonCancelOrder(Button stockButtonCancelOrder) {
+		this.stockButtonCancelOrder = stockButtonCancelOrder;
+	}
+
+	protected Label getStockLabelRequests() {
+		return stockLabelRequests;
+	}
+
+	protected void setStockLabelRequests(Label stockLabelRequests) {
+		this.stockLabelRequests = stockLabelRequests;
+	}
+
+	protected Table getStockTableRequests() {
+		return stockTableRequests;
+	}
+
+	protected void setStockTableRequests(Table stockTableRequests) {
+		this.stockTableRequests = stockTableRequests;
+	}
+
+	protected TableColumn getStockTableColumnRequestsOrderID() {
+		return stockTableColumnRequestsOrderID;
+	}
+
+	protected void setStockTableColumnRequestsOrderID(
+			TableColumn stockTableColumnRequestsOrderID) {
+		this.stockTableColumnRequestsOrderID = stockTableColumnRequestsOrderID;
+	}
+
+	protected TableColumn getStockTableColumnRequestsOrderingStoreID() {
+		return stockTableColumnRequestsOrderingStoreID;
+	}
+
+	protected void setStockTableColumnRequestsOrderingStoreID(
+			TableColumn stockTableColumnRequestsOrderingStoreID) {
+		this.stockTableColumnRequestsOrderingStoreID = stockTableColumnRequestsOrderingStoreID;
+	}
+
+	protected TableColumn getStockTableColumnRequestsAlbumID() {
+		return stockTableColumnRequestsAlbumID;
+	}
+
+	protected void setStockTableColumnRequestsAlbumID(
+			TableColumn stockTableColumnRequestsAlbumID) {
+		this.stockTableColumnRequestsAlbumID = stockTableColumnRequestsAlbumID;
+	}
+
+	protected TableColumn getStockTableColumnRequestsQuantity() {
+		return stockTableColumnRequestsQuantity;
+	}
+
+	protected void setStockTableColumnRequestsQuantity(
+			TableColumn stockTableColumnRequestsQuantity) {
+		this.stockTableColumnRequestsQuantity = stockTableColumnRequestsQuantity;
+	}
+
+	protected TableColumn getStockTableColumnRequestsDate() {
+		return stockTableColumnRequestsDate;
+	}
+
+	protected void setStockTableColumnRequestsDate(
+			TableColumn stockTableColumnRequestsDate) {
+		this.stockTableColumnRequestsDate = stockTableColumnRequestsDate;
+	}
+
+	protected TableColumn getStockTableColumnRequestsStatus() {
+		return stockTableColumnRequestsStatus;
+	}
+
+	protected void setStockTableColumnRequestsStatus(
+			TableColumn stockTableColumnRequestsStatus) {
+		this.stockTableColumnRequestsStatus = stockTableColumnRequestsStatus;
+	}
+
+	protected TableColumn getStockTableColumnRequestsCompletionDate() {
+		return stockTableColumnRequestsCompletionDate;
+	}
+
+	protected void setStockTableColumnRequestsCompletionDate(
+			TableColumn stockTableColumnRequestsCompletionDate) {
+		this.stockTableColumnRequestsCompletionDate = stockTableColumnRequestsCompletionDate;
+	}
+
+	protected Button getStockButtonDenyRequest() {
+		return stockButtonDenyRequest;
+	}
+
+	protected void setStockButtonDenyRequest(Button stockButtonDenyRequest) {
+		this.stockButtonDenyRequest = stockButtonDenyRequest;
+	}
+
+	protected Button getStockButtonApproveRequest() {
+		return stockButtonApproveRequest;
+	}
+
+	protected void setStockButtonApproveRequest(Button stockButtonApproveRequest) {
+		this.stockButtonApproveRequest = stockButtonApproveRequest;
+	}
+
+	protected TabItem getManagementTabItem() {
+		return managementTabItem;
+	}
+
+	protected void setManagementTabItem(TabItem managementTabItem) {
+		this.managementTabItem = managementTabItem;
+	}
+
+	protected Composite getManageMainComposite() {
+		return manageMainComposite;
+	}
+
+	protected void setManageMainComposite(Composite manageMainComposite) {
+		this.manageMainComposite = manageMainComposite;
+	}
+
+	protected Label getManageLabelEmployees() {
+		return manageLabelEmployees;
+	}
+
+	protected void setManageLabelEmployees(Label manageLabelEmployees) {
+		this.manageLabelEmployees = manageLabelEmployees;
+	}
+
+	protected Table getManageTableEmployees() {
+		return manageTableEmployees;
+	}
+
+	protected void setManageTableEmployees(Table manageTableEmployees) {
+		this.manageTableEmployees = manageTableEmployees;
+	}
+
+	protected TableColumn getManageTableColumnEmployeeID() {
+		return manageTableColumnEmployeeID;
+	}
+
+	protected void setManageTableColumnEmployeeID(
+			TableColumn manageTableColumnEmployeeID) {
+		this.manageTableColumnEmployeeID = manageTableColumnEmployeeID;
+	}
+
+	protected TableColumn getManageTableColumnEmployeePName() {
+		return manageTableColumnEmployeePName;
+	}
+
+	protected void setManageTableColumnEmployeePName(
+			TableColumn manageTableColumnEmployeePName) {
+		this.manageTableColumnEmployeePName = manageTableColumnEmployeePName;
+	}
+
+	protected TableColumn getManageTableColumnEmployeeLName() {
+		return manageTableColumnEmployeeLName;
+	}
+
+	protected void setManageTableColumnEmployeeLName(
+			TableColumn manageTableColumnEmployeeLName) {
+		this.manageTableColumnEmployeeLName = manageTableColumnEmployeeLName;
+	}
+
+	protected TableColumn getManageTableColumnEmployeePosition() {
+		return manageTableColumnEmployeePosition;
+	}
+
+	protected void setManageTableColumnEmployeePosition(
+			TableColumn manageTableColumnEmployeePosition) {
+		this.manageTableColumnEmployeePosition = manageTableColumnEmployeePosition;
+	}
+
+	protected Group getManageGroupEditEmployee() {
+		return manageGroupEditEmployee;
+	}
+
+	protected void setManageGroupEditEmployee(Group manageGroupEditEmployee) {
+		this.manageGroupEditEmployee = manageGroupEditEmployee;
+	}
+
+	protected Label getManageLabelEmployeeEmploymentDateInput() {
+		return manageLabelEmployeeEmploymentDateInput;
+	}
+
+	protected void setManageLabelEmployeeEmploymentDateInput(
+			Label manageLabelEmployeeEmploymentDateInput) {
+		this.manageLabelEmployeeEmploymentDateInput = manageLabelEmployeeEmploymentDateInput;
+	}
+
+	protected Label getManageLabelEmployeeEmploymentDate() {
+		return manageLabelEmployeeEmploymentDate;
+	}
+
+	protected void setManageLabelEmployeeEmploymentDate(
+			Label manageLabelEmployeeEmploymentDate) {
+		this.manageLabelEmployeeEmploymentDate = manageLabelEmployeeEmploymentDate;
+	}
+
+	protected Label getManageLabelEmployeeStoreID() {
+		return manageLabelEmployeeStoreID;
+	}
+
+	protected void setManageLabelEmployeeStoreID(Label manageLabelEmployeeStoreID) {
+		this.manageLabelEmployeeStoreID = manageLabelEmployeeStoreID;
+	}
+
+	protected Label getManageLabelEmployeeEmployeeStoreIDInput() {
+		return manageLabelEmployeeEmployeeStoreIDInput;
+	}
+
+	protected void setManageLabelEmployeeEmployeeStoreIDInput(
+			Label manageLabelEmployeeEmployeeStoreIDInput) {
+		this.manageLabelEmployeeEmployeeStoreIDInput = manageLabelEmployeeEmployeeStoreIDInput;
+	}
+
+	protected Label getManageLabelEmployeeID() {
+		return manageLabelEmployeeID;
+	}
+
+	protected void setManageLabelEmployeeID(Label manageLabelEmployeeID) {
+		this.manageLabelEmployeeID = manageLabelEmployeeID;
+	}
+
+	protected Text getManageTextBoxEmployeeIDInput() {
+		return manageTextBoxEmployeeIDInput;
+	}
+
+	protected void setManageTextBoxEmployeeIDInput(Text manageTextBoxEmployeeIDInput) {
+		this.manageTextBoxEmployeeIDInput = manageTextBoxEmployeeIDInput;
+	}
+
+	protected Label getManageLabelEmployeeBirth() {
+		return manageLabelEmployeeBirth;
+	}
+
+	protected void setManageLabelEmployeeBirth(Label manageLabelEmployeeBirth) {
+		this.manageLabelEmployeeBirth = manageLabelEmployeeBirth;
+	}
+
+	protected Text getManageTextBoxEmployeeBirthInput() {
+		return manageTextBoxEmployeeBirthInput;
+	}
+
+	protected void setManageTextBoxEmployeeBirthInput(
+			Text manageTextBoxEmployeeBirthInput) {
+		this.manageTextBoxEmployeeBirthInput = manageTextBoxEmployeeBirthInput;
+	}
+
+	protected Label getManageLabelEmployeeFName() {
+		return manageLabelEmployeeFName;
+	}
+
+	protected void setManageLabelEmployeeFName(Label manageLabelEmployeeFName) {
+		this.manageLabelEmployeeFName = manageLabelEmployeeFName;
+	}
+
+	protected Text getManageTextBoxEmployeeFNameInput() {
+		return manageTextBoxEmployeeFNameInput;
+	}
+
+	protected void setManageTextBoxEmployeeFNameInput(
+			Text manageTextBoxEmployeeFNameInput) {
+		this.manageTextBoxEmployeeFNameInput = manageTextBoxEmployeeFNameInput;
+	}
+
+	protected Label getManageLabelEmployeeLName() {
+		return manageLabelEmployeeLName;
+	}
+
+	protected void setManageLabelEmployeeLName(Label manageLabelEmployeeLName) {
+		this.manageLabelEmployeeLName = manageLabelEmployeeLName;
+	}
+
+	protected Text getManageTextBoxEmployeeLNameInput() {
+		return manageTextBoxEmployeeLNameInput;
+	}
+
+	protected void setManageTextBoxEmployeeLNameInput(
+			Text manageTextBoxEmployeeLNameInput) {
+		this.manageTextBoxEmployeeLNameInput = manageTextBoxEmployeeLNameInput;
+	}
+
+	protected Label getManageLabelEmployeeAddress() {
+		return manageLabelEmployeeAddress;
+	}
+
+	protected void setManageLabelEmployeeAddress(Label manageLabelEmployeeAddress) {
+		this.manageLabelEmployeeAddress = manageLabelEmployeeAddress;
+	}
+
+	protected Text getManageTextBoxEmployeeAddressInput() {
+		return manageTextBoxEmployeeAddressInput;
+	}
+
+	protected void setManageTextBoxEmployeeAddressInput(
+			Text manageTextBoxEmployeeAddressInput) {
+		this.manageTextBoxEmployeeAddressInput = manageTextBoxEmployeeAddressInput;
+	}
+
+	protected Label getManageLabelEmployeePhone() {
+		return manageLabelEmployeePhone;
+	}
+
+	protected void setManageLabelEmployeePhone(Label manageLabelEmployeePhone) {
+		this.manageLabelEmployeePhone = manageLabelEmployeePhone;
+	}
+
+	protected Text getManageTextBoxEmployeePhoneInput() {
+		return manageTextBoxEmployeePhoneInput;
+	}
+
+	protected void setManageTextBoxEmployeePhoneInput(
+			Text manageTextBoxEmployeePhoneInput) {
+		this.manageTextBoxEmployeePhoneInput = manageTextBoxEmployeePhoneInput;
+	}
+
+	protected Label getManageLabelEmployeeCellPhone() {
+		return manageLabelEmployeeCellPhone;
+	}
+
+	protected void setManageLabelEmployeeCellPhone(
+			Label manageLabelEmployeeCellPhone) {
+		this.manageLabelEmployeeCellPhone = manageLabelEmployeeCellPhone;
+	}
+
+	protected Text getManageTextBoxEmployeeCellPhoneInput() {
+		return manageTextBoxEmployeeCellPhoneInput;
+	}
+
+	protected void setManageTextBoxEmployeeCellPhoneInput(
+			Text manageTextBoxEmployeeCellPhoneInput) {
+		this.manageTextBoxEmployeeCellPhoneInput = manageTextBoxEmployeeCellPhoneInput;
+	}
+
+	protected Label getManageLabelEmployeePosition() {
+		return manageLabelEmployeePosition;
+	}
+
+	protected void setManageLabelEmployeePosition(Label manageLabelEmployeePosition) {
+		this.manageLabelEmployeePosition = manageLabelEmployeePosition;
+	}
+
+	protected Combo getManageComboEmployeePositionInput() {
+		return manageComboEmployeePositionInput;
+	}
+
+	protected void setManageComboEmployeePositionInput(
+			Combo manageComboEmployeePositionInput) {
+		this.manageComboEmployeePositionInput = manageComboEmployeePositionInput;
+	}
+
+	protected Button getManageButtonEmployeeNew() {
+		return manageButtonEmployeeNew;
+	}
+
+	protected void setManageButtonEmployeeNew(Button manageButtonEmployeeNew) {
+		this.manageButtonEmployeeNew = manageButtonEmployeeNew;
+	}
+
+	protected Button getManageButtonEmployeeInsert() {
+		return manageButtonEmployeeInsert;
+	}
+
+	protected void setManageButtonEmployeeInsert(Button manageButtonEmployeeInsert) {
+		this.manageButtonEmployeeInsert = manageButtonEmployeeInsert;
+	}
+
+	protected Button getManageButtonEmployeeNoSave() {
+		return manageButtonEmployeeNoSave;
+	}
+
+	protected void setManageButtonEmployeeNoSave(Button manageButtonEmployeeNoSave) {
+		this.manageButtonEmployeeNoSave = manageButtonEmployeeNoSave;
+	}
+
+	protected Button getManageButtonEmployeeEdit() {
+		return manageButtonEmployeeEdit;
+	}
+
+	protected void setManageButtonEmployeeEdit(Button manageButtonEmployeeEdit) {
+		this.manageButtonEmployeeEdit = manageButtonEmployeeEdit;
+	}
+
+	protected Button getManageButtonEmployeeSave() {
+		return manageButtonEmployeeSave;
+	}
+
+	protected void setManageButtonEmployeeSave(Button manageButtonEmployeeSave) {
+		this.manageButtonEmployeeSave = manageButtonEmployeeSave;
+	}
+
+	protected Button getManageButtonEmployeeRemove() {
+		return manageButtonEmployeeRemove;
+	}
+
+	protected void setManageButtonEmployeeRemove(Button manageButtonEmployeeRemove) {
+		this.manageButtonEmployeeRemove = manageButtonEmployeeRemove;
+	}
+
+	protected Group getManageGroupDBSManage() {
+		return manageGroupDBSManage;
+	}
+
+	protected void setManageGroupDBSManage(Group manageGroupDBSManage) {
+		this.manageGroupDBSManage = manageGroupDBSManage;
+	}
+
+	protected Label getManageLabelDBSUpdate() {
+		return manageLabelDBSUpdate;
+	}
+
+	protected void setManageLabelDBSUpdate(Label manageLabelDBSUpdate) {
+		this.manageLabelDBSUpdate = manageLabelDBSUpdate;
+	}
+
+	protected Text getManageTextBoxDBSUpdateFileInput() {
+		return manageTextBoxDBSUpdateFileInput;
+	}
+
+	protected void setManageTextBoxDBSUpdateFileInput(
+			Text manageTextBoxDBSUpdateFileInput) {
+		this.manageTextBoxDBSUpdateFileInput = manageTextBoxDBSUpdateFileInput;
+	}
+
+	protected Button getManageButtonDBSBrowse() {
+		return manageButtonDBSBrowse;
+	}
+
+	protected void setManageButtonDBSBrowse(Button manageButtonDBSBrowse) {
+		this.manageButtonDBSBrowse = manageButtonDBSBrowse;
+	}
+
+	protected Button getManageButtonDBSUpdate() {
+		return manageButtonDBSUpdate;
+	}
+
+	protected void setManageButtonDBSUpdate(Button manageButtonDBSUpdate) {
+		this.manageButtonDBSUpdate = manageButtonDBSUpdate;
+	}
+
+	protected ProgressBar getManageProgressBarDBSUpdate() {
+		return manageProgressBarDBSUpdate;
+	}
+
+	protected void setManageProgressBarDBSUpdate(
+			ProgressBar manageProgressBarDBSUpdate) {
+		this.manageProgressBarDBSUpdate = manageProgressBarDBSUpdate;
 	}
 }
