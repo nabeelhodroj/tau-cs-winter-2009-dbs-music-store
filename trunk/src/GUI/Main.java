@@ -76,6 +76,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Table manageTableEmployees;
 	private TableColumn manageTableColumnEmployeeID;
 	private TableColumn manageTableColumnEmployeePName;
+	private MenuItem searchMenuItemAddToSale;
+	private MenuItem searchMenuItemPlaceOrder;
+	private MenuItem searchMenuItemSearch;
+	private MenuItem fileMenuItemExit;
+	private MenuItem searchMenuItemClear;
 	private ProgressBar manageProgressBarDBSUpdate;
 	private Button manageButtonDBSUpdate;
 	private Button manageButtonDBSBrowse;
@@ -204,6 +209,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Text searchTextBoxAlbumID;
 	private Button searchBulletOtherParameters;
 	private MenuItem mainMenuItemFile;
+	private MenuItem mainMenuItemSearch;
 	private Button searchBulletByAlbum;
 	private Group searchGroupResults;
 	private Group searchGroupOptions;
@@ -214,6 +220,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private TabItem saleTabItem;
 	private TabFolder mainTabFolder;
 	private Menu fileMenu;
+	private Menu searchMenu;
+	private Menu saleMenu;
+	private Menu stockMenu;
+	private Menu manageMenu;
 
 	/**
 	* Auto-generated main method to display this 
@@ -286,6 +296,33 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					{
 						fileMenu = new Menu(mainMenuItemFile);
 						mainMenuItemFile.setMenu(fileMenu);
+						{
+							fileMenuItemExit = new MenuItem(fileMenu, SWT.PUSH);
+							fileMenuItemExit.setText("Exit");
+						}
+					}
+					
+					mainMenuItemSearch = new MenuItem(mainMenuBar, SWT.CASCADE);
+					mainMenuItemSearch.setText("Search");
+					{
+						searchMenu = new Menu(mainMenuItemSearch);
+						mainMenuItemSearch.setMenu(searchMenu);
+						{
+							searchMenuItemClear = new MenuItem(searchMenu, SWT.PUSH);
+							searchMenuItemClear.setText("Clear fields");
+						}
+						{
+							searchMenuItemSearch = new MenuItem(searchMenu, SWT.PUSH);
+							searchMenuItemSearch.setText("Search");
+						}
+						{
+							searchMenuItemPlaceOrder = new MenuItem(searchMenu, SWT.PUSH);
+							searchMenuItemPlaceOrder.setText("Place an order...");
+						}
+						{
+							searchMenuItemAddToSale = new MenuItem(searchMenu, SWT.PUSH);
+							searchMenuItemAddToSale.setText("Add to sale...");
+						}
 					}
 				}
 			}
