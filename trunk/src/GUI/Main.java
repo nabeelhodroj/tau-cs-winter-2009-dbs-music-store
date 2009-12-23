@@ -199,6 +199,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	public static void showGUI() {
 		Display display = Display.getDefault();
 		Shell shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
+		shell.setText("SSDA Music Store Manager");
 		Main inst = new Main(shell, SWT.NULL);
 		Point size = inst.getSize();
 		shell.setLayout(new FillLayout());
@@ -1000,7 +1001,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				}
 				{
 					mainLabelStoreDetailsDateTime = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsDateTime.setBounds(150, 19, 139, 20);
+					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
 					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
 				}
 			}
