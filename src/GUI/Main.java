@@ -1,11 +1,8 @@
 package GUI;
 
-import java.util.ListIterator;
-import java.util.Observable;
-import java.util.Date;
+import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import org.eclipse.jface.viewers.*;
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
@@ -15,15 +12,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+* SWT/Swing GUI Builder, which is free for non-commercial use.
 */
 public class Main extends org.eclipse.swt.widgets.Composite {
 
@@ -38,268 +27,268 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	//////////////////////////////////
 	
 	// Main Menu
-	private Menu mainMenuBar;
-	private MenuItem menuItemSeperator;
+	private static Menu mainMenuBar;
+	private static MenuItem menuItemSeperator;
 	
-	private MenuItem mainMenuItemFile;
-	private Menu fileMenu;
-	private MenuItem fileMenuItemExit;
+	private static MenuItem mainMenuItemFile;
+	private static Menu fileMenu;
+	private static MenuItem fileMenuItemExit;
 	
-	private MenuItem mainMenuItemSearch;
-	private Menu searchMenu;
-	private MenuItem searchMenuItemAddToSale;
-	private MenuItem searchMenuItemPlaceOrder;
-	private MenuItem searchMenuItemSearch;
-	private MenuItem searchMenuItemClear;
+	private static MenuItem mainMenuItemSearch;
+	private static Menu searchMenu;
+	private static MenuItem searchMenuItemAddToSale;
+	private static MenuItem searchMenuItemPlaceOrder;
+	private static MenuItem searchMenuItemSearch;
+	private static MenuItem searchMenuItemClear;
 	
-	private MenuItem mainMenuItemSale;
-	private Menu saleMenu;
-	private MenuItem saleMenuItemRemove;
-	private MenuItem saleMenuItemClear;
-	private MenuItem saleMenuItemMakeSale;
+	private static MenuItem mainMenuItemSale;
+	private static Menu saleMenu;
+	private static MenuItem saleMenuItemRemove;
+	private static MenuItem saleMenuItemClear;
+	private static MenuItem saleMenuItemMakeSale;
 	
-	private MenuItem mainMenuItemStock;
-	private Menu stockMenu;
-	private MenuItem stockMenuItemCheckAvailability;
-	private MenuItem stockMenuItemClear;
-	private MenuItem stockMenuItemPlaceOrder;
-	private MenuItem stockMenuItemRemoveOrder;
-	private MenuItem stockMenuItemCancelOrder;
-	private MenuItem stockMenuItemDenyRequest;
-	private MenuItem stockMenuItemApproveRequest;
+	private static MenuItem mainMenuItemStock;
+	private static Menu stockMenu;
+	private static MenuItem stockMenuItemCheckAvailability;
+	private static MenuItem stockMenuItemClear;
+	private static MenuItem stockMenuItemPlaceOrder;
+	private static MenuItem stockMenuItemRemoveOrder;
+	private static MenuItem stockMenuItemCancelOrder;
+	private static MenuItem stockMenuItemDenyRequest;
+	private static MenuItem stockMenuItemApproveRequest;
 	
-	private MenuItem mainMenuItemManage;
-	private Menu manageMenu;
-	private MenuItem manageMenuItemBrowse;
-	private MenuItem manageMenuItemUpdateDBS;
-	private MenuItem manageMenuItemNew;
-	private MenuItem manageMenuItemInsert;
-	private MenuItem manageMenuItemEdit;
-	private MenuItem manageMenuItemSave;
-	private MenuItem manageMenuItemExitNoSave;
-	private MenuItem manageMenuItemRemoveEmployee;
+	private static MenuItem mainMenuItemManage;
+	private static Menu manageMenu;
+	private static MenuItem manageMenuItemBrowse;
+	private static MenuItem manageMenuItemUpdateDBS;
+	private static MenuItem manageMenuItemNew;
+	private static MenuItem manageMenuItemInsert;
+	private static MenuItem manageMenuItemEdit;
+	private static MenuItem manageMenuItemSave;
+	private static MenuItem manageMenuItemExitNoSave;
+	private static MenuItem manageMenuItemRemoveEmployee;
 	
 	// Main Window Details
 	//////////////////////
 	// Store details
-	private Group mainGroupStoreDetails;
-	private Label mainLabelStoreDetailsStoreID;
-	private Label mainLabelStoreDetailsDateTime;
-	private Label mainLabelStoreDetailsStoreAddress;
-	private Label mainLabelStoreDetailsStorePhone;
-	private Label mainLabelStoreDetailsStoreManager;
+	private static Group mainGroupStoreDetails;
+	private static Label mainLabelStoreDetailsStoreID;
+	private static Label mainLabelStoreDetailsDateTime;
+	private static Label mainLabelStoreDetailsStoreAddress;
+	private static Label mainLabelStoreDetailsStorePhone;
+	private static Label mainLabelStoreDetailsStoreManager;
 	
 	// Quick tips
-	private Group mainGroupQuickTips;
-	private Label mainLabelQuickTipsTip;
+	private static Group mainGroupQuickTips;
+	private static Label mainLabelQuickTipsTip;
 	
 	// Tab folder
-	private TabFolder mainTabFolder;
+	private static TabFolder mainTabFolder;
 	
 	// Search tab
 	/////////////
-	private TabItem searchTabItem;
-	private Composite searchTabComposite;
+	private static TabItem searchTabItem;
+	private static Composite searchTabComposite;
 	
 	// Search options group
-	private Group searchGroupOptions;
-	private Button searchBulletByAlbum;
-	private Text searchTextBoxAlbumID;
-	private Button searchBulletOtherParameters;
-	private Button searchCheckBoxAlbumName;
-	private Text searchTextBoxAlbumName;
-	private Button searchCheckBoxArtist;
-	private Text searchTextBoxArtist;
-	private Button searchCheckBoxYear;
-	private Text searchTextBoxYearFrom;
-	private Label searchLabelYearTo;
-	private Text searchTextBoxYearTo;
-	private Button searchCheckBoxSongNames;
-	private Text searchTextBoxSongNames;
-	private Composite searchCompositeStockField;
-	private Label searchLabelStock;
-	private Button searchBulletInStockAll;
-	private Button searchBulletInStockInStore;
-	private Button searchBulletInStockInNetwork;
-	private Button searchCheckBoxGenres;
-	private Button searchCheckBoxGenreJazz;
-	private Button searchCheckBoxGenreRock;
-	private Button searchCheckBoxGenre03;
-	private Button searchCheckBoxGenre04;
-	private Button searchCheckBoxGenre05;
-	private Button searchCheckBoxGenre06;
-	private Button searchCheckBoxGenre07;
-	private Button searchCheckBoxGenre08;
-	private Button searchCheckBoxGenre09;
-	private Button searchCheckBoxGenre10;
-	private Button searchCheckBoxGenreOther;
-	private Text searchTextBoxGenreOther;
-	private Button searchButtonClear;
-	private Button searchButtonSearch;
+	private static Group searchGroupOptions;
+	private static Button searchBulletByAlbum;
+	private static Text searchTextBoxAlbumID;
+	private static Button searchBulletOtherParameters;
+	private static Button searchCheckBoxAlbumName;
+	private static Text searchTextBoxAlbumName;
+	private static Button searchCheckBoxArtist;
+	private static Text searchTextBoxArtist;
+	private static Button searchCheckBoxYear;
+	private static Text searchTextBoxYearFrom;
+	private static Label searchLabelYearTo;
+	private static Text searchTextBoxYearTo;
+	private static Button searchCheckBoxSongNames;
+	private static Text searchTextBoxSongNames;
+	private static Composite searchCompositeStockField;
+	private static Label searchLabelStock;
+	private static Button searchBulletInStockAll;
+	private static Button searchBulletInStockInStore;
+	private static Button searchBulletInStockInNetwork;
+	private static Button searchCheckBoxGenres;
+	private static Button searchCheckBoxGenreJazz;
+	private static Button searchCheckBoxGenreRock;
+	private static Button searchCheckBoxGenre03;
+	private static Button searchCheckBoxGenre04;
+	private static Button searchCheckBoxGenre05;
+	private static Button searchCheckBoxGenre06;
+	private static Button searchCheckBoxGenre07;
+	private static Button searchCheckBoxGenre08;
+	private static Button searchCheckBoxGenre09;
+	private static Button searchCheckBoxGenre10;
+	private static Button searchCheckBoxGenreOther;
+	private static Text searchTextBoxGenreOther;
+	private static Button searchButtonClear;
+	private static Button searchButtonSearch;
 	
 	// Search results group
-	private Group searchGroupResults;
-	private Table searchTableAlbumResults;
-	private TableColumn searchTableColumnAlbumID;
-	private TableColumn searchTableColumnAlbumName;
-	private TableColumn searchTableColumnAlbumArtist;
-	private TableColumn searchTableColumnAlbumYear;
-	private TableColumn searchTableColumnAlbumGenre;
-	private TableColumn searchTableColumnAlbumLength;
-	private ProgressBar searchProgressBar;
-	private Table searchTableSongResults;
-	private TableColumn searchTableColumnSongName;
-	private TableColumn searchTableColumnSongArtist;
-	private TableColumn searchTableColumnSongLength;
+	private static Group searchGroupResults;
+	private static Table searchTableAlbumResults;
+	private static TableColumn searchTableColumnAlbumID;
+	private static TableColumn searchTableColumnAlbumName;
+	private static TableColumn searchTableColumnAlbumArtist;
+	private static TableColumn searchTableColumnAlbumYear;
+	private static TableColumn searchTableColumnAlbumGenre;
+	private static TableColumn searchTableColumnAlbumLength;
+	private static ProgressBar searchProgressBar;
+	private static Table searchTableSongResults;
+	private static TableColumn searchTableColumnSongName;
+	private static TableColumn searchTableColumnSongArtist;
+	private static TableColumn searchTableColumnSongLength;
 	
 	// Stock information group
-	private Group searchGroupStockInfo;
-	private Label searchLabelStockInfoStoreStock;
-	private Label searchLabelStockInfoLocation;
-	private Label searchLabelStockInfoPrice;
-	private Button searchButtonStockInfoOrder;
+	private static Group searchGroupStockInfo;
+	private static Label searchLabelStockInfoStoreStock;
+	private static Label searchLabelStockInfoLocation;
+	private static Label searchLabelStockInfoPrice;
+	private static Button searchButtonStockInfoOrder;
 	
 	// Sale group
-	private Group searchGroupSaleInfo;	
-	private Label searchLabelSaleInfoQuantity;
-	private Text searchTextBoxSaleInfoQuantity;
-	private Button searchButtonSaleInfoSale;
+	private static Group searchGroupSaleInfo;	
+	private static Label searchLabelSaleInfoQuantity;
+	private static Text searchTextBoxSaleInfoQuantity;
+	private static Button searchButtonSaleInfoSale;
 	
 	// Sale tab
 	///////////
-	private TabItem saleTabItem;
-	private Composite saleCompositeMain;
+	private static TabItem saleTabItem;
+	private static Composite saleCompositeMain;
 	
 	// Sale details group
-	private Group saleGroupSaleDetails;
-	private Label saleLabelSaleID;
-	private Label saleLabelSaleIDInput;
-	private Label saleLabelSaleDate;
-	private Label saleLabelDateInput;
-	private Label saleLabelSalesmanIDName;
-	private Combo saleComboSalesmanIDNameInput;
-	private Label saleLabelSaleTime;
-	private Label saleLabelTimeInput;
+	private static Group saleGroupSaleDetails;
+	private static Label saleLabelSaleID;
+	private static Label saleLabelSaleIDInput;
+	private static Label saleLabelSaleDate;
+	private static Label saleLabelDateInput;
+	private static Label saleLabelSalesmanIDName;
+	private static Combo saleComboSalesmanIDNameInput;
+	private static Label saleLabelSaleTime;
+	private static Label saleLabelTimeInput;
 	
 	// Sale table
-	private Table saleTableSaleItems;
-	private TableColumn saleTableColumnAlbumID;
-	private TableColumn saleTableColumnAlbumName;
-	private TableColumn saleTableColumnQuantity;
-	private TableColumn saleTableColumnPricePerItem;
-	private TableColumn saleTableColumnPriceTotal;
-	private Button saleButtonRemoveItem;
-	private Button saleButtonClearSale;
-	private Label saleLabelTotalPrice;
-	private Label saleLabelTotalPriceValue;
-	private Button saleButtonMakeSale;
+	private static Table saleTableSaleItems;
+	private static TableColumn saleTableColumnAlbumID;
+	private static TableColumn saleTableColumnAlbumName;
+	private static TableColumn saleTableColumnQuantity;
+	private static TableColumn saleTableColumnPricePerItem;
+	private static TableColumn saleTableColumnPriceTotal;
+	private static Button saleButtonRemoveItem;
+	private static Button saleButtonClearSale;
+	private static Label saleLabelTotalPrice;
+	private static Label saleLabelTotalPriceValue;
+	private static Button saleButtonMakeSale;
 	
 	// Stock tab
 	////////////
-	private TabItem stockTabItem;
-	private Composite stockTabComposite;
+	private static TabItem stockTabItem;
+	private static Composite stockTabComposite;
 	
 	// Order group
-	private Group stockGroupOrderForm;
-	private Label stockLabelOrderID;
-	private Label stockLabelOrderIDInput;
-	private Label stockLabelAlbumID;
-	private Text stockTextBoxAlbumIDInput;
-	private Label stockLabelDate;
-	private Label stockLabelOrderDateInput;
-	private Button stockButtonCheckAvailability;
-	private Label stockLabelOrderFromStore;
-	private Table stockTableOrderAvailableStores;
-	private TableColumn stockTableColumnStoreID;
-	private TableColumn stockTableColumnStoreCity;
-	private TableColumn stockTableColumnQuantity;
-	private TableColumn stockTableColumnPrice;
-	private Label stockLabelPrice;
-	private Label stockLabelStorePriceInput;
-	private Label stockLabelQuantityInStock;
-	private Label stockLabelQuantityInStockInput;
-	private Label stockLabelStorageLocation;
-	private Label stockLabelStorageLocationInput;
-	private Label stockLabelQuantityToOrder;
-	private Text stockTextBoxQuantityToOrder;
-	private Button stockButtonClearOrder;
-	private Button stockButtonPlaceOrder;
+	private static Group stockGroupOrderForm;
+	private static Label stockLabelOrderID;
+	private static Label stockLabelOrderIDInput;
+	private static Label stockLabelAlbumID;
+	private static Text stockTextBoxAlbumIDInput;
+	private static Label stockLabelDate;
+	private static Label stockLabelOrderDateInput;
+	private static Button stockButtonCheckAvailability;
+	private static Label stockLabelOrderFromStore;
+	private static Table stockTableOrderAvailableStores;
+	private static TableColumn stockTableColumnStoreID;
+	private static TableColumn stockTableColumnStoreCity;
+	private static TableColumn stockTableColumnQuantity;
+	private static TableColumn stockTableColumnPrice;
+	private static Label stockLabelPrice;
+	private static Label stockLabelStorePriceInput;
+	private static Label stockLabelQuantityInStock;
+	private static Label stockLabelQuantityInStockInput;
+	private static Label stockLabelStorageLocation;
+	private static Label stockLabelStorageLocationInput;
+	private static Label stockLabelQuantityToOrder;
+	private static Text stockTextBoxQuantityToOrder;
+	private static Button stockButtonClearOrder;
+	private static Button stockButtonPlaceOrder;
 	
 	// Orders table
-	private Label stockLabelOrders;
-	private Table stockTableOrders;
-	private TableColumn stockTableColumnOrdersOrderID;
-	private TableColumn stockTableColumnOrdersSupplierID;
-	private TableColumn stockTableColumnOrdersAlbumID;
-	private TableColumn stockTableColumnOrdersQuantity;
-	private TableColumn stockTableColumnOrdersDate;
-	private TableColumn stockTableColumnOrdersStatus;
-	private TableColumn stockTableColumnOrdersCompletionDate;
-	private Button stockButtonRemoveOrder;
-	private Button stockButtonCancelOrder;
+	private static Label stockLabelOrders;
+	private static Table stockTableOrders;
+	private static TableColumn stockTableColumnOrdersOrderID;
+	private static TableColumn stockTableColumnOrdersSupplierID;
+	private static TableColumn stockTableColumnOrdersAlbumID;
+	private static TableColumn stockTableColumnOrdersQuantity;
+	private static TableColumn stockTableColumnOrdersDate;
+	private static TableColumn stockTableColumnOrdersStatus;
+	private static TableColumn stockTableColumnOrdersCompletionDate;
+	private static Button stockButtonRemoveOrder;
+	private static Button stockButtonCancelOrder;
 	
 	// Requests table
-	private Label stockLabelRequests;	
-	private Table stockTableRequests;
-	private TableColumn stockTableColumnRequestsOrderID;
-	private TableColumn stockTableColumnRequestsOrderingStoreID;
-	private TableColumn stockTableColumnRequestsAlbumID;
-	private TableColumn stockTableColumnRequestsQuantity;
-	private TableColumn stockTableColumnRequestsDate;
-	private TableColumn stockTableColumnRequestsStatus;
-	private TableColumn stockTableColumnRequestsCompletionDate;
-	private Button stockButtonDenyRequest;
-	private Button stockButtonApproveRequest;
+	private static Label stockLabelRequests;	
+	private static Table stockTableRequests;
+	private static TableColumn stockTableColumnRequestsOrderID;
+	private static TableColumn stockTableColumnRequestsOrderingStoreID;
+	private static TableColumn stockTableColumnRequestsAlbumID;
+	private static TableColumn stockTableColumnRequestsQuantity;
+	private static TableColumn stockTableColumnRequestsDate;
+	private static TableColumn stockTableColumnRequestsStatus;
+	private static TableColumn stockTableColumnRequestsCompletionDate;
+	private static Button stockButtonDenyRequest;
+	private static Button stockButtonApproveRequest;
 	
 	// Management tab
 	/////////////////
-	private TabItem managementTabItem;
-	private Composite manageMainComposite;
+	private static TabItem managementTabItem;
+	private static Composite manageMainComposite;
 	
 	// Employees table
-	private Label manageLabelEmployees;
-	private Table manageTableEmployees;
-	private TableColumn manageTableColumnEmployeeID;
-	private TableColumn manageTableColumnEmployeePName;
-	private TableColumn manageTableColumnEmployeeLName;
-	private TableColumn manageTableColumnEmployeePosition;
+	private static Label manageLabelEmployees;
+	private static Table manageTableEmployees;
+	private static TableColumn manageTableColumnEmployeeID;
+	private static TableColumn manageTableColumnEmployeePName;
+	private static TableColumn manageTableColumnEmployeeLName;
+	private static TableColumn manageTableColumnEmployeePosition;
 	
 	// Edit employee details group
-	private Group manageGroupEditEmployee;
-	private Label manageLabelEmployeeEmploymentDateInput;
-	private Label manageLabelEmployeeEmploymentDate;
-	private Label manageLabelEmployeeStoreID;
-	private Label manageLabelEmployeeEmployeeStoreIDInput;
-	private Label manageLabelEmployeeID;
-	private Text manageTextBoxEmployeeIDInput;
-	private Label manageLabelEmployeeBirth;
-	private Text manageTextBoxEmployeeBirthInput;
-	private Label manageLabelEmployeeFName;
-	private Text manageTextBoxEmployeeFNameInput;	
-	private Label manageLabelEmployeeLName;
-	private Text manageTextBoxEmployeeLNameInput;
-	private Label manageLabelEmployeeAddress;
-	private Text manageTextBoxEmployeeAddressInput;
-	private Label manageLabelEmployeePhone;
-	private Text manageTextBoxEmployeePhoneInput;
-	private Label manageLabelEmployeeCellPhone;
-	private Text manageTextBoxEmployeeCellPhoneInput;
-	private Label manageLabelEmployeePosition;
-	private Combo manageComboEmployeePositionInput;
-	private Button manageButtonEmployeeNew;
-	private Button manageButtonEmployeeInsert;
-	private Button manageButtonEmployeeNoSave;
-	private Button manageButtonEmployeeEdit;
-	private Button manageButtonEmployeeSave;
-	private Button manageButtonEmployeeRemove;
+	private static Group manageGroupEditEmployee;
+	private static Label manageLabelEmployeeEmploymentDateInput;
+	private static Label manageLabelEmployeeEmploymentDate;
+	private static Label manageLabelEmployeeStoreID;
+	private static Label manageLabelEmployeeEmployeeStoreIDInput;
+	private static Label manageLabelEmployeeID;
+	private static Text manageTextBoxEmployeeIDInput;
+	private static Label manageLabelEmployeeBirth;
+	private static Text manageTextBoxEmployeeBirthInput;
+	private static Label manageLabelEmployeeFName;
+	private static Text manageTextBoxEmployeeFNameInput;	
+	private static Label manageLabelEmployeeLName;
+	private static Text manageTextBoxEmployeeLNameInput;
+	private static Label manageLabelEmployeeAddress;
+	private static Text manageTextBoxEmployeeAddressInput;
+	private static Label manageLabelEmployeePhone;
+	private static Text manageTextBoxEmployeePhoneInput;
+	private static Label manageLabelEmployeeCellPhone;
+	private static Text manageTextBoxEmployeeCellPhoneInput;
+	private static Label manageLabelEmployeePosition;
+	private static Combo manageComboEmployeePositionInput;
+	private static Button manageButtonEmployeeNew;
+	private static Button manageButtonEmployeeInsert;
+	private static Button manageButtonEmployeeNoSave;
+	private static Button manageButtonEmployeeEdit;
+	private static Button manageButtonEmployeeSave;
+	private static Button manageButtonEmployeeRemove;
 	
 	// Update database group
-	private Group manageGroupDBSManage;
-	private Label manageLabelDBSUpdate;
-	private Text manageTextBoxDBSUpdateFileInput;
-	private Button manageButtonDBSBrowse;
-	private Button manageButtonDBSUpdate;
-	private ProgressBar manageProgressBarDBSUpdate;
+	private static Group manageGroupDBSManage;
+	private static Label manageLabelDBSUpdate;
+	private static Text manageTextBoxDBSUpdateFileInput;
+	private static Button manageButtonDBSBrowse;
+	private static Button manageButtonDBSUpdate;
+	private static ProgressBar manageProgressBarDBSUpdate;
 
 	/**
 	* Auto-generated main method to display this 
@@ -371,144 +360,144 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				getShell().setMenuBar(mainMenuBar);
 				{
 					mainMenuItemFile = new MenuItem(mainMenuBar, SWT.CASCADE);
-					mainMenuItemFile.setText("File");
+					mainMenuItemFile.setText("&File");
 					{
 						fileMenu = new Menu(mainMenuItemFile);
 						mainMenuItemFile.setMenu(fileMenu);
 						{
 							fileMenuItemExit = new MenuItem(fileMenu, SWT.PUSH);
-							fileMenuItemExit.setText("Exit");
+							fileMenuItemExit.setText("E&xit");
 						}
 					}
 					
 					mainMenuItemSearch = new MenuItem(mainMenuBar, SWT.CASCADE);
-					mainMenuItemSearch.setText("Search");
+					mainMenuItemSearch.setText("&Search");
 					{
 						searchMenu = new Menu(mainMenuItemSearch);
 						mainMenuItemSearch.setMenu(searchMenu);
 						{
 							searchMenuItemClear = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemClear.setText("Clear Fields");
+							searchMenuItemClear.setText("&Clear Fields");
 						}
 						{
 							searchMenuItemSearch = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemSearch.setText("Search");
+							searchMenuItemSearch.setText("&Search");
 						}
 						{
 							menuItemSeperator = new MenuItem(searchMenu, SWT.SEPARATOR);
 						}
 						{
 							searchMenuItemPlaceOrder = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemPlaceOrder.setText("Place an Order...");
+							searchMenuItemPlaceOrder.setText("&Place an Order...");
 						}
 						{
 							menuItemSeperator = new MenuItem(searchMenu, SWT.SEPARATOR);
 						}
 						{
 							searchMenuItemAddToSale = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemAddToSale.setText("Add to Sale...");
+							searchMenuItemAddToSale.setText("&Add to Sale...");
 						}
 					}
 					
 					mainMenuItemSale = new MenuItem(mainMenuBar, SWT.CASCADE);
-					mainMenuItemSale.setText("Sale");
+					mainMenuItemSale.setText("Sa&le");
 					{
 						saleMenu = new Menu(mainMenuItemSale);
 						mainMenuItemSale.setMenu(saleMenu);
 						{
 							saleMenuItemRemove = new MenuItem(saleMenu, SWT.PUSH);
-							saleMenuItemRemove.setText("Remove Item");
+							saleMenuItemRemove.setText("&Remove Item");
 						}
 						{
 							saleMenuItemClear = new MenuItem(saleMenu, SWT.PUSH);
-							saleMenuItemClear.setText("Clear Sale");
+							saleMenuItemClear.setText("&Clear Sale");
 						}
 						{
 							saleMenuItemMakeSale = new MenuItem(saleMenu, SWT.PUSH);
-							saleMenuItemMakeSale.setText("Make Sale");
+							saleMenuItemMakeSale.setText("&Make Sale");
 						}						
 					}
 					
 					mainMenuItemStock = new MenuItem(mainMenuBar, SWT.CASCADE);
-					mainMenuItemStock.setText("Stock");
+					mainMenuItemStock.setText("S&tock");
 					{
 						stockMenu = new Menu(mainMenuItemStock);
 						mainMenuItemStock.setMenu(stockMenu);
 						{
 							stockMenuItemCheckAvailability = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemCheckAvailability.setText("Check Availability");
+							stockMenuItemCheckAvailability.setText("&Check Availability");
 						}
 						{
 							stockMenuItemClear = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemClear.setText("Clear Fields");
+							stockMenuItemClear.setText("Clear &Fields");
 						}
 						{
 							stockMenuItemPlaceOrder = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemPlaceOrder.setText("Place Order");
+							stockMenuItemPlaceOrder.setText("&Place Order");
 						}
 						{
 							menuItemSeperator = new MenuItem(stockMenu, SWT.SEPARATOR);
 						}
 						{
 							stockMenuItemRemoveOrder = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemRemoveOrder.setText("Remove Order");
+							stockMenuItemRemoveOrder.setText("&Remove Order");
 						}
 						{
 							stockMenuItemCancelOrder = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemCancelOrder.setText("Cancel Order");
+							stockMenuItemCancelOrder.setText("Cancel &Order");
 						}
 						{
 							menuItemSeperator = new MenuItem(stockMenu, SWT.SEPARATOR);
 						}
 						{
 							stockMenuItemDenyRequest = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemDenyRequest.setText("Deny Request");
+							stockMenuItemDenyRequest.setText("&Deny Request");
 						}
 						{
 							stockMenuItemApproveRequest = new MenuItem(stockMenu, SWT.PUSH);
-							stockMenuItemApproveRequest.setText("Approve Request");
+							stockMenuItemApproveRequest.setText("&Approve Request");
 						}
 					}
 					
 					mainMenuItemManage = new MenuItem(mainMenuBar, SWT.CASCADE);
-					mainMenuItemManage.setText("Management");
+					mainMenuItemManage.setText("&Management");
 					{
 						manageMenu = new Menu(mainMenuItemManage);
 						mainMenuItemManage.setMenu(manageMenu);
 						{
 							manageMenuItemBrowse = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemBrowse.setText("Browse...");
+							manageMenuItemBrowse.setText("&Browse...");
 						}
 						{
 							manageMenuItemUpdateDBS = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemUpdateDBS.setText("Update Database");
+							manageMenuItemUpdateDBS.setText("&Update Database");
 						}
 						{
 							menuItemSeperator = new MenuItem(manageMenu, SWT.SEPARATOR);
 						}
 						{
 							manageMenuItemNew = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemNew.setText("New");
+							manageMenuItemNew.setText("&New");
 						}
 						{
 							manageMenuItemInsert = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemInsert.setText("Insert");
+							manageMenuItemInsert.setText("&Insert");
 						}
 						{
 							manageMenuItemEdit = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemEdit.setText("Edit");
+							manageMenuItemEdit.setText("&Edit");
 						}
 						{
 							manageMenuItemSave = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemSave.setText("Save");
+							manageMenuItemSave.setText("&Save");
 						}
 						{
 							manageMenuItemExitNoSave = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemExitNoSave.setText("Exit Without Saving");
+							manageMenuItemExitNoSave.setText("Exit &Without Saving");
 						}
 						{
 							manageMenuItemRemoveEmployee = new MenuItem(manageMenu, SWT.PUSH);
-							manageMenuItemRemoveEmployee.setText("Remove Employee");
+							manageMenuItemRemoveEmployee.setText("&Remove Employee");
 						}
 					}
 				}
@@ -876,6 +865,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 						}
 					}
+					
+					// initialize search listeners
+					SearchFuncs.initSearchListeners();
 				}
 				{
 					/**
@@ -1287,7 +1279,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					 */
 					managementTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					managementTabItem.setText("Management");
-					managementTabItem.setToolTipText("View and manage HR");
+					managementTabItem.setToolTipText("View and manage employees, update database");
 					{
 						manageMainComposite = new Composite(mainTabFolder, SWT.NONE);
 						manageMainComposite.setLayout(null);
@@ -1494,1766 +1486,859 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		}
 	}
 
-	protected Menu getMainMenuBar() {
+	//////////////////////////
+	//	Getters and Setters	//
+	//////////////////////////
+
+	protected static Menu getMainMenuBar() {
 		return mainMenuBar;
 	}
 
-	protected void setMainMenuBar(Menu mainMenuBar) {
-		this.mainMenuBar = mainMenuBar;
-	}
-
-	protected MenuItem getMenuItemSeperator() {
+	protected static MenuItem getMenuItemSeperator() {
 		return menuItemSeperator;
 	}
 
-	protected void setMenuItemSeperator(MenuItem menuItemSeperator) {
-		this.menuItemSeperator = menuItemSeperator;
-	}
-
-	protected MenuItem getMainMenuItemFile() {
+	protected static MenuItem getMainMenuItemFile() {
 		return mainMenuItemFile;
 	}
 
-	protected void setMainMenuItemFile(MenuItem mainMenuItemFile) {
-		this.mainMenuItemFile = mainMenuItemFile;
-	}
-
-	protected Menu getFileMenu() {
+	protected static Menu getFileMenu() {
 		return fileMenu;
 	}
 
-	protected void setFileMenu(Menu fileMenu) {
-		this.fileMenu = fileMenu;
-	}
-
-	protected MenuItem getFileMenuItemExit() {
+	protected static MenuItem getFileMenuItemExit() {
 		return fileMenuItemExit;
 	}
 
-	protected void setFileMenuItemExit(MenuItem fileMenuItemExit) {
-		this.fileMenuItemExit = fileMenuItemExit;
-	}
-
-	protected MenuItem getMainMenuItemSearch() {
+	protected static MenuItem getMainMenuItemSearch() {
 		return mainMenuItemSearch;
 	}
 
-	protected void setMainMenuItemSearch(MenuItem mainMenuItemSearch) {
-		this.mainMenuItemSearch = mainMenuItemSearch;
-	}
-
-	protected Menu getSearchMenu() {
+	protected static Menu getSearchMenu() {
 		return searchMenu;
 	}
 
-	protected void setSearchMenu(Menu searchMenu) {
-		this.searchMenu = searchMenu;
-	}
-
-	protected MenuItem getSearchMenuItemAddToSale() {
+	protected static MenuItem getSearchMenuItemAddToSale() {
 		return searchMenuItemAddToSale;
 	}
 
-	protected void setSearchMenuItemAddToSale(MenuItem searchMenuItemAddToSale) {
-		this.searchMenuItemAddToSale = searchMenuItemAddToSale;
-	}
-
-	protected MenuItem getSearchMenuItemPlaceOrder() {
+	protected static MenuItem getSearchMenuItemPlaceOrder() {
 		return searchMenuItemPlaceOrder;
 	}
 
-	protected void setSearchMenuItemPlaceOrder(MenuItem searchMenuItemPlaceOrder) {
-		this.searchMenuItemPlaceOrder = searchMenuItemPlaceOrder;
-	}
-
-	protected MenuItem getSearchMenuItemSearch() {
+	protected static MenuItem getSearchMenuItemSearch() {
 		return searchMenuItemSearch;
 	}
 
-	protected void setSearchMenuItemSearch(MenuItem searchMenuItemSearch) {
-		this.searchMenuItemSearch = searchMenuItemSearch;
-	}
-
-	protected MenuItem getSearchMenuItemClear() {
+	protected static MenuItem getSearchMenuItemClear() {
 		return searchMenuItemClear;
 	}
 
-	protected void setSearchMenuItemClear(MenuItem searchMenuItemClear) {
-		this.searchMenuItemClear = searchMenuItemClear;
-	}
-
-	protected MenuItem getMainMenuItemSale() {
+	protected static MenuItem getMainMenuItemSale() {
 		return mainMenuItemSale;
 	}
 
-	protected void setMainMenuItemSale(MenuItem mainMenuItemSale) {
-		this.mainMenuItemSale = mainMenuItemSale;
-	}
-
-	protected Menu getSaleMenu() {
+	protected static Menu getSaleMenu() {
 		return saleMenu;
 	}
 
-	protected void setSaleMenu(Menu saleMenu) {
-		this.saleMenu = saleMenu;
-	}
-
-	protected MenuItem getSaleMenuItemRemove() {
+	protected static MenuItem getSaleMenuItemRemove() {
 		return saleMenuItemRemove;
 	}
 
-	protected void setSaleMenuItemRemove(MenuItem saleMenuItemRemove) {
-		this.saleMenuItemRemove = saleMenuItemRemove;
-	}
-
-	protected MenuItem getSaleMenuItemClear() {
+	protected static MenuItem getSaleMenuItemClear() {
 		return saleMenuItemClear;
 	}
 
-	protected void setSaleMenuItemClear(MenuItem saleMenuItemClear) {
-		this.saleMenuItemClear = saleMenuItemClear;
-	}
-
-	protected MenuItem getSaleMenuItemMakeSale() {
+	protected static MenuItem getSaleMenuItemMakeSale() {
 		return saleMenuItemMakeSale;
 	}
 
-	protected void setSaleMenuItemMakeSale(MenuItem saleMenuItemMakeSale) {
-		this.saleMenuItemMakeSale = saleMenuItemMakeSale;
-	}
-
-	protected MenuItem getMainMenuItemStock() {
+	protected static MenuItem getMainMenuItemStock() {
 		return mainMenuItemStock;
 	}
 
-	protected void setMainMenuItemStock(MenuItem mainMenuItemStock) {
-		this.mainMenuItemStock = mainMenuItemStock;
-	}
-
-	protected Menu getStockMenu() {
+	protected static Menu getStockMenu() {
 		return stockMenu;
 	}
 
-	protected void setStockMenu(Menu stockMenu) {
-		this.stockMenu = stockMenu;
-	}
-
-	protected MenuItem getStockMenuItemCheckAvailability() {
+	protected static MenuItem getStockMenuItemCheckAvailability() {
 		return stockMenuItemCheckAvailability;
 	}
 
-	protected void setStockMenuItemCheckAvailability(
-			MenuItem stockMenuItemCheckAvailability) {
-		this.stockMenuItemCheckAvailability = stockMenuItemCheckAvailability;
-	}
-
-	protected MenuItem getStockMenuItemClear() {
+	protected static MenuItem getStockMenuItemClear() {
 		return stockMenuItemClear;
 	}
 
-	protected void setStockMenuItemClear(MenuItem stockMenuItemClear) {
-		this.stockMenuItemClear = stockMenuItemClear;
-	}
-
-	protected MenuItem getStockMenuItemPlaceOrder() {
+	protected static MenuItem getStockMenuItemPlaceOrder() {
 		return stockMenuItemPlaceOrder;
 	}
 
-	protected void setStockMenuItemPlaceOrder(MenuItem stockMenuItemPlaceOrder) {
-		this.stockMenuItemPlaceOrder = stockMenuItemPlaceOrder;
-	}
-
-	protected MenuItem getStockMenuItemRemoveOrder() {
+	protected static MenuItem getStockMenuItemRemoveOrder() {
 		return stockMenuItemRemoveOrder;
 	}
 
-	protected void setStockMenuItemRemoveOrder(MenuItem stockMenuItemRemoveOrder) {
-		this.stockMenuItemRemoveOrder = stockMenuItemRemoveOrder;
-	}
-
-	protected MenuItem getStockMenuItemCancelOrder() {
+	protected static MenuItem getStockMenuItemCancelOrder() {
 		return stockMenuItemCancelOrder;
 	}
 
-	protected void setStockMenuItemCancelOrder(MenuItem stockMenuItemCancelOrder) {
-		this.stockMenuItemCancelOrder = stockMenuItemCancelOrder;
-	}
-
-	protected MenuItem getStockMenuItemDenyRequest() {
+	protected static MenuItem getStockMenuItemDenyRequest() {
 		return stockMenuItemDenyRequest;
 	}
 
-	protected void setStockMenuItemDenyRequest(MenuItem stockMenuItemDenyRequest) {
-		this.stockMenuItemDenyRequest = stockMenuItemDenyRequest;
-	}
-
-	protected MenuItem getStockMenuItemApproveRequest() {
+	protected static MenuItem getStockMenuItemApproveRequest() {
 		return stockMenuItemApproveRequest;
 	}
 
-	protected void setStockMenuItemApproveRequest(
-			MenuItem stockMenuItemApproveRequest) {
-		this.stockMenuItemApproveRequest = stockMenuItemApproveRequest;
-	}
-
-	protected MenuItem getMainMenuItemManage() {
+	protected static MenuItem getMainMenuItemManage() {
 		return mainMenuItemManage;
 	}
 
-	protected void setMainMenuItemManage(MenuItem mainMenuItemManage) {
-		this.mainMenuItemManage = mainMenuItemManage;
-	}
-
-	protected Menu getManageMenu() {
+	protected static Menu getManageMenu() {
 		return manageMenu;
 	}
 
-	protected void setManageMenu(Menu manageMenu) {
-		this.manageMenu = manageMenu;
-	}
-
-	protected MenuItem getManageMenuItemBrowse() {
+	protected static MenuItem getManageMenuItemBrowse() {
 		return manageMenuItemBrowse;
 	}
 
-	protected void setManageMenuItemBrowse(MenuItem manageMenuItemBrowse) {
-		this.manageMenuItemBrowse = manageMenuItemBrowse;
-	}
-
-	protected MenuItem getManageMenuItemUpdateDBS() {
+	protected static MenuItem getManageMenuItemUpdateDBS() {
 		return manageMenuItemUpdateDBS;
 	}
 
-	protected void setManageMenuItemUpdateDBS(MenuItem manageMenuItemUpdateDBS) {
-		this.manageMenuItemUpdateDBS = manageMenuItemUpdateDBS;
-	}
-
-	protected MenuItem getManageMenuItemNew() {
+	protected static MenuItem getManageMenuItemNew() {
 		return manageMenuItemNew;
 	}
 
-	protected void setManageMenuItemNew(MenuItem manageMenuItemNew) {
-		this.manageMenuItemNew = manageMenuItemNew;
-	}
-
-	protected MenuItem getManageMenuItemInsert() {
+	protected static MenuItem getManageMenuItemInsert() {
 		return manageMenuItemInsert;
 	}
 
-	protected void setManageMenuItemInsert(MenuItem manageMenuItemInsert) {
-		this.manageMenuItemInsert = manageMenuItemInsert;
-	}
-
-	protected MenuItem getManageMenuItemEdit() {
+	protected static MenuItem getManageMenuItemEdit() {
 		return manageMenuItemEdit;
 	}
 
-	protected void setManageMenuItemEdit(MenuItem manageMenuItemEdit) {
-		this.manageMenuItemEdit = manageMenuItemEdit;
-	}
-
-	protected MenuItem getManageMenuItemSave() {
+	protected static MenuItem getManageMenuItemSave() {
 		return manageMenuItemSave;
 	}
 
-	protected void setManageMenuItemSave(MenuItem manageMenuItemSave) {
-		this.manageMenuItemSave = manageMenuItemSave;
-	}
-
-	protected MenuItem getManageMenuItemExitNoSave() {
+	protected static MenuItem getManageMenuItemExitNoSave() {
 		return manageMenuItemExitNoSave;
 	}
 
-	protected void setManageMenuItemExitNoSave(MenuItem manageMenuItemExitNoSave) {
-		this.manageMenuItemExitNoSave = manageMenuItemExitNoSave;
-	}
-
-	protected MenuItem getManageMenuItemRemoveEmployee() {
+	protected static MenuItem getManageMenuItemRemoveEmployee() {
 		return manageMenuItemRemoveEmployee;
 	}
 
-	protected void setManageMenuItemRemoveEmployee(
-			MenuItem manageMenuItemRemoveEmployee) {
-		this.manageMenuItemRemoveEmployee = manageMenuItemRemoveEmployee;
-	}
-
-	protected Group getMainGroupStoreDetails() {
+	protected static Group getMainGroupStoreDetails() {
 		return mainGroupStoreDetails;
 	}
 
-	protected void setMainGroupStoreDetails(Group mainGroupStoreDetails) {
-		this.mainGroupStoreDetails = mainGroupStoreDetails;
-	}
-
-	protected Label getMainLabelStoreDetailsStoreID() {
+	protected static Label getMainLabelStoreDetailsStoreID() {
 		return mainLabelStoreDetailsStoreID;
 	}
 
-	protected void setMainLabelStoreDetailsStoreID(
-			Label mainLabelStoreDetailsStoreID) {
-		this.mainLabelStoreDetailsStoreID = mainLabelStoreDetailsStoreID;
-	}
-
-	protected Label getMainLabelStoreDetailsDateTime() {
+	protected static Label getMainLabelStoreDetailsDateTime() {
 		return mainLabelStoreDetailsDateTime;
 	}
 
-	protected void setMainLabelStoreDetailsDateTime(
-			Label mainLabelStoreDetailsDateTime) {
-		this.mainLabelStoreDetailsDateTime = mainLabelStoreDetailsDateTime;
-	}
-
-	protected Label getMainLabelStoreDetailsStoreAddress() {
+	protected static Label getMainLabelStoreDetailsStoreAddress() {
 		return mainLabelStoreDetailsStoreAddress;
 	}
 
-	protected void setMainLabelStoreDetailsStoreAddress(
-			Label mainLabelStoreDetailsStoreAddress) {
-		this.mainLabelStoreDetailsStoreAddress = mainLabelStoreDetailsStoreAddress;
-	}
-
-	protected Label getMainLabelStoreDetailsStorePhone() {
+	protected static Label getMainLabelStoreDetailsStorePhone() {
 		return mainLabelStoreDetailsStorePhone;
 	}
 
-	protected void setMainLabelStoreDetailsStorePhone(
-			Label mainLabelStoreDetailsStorePhone) {
-		this.mainLabelStoreDetailsStorePhone = mainLabelStoreDetailsStorePhone;
-	}
-
-	protected Label getMainLabelStoreDetailsStoreManager() {
+	protected static Label getMainLabelStoreDetailsStoreManager() {
 		return mainLabelStoreDetailsStoreManager;
 	}
 
-	protected void setMainLabelStoreDetailsStoreManager(
-			Label mainLabelStoreDetailsStoreManager) {
-		this.mainLabelStoreDetailsStoreManager = mainLabelStoreDetailsStoreManager;
-	}
-
-	protected Group getMainGroupQuickTips() {
+	protected static Group getMainGroupQuickTips() {
 		return mainGroupQuickTips;
 	}
 
-	protected void setMainGroupQuickTips(Group mainGroupQuickTips) {
-		this.mainGroupQuickTips = mainGroupQuickTips;
-	}
-
-	protected Label getMainLabelQuickTipsTip() {
+	protected static Label getMainLabelQuickTipsTip() {
 		return mainLabelQuickTipsTip;
 	}
 
-	protected void setMainLabelQuickTipsTip(Label mainLabelQuickTipsTip) {
-		this.mainLabelQuickTipsTip = mainLabelQuickTipsTip;
-	}
-
-	protected TabFolder getMainTabFolder() {
+	protected static TabFolder getMainTabFolder() {
 		return mainTabFolder;
 	}
 
-	protected void setMainTabFolder(TabFolder mainTabFolder) {
-		this.mainTabFolder = mainTabFolder;
-	}
-
-	protected TabItem getSearchTabItem() {
+	protected static TabItem getSearchTabItem() {
 		return searchTabItem;
 	}
 
-	protected void setSearchTabItem(TabItem searchTabItem) {
-		this.searchTabItem = searchTabItem;
-	}
-
-	protected Composite getSearchTabComposite() {
+	protected static Composite getSearchTabComposite() {
 		return searchTabComposite;
 	}
 
-	protected void setSearchTabComposite(Composite searchTabComposite) {
-		this.searchTabComposite = searchTabComposite;
-	}
-
-	protected Group getSearchGroupOptions() {
+	protected static Group getSearchGroupOptions() {
 		return searchGroupOptions;
 	}
 
-	protected void setSearchGroupOptions(Group searchGroupOptions) {
-		this.searchGroupOptions = searchGroupOptions;
-	}
-
-	protected Button getSearchBulletByAlbum() {
+	protected static Button getSearchBulletByAlbum() {
 		return searchBulletByAlbum;
 	}
 
-	protected void setSearchBulletByAlbum(Button searchBulletByAlbum) {
-		this.searchBulletByAlbum = searchBulletByAlbum;
-	}
-
-	protected Text getSearchTextBoxAlbumID() {
+	protected static Text getSearchTextBoxAlbumID() {
 		return searchTextBoxAlbumID;
 	}
 
-	protected void setSearchTextBoxAlbumID(Text searchTextBoxAlbumID) {
-		this.searchTextBoxAlbumID = searchTextBoxAlbumID;
-	}
-
-	protected Button getSearchBulletOtherParameters() {
+	protected static Button getSearchBulletOtherParameters() {
 		return searchBulletOtherParameters;
 	}
 
-	protected void setSearchBulletOtherParameters(Button searchBulletOtherParameters) {
-		this.searchBulletOtherParameters = searchBulletOtherParameters;
-	}
-
-	protected Button getSearchCheckBoxAlbumName() {
+	protected static Button getSearchCheckBoxAlbumName() {
 		return searchCheckBoxAlbumName;
 	}
 
-	protected void setSearchCheckBoxAlbumName(Button searchCheckBoxAlbumName) {
-		this.searchCheckBoxAlbumName = searchCheckBoxAlbumName;
-	}
-
-	protected Text getSearchTextBoxAlbumName() {
+	protected static Text getSearchTextBoxAlbumName() {
 		return searchTextBoxAlbumName;
 	}
 
-	protected void setSearchTextBoxAlbumName(Text searchTextBoxAlbumName) {
-		this.searchTextBoxAlbumName = searchTextBoxAlbumName;
-	}
-
-	protected Button getSearchCheckBoxArtist() {
+	protected static Button getSearchCheckBoxArtist() {
 		return searchCheckBoxArtist;
 	}
 
-	protected void setSearchCheckBoxArtist(Button searchCheckBoxArtist) {
-		this.searchCheckBoxArtist = searchCheckBoxArtist;
-	}
-
-	protected Text getSearchTextBoxArtist() {
+	protected static Text getSearchTextBoxArtist() {
 		return searchTextBoxArtist;
 	}
 
-	protected void setSearchTextBoxArtist(Text searchTextBoxArtist) {
-		this.searchTextBoxArtist = searchTextBoxArtist;
-	}
-
-	protected Button getSearchCheckBoxYear() {
+	protected static Button getSearchCheckBoxYear() {
 		return searchCheckBoxYear;
 	}
 
-	protected void setSearchCheckBoxYear(Button searchCheckBoxYear) {
-		this.searchCheckBoxYear = searchCheckBoxYear;
-	}
-
-	protected Text getSearchTextBoxYearFrom() {
+	protected static Text getSearchTextBoxYearFrom() {
 		return searchTextBoxYearFrom;
 	}
 
-	protected void setSearchTextBoxYearFrom(Text searchTextBoxYearFrom) {
-		this.searchTextBoxYearFrom = searchTextBoxYearFrom;
-	}
-
-	protected Label getSearchLabelYearTo() {
+	protected static Label getSearchLabelYearTo() {
 		return searchLabelYearTo;
 	}
 
-	protected void setSearchLabelYearTo(Label searchLabelYearTo) {
-		this.searchLabelYearTo = searchLabelYearTo;
-	}
-
-	protected Text getSearchTextBoxYearTo() {
+	protected static Text getSearchTextBoxYearTo() {
 		return searchTextBoxYearTo;
 	}
 
-	protected void setSearchTextBoxYearTo(Text searchTextBoxYearTo) {
-		this.searchTextBoxYearTo = searchTextBoxYearTo;
-	}
-
-	protected Button getSearchCheckBoxSongNames() {
+	protected static Button getSearchCheckBoxSongNames() {
 		return searchCheckBoxSongNames;
 	}
 
-	protected void setSearchCheckBoxSongNames(Button searchCheckBoxSongNames) {
-		this.searchCheckBoxSongNames = searchCheckBoxSongNames;
-	}
-
-	protected Text getSearchTextBoxSongNames() {
+	protected static Text getSearchTextBoxSongNames() {
 		return searchTextBoxSongNames;
 	}
 
-	protected void setSearchTextBoxSongNames(Text searchTextBoxSongNames) {
-		this.searchTextBoxSongNames = searchTextBoxSongNames;
-	}
-
-	protected Composite getSearchCompositeStockField() {
+	protected static Composite getSearchCompositeStockField() {
 		return searchCompositeStockField;
 	}
 
-	protected void setSearchCompositeStockField(Composite searchCompositeStockField) {
-		this.searchCompositeStockField = searchCompositeStockField;
-	}
-
-	protected Label getSearchLabelStock() {
+	protected static Label getSearchLabelStock() {
 		return searchLabelStock;
 	}
 
-	protected void setSearchLabelStock(Label searchLabelStock) {
-		this.searchLabelStock = searchLabelStock;
-	}
-
-	protected Button getSearchBulletInStockAll() {
+	protected static Button getSearchBulletInStockAll() {
 		return searchBulletInStockAll;
 	}
 
-	protected void setSearchBulletInStockAll(Button searchBulletInStockAll) {
-		this.searchBulletInStockAll = searchBulletInStockAll;
-	}
-
-	protected Button getSearchBulletInStockInStore() {
+	protected static Button getSearchBulletInStockInStore() {
 		return searchBulletInStockInStore;
 	}
 
-	protected void setSearchBulletInStockInStore(Button searchBulletInStockInStore) {
-		this.searchBulletInStockInStore = searchBulletInStockInStore;
-	}
-
-	protected Button getSearchBulletInStockInNetwork() {
+	protected static Button getSearchBulletInStockInNetwork() {
 		return searchBulletInStockInNetwork;
 	}
 
-	protected void setSearchBulletInStockInNetwork(
-			Button searchBulletInStockInNetwork) {
-		this.searchBulletInStockInNetwork = searchBulletInStockInNetwork;
-	}
-
-	protected Button getSearchCheckBoxGenres() {
+	protected static Button getSearchCheckBoxGenres() {
 		return searchCheckBoxGenres;
 	}
 
-	protected void setSearchCheckBoxGenres(Button searchCheckBoxGenres) {
-		this.searchCheckBoxGenres = searchCheckBoxGenres;
-	}
-
-	protected Button getSearchCheckBoxGenreJazz() {
+	protected static Button getSearchCheckBoxGenreJazz() {
 		return searchCheckBoxGenreJazz;
 	}
 
-	protected void setSearchCheckBoxGenreJazz(Button searchCheckBoxGenreJazz) {
-		this.searchCheckBoxGenreJazz = searchCheckBoxGenreJazz;
-	}
-
-	protected Button getSearchCheckBoxGenreRock() {
+	protected static Button getSearchCheckBoxGenreRock() {
 		return searchCheckBoxGenreRock;
 	}
 
-	protected void setSearchCheckBoxGenreRock(Button searchCheckBoxGenreRock) {
-		this.searchCheckBoxGenreRock = searchCheckBoxGenreRock;
-	}
-
-	protected Button getSearchCheckBoxGenre03() {
+	protected static Button getSearchCheckBoxGenre03() {
 		return searchCheckBoxGenre03;
 	}
 
-	protected void setSearchCheckBoxGenre03(Button searchCheckBoxGenre03) {
-		this.searchCheckBoxGenre03 = searchCheckBoxGenre03;
-	}
-
-	protected Button getSearchCheckBoxGenre04() {
+	protected static Button getSearchCheckBoxGenre04() {
 		return searchCheckBoxGenre04;
 	}
 
-	protected void setSearchCheckBoxGenre04(Button searchCheckBoxGenre04) {
-		this.searchCheckBoxGenre04 = searchCheckBoxGenre04;
-	}
-
-	protected Button getSearchCheckBoxGenre05() {
+	protected static Button getSearchCheckBoxGenre05() {
 		return searchCheckBoxGenre05;
 	}
 
-	protected void setSearchCheckBoxGenre05(Button searchCheckBoxGenre05) {
-		this.searchCheckBoxGenre05 = searchCheckBoxGenre05;
-	}
-
-	protected Button getSearchCheckBoxGenre06() {
+	protected static Button getSearchCheckBoxGenre06() {
 		return searchCheckBoxGenre06;
 	}
 
-	protected void setSearchCheckBoxGenre06(Button searchCheckBoxGenre06) {
-		this.searchCheckBoxGenre06 = searchCheckBoxGenre06;
-	}
-
-	protected Button getSearchCheckBoxGenre07() {
+	protected static Button getSearchCheckBoxGenre07() {
 		return searchCheckBoxGenre07;
 	}
 
-	protected void setSearchCheckBoxGenre07(Button searchCheckBoxGenre07) {
-		this.searchCheckBoxGenre07 = searchCheckBoxGenre07;
-	}
-
-	protected Button getSearchCheckBoxGenre08() {
+	protected static Button getSearchCheckBoxGenre08() {
 		return searchCheckBoxGenre08;
 	}
 
-	protected void setSearchCheckBoxGenre08(Button searchCheckBoxGenre08) {
-		this.searchCheckBoxGenre08 = searchCheckBoxGenre08;
-	}
-
-	protected Button getSearchCheckBoxGenre09() {
+	protected static Button getSearchCheckBoxGenre09() {
 		return searchCheckBoxGenre09;
 	}
 
-	protected void setSearchCheckBoxGenre09(Button searchCheckBoxGenre09) {
-		this.searchCheckBoxGenre09 = searchCheckBoxGenre09;
-	}
-
-	protected Button getSearchCheckBoxGenre10() {
+	protected static Button getSearchCheckBoxGenre10() {
 		return searchCheckBoxGenre10;
 	}
 
-	protected void setSearchCheckBoxGenre10(Button searchCheckBoxGenre10) {
-		this.searchCheckBoxGenre10 = searchCheckBoxGenre10;
-	}
-
-	protected Button getSearchCheckBoxGenreOther() {
+	protected static Button getSearchCheckBoxGenreOther() {
 		return searchCheckBoxGenreOther;
 	}
 
-	protected void setSearchCheckBoxGenreOther(Button searchCheckBoxGenreOther) {
-		this.searchCheckBoxGenreOther = searchCheckBoxGenreOther;
-	}
-
-	protected Text getSearchTextBoxGenreOther() {
+	protected static Text getSearchTextBoxGenreOther() {
 		return searchTextBoxGenreOther;
 	}
 
-	protected void setSearchTextBoxGenreOther(Text searchTextBoxGenreOther) {
-		this.searchTextBoxGenreOther = searchTextBoxGenreOther;
-	}
-
-	protected Button getSearchButtonClear() {
+	protected static Button getSearchButtonClear() {
 		return searchButtonClear;
 	}
 
-	protected void setSearchButtonClear(Button searchButtonClear) {
-		this.searchButtonClear = searchButtonClear;
-	}
-
-	protected Button getSearchButtonSearch() {
+	protected static Button getSearchButtonSearch() {
 		return searchButtonSearch;
 	}
 
-	protected void setSearchButtonSearch(Button searchButtonSearch) {
-		this.searchButtonSearch = searchButtonSearch;
-	}
-
-	protected Group getSearchGroupResults() {
+	protected static Group getSearchGroupResults() {
 		return searchGroupResults;
 	}
 
-	protected void setSearchGroupResults(Group searchGroupResults) {
-		this.searchGroupResults = searchGroupResults;
-	}
-
-	protected Table getSearchTableAlbumResults() {
+	protected static Table getSearchTableAlbumResults() {
 		return searchTableAlbumResults;
 	}
 
-	protected void setSearchTableAlbumResults(Table searchTableAlbumResults) {
-		this.searchTableAlbumResults = searchTableAlbumResults;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumID() {
+	protected static TableColumn getSearchTableColumnAlbumID() {
 		return searchTableColumnAlbumID;
 	}
 
-	protected void setSearchTableColumnAlbumID(TableColumn searchTableColumnAlbumID) {
-		this.searchTableColumnAlbumID = searchTableColumnAlbumID;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumName() {
+	protected static TableColumn getSearchTableColumnAlbumName() {
 		return searchTableColumnAlbumName;
 	}
 
-	protected void setSearchTableColumnAlbumName(
-			TableColumn searchTableColumnAlbumName) {
-		this.searchTableColumnAlbumName = searchTableColumnAlbumName;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumArtist() {
+	protected static TableColumn getSearchTableColumnAlbumArtist() {
 		return searchTableColumnAlbumArtist;
 	}
 
-	protected void setSearchTableColumnAlbumArtist(
-			TableColumn searchTableColumnAlbumArtist) {
-		this.searchTableColumnAlbumArtist = searchTableColumnAlbumArtist;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumYear() {
+	protected static TableColumn getSearchTableColumnAlbumYear() {
 		return searchTableColumnAlbumYear;
 	}
 
-	protected void setSearchTableColumnAlbumYear(
-			TableColumn searchTableColumnAlbumYear) {
-		this.searchTableColumnAlbumYear = searchTableColumnAlbumYear;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumGenre() {
+	protected static TableColumn getSearchTableColumnAlbumGenre() {
 		return searchTableColumnAlbumGenre;
 	}
 
-	protected void setSearchTableColumnAlbumGenre(
-			TableColumn searchTableColumnAlbumGenre) {
-		this.searchTableColumnAlbumGenre = searchTableColumnAlbumGenre;
-	}
-
-	protected TableColumn getSearchTableColumnAlbumLength() {
+	protected static TableColumn getSearchTableColumnAlbumLength() {
 		return searchTableColumnAlbumLength;
 	}
 
-	protected void setSearchTableColumnAlbumLength(
-			TableColumn searchTableColumnAlbumLength) {
-		this.searchTableColumnAlbumLength = searchTableColumnAlbumLength;
-	}
-
-	protected ProgressBar getSearchProgressBar() {
+	protected static ProgressBar getSearchProgressBar() {
 		return searchProgressBar;
 	}
 
-	protected void setSearchProgressBar(ProgressBar searchProgressBar) {
-		this.searchProgressBar = searchProgressBar;
-	}
-
-	protected Table getSearchTableSongResults() {
+	protected static Table getSearchTableSongResults() {
 		return searchTableSongResults;
 	}
 
-	protected void setSearchTableSongResults(Table searchTableSongResults) {
-		this.searchTableSongResults = searchTableSongResults;
-	}
-
-	protected TableColumn getSearchTableColumnSongName() {
+	protected static TableColumn getSearchTableColumnSongName() {
 		return searchTableColumnSongName;
 	}
 
-	protected void setSearchTableColumnSongName(
-			TableColumn searchTableColumnSongName) {
-		this.searchTableColumnSongName = searchTableColumnSongName;
-	}
-
-	protected TableColumn getSearchTableColumnSongArtist() {
+	protected static TableColumn getSearchTableColumnSongArtist() {
 		return searchTableColumnSongArtist;
 	}
 
-	protected void setSearchTableColumnSongArtist(
-			TableColumn searchTableColumnSongArtist) {
-		this.searchTableColumnSongArtist = searchTableColumnSongArtist;
-	}
-
-	protected TableColumn getSearchTableColumnSongLength() {
+	protected static TableColumn getSearchTableColumnSongLength() {
 		return searchTableColumnSongLength;
 	}
 
-	protected void setSearchTableColumnSongLength(
-			TableColumn searchTableColumnSongLength) {
-		this.searchTableColumnSongLength = searchTableColumnSongLength;
-	}
-
-	protected Group getSearchGroupStockInfo() {
+	protected static Group getSearchGroupStockInfo() {
 		return searchGroupStockInfo;
 	}
 
-	protected void setSearchGroupStockInfo(Group searchGroupStockInfo) {
-		this.searchGroupStockInfo = searchGroupStockInfo;
-	}
-
-	protected Label getSearchLabelStockInfoStoreStock() {
+	protected static Label getSearchLabelStockInfoStoreStock() {
 		return searchLabelStockInfoStoreStock;
 	}
 
-	protected void setSearchLabelStockInfoStoreStock(
-			Label searchLabelStockInfoStoreStock) {
-		this.searchLabelStockInfoStoreStock = searchLabelStockInfoStoreStock;
-	}
-
-	protected Label getSearchLabelStockInfoLocation() {
+	protected static Label getSearchLabelStockInfoLocation() {
 		return searchLabelStockInfoLocation;
 	}
 
-	protected void setSearchLabelStockInfoLocation(
-			Label searchLabelStockInfoLocation) {
-		this.searchLabelStockInfoLocation = searchLabelStockInfoLocation;
-	}
-
-	protected Label getSearchLabelStockInfoPrice() {
+	protected static Label getSearchLabelStockInfoPrice() {
 		return searchLabelStockInfoPrice;
 	}
 
-	protected void setSearchLabelStockInfoPrice(Label searchLabelStockInfoPrice) {
-		this.searchLabelStockInfoPrice = searchLabelStockInfoPrice;
-	}
-
-	protected Button getSearchButtonStockInfoOrder() {
+	protected static Button getSearchButtonStockInfoOrder() {
 		return searchButtonStockInfoOrder;
 	}
 
-	protected void setSearchButtonStockInfoOrder(Button searchButtonStockInfoOrder) {
-		this.searchButtonStockInfoOrder = searchButtonStockInfoOrder;
-	}
-
-	protected Group getSearchGroupSaleInfo() {
+	protected static Group getSearchGroupSaleInfo() {
 		return searchGroupSaleInfo;
 	}
 
-	protected void setSearchGroupSaleInfo(Group searchGroupSaleInfo) {
-		this.searchGroupSaleInfo = searchGroupSaleInfo;
-	}
-
-	protected Label getSearchLabelSaleInfoQuantity() {
+	protected static Label getSearchLabelSaleInfoQuantity() {
 		return searchLabelSaleInfoQuantity;
 	}
 
-	protected void setSearchLabelSaleInfoQuantity(Label searchLabelSaleInfoQuantity) {
-		this.searchLabelSaleInfoQuantity = searchLabelSaleInfoQuantity;
-	}
-
-	protected Text getSearchTextBoxSaleInfoQuantity() {
+	protected static Text getSearchTextBoxSaleInfoQuantity() {
 		return searchTextBoxSaleInfoQuantity;
 	}
 
-	protected void setSearchTextBoxSaleInfoQuantity(
-			Text searchTextBoxSaleInfoQuantity) {
-		this.searchTextBoxSaleInfoQuantity = searchTextBoxSaleInfoQuantity;
-	}
-
-	protected Button getSearchButtonSaleInfoSale() {
+	protected static Button getSearchButtonSaleInfoSale() {
 		return searchButtonSaleInfoSale;
 	}
 
-	protected void setSearchButtonSaleInfoSale(Button searchButtonSaleInfoSale) {
-		this.searchButtonSaleInfoSale = searchButtonSaleInfoSale;
-	}
-
-	protected TabItem getSaleTabItem() {
+	protected static TabItem getSaleTabItem() {
 		return saleTabItem;
 	}
 
-	protected void setSaleTabItem(TabItem saleTabItem) {
-		this.saleTabItem = saleTabItem;
-	}
-
-	protected Composite getSaleCompositeMain() {
+	protected static Composite getSaleCompositeMain() {
 		return saleCompositeMain;
 	}
 
-	protected void setSaleCompositeMain(Composite saleCompositeMain) {
-		this.saleCompositeMain = saleCompositeMain;
-	}
-
-	protected Group getSaleGroupSaleDetails() {
+	protected static Group getSaleGroupSaleDetails() {
 		return saleGroupSaleDetails;
 	}
 
-	protected void setSaleGroupSaleDetails(Group saleGroupSaleDetails) {
-		this.saleGroupSaleDetails = saleGroupSaleDetails;
-	}
-
-	protected Label getSaleLabelSaleID() {
+	protected static Label getSaleLabelSaleID() {
 		return saleLabelSaleID;
 	}
 
-	protected void setSaleLabelSaleID(Label saleLabelSaleID) {
-		this.saleLabelSaleID = saleLabelSaleID;
-	}
-
-	protected Label getSaleLabelSaleIDInput() {
+	protected static Label getSaleLabelSaleIDInput() {
 		return saleLabelSaleIDInput;
 	}
 
-	protected void setSaleLabelSaleIDInput(Label saleLabelSaleIDInput) {
-		this.saleLabelSaleIDInput = saleLabelSaleIDInput;
-	}
-
-	protected Label getSaleLabelSaleDate() {
+	protected static Label getSaleLabelSaleDate() {
 		return saleLabelSaleDate;
 	}
 
-	protected void setSaleLabelSaleDate(Label saleLabelSaleDate) {
-		this.saleLabelSaleDate = saleLabelSaleDate;
-	}
-
-	protected Label getSaleLabelDateInput() {
+	protected static Label getSaleLabelDateInput() {
 		return saleLabelDateInput;
 	}
 
-	protected void setSaleLabelDateInput(Label saleLabelDateInput) {
-		this.saleLabelDateInput = saleLabelDateInput;
-	}
-
-	protected Label getSaleLabelSalesmanIDName() {
+	protected static Label getSaleLabelSalesmanIDName() {
 		return saleLabelSalesmanIDName;
 	}
 
-	protected void setSaleLabelSalesmanIDName(Label saleLabelSalesmanIDName) {
-		this.saleLabelSalesmanIDName = saleLabelSalesmanIDName;
-	}
-
-	protected Combo getSaleComboSalesmanIDNameInput() {
+	protected static Combo getSaleComboSalesmanIDNameInput() {
 		return saleComboSalesmanIDNameInput;
 	}
 
-	protected void setSaleComboSalesmanIDNameInput(
-			Combo saleComboSalesmanIDNameInput) {
-		this.saleComboSalesmanIDNameInput = saleComboSalesmanIDNameInput;
-	}
-
-	protected Label getSaleLabelSaleTime() {
+	protected static Label getSaleLabelSaleTime() {
 		return saleLabelSaleTime;
 	}
 
-	protected void setSaleLabelSaleTime(Label saleLabelSaleTime) {
-		this.saleLabelSaleTime = saleLabelSaleTime;
-	}
-
-	protected Label getSaleLabelTimeInput() {
+	protected static Label getSaleLabelTimeInput() {
 		return saleLabelTimeInput;
 	}
 
-	protected void setSaleLabelTimeInput(Label saleLabelTimeInput) {
-		this.saleLabelTimeInput = saleLabelTimeInput;
-	}
-
-	protected Table getSaleTableSaleItems() {
+	protected static Table getSaleTableSaleItems() {
 		return saleTableSaleItems;
 	}
 
-	protected void setSaleTableSaleItems(Table saleTableSaleItems) {
-		this.saleTableSaleItems = saleTableSaleItems;
-	}
-
-	protected TableColumn getSaleTableColumnAlbumID() {
+	protected static TableColumn getSaleTableColumnAlbumID() {
 		return saleTableColumnAlbumID;
 	}
 
-	protected void setSaleTableColumnAlbumID(TableColumn saleTableColumnAlbumID) {
-		this.saleTableColumnAlbumID = saleTableColumnAlbumID;
-	}
-
-	protected TableColumn getSaleTableColumnAlbumName() {
+	protected static TableColumn getSaleTableColumnAlbumName() {
 		return saleTableColumnAlbumName;
 	}
 
-	protected void setSaleTableColumnAlbumName(TableColumn saleTableColumnAlbumName) {
-		this.saleTableColumnAlbumName = saleTableColumnAlbumName;
-	}
-
-	protected TableColumn getSaleTableColumnQuantity() {
+	protected static TableColumn getSaleTableColumnQuantity() {
 		return saleTableColumnQuantity;
 	}
 
-	protected void setSaleTableColumnQuantity(TableColumn saleTableColumnQuantity) {
-		this.saleTableColumnQuantity = saleTableColumnQuantity;
-	}
-
-	protected TableColumn getSaleTableColumnPricePerItem() {
+	protected static TableColumn getSaleTableColumnPricePerItem() {
 		return saleTableColumnPricePerItem;
 	}
 
-	protected void setSaleTableColumnPricePerItem(
-			TableColumn saleTableColumnPricePerItem) {
-		this.saleTableColumnPricePerItem = saleTableColumnPricePerItem;
-	}
-
-	protected TableColumn getSaleTableColumnPriceTotal() {
+	protected static TableColumn getSaleTableColumnPriceTotal() {
 		return saleTableColumnPriceTotal;
 	}
 
-	protected void setSaleTableColumnPriceTotal(
-			TableColumn saleTableColumnPriceTotal) {
-		this.saleTableColumnPriceTotal = saleTableColumnPriceTotal;
-	}
-
-	protected Button getSaleButtonRemoveItem() {
+	protected static Button getSaleButtonRemoveItem() {
 		return saleButtonRemoveItem;
 	}
 
-	protected void setSaleButtonRemoveItem(Button saleButtonRemoveItem) {
-		this.saleButtonRemoveItem = saleButtonRemoveItem;
-	}
-
-	protected Button getSaleButtonClearSale() {
+	protected static Button getSaleButtonClearSale() {
 		return saleButtonClearSale;
 	}
 
-	protected void setSaleButtonClearSale(Button saleButtonClearSale) {
-		this.saleButtonClearSale = saleButtonClearSale;
-	}
-
-	protected Label getSaleLabelTotalPrice() {
+	protected static Label getSaleLabelTotalPrice() {
 		return saleLabelTotalPrice;
 	}
 
-	protected void setSaleLabelTotalPrice(Label saleLabelTotalPrice) {
-		this.saleLabelTotalPrice = saleLabelTotalPrice;
-	}
-
-	protected Label getSaleLabelTotalPriceValue() {
+	protected static Label getSaleLabelTotalPriceValue() {
 		return saleLabelTotalPriceValue;
 	}
 
-	protected void setSaleLabelTotalPriceValue(Label saleLabelTotalPriceValue) {
-		this.saleLabelTotalPriceValue = saleLabelTotalPriceValue;
-	}
-
-	protected Button getSaleButtonMakeSale() {
+	protected static Button getSaleButtonMakeSale() {
 		return saleButtonMakeSale;
 	}
 
-	protected void setSaleButtonMakeSale(Button saleButtonMakeSale) {
-		this.saleButtonMakeSale = saleButtonMakeSale;
-	}
-
-	protected TabItem getStockTabItem() {
+	protected static TabItem getStockTabItem() {
 		return stockTabItem;
 	}
 
-	protected void setStockTabItem(TabItem stockTabItem) {
-		this.stockTabItem = stockTabItem;
-	}
-
-	protected Composite getStockTabComposite() {
+	protected static Composite getStockTabComposite() {
 		return stockTabComposite;
 	}
 
-	protected void setStockTabComposite(Composite stockTabComposite) {
-		this.stockTabComposite = stockTabComposite;
-	}
-
-	protected Group getStockGroupOrderForm() {
+	protected static Group getStockGroupOrderForm() {
 		return stockGroupOrderForm;
 	}
 
-	protected void setStockGroupOrderForm(Group stockGroupOrderForm) {
-		this.stockGroupOrderForm = stockGroupOrderForm;
-	}
-
-	protected Label getStockLabelOrderID() {
+	protected static Label getStockLabelOrderID() {
 		return stockLabelOrderID;
 	}
 
-	protected void setStockLabelOrderID(Label stockLabelOrderID) {
-		this.stockLabelOrderID = stockLabelOrderID;
-	}
-
-	protected Label getStockLabelOrderIDInput() {
+	protected static Label getStockLabelOrderIDInput() {
 		return stockLabelOrderIDInput;
 	}
 
-	protected void setStockLabelOrderIDInput(Label stockLabelOrderIDInput) {
-		this.stockLabelOrderIDInput = stockLabelOrderIDInput;
-	}
-
-	protected Label getStockLabelAlbumID() {
+	protected static Label getStockLabelAlbumID() {
 		return stockLabelAlbumID;
 	}
 
-	protected void setStockLabelAlbumID(Label stockLabelAlbumID) {
-		this.stockLabelAlbumID = stockLabelAlbumID;
-	}
-
-	protected Text getStockTextBoxAlbumIDInput() {
+	protected static Text getStockTextBoxAlbumIDInput() {
 		return stockTextBoxAlbumIDInput;
 	}
 
-	protected void setStockTextBoxAlbumIDInput(Text stockTextBoxAlbumIDInput) {
-		this.stockTextBoxAlbumIDInput = stockTextBoxAlbumIDInput;
-	}
-
-	protected Label getStockLabelDate() {
+	protected static Label getStockLabelDate() {
 		return stockLabelDate;
 	}
 
-	protected void setStockLabelDate(Label stockLabelDate) {
-		this.stockLabelDate = stockLabelDate;
-	}
-
-	protected Label getStockLabelOrderDateInput() {
+	protected static Label getStockLabelOrderDateInput() {
 		return stockLabelOrderDateInput;
 	}
 
-	protected void setStockLabelOrderDateInput(Label stockLabelOrderDateInput) {
-		this.stockLabelOrderDateInput = stockLabelOrderDateInput;
-	}
-
-	protected Button getStockButtonCheckAvailability() {
+	protected static Button getStockButtonCheckAvailability() {
 		return stockButtonCheckAvailability;
 	}
 
-	protected void setStockButtonCheckAvailability(
-			Button stockButtonCheckAvailability) {
-		this.stockButtonCheckAvailability = stockButtonCheckAvailability;
-	}
-
-	protected Label getStockLabelOrderFromStore() {
+	protected static Label getStockLabelOrderFromStore() {
 		return stockLabelOrderFromStore;
 	}
 
-	protected void setStockLabelOrderFromStore(Label stockLabelOrderFromStore) {
-		this.stockLabelOrderFromStore = stockLabelOrderFromStore;
-	}
-
-	protected Table getStockTableOrderAvailableStores() {
+	protected static Table getStockTableOrderAvailableStores() {
 		return stockTableOrderAvailableStores;
 	}
 
-	protected void setStockTableOrderAvailableStores(
-			Table stockTableOrderAvailableStores) {
-		this.stockTableOrderAvailableStores = stockTableOrderAvailableStores;
-	}
-
-	protected TableColumn getStockTableColumnStoreID() {
+	protected static TableColumn getStockTableColumnStoreID() {
 		return stockTableColumnStoreID;
 	}
 
-	protected void setStockTableColumnStoreID(TableColumn stockTableColumnStoreID) {
-		this.stockTableColumnStoreID = stockTableColumnStoreID;
-	}
-
-	protected TableColumn getStockTableColumnStoreCity() {
+	protected static TableColumn getStockTableColumnStoreCity() {
 		return stockTableColumnStoreCity;
 	}
 
-	protected void setStockTableColumnStoreCity(
-			TableColumn stockTableColumnStoreCity) {
-		this.stockTableColumnStoreCity = stockTableColumnStoreCity;
-	}
-
-	protected TableColumn getStockTableColumnQuantity() {
+	protected static TableColumn getStockTableColumnQuantity() {
 		return stockTableColumnQuantity;
 	}
 
-	protected void setStockTableColumnQuantity(TableColumn stockTableColumnQuantity) {
-		this.stockTableColumnQuantity = stockTableColumnQuantity;
-	}
-
-	protected TableColumn getStockTableColumnPrice() {
+	protected static TableColumn getStockTableColumnPrice() {
 		return stockTableColumnPrice;
 	}
 
-	protected void setStockTableColumnPrice(TableColumn stockTableColumnPrice) {
-		this.stockTableColumnPrice = stockTableColumnPrice;
-	}
-
-	protected Label getStockLabelPrice() {
+	protected static Label getStockLabelPrice() {
 		return stockLabelPrice;
 	}
 
-	protected void setStockLabelPrice(Label stockLabelPrice) {
-		this.stockLabelPrice = stockLabelPrice;
-	}
-
-	protected Label getStockLabelStorePriceInput() {
+	protected static Label getStockLabelStorePriceInput() {
 		return stockLabelStorePriceInput;
 	}
 
-	protected void setStockLabelStorePriceInput(Label stockLabelStorePriceInput) {
-		this.stockLabelStorePriceInput = stockLabelStorePriceInput;
-	}
-
-	protected Label getStockLabelQuantityInStock() {
+	protected static Label getStockLabelQuantityInStock() {
 		return stockLabelQuantityInStock;
 	}
 
-	protected void setStockLabelQuantityInStock(Label stockLabelQuantityInStock) {
-		this.stockLabelQuantityInStock = stockLabelQuantityInStock;
-	}
-
-	protected Label getStockLabelQuantityInStockInput() {
+	protected static Label getStockLabelQuantityInStockInput() {
 		return stockLabelQuantityInStockInput;
 	}
 
-	protected void setStockLabelQuantityInStockInput(
-			Label stockLabelQuantityInStockInput) {
-		this.stockLabelQuantityInStockInput = stockLabelQuantityInStockInput;
-	}
-
-	protected Label getStockLabelStorageLocation() {
+	protected static Label getStockLabelStorageLocation() {
 		return stockLabelStorageLocation;
 	}
 
-	protected void setStockLabelStorageLocation(Label stockLabelStorageLocation) {
-		this.stockLabelStorageLocation = stockLabelStorageLocation;
-	}
-
-	protected Label getStockLabelStorageLocationInput() {
+	protected static Label getStockLabelStorageLocationInput() {
 		return stockLabelStorageLocationInput;
 	}
 
-	protected void setStockLabelStorageLocationInput(
-			Label stockLabelStorageLocationInput) {
-		this.stockLabelStorageLocationInput = stockLabelStorageLocationInput;
-	}
-
-	protected Label getStockLabelQuantityToOrder() {
+	protected static Label getStockLabelQuantityToOrder() {
 		return stockLabelQuantityToOrder;
 	}
 
-	protected void setStockLabelQuantityToOrder(Label stockLabelQuantityToOrder) {
-		this.stockLabelQuantityToOrder = stockLabelQuantityToOrder;
-	}
-
-	protected Text getStockTextBoxQuantityToOrder() {
+	protected static Text getStockTextBoxQuantityToOrder() {
 		return stockTextBoxQuantityToOrder;
 	}
 
-	protected void setStockTextBoxQuantityToOrder(Text stockTextBoxQuantityToOrder) {
-		this.stockTextBoxQuantityToOrder = stockTextBoxQuantityToOrder;
-	}
-
-	protected Button getStockButtonClearOrder() {
+	protected static Button getStockButtonClearOrder() {
 		return stockButtonClearOrder;
 	}
 
-	protected void setStockButtonClearOrder(Button stockButtonClearOrder) {
-		this.stockButtonClearOrder = stockButtonClearOrder;
-	}
-
-	protected Button getStockButtonPlaceOrder() {
+	protected static Button getStockButtonPlaceOrder() {
 		return stockButtonPlaceOrder;
 	}
 
-	protected void setStockButtonPlaceOrder(Button stockButtonPlaceOrder) {
-		this.stockButtonPlaceOrder = stockButtonPlaceOrder;
-	}
-
-	protected Label getStockLabelOrders() {
+	protected static Label getStockLabelOrders() {
 		return stockLabelOrders;
 	}
 
-	protected void setStockLabelOrders(Label stockLabelOrders) {
-		this.stockLabelOrders = stockLabelOrders;
-	}
-
-	protected Table getStockTableOrders() {
+	protected static Table getStockTableOrders() {
 		return stockTableOrders;
 	}
 
-	protected void setStockTableOrders(Table stockTableOrders) {
-		this.stockTableOrders = stockTableOrders;
-	}
-
-	protected TableColumn getStockTableColumnOrdersOrderID() {
+	protected static TableColumn getStockTableColumnOrdersOrderID() {
 		return stockTableColumnOrdersOrderID;
 	}
 
-	protected void setStockTableColumnOrdersOrderID(
-			TableColumn stockTableColumnOrdersOrderID) {
-		this.stockTableColumnOrdersOrderID = stockTableColumnOrdersOrderID;
-	}
-
-	protected TableColumn getStockTableColumnOrdersSupplierID() {
+	protected static TableColumn getStockTableColumnOrdersSupplierID() {
 		return stockTableColumnOrdersSupplierID;
 	}
 
-	protected void setStockTableColumnOrdersSupplierID(
-			TableColumn stockTableColumnOrdersSupplierID) {
-		this.stockTableColumnOrdersSupplierID = stockTableColumnOrdersSupplierID;
-	}
-
-	protected TableColumn getStockTableColumnOrdersAlbumID() {
+	protected static TableColumn getStockTableColumnOrdersAlbumID() {
 		return stockTableColumnOrdersAlbumID;
 	}
 
-	protected void setStockTableColumnOrdersAlbumID(
-			TableColumn stockTableColumnOrdersAlbumID) {
-		this.stockTableColumnOrdersAlbumID = stockTableColumnOrdersAlbumID;
-	}
-
-	protected TableColumn getStockTableColumnOrdersQuantity() {
+	protected static TableColumn getStockTableColumnOrdersQuantity() {
 		return stockTableColumnOrdersQuantity;
 	}
 
-	protected void setStockTableColumnOrdersQuantity(
-			TableColumn stockTableColumnOrdersQuantity) {
-		this.stockTableColumnOrdersQuantity = stockTableColumnOrdersQuantity;
-	}
-
-	protected TableColumn getStockTableColumnOrdersDate() {
+	protected static TableColumn getStockTableColumnOrdersDate() {
 		return stockTableColumnOrdersDate;
 	}
 
-	protected void setStockTableColumnOrdersDate(
-			TableColumn stockTableColumnOrdersDate) {
-		this.stockTableColumnOrdersDate = stockTableColumnOrdersDate;
-	}
-
-	protected TableColumn getStockTableColumnOrdersStatus() {
+	protected static TableColumn getStockTableColumnOrdersStatus() {
 		return stockTableColumnOrdersStatus;
 	}
 
-	protected void setStockTableColumnOrdersStatus(
-			TableColumn stockTableColumnOrdersStatus) {
-		this.stockTableColumnOrdersStatus = stockTableColumnOrdersStatus;
-	}
-
-	protected TableColumn getStockTableColumnOrdersCompletionDate() {
+	protected static TableColumn getStockTableColumnOrdersCompletionDate() {
 		return stockTableColumnOrdersCompletionDate;
 	}
 
-	protected void setStockTableColumnOrdersCompletionDate(
-			TableColumn stockTableColumnOrdersCompletionDate) {
-		this.stockTableColumnOrdersCompletionDate = stockTableColumnOrdersCompletionDate;
-	}
-
-	protected Button getStockButtonRemoveOrder() {
+	protected static Button getStockButtonRemoveOrder() {
 		return stockButtonRemoveOrder;
 	}
 
-	protected void setStockButtonRemoveOrder(Button stockButtonRemoveOrder) {
-		this.stockButtonRemoveOrder = stockButtonRemoveOrder;
-	}
-
-	protected Button getStockButtonCancelOrder() {
+	protected static Button getStockButtonCancelOrder() {
 		return stockButtonCancelOrder;
 	}
 
-	protected void setStockButtonCancelOrder(Button stockButtonCancelOrder) {
-		this.stockButtonCancelOrder = stockButtonCancelOrder;
-	}
-
-	protected Label getStockLabelRequests() {
+	protected static Label getStockLabelRequests() {
 		return stockLabelRequests;
 	}
 
-	protected void setStockLabelRequests(Label stockLabelRequests) {
-		this.stockLabelRequests = stockLabelRequests;
-	}
-
-	protected Table getStockTableRequests() {
+	protected static Table getStockTableRequests() {
 		return stockTableRequests;
 	}
 
-	protected void setStockTableRequests(Table stockTableRequests) {
-		this.stockTableRequests = stockTableRequests;
-	}
-
-	protected TableColumn getStockTableColumnRequestsOrderID() {
+	protected static TableColumn getStockTableColumnRequestsOrderID() {
 		return stockTableColumnRequestsOrderID;
 	}
 
-	protected void setStockTableColumnRequestsOrderID(
-			TableColumn stockTableColumnRequestsOrderID) {
-		this.stockTableColumnRequestsOrderID = stockTableColumnRequestsOrderID;
-	}
-
-	protected TableColumn getStockTableColumnRequestsOrderingStoreID() {
+	protected static TableColumn getStockTableColumnRequestsOrderingStoreID() {
 		return stockTableColumnRequestsOrderingStoreID;
 	}
 
-	protected void setStockTableColumnRequestsOrderingStoreID(
-			TableColumn stockTableColumnRequestsOrderingStoreID) {
-		this.stockTableColumnRequestsOrderingStoreID = stockTableColumnRequestsOrderingStoreID;
-	}
-
-	protected TableColumn getStockTableColumnRequestsAlbumID() {
+	protected static TableColumn getStockTableColumnRequestsAlbumID() {
 		return stockTableColumnRequestsAlbumID;
 	}
 
-	protected void setStockTableColumnRequestsAlbumID(
-			TableColumn stockTableColumnRequestsAlbumID) {
-		this.stockTableColumnRequestsAlbumID = stockTableColumnRequestsAlbumID;
-	}
-
-	protected TableColumn getStockTableColumnRequestsQuantity() {
+	protected static TableColumn getStockTableColumnRequestsQuantity() {
 		return stockTableColumnRequestsQuantity;
 	}
 
-	protected void setStockTableColumnRequestsQuantity(
-			TableColumn stockTableColumnRequestsQuantity) {
-		this.stockTableColumnRequestsQuantity = stockTableColumnRequestsQuantity;
-	}
-
-	protected TableColumn getStockTableColumnRequestsDate() {
+	protected static TableColumn getStockTableColumnRequestsDate() {
 		return stockTableColumnRequestsDate;
 	}
 
-	protected void setStockTableColumnRequestsDate(
-			TableColumn stockTableColumnRequestsDate) {
-		this.stockTableColumnRequestsDate = stockTableColumnRequestsDate;
-	}
-
-	protected TableColumn getStockTableColumnRequestsStatus() {
+	protected static TableColumn getStockTableColumnRequestsStatus() {
 		return stockTableColumnRequestsStatus;
 	}
 
-	protected void setStockTableColumnRequestsStatus(
-			TableColumn stockTableColumnRequestsStatus) {
-		this.stockTableColumnRequestsStatus = stockTableColumnRequestsStatus;
-	}
-
-	protected TableColumn getStockTableColumnRequestsCompletionDate() {
+	protected static TableColumn getStockTableColumnRequestsCompletionDate() {
 		return stockTableColumnRequestsCompletionDate;
 	}
 
-	protected void setStockTableColumnRequestsCompletionDate(
-			TableColumn stockTableColumnRequestsCompletionDate) {
-		this.stockTableColumnRequestsCompletionDate = stockTableColumnRequestsCompletionDate;
-	}
-
-	protected Button getStockButtonDenyRequest() {
+	protected static Button getStockButtonDenyRequest() {
 		return stockButtonDenyRequest;
 	}
 
-	protected void setStockButtonDenyRequest(Button stockButtonDenyRequest) {
-		this.stockButtonDenyRequest = stockButtonDenyRequest;
-	}
-
-	protected Button getStockButtonApproveRequest() {
+	protected static Button getStockButtonApproveRequest() {
 		return stockButtonApproveRequest;
 	}
 
-	protected void setStockButtonApproveRequest(Button stockButtonApproveRequest) {
-		this.stockButtonApproveRequest = stockButtonApproveRequest;
-	}
-
-	protected TabItem getManagementTabItem() {
+	protected static TabItem getManagementTabItem() {
 		return managementTabItem;
 	}
 
-	protected void setManagementTabItem(TabItem managementTabItem) {
-		this.managementTabItem = managementTabItem;
-	}
-
-	protected Composite getManageMainComposite() {
+	protected static Composite getManageMainComposite() {
 		return manageMainComposite;
 	}
 
-	protected void setManageMainComposite(Composite manageMainComposite) {
-		this.manageMainComposite = manageMainComposite;
-	}
-
-	protected Label getManageLabelEmployees() {
+	protected static Label getManageLabelEmployees() {
 		return manageLabelEmployees;
 	}
 
-	protected void setManageLabelEmployees(Label manageLabelEmployees) {
-		this.manageLabelEmployees = manageLabelEmployees;
-	}
-
-	protected Table getManageTableEmployees() {
+	protected static Table getManageTableEmployees() {
 		return manageTableEmployees;
 	}
 
-	protected void setManageTableEmployees(Table manageTableEmployees) {
-		this.manageTableEmployees = manageTableEmployees;
-	}
-
-	protected TableColumn getManageTableColumnEmployeeID() {
+	protected static TableColumn getManageTableColumnEmployeeID() {
 		return manageTableColumnEmployeeID;
 	}
 
-	protected void setManageTableColumnEmployeeID(
-			TableColumn manageTableColumnEmployeeID) {
-		this.manageTableColumnEmployeeID = manageTableColumnEmployeeID;
-	}
-
-	protected TableColumn getManageTableColumnEmployeePName() {
+	protected static TableColumn getManageTableColumnEmployeePName() {
 		return manageTableColumnEmployeePName;
 	}
 
-	protected void setManageTableColumnEmployeePName(
-			TableColumn manageTableColumnEmployeePName) {
-		this.manageTableColumnEmployeePName = manageTableColumnEmployeePName;
-	}
-
-	protected TableColumn getManageTableColumnEmployeeLName() {
+	protected static TableColumn getManageTableColumnEmployeeLName() {
 		return manageTableColumnEmployeeLName;
 	}
 
-	protected void setManageTableColumnEmployeeLName(
-			TableColumn manageTableColumnEmployeeLName) {
-		this.manageTableColumnEmployeeLName = manageTableColumnEmployeeLName;
-	}
-
-	protected TableColumn getManageTableColumnEmployeePosition() {
+	protected static TableColumn getManageTableColumnEmployeePosition() {
 		return manageTableColumnEmployeePosition;
 	}
 
-	protected void setManageTableColumnEmployeePosition(
-			TableColumn manageTableColumnEmployeePosition) {
-		this.manageTableColumnEmployeePosition = manageTableColumnEmployeePosition;
-	}
-
-	protected Group getManageGroupEditEmployee() {
+	protected static Group getManageGroupEditEmployee() {
 		return manageGroupEditEmployee;
 	}
 
-	protected void setManageGroupEditEmployee(Group manageGroupEditEmployee) {
-		this.manageGroupEditEmployee = manageGroupEditEmployee;
-	}
-
-	protected Label getManageLabelEmployeeEmploymentDateInput() {
+	protected static Label getManageLabelEmployeeEmploymentDateInput() {
 		return manageLabelEmployeeEmploymentDateInput;
 	}
 
-	protected void setManageLabelEmployeeEmploymentDateInput(
-			Label manageLabelEmployeeEmploymentDateInput) {
-		this.manageLabelEmployeeEmploymentDateInput = manageLabelEmployeeEmploymentDateInput;
-	}
-
-	protected Label getManageLabelEmployeeEmploymentDate() {
+	protected static Label getManageLabelEmployeeEmploymentDate() {
 		return manageLabelEmployeeEmploymentDate;
 	}
 
-	protected void setManageLabelEmployeeEmploymentDate(
-			Label manageLabelEmployeeEmploymentDate) {
-		this.manageLabelEmployeeEmploymentDate = manageLabelEmployeeEmploymentDate;
-	}
-
-	protected Label getManageLabelEmployeeStoreID() {
+	protected static Label getManageLabelEmployeeStoreID() {
 		return manageLabelEmployeeStoreID;
 	}
 
-	protected void setManageLabelEmployeeStoreID(Label manageLabelEmployeeStoreID) {
-		this.manageLabelEmployeeStoreID = manageLabelEmployeeStoreID;
-	}
-
-	protected Label getManageLabelEmployeeEmployeeStoreIDInput() {
+	protected static Label getManageLabelEmployeeEmployeeStoreIDInput() {
 		return manageLabelEmployeeEmployeeStoreIDInput;
 	}
 
-	protected void setManageLabelEmployeeEmployeeStoreIDInput(
-			Label manageLabelEmployeeEmployeeStoreIDInput) {
-		this.manageLabelEmployeeEmployeeStoreIDInput = manageLabelEmployeeEmployeeStoreIDInput;
-	}
-
-	protected Label getManageLabelEmployeeID() {
+	protected static Label getManageLabelEmployeeID() {
 		return manageLabelEmployeeID;
 	}
 
-	protected void setManageLabelEmployeeID(Label manageLabelEmployeeID) {
-		this.manageLabelEmployeeID = manageLabelEmployeeID;
-	}
-
-	protected Text getManageTextBoxEmployeeIDInput() {
+	protected static Text getManageTextBoxEmployeeIDInput() {
 		return manageTextBoxEmployeeIDInput;
 	}
 
-	protected void setManageTextBoxEmployeeIDInput(Text manageTextBoxEmployeeIDInput) {
-		this.manageTextBoxEmployeeIDInput = manageTextBoxEmployeeIDInput;
-	}
-
-	protected Label getManageLabelEmployeeBirth() {
+	protected static Label getManageLabelEmployeeBirth() {
 		return manageLabelEmployeeBirth;
 	}
 
-	protected void setManageLabelEmployeeBirth(Label manageLabelEmployeeBirth) {
-		this.manageLabelEmployeeBirth = manageLabelEmployeeBirth;
-	}
-
-	protected Text getManageTextBoxEmployeeBirthInput() {
+	protected static Text getManageTextBoxEmployeeBirthInput() {
 		return manageTextBoxEmployeeBirthInput;
 	}
 
-	protected void setManageTextBoxEmployeeBirthInput(
-			Text manageTextBoxEmployeeBirthInput) {
-		this.manageTextBoxEmployeeBirthInput = manageTextBoxEmployeeBirthInput;
-	}
-
-	protected Label getManageLabelEmployeeFName() {
+	protected static Label getManageLabelEmployeeFName() {
 		return manageLabelEmployeeFName;
 	}
 
-	protected void setManageLabelEmployeeFName(Label manageLabelEmployeeFName) {
-		this.manageLabelEmployeeFName = manageLabelEmployeeFName;
-	}
-
-	protected Text getManageTextBoxEmployeeFNameInput() {
+	protected static Text getManageTextBoxEmployeeFNameInput() {
 		return manageTextBoxEmployeeFNameInput;
 	}
 
-	protected void setManageTextBoxEmployeeFNameInput(
-			Text manageTextBoxEmployeeFNameInput) {
-		this.manageTextBoxEmployeeFNameInput = manageTextBoxEmployeeFNameInput;
-	}
-
-	protected Label getManageLabelEmployeeLName() {
+	protected static Label getManageLabelEmployeeLName() {
 		return manageLabelEmployeeLName;
 	}
 
-	protected void setManageLabelEmployeeLName(Label manageLabelEmployeeLName) {
-		this.manageLabelEmployeeLName = manageLabelEmployeeLName;
-	}
-
-	protected Text getManageTextBoxEmployeeLNameInput() {
+	protected static Text getManageTextBoxEmployeeLNameInput() {
 		return manageTextBoxEmployeeLNameInput;
 	}
 
-	protected void setManageTextBoxEmployeeLNameInput(
-			Text manageTextBoxEmployeeLNameInput) {
-		this.manageTextBoxEmployeeLNameInput = manageTextBoxEmployeeLNameInput;
-	}
-
-	protected Label getManageLabelEmployeeAddress() {
+	protected static Label getManageLabelEmployeeAddress() {
 		return manageLabelEmployeeAddress;
 	}
 
-	protected void setManageLabelEmployeeAddress(Label manageLabelEmployeeAddress) {
-		this.manageLabelEmployeeAddress = manageLabelEmployeeAddress;
-	}
-
-	protected Text getManageTextBoxEmployeeAddressInput() {
+	protected static Text getManageTextBoxEmployeeAddressInput() {
 		return manageTextBoxEmployeeAddressInput;
 	}
 
-	protected void setManageTextBoxEmployeeAddressInput(
-			Text manageTextBoxEmployeeAddressInput) {
-		this.manageTextBoxEmployeeAddressInput = manageTextBoxEmployeeAddressInput;
-	}
-
-	protected Label getManageLabelEmployeePhone() {
+	protected static Label getManageLabelEmployeePhone() {
 		return manageLabelEmployeePhone;
 	}
 
-	protected void setManageLabelEmployeePhone(Label manageLabelEmployeePhone) {
-		this.manageLabelEmployeePhone = manageLabelEmployeePhone;
-	}
-
-	protected Text getManageTextBoxEmployeePhoneInput() {
+	protected static Text getManageTextBoxEmployeePhoneInput() {
 		return manageTextBoxEmployeePhoneInput;
 	}
 
-	protected void setManageTextBoxEmployeePhoneInput(
-			Text manageTextBoxEmployeePhoneInput) {
-		this.manageTextBoxEmployeePhoneInput = manageTextBoxEmployeePhoneInput;
-	}
-
-	protected Label getManageLabelEmployeeCellPhone() {
+	protected static Label getManageLabelEmployeeCellPhone() {
 		return manageLabelEmployeeCellPhone;
 	}
 
-	protected void setManageLabelEmployeeCellPhone(
-			Label manageLabelEmployeeCellPhone) {
-		this.manageLabelEmployeeCellPhone = manageLabelEmployeeCellPhone;
-	}
-
-	protected Text getManageTextBoxEmployeeCellPhoneInput() {
+	protected static Text getManageTextBoxEmployeeCellPhoneInput() {
 		return manageTextBoxEmployeeCellPhoneInput;
 	}
 
-	protected void setManageTextBoxEmployeeCellPhoneInput(
-			Text manageTextBoxEmployeeCellPhoneInput) {
-		this.manageTextBoxEmployeeCellPhoneInput = manageTextBoxEmployeeCellPhoneInput;
-	}
-
-	protected Label getManageLabelEmployeePosition() {
+	protected static Label getManageLabelEmployeePosition() {
 		return manageLabelEmployeePosition;
 	}
 
-	protected void setManageLabelEmployeePosition(Label manageLabelEmployeePosition) {
-		this.manageLabelEmployeePosition = manageLabelEmployeePosition;
-	}
-
-	protected Combo getManageComboEmployeePositionInput() {
+	protected static Combo getManageComboEmployeePositionInput() {
 		return manageComboEmployeePositionInput;
 	}
 
-	protected void setManageComboEmployeePositionInput(
-			Combo manageComboEmployeePositionInput) {
-		this.manageComboEmployeePositionInput = manageComboEmployeePositionInput;
-	}
-
-	protected Button getManageButtonEmployeeNew() {
+	protected static Button getManageButtonEmployeeNew() {
 		return manageButtonEmployeeNew;
 	}
 
-	protected void setManageButtonEmployeeNew(Button manageButtonEmployeeNew) {
-		this.manageButtonEmployeeNew = manageButtonEmployeeNew;
-	}
-
-	protected Button getManageButtonEmployeeInsert() {
+	protected static Button getManageButtonEmployeeInsert() {
 		return manageButtonEmployeeInsert;
 	}
 
-	protected void setManageButtonEmployeeInsert(Button manageButtonEmployeeInsert) {
-		this.manageButtonEmployeeInsert = manageButtonEmployeeInsert;
-	}
-
-	protected Button getManageButtonEmployeeNoSave() {
+	protected static Button getManageButtonEmployeeNoSave() {
 		return manageButtonEmployeeNoSave;
 	}
 
-	protected void setManageButtonEmployeeNoSave(Button manageButtonEmployeeNoSave) {
-		this.manageButtonEmployeeNoSave = manageButtonEmployeeNoSave;
-	}
-
-	protected Button getManageButtonEmployeeEdit() {
+	protected static Button getManageButtonEmployeeEdit() {
 		return manageButtonEmployeeEdit;
 	}
 
-	protected void setManageButtonEmployeeEdit(Button manageButtonEmployeeEdit) {
-		this.manageButtonEmployeeEdit = manageButtonEmployeeEdit;
-	}
-
-	protected Button getManageButtonEmployeeSave() {
+	protected static Button getManageButtonEmployeeSave() {
 		return manageButtonEmployeeSave;
 	}
 
-	protected void setManageButtonEmployeeSave(Button manageButtonEmployeeSave) {
-		this.manageButtonEmployeeSave = manageButtonEmployeeSave;
-	}
-
-	protected Button getManageButtonEmployeeRemove() {
+	protected static Button getManageButtonEmployeeRemove() {
 		return manageButtonEmployeeRemove;
 	}
 
-	protected void setManageButtonEmployeeRemove(Button manageButtonEmployeeRemove) {
-		this.manageButtonEmployeeRemove = manageButtonEmployeeRemove;
-	}
-
-	protected Group getManageGroupDBSManage() {
+	protected static Group getManageGroupDBSManage() {
 		return manageGroupDBSManage;
 	}
 
-	protected void setManageGroupDBSManage(Group manageGroupDBSManage) {
-		this.manageGroupDBSManage = manageGroupDBSManage;
-	}
-
-	protected Label getManageLabelDBSUpdate() {
+	protected static Label getManageLabelDBSUpdate() {
 		return manageLabelDBSUpdate;
 	}
 
-	protected void setManageLabelDBSUpdate(Label manageLabelDBSUpdate) {
-		this.manageLabelDBSUpdate = manageLabelDBSUpdate;
-	}
-
-	protected Text getManageTextBoxDBSUpdateFileInput() {
+	protected static Text getManageTextBoxDBSUpdateFileInput() {
 		return manageTextBoxDBSUpdateFileInput;
 	}
 
-	protected void setManageTextBoxDBSUpdateFileInput(
-			Text manageTextBoxDBSUpdateFileInput) {
-		this.manageTextBoxDBSUpdateFileInput = manageTextBoxDBSUpdateFileInput;
-	}
-
-	protected Button getManageButtonDBSBrowse() {
+	protected static Button getManageButtonDBSBrowse() {
 		return manageButtonDBSBrowse;
 	}
 
-	protected void setManageButtonDBSBrowse(Button manageButtonDBSBrowse) {
-		this.manageButtonDBSBrowse = manageButtonDBSBrowse;
-	}
-
-	protected Button getManageButtonDBSUpdate() {
+	protected static Button getManageButtonDBSUpdate() {
 		return manageButtonDBSUpdate;
 	}
 
-	protected void setManageButtonDBSUpdate(Button manageButtonDBSUpdate) {
-		this.manageButtonDBSUpdate = manageButtonDBSUpdate;
-	}
-
-	protected ProgressBar getManageProgressBarDBSUpdate() {
+	protected static ProgressBar getManageProgressBarDBSUpdate() {
 		return manageProgressBarDBSUpdate;
-	}
-
-	protected void setManageProgressBarDBSUpdate(
-			ProgressBar manageProgressBarDBSUpdate) {
-		this.manageProgressBarDBSUpdate = manageProgressBarDBSUpdate;
 	}
 }
