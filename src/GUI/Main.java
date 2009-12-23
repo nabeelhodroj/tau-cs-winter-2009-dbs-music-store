@@ -33,96 +33,200 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		SWTResourceManager.registerResourceUser(this);
 	}
 
+	//////////////////////////////
+	//	Variables definitions	//
+	//////////////////////////////
+	
+	// Main Menu
 	private Menu mainMenuBar;
+	private MenuItem menuItemSeperator;
+	
+	private MenuItem mainMenuItemFile;
+	private Menu fileMenu;
+	private MenuItem fileMenuItemExit;
+	
+	private MenuItem mainMenuItemSearch;
+	private Menu searchMenu;
+	private MenuItem searchMenuItemAddToSale;
+	private MenuItem searchMenuItemPlaceOrder;
+	private MenuItem searchMenuItemSearch;
+	private MenuItem searchMenuItemClear;
+	
+	private MenuItem mainMenuItemSale;
+	private Menu saleMenu;
+	private MenuItem saleMenuItemRemove;
+	private MenuItem saleMenuItemClear;
+	private MenuItem saleMenuItemMakeSale;
+	
+	private MenuItem mainMenuItemStock;
+	private Menu stockMenu;
+	private MenuItem stockMenuItemCheckAvailability;
+	private MenuItem stockMenuItemClear;
+	private MenuItem stockMenuItemPlaceOrder;
+	private MenuItem stockMenuItemRemoveOrder;
+	private MenuItem stockMenuItemCancelOrder;
+	private MenuItem stockMenuItemDenyRequest;
+	private MenuItem stockMenuItemApproveRequest;
+	
+	private MenuItem mainMenuItemManage;
+	private Menu manageMenu;
+	private MenuItem manageMenuItemBrowse;
+	private MenuItem manageMenuItemUpdateDBS;
+	private MenuItem manageMenuItemNew;
+	private MenuItem manageMenuItemInsert;
+	private MenuItem manageMenuItemEdit;
+	private MenuItem manageMenuItemSave;
+	private MenuItem manageMenuItemExitNoSave;
+	private MenuItem manageMenuItemRemoveEmployee;
+	
+	// Main Window Details
+	//////////////////////
+	// Store details
+	private Group mainGroupStoreDetails;
+	private Label mainLabelStoreDetailsStoreID;
+	private Label mainLabelStoreDetailsDateTime;
+	private Label mainLabelStoreDetailsStoreAddress;
+	private Label mainLabelStoreDetailsStorePhone;
+	private Label mainLabelStoreDetailsStoreManager;
+	
+	// Quick tips
+	private Group mainGroupQuickTips;
+	private Label mainLabelQuickTipsTip;
+	
+	// Tab folder
+	private TabFolder mainTabFolder;
+	
+	// Search tab
+	/////////////
+	private TabItem searchTabItem;
+	private Composite searchTabComposite;
+	
+	// Search options group
+	private Group searchGroupOptions;
+	private Button searchBulletByAlbum;
+	private Text searchTextBoxAlbumID;
+	private Button searchBulletOtherParameters;
+	private Button searchCheckBoxAlbumName;
+	private Text searchTextBoxAlbumName;
+	private Button searchCheckBoxArtist;
+	private Text searchTextBoxArtist;
+	private Button searchCheckBoxYear;
+	private Text searchTextBoxYearFrom;
+	private Label searchLabelYearTo;
+	private Text searchTextBoxYearTo;
+	private Button searchCheckBoxSongNames;
+	private Text searchTextBoxSongNames;
+	private Composite searchCompositeStockField;
+	private Label searchLabelStock;
+	private Button searchBulletInStockAll;
+	private Button searchBulletInStockInStore;
+	private Button searchBulletInStockInNetwork;
+	private Button searchCheckBoxGenres;
+	private Button searchCheckBoxGenreJazz;
+	private Button searchCheckBoxGenreRock;
+	private Button searchCheckBoxGenre03;
+	private Button searchCheckBoxGenre04;
+	private Button searchCheckBoxGenre05;
+	private Button searchCheckBoxGenre06;
+	private Button searchCheckBoxGenre07;
+	private Button searchCheckBoxGenre08;
+	private Button searchCheckBoxGenre09;
+	private Button searchCheckBoxGenre10;
+	private Button searchCheckBoxGenreOther;
+	private Text searchTextBoxGenreOther;
+	private Button searchButtonClear;
+	private Button searchButtonSearch;
+	
+	// Search results group
+	private Group searchGroupResults;
+	private Table searchTableAlbumResults;
+	private TableColumn searchTableColumnAlbumID;
+	private TableColumn searchTableColumnAlbumName;
+	private TableColumn searchTableColumnAlbumArtist;
+	private TableColumn searchTableColumnAlbumYear;
+	private TableColumn searchTableColumnAlbumGenre;
+	private TableColumn searchTableColumnAlbumLength;
+	private ProgressBar searchProgressBar;
+	private Table searchTableSongResults;
+	private TableColumn searchTableColumnSongName;
+	private TableColumn searchTableColumnSongArtist;
+	private TableColumn searchTableColumnSongLength;
+	
+	// Stock information group
+	private Group searchGroupStockInfo;
+	private Label searchLabelStockInfoStoreStock;
+	private Label searchLabelStockInfoLocation;
+	private Label searchLabelStockInfoPrice;
+	private Button searchButtonStockInfoOrder;
+	
+	// Sale group
+	private Group searchGroupSaleInfo;	
 	private Label searchLabelSaleInfoQuantity;
+	private Text searchTextBoxSaleInfoQuantity;
+	private Button searchButtonSaleInfoSale;
+	
+	// Sale tab
+	///////////
+	private TabItem saleTabItem;
+	private Composite saleCompositeMain;
+	
+	// Sale details group
+	private Group saleGroupSaleDetails;
+	private Label saleLabelSaleID;
+	private Label saleLabelSaleIDInput;
+	private Label saleLabelSaleDate;
 	private Label saleLabelDateInput;
-	private Label stockLabelOrderID;
-	private Group stockGroupOrderForm;
-	private Composite stockTabComposite;
-	private Button saleButtonMakeSale;
-	private Button saleButtonClearSale;
-	private Button saleButtonRemoveItem;
-	private Label saleLabelTotalPrice;
-	private Label saleLabelTotalPriceValue;
+	private Label saleLabelSalesmanIDName;
+	private Combo saleComboSalesmanIDNameInput;
+	private Label saleLabelSaleTime;
+	private Label saleLabelTimeInput;
+	
+	// Sale table
 	private Table saleTableSaleItems;
 	private TableColumn saleTableColumnAlbumID;
 	private TableColumn saleTableColumnAlbumName;
 	private TableColumn saleTableColumnQuantity;
 	private TableColumn saleTableColumnPricePerItem;
 	private TableColumn saleTableColumnPriceTotal;
-	private Label saleLabelTimeInput;
-	private Label saleLabelSaleTime;
-	private Label saleLabelSaleDate;
-	private Combo saleComboSalesmanIDNameInput;
-	private Label saleLabelSalesmanIDName;
-	private Label saleLabelSaleIDInput;
-	private Label saleLabelSaleID;
-	private Group saleGroupSaleDetails;
-	private Label mainLabelStoreDetailsDateTime;
-	private Label mainLabelQuickTipsTip;
-	private Group mainGroupHeaderText;
-	private Label mainLabelStoreDetailsStoreID;
-	private Label mainLabelStoreDetailsStoreManager;
-	private Label mainLabelStoreDetailsStorePhone;
-	private Label mainLabelStoreDetailsStoreAddress;
-	private Group mainGroupStoreDetails;
-	private Composite saleCompositeMain;
-	private Composite searchCompositeStockField;
-	private Button searchButtonSaleInfoSale;
-	private Text searchTextBoxSaleInfoQuantity;
-	private Label searchLabelStockInfoPrice;
+	private Button saleButtonRemoveItem;
+	private Button saleButtonClearSale;
+	private Label saleLabelTotalPrice;
+	private Label saleLabelTotalPriceValue;
+	private Button saleButtonMakeSale;
+	
+	// Stock tab
+	////////////
+	private TabItem stockTabItem;
+	private Composite stockTabComposite;
+	
+	// Order group
+	private Group stockGroupOrderForm;
+	private Label stockLabelOrderID;
+	private Label stockLabelOrderIDInput;
+	private Label stockLabelAlbumID;
+	private Text stockTextBoxAlbumIDInput;
+	private Label stockLabelDate;
+	private Label stockLabelOrderDateInput;
+	private Button stockButtonCheckAvailability;
+	private Label stockLabelOrderFromStore;
+	private Table stockTableOrderAvailableStores;
+	private TableColumn stockTableColumnStoreID;
+	private TableColumn stockTableColumnStoreCity;
+	private TableColumn stockTableColumnQuantity;
+	private TableColumn stockTableColumnPrice;
+	private Label stockLabelPrice;
+	private Label stockLabelStorePriceInput;
+	private Label stockLabelQuantityInStock;
+	private Label stockLabelQuantityInStockInput;
+	private Label stockLabelStorageLocation;
+	private Label stockLabelStorageLocationInput;
+	private Label stockLabelQuantityToOrder;
+	private Text stockTextBoxQuantityToOrder;
 	private Button stockButtonClearOrder;
-	private Label manageLabelEmployees;
-	private Table manageTableEmployees;
-	private TableColumn manageTableColumnEmployeeID;
-	private TableColumn manageTableColumnEmployeePName;
-	private MenuItem searchMenuItemAddToSale;
-	private MenuItem searchMenuItemPlaceOrder;
-	private MenuItem searchMenuItemSearch;
-	private MenuItem fileMenuItemExit;
-	private MenuItem searchMenuItemClear;
-	private ProgressBar manageProgressBarDBSUpdate;
-	private Button manageButtonDBSUpdate;
-	private Button manageButtonDBSBrowse;
-	private Text manageTextBoxDBSUpdateFileInput;
-	private Label manageLabelDBSUpdate;
-	private Group manageGroupDBSManage;
-	private Button manageButtonEmployeeNoSave;
-	private Button manageButtonEmployeeRemove;
-	private Button manageButtonEmployeeSave;
-	private Button manageButtonEmployeeEdit;
-	private Button manageButtonEmployeeInsert;
-	private Button manageButtonEmployeeNew;
-	private Combo manageComboEmployeePosition;
-	private Label manageLabelEmployeePosition;
-	private Text manageTextBoxEmployeeCellPhoneInput;
-	private Text manageTextBoxEmployeePhoneInput;
-	private Label manageLabelEmployeeCellPhone;
-	private Label manageLabelEmployeePhone;
-	private Label manageLabelEmployeeEmploymentDateInput;
-	private Label manageLabelEmployeeEmployingStoreIDInput;
-	private Label manageLabelEmployeeStoreID;
-	private Text manageTextBoxEmployeeAddressInput;
-	private Label manageLabelEmployeeAddress;
-	private Label manageLabelEmployeeBirth;
-	private Text manageTextBoxEmployeeBirthInput;
-	private Label manageLabelEmployeeEmploymentDate;
-	private Text manageTextBoxEmployeeLNameInput;
-	private Label manageLabelEmployeeLName;
-	private Text manageTextBoxEmployeeFNameInput;
-	private Label manageLabelEmployeeFName;
-	private Text manageTextBoxEmployeeIDInput;
-	private Label manageLabelEmployeeID;
-	private Group manageGroupEditEmployee;
-	private TableColumn manageTableColumnEmployeeLName;
-	private TableColumn manageTableColumnEmployeePosition;
-	private Composite manageMainComposite;
-	private Button stockButtonRemoveOrder;
-	private Button stockButtonCancelOrder;
+	private Button stockButtonPlaceOrder;
+	
+	// Orders table
 	private Label stockLabelOrders;
-	private Button stockButtonDenyRequest;
-	private Button stockButtonApproveRequest;
-	private Label stockLabelRequests;
 	private Table stockTableOrders;
 	private TableColumn stockTableColumnOrdersOrderID;
 	private TableColumn stockTableColumnOrdersSupplierID;
@@ -131,6 +235,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private TableColumn stockTableColumnOrdersDate;
 	private TableColumn stockTableColumnOrdersStatus;
 	private TableColumn stockTableColumnOrdersCompletionDate;
+	private Button stockButtonRemoveOrder;
+	private Button stockButtonCancelOrder;
+	
+	// Requests table
+	private Label stockLabelRequests;	
 	private Table stockTableRequests;
 	private TableColumn stockTableColumnRequestsOrderID;
 	private TableColumn stockTableColumnRequestsOrderingStoreID;
@@ -139,91 +248,58 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private TableColumn stockTableColumnRequestsDate;
 	private TableColumn stockTableColumnRequestsStatus;
 	private TableColumn stockTableColumnRequestsCompletionDate;
-	private Text stockTextBoxQuantityToOrder;
-	private Label stockLabelQuantityToOrder;
-	private Button stockButtonPlaceOrder;
-	private Label stockLabelStorageLocationInput;
-	private Label stockLabelStorageLocation;
-	private Label stockLabelStorePriceInput;
-	private Label stockLabelPrice;
-	private Label stockLabelQuantityInStockInput;
-	private Label stockLabelQuantityInStock;
-	private Table stockTableOrderAvailableStores;
-	private TableColumn stockTableColumnStoreID;
-	private TableColumn stockTableColumnStoreCity;
-	private TableColumn stockTableColumnQuantity;
-	private TableColumn stockTableColumnPrice;
-	private Label stockLabelOrderFromStore;
-	private Button stockButtonCheckAvailability;
-	private Label stockLabelOrderDateInput;
-	private Label stockLabelDate;
-	private Text stockTextBoxAlbumIDInput;
-	private Label stockLabelAlbumID;
-	private Label stockLabelOrderIDInput;
-	private Button searchButtonStockInfoOrder;
-	private Label searchLabelStockInfoLocation;
-	private Label searchLabelStockInfoStoreStock;
-	private Group searchGroupSaleInfo;
-	private Button searchCheckBoxYear;
-	private Label searchLabelStock;
-	private Button searchCheckBoxGenreOther;
-	private Button searchCheckBoxGenre10;
-	private Button searchCheckBoxGenre09;
-	private Button searchCheckBoxGenre08;
-	private Button searchCheckBoxGenre07;
-	private Button searchCheckBoxGenre06;
-	private Button searchCheckBoxGenre05;
-	private Button searchCheckBoxGenre04;
-	private Button searchCheckBoxGenre03;
-	private Button searchBulletInStockInStore;
-	private Button searchBulletInStockInNetwork;
-	private Button searchBulletInStockAll;
-	private Button searchCheckBoxGenreJazz;
-	private ProgressBar searchProgressBar;
-	private Table searchTableAlbumResults;
-	private TableColumn searchTableColumnAlbumID;
-	private TableColumn searchTableColumnAlbumName;
-	private TableColumn searchTableColumnAlbumArtist;
-	private TableColumn searchTableColumnAlbumYear;
-	private TableColumn searchTableColumnAlbumGenre;
-	private TableColumn searchTableColumnAlbumLength;
-	private Table searchTableSongResults;
-	private TableColumn searchTableColumnSongName;
-	private TableColumn searchTableColumnSongArtist;
-	private TableColumn searchTableColumnSongLength;
-	private Group searchGroupStockInfo;
-	private Button searchButtonSearch;
-	private Button searchButtonClear;
-	private Text searchTextBoxGenreOther;
-	private Button searchCheckBoxGenreRock;
-	private Text searchTextBoxSongNames;
-	private Text searchTextBoxYearTo;
-	private Label searchLabelYearTo;
-	private Text searchTextBoxYearFrom;
-	private Text searchTextBoxArtist;
-	private Text searchTextBoxAlbumName;
-	private Button searchCheckBoxGenres;
-	private Button searchCheckBoxSongNames;
-	private Button searchCheckBoxArtist;
-	private Button searchCheckBoxAlbumName;
-	private Text searchTextBoxAlbumID;
-	private Button searchBulletOtherParameters;
-	private MenuItem mainMenuItemFile;
-	private MenuItem mainMenuItemSearch;
-	private Button searchBulletByAlbum;
-	private Group searchGroupResults;
-	private Group searchGroupOptions;
-	private Composite searchTabComposite;
+	private Button stockButtonDenyRequest;
+	private Button stockButtonApproveRequest;
+	
+	// Management tab
+	/////////////////
 	private TabItem managementTabItem;
-	private TabItem stockTabItem;
-	private TabItem searchTabItem;
-	private TabItem saleTabItem;
-	private TabFolder mainTabFolder;
-	private Menu fileMenu;
-	private Menu searchMenu;
-	private Menu saleMenu;
-	private Menu stockMenu;
-	private Menu manageMenu;
+	private Composite manageMainComposite;
+	
+	// Employees table
+	private Label manageLabelEmployees;
+	private Table manageTableEmployees;
+	private TableColumn manageTableColumnEmployeeID;
+	private TableColumn manageTableColumnEmployeePName;
+	private TableColumn manageTableColumnEmployeeLName;
+	private TableColumn manageTableColumnEmployeePosition;
+	
+	// Edit employee details group
+	private Group manageGroupEditEmployee;
+	private Label manageLabelEmployeeEmploymentDateInput;
+	private Label manageLabelEmployeeEmploymentDate;
+	private Label manageLabelEmployeeStoreID;
+	private Label manageLabelEmployeeEmployeeStoreIDInput;
+	private Label manageLabelEmployeeID;
+	private Text manageTextBoxEmployeeIDInput;
+	private Label manageLabelEmployeeBirth;
+	private Text manageTextBoxEmployeeBirthInput;
+	private Label manageLabelEmployeeFName;
+	private Text manageTextBoxEmployeeFNameInput;	
+	private Label manageLabelEmployeeLName;
+	private Text manageTextBoxEmployeeLNameInput;
+	private Label manageLabelEmployeeAddress;
+	private Text manageTextBoxEmployeeAddressInput;
+	private Label manageLabelEmployeePhone;
+	private Text manageTextBoxEmployeePhoneInput;
+	private Label manageLabelEmployeeCellPhone;
+	private Text manageTextBoxEmployeeCellPhoneInput;
+	private Label manageLabelEmployeePosition;
+	private Combo manageComboEmployeePositionInput;
+	private Button manageButtonEmployeeNew;
+	private Button manageButtonEmployeeInsert;
+	private Button manageButtonEmployeeNoSave;
+	private Button manageButtonEmployeeEdit;
+	private Button manageButtonEmployeeSave;
+	private Button manageButtonEmployeeRemove;
+	
+	// Update database group
+	private Group manageGroupDBSManage;
+	private Label manageLabelDBSUpdate;
+	private Text manageTextBoxDBSUpdateFileInput;
+	private Button manageButtonDBSBrowse;
+	private Button manageButtonDBSUpdate;
+	private ProgressBar manageProgressBarDBSUpdate;
 
 	/**
 	* Auto-generated main method to display this 
@@ -288,6 +364,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			pack();
 			this.setSize(800, 590);
 			{
+				/**
+				 * Main menu
+				 */
 				mainMenuBar = new Menu(getShell(), SWT.BAR);
 				getShell().setMenuBar(mainMenuBar);
 				{
@@ -309,23 +388,132 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						mainMenuItemSearch.setMenu(searchMenu);
 						{
 							searchMenuItemClear = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemClear.setText("Clear fields");
+							searchMenuItemClear.setText("Clear Fields");
 						}
 						{
 							searchMenuItemSearch = new MenuItem(searchMenu, SWT.PUSH);
 							searchMenuItemSearch.setText("Search");
 						}
 						{
+							menuItemSeperator = new MenuItem(searchMenu, SWT.SEPARATOR);
+						}
+						{
 							searchMenuItemPlaceOrder = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemPlaceOrder.setText("Place an order...");
+							searchMenuItemPlaceOrder.setText("Place an Order...");
+						}
+						{
+							menuItemSeperator = new MenuItem(searchMenu, SWT.SEPARATOR);
 						}
 						{
 							searchMenuItemAddToSale = new MenuItem(searchMenu, SWT.PUSH);
-							searchMenuItemAddToSale.setText("Add to sale...");
+							searchMenuItemAddToSale.setText("Add to Sale...");
+						}
+					}
+					
+					mainMenuItemSale = new MenuItem(mainMenuBar, SWT.CASCADE);
+					mainMenuItemSale.setText("Sale");
+					{
+						saleMenu = new Menu(mainMenuItemSale);
+						mainMenuItemSale.setMenu(saleMenu);
+						{
+							saleMenuItemRemove = new MenuItem(saleMenu, SWT.PUSH);
+							saleMenuItemRemove.setText("Remove Item");
+						}
+						{
+							saleMenuItemClear = new MenuItem(saleMenu, SWT.PUSH);
+							saleMenuItemClear.setText("Clear Sale");
+						}
+						{
+							saleMenuItemMakeSale = new MenuItem(saleMenu, SWT.PUSH);
+							saleMenuItemMakeSale.setText("Make Sale");
+						}						
+					}
+					
+					mainMenuItemStock = new MenuItem(mainMenuBar, SWT.CASCADE);
+					mainMenuItemStock.setText("Stock");
+					{
+						stockMenu = new Menu(mainMenuItemStock);
+						mainMenuItemStock.setMenu(stockMenu);
+						{
+							stockMenuItemCheckAvailability = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemCheckAvailability.setText("Check Availability");
+						}
+						{
+							stockMenuItemClear = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemClear.setText("Clear Fields");
+						}
+						{
+							stockMenuItemPlaceOrder = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemPlaceOrder.setText("Place Order");
+						}
+						{
+							menuItemSeperator = new MenuItem(stockMenu, SWT.SEPARATOR);
+						}
+						{
+							stockMenuItemRemoveOrder = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemRemoveOrder.setText("Remove Order");
+						}
+						{
+							stockMenuItemCancelOrder = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemCancelOrder.setText("Cancel Order");
+						}
+						{
+							menuItemSeperator = new MenuItem(stockMenu, SWT.SEPARATOR);
+						}
+						{
+							stockMenuItemDenyRequest = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemDenyRequest.setText("Deny Request");
+						}
+						{
+							stockMenuItemApproveRequest = new MenuItem(stockMenu, SWT.PUSH);
+							stockMenuItemApproveRequest.setText("Approve Request");
+						}
+					}
+					
+					mainMenuItemManage = new MenuItem(mainMenuBar, SWT.CASCADE);
+					mainMenuItemManage.setText("Management");
+					{
+						manageMenu = new Menu(mainMenuItemManage);
+						mainMenuItemManage.setMenu(manageMenu);
+						{
+							manageMenuItemBrowse = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemBrowse.setText("Browse...");
+						}
+						{
+							manageMenuItemUpdateDBS = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemUpdateDBS.setText("Update Database");
+						}
+						{
+							menuItemSeperator = new MenuItem(manageMenu, SWT.SEPARATOR);
+						}
+						{
+							manageMenuItemNew = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemNew.setText("New");
+						}
+						{
+							manageMenuItemInsert = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemInsert.setText("Insert");
+						}
+						{
+							manageMenuItemEdit = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemEdit.setText("Edit");
+						}
+						{
+							manageMenuItemSave = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemSave.setText("Save");
+						}
+						{
+							manageMenuItemExitNoSave = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemExitNoSave.setText("Exit Without Saving");
+						}
+						{
+							manageMenuItemRemoveEmployee = new MenuItem(manageMenu, SWT.PUSH);
+							manageMenuItemRemoveEmployee.setText("Remove Employee");
 						}
 					}
 				}
 			}
+			
 			{
 				/**
 				 * Main window details: store details and quick tips
@@ -361,12 +549,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				}
 			}
 			{
-				mainGroupHeaderText = new Group(this, SWT.NONE);
-				mainGroupHeaderText.setLayout(null);
-				mainGroupHeaderText.setBounds(337, 0, 460, 86);
-				mainGroupHeaderText.setText("Quick Tips");
+				mainGroupQuickTips = new Group(this, SWT.NONE);
+				mainGroupQuickTips.setLayout(null);
+				mainGroupQuickTips.setBounds(337, 0, 460, 86);
+				mainGroupQuickTips.setText("Quick Tips");
 				{
-					mainLabelQuickTipsTip = new Label(mainGroupHeaderText, SWT.NONE);
+					mainLabelQuickTipsTip = new Label(mainGroupQuickTips, SWT.NONE);
 					mainLabelQuickTipsTip.setBounds(8, 19, 445, 61);
 					mainLabelQuickTipsTip.setText(MainFuncs.getTip());
 				}
@@ -521,7 +709,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchButtonClear = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
-								searchButtonClear.setText("Clear fields");
+								searchButtonClear.setText("Clear Fields");
 								searchButtonClear.setBounds(12, 273, 156, 33);
 							}
 							{
@@ -559,7 +747,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						{
 							searchGroupResults = new Group(searchTabComposite, SWT.NONE);
 							searchGroupResults.setLayout(null);
-							searchGroupResults.setText("Seach Results");
+							searchGroupResults.setText("Search Results");
 							searchGroupResults.setBounds(366, 0, 419, 465);
 							{
 								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
@@ -662,7 +850,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchButtonStockInfoOrder = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
-								searchButtonStockInfoOrder.setText("Place an order...");
+								searchButtonStockInfoOrder.setText("Place an Order...");
 								searchButtonStockInfoOrder.setBounds(12, 91, 147, 45);
 							}
 						}
@@ -683,7 +871,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchButtonSaleInfoSale = new Button(searchGroupSaleInfo, SWT.PUSH | SWT.CENTER);
-								searchButtonSaleInfoSale.setText("Add to sale...");
+								searchButtonSaleInfoSale.setText("Add to Sale...");
 								searchButtonSaleInfoSale.setBounds(8, 91, 157, 45);
 							}
 						}
@@ -802,17 +990,17 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						}
 						{
 							saleButtonRemoveItem = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
-							saleButtonRemoveItem.setText("Remove item");
+							saleButtonRemoveItem.setText("Remove Item");
 							saleButtonRemoveItem.setBounds(18, 384, 110, 30);
 						}
 						{
 							saleButtonClearSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
-							saleButtonClearSale.setText("Clear sale");
+							saleButtonClearSale.setText("Clear Sale");
 							saleButtonClearSale.setBounds(134, 384, 110, 30);
 						}
 						{
 							saleButtonMakeSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
-							saleButtonMakeSale.setText("Make sale");
+							saleButtonMakeSale.setText("Make Sale");
 							saleButtonMakeSale.setBounds(680, 412, 93, 41);
 						}
 					}
@@ -873,7 +1061,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								stockLabelOrderFromStore = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelOrderFromStore.setText("Order from:");
-								stockLabelOrderFromStore.setBounds(254, 12, 79, 24);
+								stockLabelOrderFromStore.setBounds(256, 18, 79, 24);
 							}
 							{
 								stockTableOrderAvailableStores = new Table(stockGroupOrderForm, SWT.BORDER | SWT.MULTI
@@ -937,12 +1125,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								stockButtonPlaceOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
-								stockButtonPlaceOrder.setText("Place order");
+								stockButtonPlaceOrder.setText("Place Order");
 								stockButtonPlaceOrder.setBounds(665, 109, 102, 30);
 							}
 							{
 								stockButtonClearOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
-								stockButtonClearOrder.setText("Clear fields");
+								stockButtonClearOrder.setText("Clear Fields");
 								stockButtonClearOrder.setBounds(551, 109, 108, 30);
 							}
 							{
@@ -1203,8 +1391,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageLabelEmployeeStoreID.setBounds(176, 24, 106, 22);
 							}
 							{
-								manageLabelEmployeeEmployingStoreIDInput = new Label(manageGroupEditEmployee, SWT.BORDER);
-								manageLabelEmployeeEmployingStoreIDInput.setBounds(176, 49, 130, 22);
+								manageLabelEmployeeEmployeeStoreIDInput = new Label(manageGroupEditEmployee, SWT.BORDER);
+								manageLabelEmployeeEmployeeStoreIDInput.setBounds(176, 49, 130, 22);
 							}
 							{
 								manageLabelEmployeeEmploymentDateInput = new Label(manageGroupEditEmployee, SWT.BORDER);
@@ -1234,8 +1422,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageLabelEmployeePosition.setBounds(12, 291, 60, 22);
 							}
 							{
-								manageComboEmployeePosition = new Combo(manageGroupEditEmployee, SWT.NONE);
-								manageComboEmployeePosition.setBounds(78, 291, 229, 21);
+								manageComboEmployeePositionInput = new Combo(manageGroupEditEmployee, SWT.NONE);
+								manageComboEmployeePositionInput.setBounds(78, 291, 229, 21);
 							}
 							{
 								manageButtonEmployeeNew = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
@@ -1264,7 +1452,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								manageButtonEmployeeNoSave = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
-								manageButtonEmployeeNoSave.setText("Exit withoutsaving");
+								manageButtonEmployeeNoSave.setText("Exit Without Saving");
 								manageButtonEmployeeNoSave.setBounds(150, 363, 157, 30);
 							}
 						}
