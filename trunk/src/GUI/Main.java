@@ -72,6 +72,46 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private Text searchTextBoxSaleInfoQuantity;
 	private Label searchLabelStockInfoPrice;
 	private Button stockButtonClearOrder;
+	private Label manageLabelEmployees;
+	private Table manageTableEmployees;
+	private TableColumn manageTableColumnEmployeeID;
+	private TableColumn manageTableColumnEmployeePName;
+	private ProgressBar manageProgressBarDBSUpdate;
+	private Button manageButtonDBSUpdate;
+	private Button manageButtonDBSBrowse;
+	private Text manageTextBoxDBSUpdateFileInput;
+	private Label manageLabelDBSUpdate;
+	private Group manageGroupDBSManage;
+	private Button manageButtonEmployeeNoSave;
+	private Button manageButtonEmployeeRemove;
+	private Button manageButtonEmployeeSave;
+	private Button manageButtonEmployeeEdit;
+	private Button manageButtonEmployeeInsert;
+	private Button manageButtonEmployeeNew;
+	private Combo manageComboEmployeePosition;
+	private Label manageLabelEmployeePosition;
+	private Text manageTextBoxEmployeeCellPhoneInput;
+	private Text manageTextBoxEmployeePhoneInput;
+	private Label manageLabelEmployeeCellPhone;
+	private Label manageLabelEmployeePhone;
+	private Label manageLabelEmployeeEmploymentDateInput;
+	private Label manageLabelEmployeeEmployingStoreIDInput;
+	private Label manageLabelEmployeeStoreID;
+	private Text manageTextBoxEmployeeAddressInput;
+	private Label manageLabelEmployeeAddress;
+	private Label manageLabelEmployeeBirth;
+	private Text manageTextBoxEmployeeBirthInput;
+	private Label manageLabelEmployeeEmploymentDate;
+	private Text manageTextBoxEmployeeLNameInput;
+	private Label manageLabelEmployeeLName;
+	private Text manageTextBoxEmployeeFNameInput;
+	private Label manageLabelEmployeeFName;
+	private Text manageTextBoxEmployeeIDInput;
+	private Label manageLabelEmployeeID;
+	private Group manageGroupEditEmployee;
+	private TableColumn manageTableColumnEmployeeLName;
+	private TableColumn manageTableColumnEmployeePosition;
+	private Composite manageMainComposite;
 	private Button stockButtonRemoveOrder;
 	private Button stockButtonCancelOrder;
 	private Label stockLabelOrders;
@@ -251,13 +291,60 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			}
 			{
 				/**
-				 * Search Tab
-				 * ==========
-				 * Contains search fields, results and stock and sale actions
+				 * Main window details: store details and quick tips
 				 */
+				mainGroupStoreDetails = new Group(this, SWT.NONE);
+				mainGroupStoreDetails.setLayout(null);
+				mainGroupStoreDetails.setText("Store Details");
+				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
+				{
+					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreID.setText("Store: "+MainFuncs.getStoreID());
+					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
+				}
+				{
+					mainLabelStoreDetailsStoreAddress = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreAddress.setText("Address: "+MainFuncs.getStoreAddress()+", "+MainFuncs.getStoreCity());
+					mainLabelStoreDetailsStoreAddress.setBounds(5, 41, 245, 20);
+				}
+				{
+					mainLabelStoreDetailsStorePhone = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStorePhone.setText("Phone: "+MainFuncs.getStorePhone());
+					mainLabelStoreDetailsStorePhone.setBounds(5, 63, 133, 20);
+				}
+				{
+					mainLabelStoreDetailsStoreManager = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsStoreManager.setText("Manager: "+MainFuncs.getStoreManager());
+					mainLabelStoreDetailsStoreManager.setBounds(150, 62, 162, 22);
+				}
+				{
+					mainLabelStoreDetailsDateTime = new Label(mainGroupStoreDetails, SWT.NONE);
+					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
+					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
+				}
+			}
+			{
+				mainGroupHeaderText = new Group(this, SWT.NONE);
+				mainGroupHeaderText.setLayout(null);
+				mainGroupHeaderText.setBounds(337, 0, 460, 86);
+				mainGroupHeaderText.setText("Quick Tips");
+				{
+					mainLabelQuickTipsTip = new Label(mainGroupHeaderText, SWT.NONE);
+					mainLabelQuickTipsTip.setBounds(8, 19, 445, 61);
+					mainLabelQuickTipsTip.setText(MainFuncs.getTip());
+				}
+			}
+			{
 				mainTabFolder = new TabFolder(this, SWT.NONE);
+				mainTabFolder.setSelection(0);
+				mainTabFolder.setBounds(7, 92, 793, 491);
 
 				{
+					/**
+					 * Search Tab
+					 * ==========
+					 * Contains search fields, results and stock and sale actions
+					 */
 					searchTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					searchTabItem.setText("Search");
 					searchTabItem.setToolTipText("Search for Albums");
@@ -884,7 +971,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnOrdersCompletionDate.setWidth(tableWidth / numOfColumns);
 						}
 						{
-							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI
+							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI // TODO
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 							stockTableRequests.setBounds(4, 317, 770, 104);
 							stockTableRequests.setHeaderVisible(true);
@@ -967,54 +1054,215 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					}
 				}
 				{
+					/**
+					 * Management tab
+					 * ==============
+					 * Manage Employees and database
+					 * 
+					 */
 					managementTabItem = new TabItem(mainTabFolder, SWT.NONE);
 					managementTabItem.setText("Management");
 					managementTabItem.setToolTipText("View and manage HR");
-				}
-				mainTabFolder.setSelection(0);
-				mainTabFolder.setBounds(7, 92, 793, 491);
-			}
-			{
-				mainGroupStoreDetails = new Group(this, SWT.NONE);
-				mainGroupStoreDetails.setLayout(null);
-				mainGroupStoreDetails.setText("Store Details");
-				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
-				{
-					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreID.setText("Store: "+MainFuncs.getStoreID());
-					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
-				}
-				{
-					mainLabelStoreDetailsStoreAddress = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreAddress.setText("Address: "+MainFuncs.getStoreAddress()+", "+MainFuncs.getStoreCity());
-					mainLabelStoreDetailsStoreAddress.setBounds(5, 41, 245, 20);
-				}
-				{
-					mainLabelStoreDetailsStorePhone = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStorePhone.setText("Phone: "+MainFuncs.getStorePhone());
-					mainLabelStoreDetailsStorePhone.setBounds(5, 63, 133, 20);
-				}
-				{
-					mainLabelStoreDetailsStoreManager = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreManager.setText("Manager: "+MainFuncs.getStoreManager());
-					mainLabelStoreDetailsStoreManager.setBounds(150, 62, 162, 22);
-				}
-				{
-					mainLabelStoreDetailsDateTime = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
-					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
-				}
-			}
-			{
-				mainGroupHeaderText = new Group(this, SWT.NONE);
-				mainGroupHeaderText.setLayout(null);
-				mainGroupHeaderText.setBounds(337, 0, 460, 86);
-				mainGroupHeaderText.setText("Quick Tips");
-				{
-					mainLabelQuickTipsTip = new Label(mainGroupHeaderText, SWT.NONE);
-					mainLabelQuickTipsTip.setBounds(8, 19, 445, 61);
-					mainLabelQuickTipsTip.setText(MainFuncs.getTip());
-				}
+					{
+						manageMainComposite = new Composite(mainTabFolder, SWT.NONE);
+						manageMainComposite.setLayout(null);
+						managementTabItem.setControl(manageMainComposite);
+						{
+							manageLabelEmployees = new Label(manageMainComposite, SWT.NONE);
+							manageLabelEmployees.setText("Employees:");
+							manageLabelEmployees.setBounds(12, 12, 60, 22);
+						}
+						{
+							manageTableEmployees = new Table(manageMainComposite, SWT.BORDER | SWT.MULTI // TODO
+									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+							manageTableEmployees.setBounds(13, 35, 423, 250);
+							manageTableEmployees.setHeaderVisible(true);
+							manageTableEmployees.setLinesVisible(true);
+							int numOfColumns = 4;
+							int tableWidth = manageTableEmployees.getClientArea().width - getBorderWidth()*2;
+							
+							manageTableColumnEmployeeID = new TableColumn(manageTableEmployees, SWT.NONE);
+							manageTableColumnEmployeeID.setText("Employee ID");
+							manageTableColumnEmployeeID.setResizable(true);
+							manageTableColumnEmployeeID.setMoveable(true);
+							manageTableColumnEmployeeID.setWidth(tableWidth / numOfColumns);
+							
+							manageTableColumnEmployeePName = new TableColumn(manageTableEmployees, SWT.NONE);
+							manageTableColumnEmployeePName.setText("First name");
+							manageTableColumnEmployeePName.setResizable(true);
+							manageTableColumnEmployeePName.setMoveable(true);
+							manageTableColumnEmployeePName.setWidth(tableWidth / numOfColumns);
+							
+							manageTableColumnEmployeeLName = new TableColumn(manageTableEmployees, SWT.NONE);
+							manageTableColumnEmployeeLName.setText("Last name");
+							manageTableColumnEmployeeLName.setResizable(true);
+							manageTableColumnEmployeeLName.setMoveable(true);
+							manageTableColumnEmployeeLName.setWidth(tableWidth / numOfColumns);
+							
+							manageTableColumnEmployeePosition = new TableColumn(manageTableEmployees, SWT.NONE);
+							manageTableColumnEmployeePosition.setText("Position");
+							manageTableColumnEmployeePosition.setResizable(true);
+							manageTableColumnEmployeePosition.setMoveable(true);
+							manageTableColumnEmployeePosition.setWidth(tableWidth / numOfColumns);
+						}
+						{
+							manageGroupEditEmployee = new Group(manageMainComposite, SWT.NONE);
+							manageGroupEditEmployee.setLayout(null);
+							manageGroupEditEmployee.setText("Edit Employee Details");
+							manageGroupEditEmployee.setBounds(449, 12, 324, 441);
+							{
+								manageLabelEmployeeID = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeID.setText("ID:");
+								manageLabelEmployeeID.setBounds(12, 79, 25, 22);
+							}
+							{
+								manageTextBoxEmployeeIDInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeIDInput.setBounds(12, 101, 129, 22);
+							}
+							{
+								manageLabelEmployeeFName = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeFName.setText("First name:");
+								manageLabelEmployeeFName.setBounds(12, 131, 62, 22);
+							}
+							{
+								manageTextBoxEmployeeFNameInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeFNameInput.setBounds(12, 153, 129, 22);
+							}
+							{
+								manageLabelEmployeeLName = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeLName.setText("Last name:");
+								manageLabelEmployeeLName.setBounds(177, 131, 60, 22);
+							}
+							{
+								manageTextBoxEmployeeLNameInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeLNameInput.setBounds(178, 153, 129, 22);
+							}
+							{
+								manageLabelEmployeeEmploymentDate = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeEmploymentDate.setText("Date of employment:");
+								manageLabelEmployeeEmploymentDate.setBounds(12, 24, 112, 22);
+							}
+							{
+								manageLabelEmployeeBirth = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeBirth.setText("Date of birth:");
+								manageLabelEmployeeBirth.setBounds(177, 79, 78, 22);
+							}
+							{
+								manageTextBoxEmployeeBirthInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeBirthInput.setBounds(177, 101, 129, 22);
+							}
+							{
+								manageLabelEmployeeAddress = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeAddress.setText("Address:");
+								manageLabelEmployeeAddress.setBounds(12, 183, 51, 22);
+							}
+							{
+								manageTextBoxEmployeeAddressInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeAddressInput.setBounds(12, 205, 296, 22);
+							}
+							{
+								manageLabelEmployeeStoreID = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeStoreID.setText("Employing store ID:");
+								manageLabelEmployeeStoreID.setBounds(176, 24, 106, 22);
+							}
+							{
+								manageLabelEmployeeEmployingStoreIDInput = new Label(manageGroupEditEmployee, SWT.BORDER);
+								manageLabelEmployeeEmployingStoreIDInput.setBounds(176, 49, 130, 22);
+							}
+							{
+								manageLabelEmployeeEmploymentDateInput = new Label(manageGroupEditEmployee, SWT.BORDER);
+								manageLabelEmployeeEmploymentDateInput.setBounds(12, 50, 130, 22);
+							}
+							{
+								manageLabelEmployeePhone = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeePhone.setText("Phone:");
+								manageLabelEmployeePhone.setBounds(12, 235, 60, 22);
+							}
+							{
+								manageLabelEmployeeCellPhone = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeCellPhone.setText("Cellular Phone:");
+								manageLabelEmployeeCellPhone.setBounds(180, 235, 80, 22);
+							}
+							{
+								manageTextBoxEmployeePhoneInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeePhoneInput.setBounds(12, 257, 131, 22);
+							}
+							{
+								manageTextBoxEmployeeCellPhoneInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeCellPhoneInput.setBounds(177, 257, 131, 22);
+							}
+							{
+								manageLabelEmployeePosition = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeePosition.setText("Position:");
+								manageLabelEmployeePosition.setBounds(12, 291, 60, 22);
+							}
+							{
+								manageComboEmployeePosition = new Combo(manageGroupEditEmployee, SWT.NONE);
+								manageComboEmployeePosition.setBounds(78, 291, 229, 21);
+							}
+							{
+								manageButtonEmployeeNew = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeNew.setText("New");
+								manageButtonEmployeeNew.setBounds(12, 363, 60, 30);
+							}
+							{
+								manageButtonEmployeeInsert = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeInsert.setText("Insert");
+								manageButtonEmployeeInsert.setBounds(81, 363, 60, 30);
+							}
+							{
+								manageButtonEmployeeEdit = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeEdit.setText("Edit");
+								manageButtonEmployeeEdit.setBounds(12, 399, 60, 30);
+							}
+							{
+								manageButtonEmployeeSave = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeSave.setText("Save");
+								manageButtonEmployeeSave.setBounds(81, 399, 60, 30);
+							}
+							{
+								manageButtonEmployeeRemove = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeRemove.setText("Remove Employee");
+								manageButtonEmployeeRemove.setBounds(150, 399, 157, 30);
+							}
+							{
+								manageButtonEmployeeNoSave = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
+								manageButtonEmployeeNoSave.setText("Exit withoutsaving");
+								manageButtonEmployeeNoSave.setBounds(150, 363, 157, 30);
+							}
+						}
+						{
+							manageGroupDBSManage = new Group(manageMainComposite, SWT.NONE);
+							manageGroupDBSManage.setLayout(null);
+							manageGroupDBSManage.setText("Manage Database");
+							manageGroupDBSManage.setBounds(12, 293, 425, 160);
+							{
+								manageLabelDBSUpdate = new Label(manageGroupDBSManage, SWT.NONE);
+								manageLabelDBSUpdate.setText("Select update file:");
+								manageLabelDBSUpdate.setBounds(12, 26, 96, 18);
+							}
+							{
+								manageTextBoxDBSUpdateFileInput = new Text(manageGroupDBSManage, SWT.BORDER);
+								manageTextBoxDBSUpdateFileInput.setBounds(13, 49, 393, 22);
+							}
+							{
+								manageButtonDBSBrowse = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
+								manageButtonDBSBrowse.setText("Browse...");
+								manageButtonDBSBrowse.setBounds(214, 82, 74, 30);
+							}
+							{
+								manageButtonDBSUpdate = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
+								manageButtonDBSUpdate.setText("Update Database");
+								manageButtonDBSUpdate.setBounds(294, 82, 112, 30);
+							}
+							{
+								manageProgressBarDBSUpdate = new ProgressBar(manageGroupDBSManage, SWT.NONE);
+								manageProgressBarDBSUpdate.setBounds(13, 123, 393, 25);
+							}
+						}
+					}
+
+				}	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
