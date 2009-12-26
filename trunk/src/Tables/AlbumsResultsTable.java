@@ -10,7 +10,7 @@ import java.util.*;
  * holds all AlbumItem tuples search results held by their album ID
  */
 public class AlbumsResultsTable extends Table {
-	private Map<Long,AlbumItem> albums = new HashMap<Long,AlbumItem>();
+	private Map<Long,AlbumsResultsTableItem> albums = new HashMap<Long,AlbumsResultsTableItem>();
 	
 	/**
 	 * constructor for the albums search results table
@@ -24,7 +24,7 @@ public class AlbumsResultsTable extends Table {
 	 * with the album results map as input
 	 * @param albums
 	 */
-	public AlbumsResultsTable(HashMap<Long,AlbumItem> albums){
+	public AlbumsResultsTable(HashMap<Long,AlbumsResultsTableItem> albums){
 		super("AlbumsResultsTable");
 		this.albums = albums;
 	}
@@ -38,7 +38,7 @@ public class AlbumsResultsTable extends Table {
 	 * @param albumID
 	 * @param album
 	 */
-	public void addAlbum(AlbumItem album){
+	public void addAlbum(AlbumsResultsTableItem album){
 		albums.put(album.getAlbumID(), album);
 	}
 	
@@ -52,9 +52,14 @@ public class AlbumsResultsTable extends Table {
 	 * @param genre
 	 * @param length
 	 * @param songs
+	 * @param price
+	 * @param storageLocation
+	 * @param quantity
 	 */
-	public void addAlbum(long albumID, String albumName, String artist, int year, String genre, int length, SongsResultsTable songs){
-		AlbumItem album = new AlbumItem(albumID,albumName,artist,year,genre,length,songs);
+	public void addAlbum(long albumID, String albumName, String artist, int year, String genre,
+			int length, SongsResultsTable songs, int price, long storageLocation, int quantity){
+		AlbumsResultsTableItem album = new AlbumsResultsTableItem(albumID,albumName,artist,year,genre,
+				length,songs,price,storageLocation,quantity);
 		albums.put(albumID, album);
 	}
 	
@@ -63,7 +68,7 @@ public class AlbumsResultsTable extends Table {
 	 * @param albumID
 	 * @return
 	 */
-	public AlbumItem getAlbum(long albumID){
+	public AlbumsResultsTableItem getAlbum(long albumID){
 		return albums.get(albumID);
 	}
 }

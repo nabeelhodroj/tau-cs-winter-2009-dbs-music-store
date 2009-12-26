@@ -6,6 +6,7 @@ package Tables;
  * Album item data structure
  * =========================
  * holds all fields for a single album search result, to be inserted into an album search results table
+ * also holds information relevant to sale and stock
  * contains the fields:
  * - album id
  * - album name
@@ -17,8 +18,12 @@ package Tables;
  * 	* song name
  * 	* artist
  * 	* length (in seconds)
+ * additional information:
+ * - price (in this store)
+ * - storage location
+ * - quantity in stock
  */
-public class AlbumItem {
+public class AlbumsResultsTableItem {
 	private long albumID = -1;
 	private String albumName = null;
 	private String artist = null;
@@ -27,6 +32,10 @@ public class AlbumItem {
 	private int length = -1;
 	private SongsResultsTable songs = null;
 	
+	private int price = -1;
+	private long storageLocation = -1;	//TODO format yet to be determined
+	private int quantity = -1;
+	
 	//////////////////////
 	//	constructors	//
 	//////////////////////
@@ -34,7 +43,7 @@ public class AlbumItem {
 	/**
 	 * constructor for an album result, to be entered to the album results table
 	 */
-	public AlbumItem(long albumID){
+	public AlbumsResultsTableItem(long albumID){
 		this.albumID = albumID;
 	}
 	
@@ -47,13 +56,17 @@ public class AlbumItem {
 	 * @param genre
 	 * @param length
 	 */
-	public AlbumItem(long albumID, String albumName, String artist, int year, String genre, int length){
+	public AlbumsResultsTableItem(long albumID, String albumName, String artist,
+			int year, String genre, int length, int price, long storageLocation, int quantity){
 		this.albumID = albumID;
 		this.albumName = albumName;
 		this.artist = artist;
 		this.year = year;
 		this.genre = genre;
 		this.length = length;
+		this.price = price;
+		this.storageLocation = storageLocation;
+		this.quantity = quantity;
 	}
 	
 	/**
@@ -66,7 +79,8 @@ public class AlbumItem {
 	 * @param length
 	 * @param songs
 	 */
-	public AlbumItem(long albumID, String albumName, String artist, int year, String genre, int length, SongsResultsTable songs){
+	public AlbumsResultsTableItem(long albumID, String albumName, String artist, int year,
+			String genre, int length, SongsResultsTable songs, int price, long storageLocation, int quantity){
 		this.albumID = albumID;
 		this.albumName = albumName;
 		this.artist = artist;
@@ -74,6 +88,9 @@ public class AlbumItem {
 		this.genre = genre;
 		this.length = length;
 		this.songs = songs;
+		this.price = price;
+		this.storageLocation = storageLocation;
+		this.quantity = quantity;
 	}
 
 	/////////////////////////
@@ -134,5 +151,17 @@ public class AlbumItem {
 
 	public void setSongs(SongsResultsTable songs) {
 		this.songs = songs;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public long getStorageLocation() {
+		return storageLocation;
+	}
+
+	public int getQuantity() {
+		return quantity;
 	}
 }
