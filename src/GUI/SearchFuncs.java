@@ -193,14 +193,15 @@ public class SearchFuncs {
 		Button[] genres = Main.getSearchCheckBoxGenresArr();
 		for (Button g: genres) g.setEnabled(isEnabled);
 		Main.getSearchCheckBoxGenreOther().setEnabled(isEnabled);
-		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
+		setSearchGenreOtherState();
 	}
 	
 	/**
 	 * set other genre text box by its checkbox state
 	 */
 	protected static void setSearchGenreOtherState(){
-		boolean isEnabled = Main.getSearchCheckBoxGenreOther().getSelection();
+		boolean isEnabled = Main.getSearchCheckBoxGenreOther().getSelection() &&	// other genre check box is on
+							Main.getSearchCheckBoxGenres().getSelection();			// and genres check box is on
 		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
 	}
 }
