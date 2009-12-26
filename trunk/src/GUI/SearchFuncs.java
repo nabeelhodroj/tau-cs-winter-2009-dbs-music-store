@@ -43,7 +43,7 @@ public class SearchFuncs {
 		Main.getSearchBulletByAlbum().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Album Selected"); //TODO
+						System.out.println("Search tab: by Album Selected"); //TODO remove
 						// enable album ID and disable other parameters text boxes
 						switchAlbumSearchBullet(true);
 					}
@@ -53,7 +53,7 @@ public class SearchFuncs {
 		Main.getSearchBulletOtherParameters().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Other Parameters Selected!"); //TODO
+						System.out.println("Search tab: by Other Parameters Selected!"); //TODO remove
 						// disable album ID and enable other parameters text boxes
 						switchAlbumSearchBullet(false);
 					}
@@ -63,7 +63,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxAlbumName().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: album name checkbox changed"); //TODO
+						System.out.println("Search tab: album name checkbox changed"); //TODO remove
 						// change album name text box accordingly
 						setSearchAlbumNameState();
 					}
@@ -73,7 +73,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxArtist().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: artist checkbox changed"); //TODO
+						System.out.println("Search tab: artist checkbox changed"); //TODO remove
 						// change artist text box accordingly
 						setSearchArtistState();
 					}
@@ -83,7 +83,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxYear().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: year checkbox changed"); //TODO
+						System.out.println("Search tab: year checkbox changed"); //TODO remove
 						// change artist text box accordingly
 						setSearchYearState();
 					}
@@ -93,7 +93,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxSongNames().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: song names checkbox changed"); //TODO
+						System.out.println("Search tab: song names checkbox changed"); //TODO remove
 						// change artist text box accordingly
 						setSearchSongNamesState();
 					}
@@ -103,7 +103,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenres().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: genres checkbox changed"); //TODO
+						System.out.println("Search tab: genres checkbox changed"); //TODO remove
 						// change artist text box accordingly
 						setSearchGenresState();
 					}
@@ -113,7 +113,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenreOther().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: other genre checkbox changed"); //TODO
+						System.out.println("Search tab: other genre checkbox changed"); //TODO remove
 						// change artist text box accordingly
 						setSearchGenreOtherState();
 					}
