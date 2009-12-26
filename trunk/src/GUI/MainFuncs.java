@@ -153,6 +153,5 @@ public class MainFuncs {
 			quickTipsIter = quickTips.iterator();
 			return getTip();
 		}
-	}
-	
+	}	
 }

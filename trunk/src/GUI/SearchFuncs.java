@@ -6,18 +6,29 @@ import java.text.SimpleDateFormat;
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
+import java.awt.*;
+import java.awt.event.*;
 
 /*
  * Search tab handlers
  */
 public class SearchFuncs {
+	
+	/**
+	 * initializes the search tab view: enabled and disabled fields, default values etc.
+	 */
+	protected static void initSearchTabView(){
+		// set search parameters group to be set on "by album id"
+		switchAlbumSearchBullet(true);
+		// set all search parameters text boxes disabled except for album id
+		Main.getSearchTextBoxAlbumName().setEnabled(false);
+	}
 
-	public static void initSearchListeners(){
+	protected static void initSearchListeners(){
 		
 		// Search parameters group
 		//////////////////////////
@@ -26,37 +37,9 @@ public class SearchFuncs {
 		Main.getSearchBulletByAlbum().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("By Album Selected!");
-						
-						// disable other parameters text boxes
-						Main.getSearchCheckBoxAlbumName().setEnabled(false);
-						Main.getSearchTextBoxAlbumName().setEnabled(false);
-						Main.getSearchCheckBoxArtist().setEnabled(false);
-						Main.getSearchTextBoxArtist().setEnabled(false);
-						Main.getSearchCheckBoxYear().setEnabled(false);
-						Main.getSearchTextBoxYearFrom().setEnabled(false);
-						Main.getSearchTextBoxYearTo().setEnabled(false);
-						Main.getSearchCheckBoxSongNames().setEnabled(false);
-						Main.getSearchTextBoxSongNames().setEnabled(false);
-						Main.getSearchBulletInStockAll().setEnabled(false);
-						Main.getSearchBulletInStockInNetwork().setEnabled(false);
-						Main.getSearchBulletInStockInStore().setEnabled(false);
-						Main.getSearchCheckBoxGenres().setEnabled(false);
-						Main.getSearchCheckBoxGenreJazz().setEnabled(false);
-						Main.getSearchCheckBoxGenreRock().setEnabled(false);
-						Main.getSearchCheckBoxGenreJazz().setEnabled(false);
-						Main.getSearchCheckBoxGenre03().setEnabled(false);
-						Main.getSearchCheckBoxGenre04().setEnabled(false);
-						Main.getSearchCheckBoxGenre05().setEnabled(false);
-						Main.getSearchCheckBoxGenre06().setEnabled(false);
-						Main.getSearchCheckBoxGenre07().setEnabled(false);
-						Main.getSearchCheckBoxGenre08().setEnabled(false);
-						Main.getSearchCheckBoxGenre09().setEnabled(false);
-						Main.getSearchCheckBoxGenre10().setEnabled(false);
-						Main.getSearchCheckBoxGenreOther().setEnabled(false);
-						Main.getSearchTextBoxGenreOther().setEnabled(false);
-						// enable album ID
-						Main.getSearchTextBoxAlbumID().setEnabled(true);
+						System.out.println("Search tab: by Album Selected"); //TODO
+						// enable album ID and disable other parameters text boxes
+						switchAlbumSearchBullet(true);
 					}
 				}
 		);
@@ -64,39 +47,179 @@ public class SearchFuncs {
 		Main.getSearchBulletOtherParameters().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("By Other Parameters Selected!");
-						
-						// disable album ID
-						Main.getSearchTextBoxAlbumID().setEnabled(false);
-						// enable other parameters text boxes
-						Main.getSearchCheckBoxAlbumName().setEnabled(true);
-						Main.getSearchTextBoxAlbumName().setEnabled(true);
-						Main.getSearchCheckBoxArtist().setEnabled(true);
-						Main.getSearchTextBoxArtist().setEnabled(true);
-						Main.getSearchCheckBoxYear().setEnabled(true);
-						Main.getSearchTextBoxYearFrom().setEnabled(true);
-						Main.getSearchTextBoxYearTo().setEnabled(true);
-						Main.getSearchCheckBoxSongNames().setEnabled(true);
-						Main.getSearchTextBoxSongNames().setEnabled(true);
-						Main.getSearchBulletInStockAll().setEnabled(true);
-						Main.getSearchBulletInStockInNetwork().setEnabled(true);
-						Main.getSearchBulletInStockInStore().setEnabled(true);
-						Main.getSearchCheckBoxGenres().setEnabled(true);
-						Main.getSearchCheckBoxGenreJazz().setEnabled(true);
-						Main.getSearchCheckBoxGenreRock().setEnabled(true);
-						Main.getSearchCheckBoxGenreJazz().setEnabled(true);
-						Main.getSearchCheckBoxGenre03().setEnabled(true);
-						Main.getSearchCheckBoxGenre04().setEnabled(true);
-						Main.getSearchCheckBoxGenre05().setEnabled(true);
-						Main.getSearchCheckBoxGenre06().setEnabled(true);
-						Main.getSearchCheckBoxGenre07().setEnabled(true);
-						Main.getSearchCheckBoxGenre08().setEnabled(true);
-						Main.getSearchCheckBoxGenre09().setEnabled(true);
-						Main.getSearchCheckBoxGenre10().setEnabled(true);
-						Main.getSearchCheckBoxGenreOther().setEnabled(true);
-						Main.getSearchTextBoxGenreOther().setEnabled(true);						
+						System.out.println("Search tab: by Other Parameters Selected!"); //TODO
+						// disable album ID and enable other parameters text boxes
+						switchAlbumSearchBullet(false);
 					}
 				}
 		);
+		
+		Main.getSearchCheckBoxAlbumName().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: album name checkbox changed"); //TODO
+						// change album name text box accordingly
+						setSearchAlbumNameState();
+					}
+				}
+		);
+		
+		Main.getSearchCheckBoxArtist().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: artist checkbox changed"); //TODO
+						// change artist text box accordingly
+						setSearchArtistState();
+					}
+				}
+		);
+		
+		Main.getSearchCheckBoxYear().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: year checkbox changed"); //TODO
+						// change artist text box accordingly
+						setSearchYearState();
+					}
+				}
+		);
+		
+		Main.getSearchCheckBoxSongNames().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: song names checkbox changed"); //TODO
+						// change artist text box accordingly
+						setSearchSongNamesState();
+					}
+				}
+		);
+		
+		Main.getSearchCheckBoxGenres().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: genres checkbox changed"); //TODO
+						// change artist text box accordingly
+						setSearchGenresState();
+					}
+				}
+		);
+		
+		Main.getSearchCheckBoxGenreOther().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: other genre checkbox changed"); //TODO
+						// change artist text box accordingly
+						setSearchGenreOtherState();
+					}
+				}
+		);
+	}
+	
+	/**
+	 * sets search tab \ search by fields according to enableByAlbumID:
+	 * - if true: by album id enabled, by other parameters disabled
+	 * - if false: by other parameters disabled, by album id enabled
+	 * @param enableByAlbumID
+	 */
+	protected static void switchAlbumSearchBullet(boolean enableByAlbumID){
+		// set other parameters search fields by enableByAlbumID
+		Main.getSearchCheckBoxAlbumName().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxAlbumName().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxArtist().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxArtist().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxYear().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxYearFrom().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxYearTo().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxSongNames().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxSongNames().setEnabled(!enableByAlbumID);
+		Main.getSearchBulletInStockAll().setEnabled(!enableByAlbumID);
+		Main.getSearchBulletInStockInNetwork().setEnabled(!enableByAlbumID);
+		Main.getSearchBulletInStockInStore().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenres().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenreJazz().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenreRock().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenreJazz().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre03().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre04().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre05().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre06().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre07().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre08().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre09().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenre10().setEnabled(!enableByAlbumID);
+		Main.getSearchCheckBoxGenreOther().setEnabled(!enableByAlbumID);
+		Main.getSearchTextBoxGenreOther().setEnabled(!enableByAlbumID);
+		// set album id search fields by enableByAlbumID
+		Main.getSearchTextBoxAlbumID().setEnabled(enableByAlbumID);
+		
+		// in case other parameters are enabled, set text boxes according to their checkboxes
+		// otherwise it should be disabled anyway
+		if (!enableByAlbumID){
+			setSearchAlbumNameState();
+			setSearchArtistState();
+			setSearchYearState();
+			setSearchSongNamesState();
+			setSearchGenresState();
+			setSearchGenreOtherState();
+		}
+	}
+	
+	/**
+	 * set album name text box by its checkbox state
+	 */
+	protected static void setSearchAlbumNameState(){
+		boolean isEnabled = Main.getSearchCheckBoxAlbumName().getSelection();
+		Main.getSearchTextBoxAlbumName().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * set artist text box by its checkbox state
+	 */
+	protected static void setSearchArtistState(){
+		boolean isEnabled = Main.getSearchCheckBoxArtist().getSelection();
+		Main.getSearchTextBoxArtist().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * set year text boxes (from, to) by its checkbox state
+	 */
+	protected static void setSearchYearState(){
+		boolean isEnabled = Main.getSearchCheckBoxYear().getSelection();
+		Main.getSearchTextBoxYearFrom().setEnabled(isEnabled);
+		Main.getSearchTextBoxYearTo().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * set song names text box by its checkbox state
+	 */
+	protected static void setSearchSongNamesState(){
+		boolean isEnabled = Main.getSearchCheckBoxSongNames().getSelection();
+		Main.getSearchTextBoxSongNames().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * set song names text box by its checkbox state
+	 */
+	protected static void setSearchGenresState(){
+		boolean isEnabled = Main.getSearchCheckBoxGenres().getSelection();
+		Main.getSearchCheckBoxGenreJazz().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenreRock().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre03().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre04().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre05().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre06().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre07().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre08().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre09().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenre10().setEnabled(isEnabled);
+		Main.getSearchCheckBoxGenreOther().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * set other genre text box by its checkbox state
+	 */
+	protected static void setSearchGenreOtherState(){
+		boolean isEnabled = Main.getSearchCheckBoxGenreOther().getSelection();
+		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
 	}
 }

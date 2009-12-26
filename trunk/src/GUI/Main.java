@@ -866,6 +866,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						}
 					}
 					
+					// initialize search tab view
+					SearchFuncs.initSearchTabView();
 					// initialize search listeners
 					SearchFuncs.initSearchListeners();
 				}
