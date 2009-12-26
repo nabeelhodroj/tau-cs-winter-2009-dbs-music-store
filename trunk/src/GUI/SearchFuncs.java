@@ -10,10 +10,10 @@ import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
-import java.awt.*;
-import java.awt.event.*;
 
-/*
+/**
+ * created by Ariel
+ * 
  * Search tab handlers
  */
 public class SearchFuncs {
@@ -132,21 +132,9 @@ public class SearchFuncs {
 		Main.getSearchTextBoxYearTo().setEnabled(!enableByAlbumID);
 		Main.getSearchCheckBoxSongNames().setEnabled(!enableByAlbumID);
 		Main.getSearchTextBoxSongNames().setEnabled(!enableByAlbumID);
-		Main.getSearchBulletInStockAll().setEnabled(!enableByAlbumID);
-		Main.getSearchBulletInStockInNetwork().setEnabled(!enableByAlbumID);
-		Main.getSearchBulletInStockInStore().setEnabled(!enableByAlbumID);
 		Main.getSearchCheckBoxGenres().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenreJazz().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenreRock().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenreJazz().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre03().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre04().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre05().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre06().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre07().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre08().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre09().setEnabled(!enableByAlbumID);
-		Main.getSearchCheckBoxGenre10().setEnabled(!enableByAlbumID);
+		Button[] genres = Main.getSearchCheckBoxGenresArr();
+		for (Button g: genres) g.setEnabled(!enableByAlbumID);
 		Main.getSearchCheckBoxGenreOther().setEnabled(!enableByAlbumID);
 		Main.getSearchTextBoxGenreOther().setEnabled(!enableByAlbumID);
 		// set album id search fields by enableByAlbumID
@@ -198,21 +186,14 @@ public class SearchFuncs {
 	}
 	
 	/**
-	 * set song names text box by its checkbox state
+	 * set genres checkboxes by its the genres checkbox state
 	 */
 	protected static void setSearchGenresState(){
 		boolean isEnabled = Main.getSearchCheckBoxGenres().getSelection();
-		Main.getSearchCheckBoxGenreJazz().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenreRock().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre03().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre04().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre05().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre06().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre07().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre08().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre09().setEnabled(isEnabled);
-		Main.getSearchCheckBoxGenre10().setEnabled(isEnabled);
+		Button[] genres = Main.getSearchCheckBoxGenresArr();
+		for (Button g: genres) g.setEnabled(isEnabled);
 		Main.getSearchCheckBoxGenreOther().setEnabled(isEnabled);
+		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
 	}
 	
 	/**
