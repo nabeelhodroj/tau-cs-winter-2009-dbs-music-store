@@ -1,6 +1,7 @@
 package GUI;
 
 import java.util.*;
+import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import com.cloudgarden.resource.SWTResourceManager;
@@ -11,12 +12,17 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
 
+import Queries.*;
+import Tables.*;
+
 /**
  * created by Ariel
  * 
  * Search tab handlers
  */
 public class SearchFuncs {
+
+	protected static AlbumsResultsTable results = null; // holds the current search results data structure 
 	
 	/**
 	 * initializes the search tab view: enabled and disabled fields, default values etc.
@@ -203,5 +209,57 @@ public class SearchFuncs {
 		boolean isEnabled = Main.getSearchCheckBoxGenreOther().getSelection() &&	// other genre check box is on
 							Main.getSearchCheckBoxGenres().getSelection();			// and genres check box is on
 		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
+	}
+	
+	//////////////////////////////
+	//	handle album results	//
+	//////////////////////////////
+	
+	/**
+	 * getter for the current search results data structure
+	 */
+	public static AlbumsResultsTable getCurrentSearchResults(){
+		return results;
+	}
+	
+	/**
+	 * setter for the current search results data structure
+	 */
+	public static void setCurrentSearchResults(AlbumsResultsTable results){
+		SearchFuncs.results = results;
+	}
+	
+	/**
+	 * update current results and the Album results table accordingly
+	 * @param results
+	 */
+	public static void updateAlbumsResultsTable(AlbumsResultsTable results){
+		// set current results to the new ones
+		setCurrentSearchResults(results);
+		//TODO
+		// should implement update of the Albums results table according to the
+		// new results
+	}
+	
+	/**
+	 * update the Songs results table to show the given album's songs
+	 * (taken from the current results data structure)
+	 * @param albumID
+	 */
+	public static void updateSongsResultsTable(long albumID){
+		//TODO
+		// should get the songs list for the given album id from the current search results
+	}
+	
+	/**
+	 * returns the minutes-seconds representation for the given seconds integer
+	 * @param secs
+	 * @return
+	 */
+	public static List<Integer> getMinutesSeconds(int secs){
+		List<Integer> l =  new ArrayList<Integer>();
+		l.add(secs/60);
+		l.add(secs%60);
+		return l;
 	}
 }
