@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
 
-/*
+/**
+ * created by Ariel
+ * 
  * Main window handlers
  */
 public class MainFuncs {

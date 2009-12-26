@@ -11,8 +11,18 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
 
 /**
+ * created by Ariel
+ * 
 * This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial use.
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class Main extends org.eclipse.swt.widgets.Composite {
 
@@ -111,6 +121,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Button searchBulletInStockInStore;
 	private static Button searchBulletInStockInNetwork;
 	private static Button searchCheckBoxGenres;
+	private static Button[] searchCheckBoxGenresArr = new Button[10];
+	/*
 	private static Button searchCheckBoxGenreJazz;
 	private static Button searchCheckBoxGenreRock;
 	private static Button searchCheckBoxGenre03;
@@ -121,6 +133,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Button searchCheckBoxGenre08;
 	private static Button searchCheckBoxGenre09;
 	private static Button searchCheckBoxGenre10;
+	*/
 	private static Button searchCheckBoxGenreOther;
 	private static Text searchTextBoxGenreOther;
 	private static Button searchButtonClear;
@@ -610,7 +623,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCheckBoxGenres = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenres.setText("Genre(s):");
-								searchCheckBoxGenres.setBounds(12, 186, 82, 22);
+								searchCheckBoxGenres.setBounds(12, 165, 82, 22);
 							}
 							{
 								searchTextBoxAlbumName = new Text(searchGroupOptions, SWT.BORDER);
@@ -638,63 +651,63 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTextBoxSongNames.setBounds(106, 141, 237, 22);
 							}
 							{
-								searchCheckBoxGenreRock = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenreRock.setText("Rock");
-								searchCheckBoxGenreRock.setBounds(12, 207, 60, 16);
+								searchCheckBoxGenresArr[0] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[0].setText("Rock");
+								searchCheckBoxGenresArr[0].setBounds(12, 186, 60, 16);
 							}
 							{
-								searchCheckBoxGenreJazz = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenreJazz.setText("Jazz");
-								searchCheckBoxGenreJazz.setBounds(12, 227, 60, 16);
+								searchCheckBoxGenresArr[1] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[1].setText("Jazz");
+								searchCheckBoxGenresArr[1].setBounds(12, 206, 60, 16);
 							}
 							{
-								searchCheckBoxGenre03 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre03.setText("Genre03");
-								searchCheckBoxGenre03.setBounds(76, 207, 60, 16);
+								searchCheckBoxGenresArr[2] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[2].setText("Genre03");
+								searchCheckBoxGenresArr[2].setBounds(76, 186, 60, 16);
 							}
 							{
-								searchCheckBoxGenre04 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre04.setText("Genre04");
-								searchCheckBoxGenre04.setBounds(76, 227, 60, 16);
+								searchCheckBoxGenresArr[3] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[3].setText("Genre04");
+								searchCheckBoxGenresArr[3].setBounds(76, 206, 60, 16);
 							}
 							{
-								searchCheckBoxGenre05 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre05.setText("Genre05");
-								searchCheckBoxGenre05.setBounds(141, 207, 60, 16);
+								searchCheckBoxGenresArr[4] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[4].setText("Genre05");
+								searchCheckBoxGenresArr[4].setBounds(141, 186, 60, 16);
 							}
 							{
-								searchCheckBoxGenre06 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre06.setText("Genre06");
-								searchCheckBoxGenre06.setBounds(141, 227, 60, 16);
+								searchCheckBoxGenresArr[5] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[5].setText("Genre06");
+								searchCheckBoxGenresArr[5].setBounds(141, 206, 60, 16);
 							}
 							{
-								searchCheckBoxGenre07 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre07.setText("Genre07");
-								searchCheckBoxGenre07.setBounds(205, 207, 60, 16);
+								searchCheckBoxGenresArr[6] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[6].setText("Genre07");
+								searchCheckBoxGenresArr[6].setBounds(205, 186, 60, 16);
 							}
 							{
-								searchCheckBoxGenre08 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre08.setText("Genre08");
-								searchCheckBoxGenre08.setBounds(205, 227, 60, 16);
+								searchCheckBoxGenresArr[7] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[7].setText("Genre08");
+								searchCheckBoxGenresArr[7].setBounds(205, 206, 60, 16);
 							}
 							{
-								searchCheckBoxGenre09 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre09.setText("Genre09");
-								searchCheckBoxGenre09.setBounds(270, 207, 60, 16);
+								searchCheckBoxGenresArr[8] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[8].setText("Genre09");
+								searchCheckBoxGenresArr[8].setBounds(270, 186, 60, 16);
 							}
 							{
-								searchCheckBoxGenre10 = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenre10.setText("Genre10");
-								searchCheckBoxGenre10.setBounds(270, 227, 60, 16);
+								searchCheckBoxGenresArr[9] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
+								searchCheckBoxGenresArr[9].setText("Genre10");
+								searchCheckBoxGenresArr[9].setBounds(270, 206, 60, 16);
 							}
 							{
 								searchCheckBoxGenreOther = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreOther.setText("Other:");
-								searchCheckBoxGenreOther.setBounds(12, 243, 54, 22);
+								searchCheckBoxGenreOther.setBounds(12, 223, 54, 22);
 							}
 							{
 								searchTextBoxGenreOther = new Text(searchGroupOptions, SWT.BORDER);
-								searchTextBoxGenreOther.setBounds(74, 243, 273, 22);
+								searchTextBoxGenreOther.setBounds(76, 224, 273, 22);
 							}
 							{
 								searchButtonClear = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
@@ -709,26 +722,26 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCompositeStockField = new Composite(searchGroupOptions, SWT.NONE);
 								searchCompositeStockField.setLayout(null);
-								searchCompositeStockField.setBounds(12, 166, 331, 20);
+								searchCompositeStockField.setBounds(12, 247, 331, 20);
 								{
 									searchLabelStock = new Label(searchCompositeStockField, SWT.NONE);
 									searchLabelStock.setText("Stock:");
-									searchLabelStock.setBounds(0, 2, 36, 16);
+									searchLabelStock.setBounds(0, 3, 36, 16);
 								}
 								{
 									searchBulletInStockInStore = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockInStore.setText("In store");
-									searchBulletInStockInStore.setBounds(223, -1, 60, 22);
+									searchBulletInStockInStore.setBounds(191, 0, 60, 22);
 								}
 								{
 									searchBulletInStockInNetwork = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockInNetwork.setText("In network");
-									searchBulletInStockInNetwork.setBounds(147, -1, 76, 22);
+									searchBulletInStockInNetwork.setBounds(115, 0, 76, 22);
 								}
 								{
 									searchBulletInStockAll = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockAll.setText("All");
-									searchBulletInStockAll.setBounds(96, -1, 33, 22);
+									searchBulletInStockAll.setBounds(64, 0, 33, 22);
 									searchBulletInStockAll.setSelection(true);
 								}
 							}
@@ -1492,855 +1505,859 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	//	Getters and Setters	//
 	//////////////////////////
 
-	protected static Menu getMainMenuBar() {
+	public static Menu getMainMenuBar() {
 		return mainMenuBar;
 	}
 
-	protected static MenuItem getMenuItemSeperator() {
+	public static MenuItem getMenuItemSeperator() {
 		return menuItemSeperator;
 	}
 
-	protected static MenuItem getMainMenuItemFile() {
+	public static MenuItem getMainMenuItemFile() {
 		return mainMenuItemFile;
 	}
 
-	protected static Menu getFileMenu() {
+	public static Menu getFileMenu() {
 		return fileMenu;
 	}
 
-	protected static MenuItem getFileMenuItemExit() {
+	public static MenuItem getFileMenuItemExit() {
 		return fileMenuItemExit;
 	}
 
-	protected static MenuItem getMainMenuItemSearch() {
+	public static MenuItem getMainMenuItemSearch() {
 		return mainMenuItemSearch;
 	}
 
-	protected static Menu getSearchMenu() {
+	public static Menu getSearchMenu() {
 		return searchMenu;
 	}
 
-	protected static MenuItem getSearchMenuItemAddToSale() {
+	public static MenuItem getSearchMenuItemAddToSale() {
 		return searchMenuItemAddToSale;
 	}
 
-	protected static MenuItem getSearchMenuItemPlaceOrder() {
+	public static MenuItem getSearchMenuItemPlaceOrder() {
 		return searchMenuItemPlaceOrder;
 	}
 
-	protected static MenuItem getSearchMenuItemSearch() {
+	public static MenuItem getSearchMenuItemSearch() {
 		return searchMenuItemSearch;
 	}
 
-	protected static MenuItem getSearchMenuItemClear() {
+	public static MenuItem getSearchMenuItemClear() {
 		return searchMenuItemClear;
 	}
 
-	protected static MenuItem getMainMenuItemSale() {
+	public static MenuItem getMainMenuItemSale() {
 		return mainMenuItemSale;
 	}
 
-	protected static Menu getSaleMenu() {
+	public static Menu getSaleMenu() {
 		return saleMenu;
 	}
 
-	protected static MenuItem getSaleMenuItemRemove() {
+	public static MenuItem getSaleMenuItemRemove() {
 		return saleMenuItemRemove;
 	}
 
-	protected static MenuItem getSaleMenuItemClear() {
+	public static MenuItem getSaleMenuItemClear() {
 		return saleMenuItemClear;
 	}
 
-	protected static MenuItem getSaleMenuItemMakeSale() {
+	public static MenuItem getSaleMenuItemMakeSale() {
 		return saleMenuItemMakeSale;
 	}
 
-	protected static MenuItem getMainMenuItemStock() {
+	public static MenuItem getMainMenuItemStock() {
 		return mainMenuItemStock;
 	}
 
-	protected static Menu getStockMenu() {
+	public static Menu getStockMenu() {
 		return stockMenu;
 	}
 
-	protected static MenuItem getStockMenuItemCheckAvailability() {
+	public static MenuItem getStockMenuItemCheckAvailability() {
 		return stockMenuItemCheckAvailability;
 	}
 
-	protected static MenuItem getStockMenuItemClear() {
+	public static MenuItem getStockMenuItemClear() {
 		return stockMenuItemClear;
 	}
 
-	protected static MenuItem getStockMenuItemPlaceOrder() {
+	public static MenuItem getStockMenuItemPlaceOrder() {
 		return stockMenuItemPlaceOrder;
 	}
 
-	protected static MenuItem getStockMenuItemRemoveOrder() {
+	public static MenuItem getStockMenuItemRemoveOrder() {
 		return stockMenuItemRemoveOrder;
 	}
 
-	protected static MenuItem getStockMenuItemCancelOrder() {
+	public static MenuItem getStockMenuItemCancelOrder() {
 		return stockMenuItemCancelOrder;
 	}
 
-	protected static MenuItem getStockMenuItemDenyRequest() {
+	public static MenuItem getStockMenuItemDenyRequest() {
 		return stockMenuItemDenyRequest;
 	}
 
-	protected static MenuItem getStockMenuItemApproveRequest() {
+	public static MenuItem getStockMenuItemApproveRequest() {
 		return stockMenuItemApproveRequest;
 	}
 
-	protected static MenuItem getMainMenuItemManage() {
+	public static MenuItem getMainMenuItemManage() {
 		return mainMenuItemManage;
 	}
 
-	protected static Menu getManageMenu() {
+	public static Menu getManageMenu() {
 		return manageMenu;
 	}
 
-	protected static MenuItem getManageMenuItemBrowse() {
+	public static MenuItem getManageMenuItemBrowse() {
 		return manageMenuItemBrowse;
 	}
 
-	protected static MenuItem getManageMenuItemUpdateDBS() {
+	public static MenuItem getManageMenuItemUpdateDBS() {
 		return manageMenuItemUpdateDBS;
 	}
 
-	protected static MenuItem getManageMenuItemNew() {
+	public static MenuItem getManageMenuItemNew() {
 		return manageMenuItemNew;
 	}
 
-	protected static MenuItem getManageMenuItemInsert() {
+	public static MenuItem getManageMenuItemInsert() {
 		return manageMenuItemInsert;
 	}
 
-	protected static MenuItem getManageMenuItemEdit() {
+	public static MenuItem getManageMenuItemEdit() {
 		return manageMenuItemEdit;
 	}
 
-	protected static MenuItem getManageMenuItemSave() {
+	public static MenuItem getManageMenuItemSave() {
 		return manageMenuItemSave;
 	}
 
-	protected static MenuItem getManageMenuItemExitNoSave() {
+	public static MenuItem getManageMenuItemExitNoSave() {
 		return manageMenuItemExitNoSave;
 	}
 
-	protected static MenuItem getManageMenuItemRemoveEmployee() {
+	public static MenuItem getManageMenuItemRemoveEmployee() {
 		return manageMenuItemRemoveEmployee;
 	}
 
-	protected static Group getMainGroupStoreDetails() {
+	public static Group getMainGroupStoreDetails() {
 		return mainGroupStoreDetails;
 	}
 
-	protected static Label getMainLabelStoreDetailsStoreID() {
+	public static Label getMainLabelStoreDetailsStoreID() {
 		return mainLabelStoreDetailsStoreID;
 	}
 
-	protected static Label getMainLabelStoreDetailsDateTime() {
+	public static Label getMainLabelStoreDetailsDateTime() {
 		return mainLabelStoreDetailsDateTime;
 	}
 
-	protected static Label getMainLabelStoreDetailsStoreAddress() {
+	public static Label getMainLabelStoreDetailsStoreAddress() {
 		return mainLabelStoreDetailsStoreAddress;
 	}
 
-	protected static Label getMainLabelStoreDetailsStorePhone() {
+	public static Label getMainLabelStoreDetailsStorePhone() {
 		return mainLabelStoreDetailsStorePhone;
 	}
 
-	protected static Label getMainLabelStoreDetailsStoreManager() {
+	public static Label getMainLabelStoreDetailsStoreManager() {
 		return mainLabelStoreDetailsStoreManager;
 	}
 
-	protected static Group getMainGroupQuickTips() {
+	public static Group getMainGroupQuickTips() {
 		return mainGroupQuickTips;
 	}
 
-	protected static Label getMainLabelQuickTipsTip() {
+	public static Label getMainLabelQuickTipsTip() {
 		return mainLabelQuickTipsTip;
 	}
 
-	protected static TabFolder getMainTabFolder() {
+	public static TabFolder getMainTabFolder() {
 		return mainTabFolder;
 	}
 
-	protected static TabItem getSearchTabItem() {
+	public static TabItem getSearchTabItem() {
 		return searchTabItem;
 	}
 
-	protected static Composite getSearchTabComposite() {
+	public static Composite getSearchTabComposite() {
 		return searchTabComposite;
 	}
 
-	protected static Group getSearchGroupOptions() {
+	public static Group getSearchGroupOptions() {
 		return searchGroupOptions;
 	}
 
-	protected static Button getSearchBulletByAlbum() {
+	public static Button getSearchBulletByAlbum() {
 		return searchBulletByAlbum;
 	}
 
-	protected static Text getSearchTextBoxAlbumID() {
+	public static Text getSearchTextBoxAlbumID() {
 		return searchTextBoxAlbumID;
 	}
 
-	protected static Button getSearchBulletOtherParameters() {
+	public static Button getSearchBulletOtherParameters() {
 		return searchBulletOtherParameters;
 	}
 
-	protected static Button getSearchCheckBoxAlbumName() {
+	public static Button getSearchCheckBoxAlbumName() {
 		return searchCheckBoxAlbumName;
 	}
 
-	protected static Text getSearchTextBoxAlbumName() {
+	public static Text getSearchTextBoxAlbumName() {
 		return searchTextBoxAlbumName;
 	}
 
-	protected static Button getSearchCheckBoxArtist() {
+	public static Button getSearchCheckBoxArtist() {
 		return searchCheckBoxArtist;
 	}
 
-	protected static Text getSearchTextBoxArtist() {
+	public static Text getSearchTextBoxArtist() {
 		return searchTextBoxArtist;
 	}
 
-	protected static Button getSearchCheckBoxYear() {
+	public static Button getSearchCheckBoxYear() {
 		return searchCheckBoxYear;
 	}
 
-	protected static Text getSearchTextBoxYearFrom() {
+	public static Text getSearchTextBoxYearFrom() {
 		return searchTextBoxYearFrom;
 	}
 
-	protected static Label getSearchLabelYearTo() {
+	public static Label getSearchLabelYearTo() {
 		return searchLabelYearTo;
 	}
 
-	protected static Text getSearchTextBoxYearTo() {
+	public static Text getSearchTextBoxYearTo() {
 		return searchTextBoxYearTo;
 	}
 
-	protected static Button getSearchCheckBoxSongNames() {
+	public static Button getSearchCheckBoxSongNames() {
 		return searchCheckBoxSongNames;
 	}
 
-	protected static Text getSearchTextBoxSongNames() {
+	public static Text getSearchTextBoxSongNames() {
 		return searchTextBoxSongNames;
 	}
 
-	protected static Composite getSearchCompositeStockField() {
+	public static Composite getSearchCompositeStockField() {
 		return searchCompositeStockField;
 	}
 
-	protected static Label getSearchLabelStock() {
+	public static Label getSearchLabelStock() {
 		return searchLabelStock;
 	}
 
-	protected static Button getSearchBulletInStockAll() {
+	public static Button getSearchBulletInStockAll() {
 		return searchBulletInStockAll;
 	}
 
-	protected static Button getSearchBulletInStockInStore() {
+	public static Button getSearchBulletInStockInStore() {
 		return searchBulletInStockInStore;
 	}
 
-	protected static Button getSearchBulletInStockInNetwork() {
+	public static Button getSearchBulletInStockInNetwork() {
 		return searchBulletInStockInNetwork;
 	}
 
-	protected static Button getSearchCheckBoxGenres() {
+	public static Button getSearchCheckBoxGenres() {
 		return searchCheckBoxGenres;
 	}
 
-	protected static Button getSearchCheckBoxGenreJazz() {
-		return searchCheckBoxGenreJazz;
+	public static Button[] getSearchCheckBoxGenresArr(){
+		return searchCheckBoxGenresArr;
+	}
+	
+	public static Button getSearchCheckBoxGenreRock() {
+		return searchCheckBoxGenresArr[0];
+	}
+	
+	public static Button getSearchCheckBoxGenreJazz() {
+		return searchCheckBoxGenresArr[1];
 	}
 
-	protected static Button getSearchCheckBoxGenreRock() {
-		return searchCheckBoxGenreRock;
+	public static Button getSearchCheckBoxGenre03() {
+		return searchCheckBoxGenresArr[2];
 	}
 
-	protected static Button getSearchCheckBoxGenre03() {
-		return searchCheckBoxGenre03;
+	public static Button getSearchCheckBoxGenre04() {
+		return searchCheckBoxGenresArr[3];
 	}
 
-	protected static Button getSearchCheckBoxGenre04() {
-		return searchCheckBoxGenre04;
+	public static Button getSearchCheckBoxGenre05() {
+		return searchCheckBoxGenresArr[4];
 	}
 
-	protected static Button getSearchCheckBoxGenre05() {
-		return searchCheckBoxGenre05;
+	public static Button getSearchCheckBoxGenre06() {
+		return searchCheckBoxGenresArr[5];
 	}
 
-	protected static Button getSearchCheckBoxGenre06() {
-		return searchCheckBoxGenre06;
+	public static Button getSearchCheckBoxGenre07() {
+		return searchCheckBoxGenresArr[6];
 	}
 
-	protected static Button getSearchCheckBoxGenre07() {
-		return searchCheckBoxGenre07;
+	public static Button getSearchCheckBoxGenre08() {
+		return searchCheckBoxGenresArr[7];
 	}
 
-	protected static Button getSearchCheckBoxGenre08() {
-		return searchCheckBoxGenre08;
+	public static Button getSearchCheckBoxGenre09() {
+		return searchCheckBoxGenresArr[8];
 	}
 
-	protected static Button getSearchCheckBoxGenre09() {
-		return searchCheckBoxGenre09;
+	public static Button getSearchCheckBoxGenre10() {
+		return searchCheckBoxGenresArr[9];
 	}
 
-	protected static Button getSearchCheckBoxGenre10() {
-		return searchCheckBoxGenre10;
-	}
-
-	protected static Button getSearchCheckBoxGenreOther() {
+	public static Button getSearchCheckBoxGenreOther() {
 		return searchCheckBoxGenreOther;
 	}
 
-	protected static Text getSearchTextBoxGenreOther() {
+	public static Text getSearchTextBoxGenreOther() {
 		return searchTextBoxGenreOther;
 	}
 
-	protected static Button getSearchButtonClear() {
+	public static Button getSearchButtonClear() {
 		return searchButtonClear;
 	}
 
-	protected static Button getSearchButtonSearch() {
+	public static Button getSearchButtonSearch() {
 		return searchButtonSearch;
 	}
 
-	protected static Group getSearchGroupResults() {
+	public static Group getSearchGroupResults() {
 		return searchGroupResults;
 	}
 
-	protected static Table getSearchTableAlbumResults() {
+	public static Table getSearchTableAlbumResults() {
 		return searchTableAlbumResults;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumID() {
+	public static TableColumn getSearchTableColumnAlbumID() {
 		return searchTableColumnAlbumID;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumName() {
+	public static TableColumn getSearchTableColumnAlbumName() {
 		return searchTableColumnAlbumName;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumArtist() {
+	public static TableColumn getSearchTableColumnAlbumArtist() {
 		return searchTableColumnAlbumArtist;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumYear() {
+	public static TableColumn getSearchTableColumnAlbumYear() {
 		return searchTableColumnAlbumYear;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumGenre() {
+	public static TableColumn getSearchTableColumnAlbumGenre() {
 		return searchTableColumnAlbumGenre;
 	}
 
-	protected static TableColumn getSearchTableColumnAlbumLength() {
+	public static TableColumn getSearchTableColumnAlbumLength() {
 		return searchTableColumnAlbumLength;
 	}
 
-	protected static ProgressBar getSearchProgressBar() {
+	public static ProgressBar getSearchProgressBar() {
 		return searchProgressBar;
 	}
 
-	protected static Table getSearchTableSongResults() {
+	public static Table getSearchTableSongResults() {
 		return searchTableSongResults;
 	}
 
-	protected static TableColumn getSearchTableColumnSongName() {
+	public static TableColumn getSearchTableColumnSongName() {
 		return searchTableColumnSongName;
 	}
 
-	protected static TableColumn getSearchTableColumnSongArtist() {
+	public static TableColumn getSearchTableColumnSongArtist() {
 		return searchTableColumnSongArtist;
 	}
 
-	protected static TableColumn getSearchTableColumnSongLength() {
+	public static TableColumn getSearchTableColumnSongLength() {
 		return searchTableColumnSongLength;
 	}
 
-	protected static Group getSearchGroupStockInfo() {
+	public static Group getSearchGroupStockInfo() {
 		return searchGroupStockInfo;
 	}
 
-	protected static Label getSearchLabelStockInfoStoreStock() {
+	public static Label getSearchLabelStockInfoStoreStock() {
 		return searchLabelStockInfoStoreStock;
 	}
 
-	protected static Label getSearchLabelStockInfoLocation() {
+	public static Label getSearchLabelStockInfoLocation() {
 		return searchLabelStockInfoLocation;
 	}
 
-	protected static Label getSearchLabelStockInfoPrice() {
+	public static Label getSearchLabelStockInfoPrice() {
 		return searchLabelStockInfoPrice;
 	}
 
-	protected static Button getSearchButtonStockInfoOrder() {
+	public static Button getSearchButtonStockInfoOrder() {
 		return searchButtonStockInfoOrder;
 	}
 
-	protected static Group getSearchGroupSaleInfo() {
+	public static Group getSearchGroupSaleInfo() {
 		return searchGroupSaleInfo;
 	}
 
-	protected static Label getSearchLabelSaleInfoQuantity() {
+	public static Label getSearchLabelSaleInfoQuantity() {
 		return searchLabelSaleInfoQuantity;
 	}
 
-	protected static Text getSearchTextBoxSaleInfoQuantity() {
+	public static Text getSearchTextBoxSaleInfoQuantity() {
 		return searchTextBoxSaleInfoQuantity;
 	}
 
-	protected static Button getSearchButtonSaleInfoSale() {
+	public static Button getSearchButtonSaleInfoSale() {
 		return searchButtonSaleInfoSale;
 	}
 
-	protected static TabItem getSaleTabItem() {
+	public static TabItem getSaleTabItem() {
 		return saleTabItem;
 	}
 
-	protected static Composite getSaleCompositeMain() {
+	public static Composite getSaleCompositeMain() {
 		return saleCompositeMain;
 	}
 
-	protected static Group getSaleGroupSaleDetails() {
+	public static Group getSaleGroupSaleDetails() {
 		return saleGroupSaleDetails;
 	}
 
-	protected static Label getSaleLabelSaleID() {
+	public static Label getSaleLabelSaleID() {
 		return saleLabelSaleID;
 	}
 
-	protected static Label getSaleLabelSaleIDInput() {
+	public static Label getSaleLabelSaleIDInput() {
 		return saleLabelSaleIDInput;
 	}
 
-	protected static Label getSaleLabelSaleDate() {
+	public static Label getSaleLabelSaleDate() {
 		return saleLabelSaleDate;
 	}
 
-	protected static Label getSaleLabelDateInput() {
+	public static Label getSaleLabelDateInput() {
 		return saleLabelDateInput;
 	}
 
-	protected static Label getSaleLabelSalesmanIDName() {
+	public static Label getSaleLabelSalesmanIDName() {
 		return saleLabelSalesmanIDName;
 	}
 
-	protected static Combo getSaleComboSalesmanIDNameInput() {
+	public static Combo getSaleComboSalesmanIDNameInput() {
 		return saleComboSalesmanIDNameInput;
 	}
 
-	protected static Label getSaleLabelSaleTime() {
+	public static Label getSaleLabelSaleTime() {
 		return saleLabelSaleTime;
 	}
 
-	protected static Label getSaleLabelTimeInput() {
+	public static Label getSaleLabelTimeInput() {
 		return saleLabelTimeInput;
 	}
 
-	protected static Table getSaleTableSaleItems() {
+	public static Table getSaleTableSaleItems() {
 		return saleTableSaleItems;
 	}
 
-	protected static TableColumn getSaleTableColumnAlbumID() {
+	public static TableColumn getSaleTableColumnAlbumID() {
 		return saleTableColumnAlbumID;
 	}
 
-	protected static TableColumn getSaleTableColumnAlbumName() {
+	public static TableColumn getSaleTableColumnAlbumName() {
 		return saleTableColumnAlbumName;
 	}
 
-	protected static TableColumn getSaleTableColumnQuantity() {
+	public static TableColumn getSaleTableColumnQuantity() {
 		return saleTableColumnQuantity;
 	}
 
-	protected static TableColumn getSaleTableColumnPricePerItem() {
+	public static TableColumn getSaleTableColumnPricePerItem() {
 		return saleTableColumnPricePerItem;
 	}
 
-	protected static TableColumn getSaleTableColumnPriceTotal() {
+	public static TableColumn getSaleTableColumnPriceTotal() {
 		return saleTableColumnPriceTotal;
 	}
 
-	protected static Button getSaleButtonRemoveItem() {
+	public static Button getSaleButtonRemoveItem() {
 		return saleButtonRemoveItem;
 	}
 
-	protected static Button getSaleButtonClearSale() {
+	public static Button getSaleButtonClearSale() {
 		return saleButtonClearSale;
 	}
 
-	protected static Label getSaleLabelTotalPrice() {
+	public static Label getSaleLabelTotalPrice() {
 		return saleLabelTotalPrice;
 	}
 
-	protected static Label getSaleLabelTotalPriceValue() {
+	public static Label getSaleLabelTotalPriceValue() {
 		return saleLabelTotalPriceValue;
 	}
 
-	protected static Button getSaleButtonMakeSale() {
+	public static Button getSaleButtonMakeSale() {
 		return saleButtonMakeSale;
 	}
 
-	protected static TabItem getStockTabItem() {
+	public static TabItem getStockTabItem() {
 		return stockTabItem;
 	}
 
-	protected static Composite getStockTabComposite() {
+	public static Composite getStockTabComposite() {
 		return stockTabComposite;
 	}
 
-	protected static Group getStockGroupOrderForm() {
+	public static Group getStockGroupOrderForm() {
 		return stockGroupOrderForm;
 	}
 
-	protected static Label getStockLabelOrderID() {
+	public static Label getStockLabelOrderID() {
 		return stockLabelOrderID;
 	}
 
-	protected static Label getStockLabelOrderIDInput() {
+	public static Label getStockLabelOrderIDInput() {
 		return stockLabelOrderIDInput;
 	}
 
-	protected static Label getStockLabelAlbumID() {
+	public static Label getStockLabelAlbumID() {
 		return stockLabelAlbumID;
 	}
 
-	protected static Text getStockTextBoxAlbumIDInput() {
+	public static Text getStockTextBoxAlbumIDInput() {
 		return stockTextBoxAlbumIDInput;
 	}
 
-	protected static Label getStockLabelDate() {
+	public static Label getStockLabelDate() {
 		return stockLabelDate;
 	}
 
-	protected static Label getStockLabelOrderDateInput() {
+	public static Label getStockLabelOrderDateInput() {
 		return stockLabelOrderDateInput;
 	}
 
-	protected static Button getStockButtonCheckAvailability() {
+	public static Button getStockButtonCheckAvailability() {
 		return stockButtonCheckAvailability;
 	}
 
-	protected static Label getStockLabelOrderFromStore() {
+	public static Label getStockLabelOrderFromStore() {
 		return stockLabelOrderFromStore;
 	}
 
-	protected static Table getStockTableOrderAvailableStores() {
+	public static Table getStockTableOrderAvailableStores() {
 		return stockTableOrderAvailableStores;
 	}
 
-	protected static TableColumn getStockTableColumnStoreID() {
+	public static TableColumn getStockTableColumnStoreID() {
 		return stockTableColumnStoreID;
 	}
 
-	protected static TableColumn getStockTableColumnStoreCity() {
+	public static TableColumn getStockTableColumnStoreCity() {
 		return stockTableColumnStoreCity;
 	}
 
-	protected static TableColumn getStockTableColumnQuantity() {
+	public static TableColumn getStockTableColumnQuantity() {
 		return stockTableColumnQuantity;
 	}
 
-	protected static TableColumn getStockTableColumnPrice() {
+	public static TableColumn getStockTableColumnPrice() {
 		return stockTableColumnPrice;
 	}
 
-	protected static Label getStockLabelPrice() {
+	public static Label getStockLabelPrice() {
 		return stockLabelPrice;
 	}
 
-	protected static Label getStockLabelStorePriceInput() {
+	public static Label getStockLabelStorePriceInput() {
 		return stockLabelStorePriceInput;
 	}
 
-	protected static Label getStockLabelQuantityInStock() {
+	public static Label getStockLabelQuantityInStock() {
 		return stockLabelQuantityInStock;
 	}
 
-	protected static Label getStockLabelQuantityInStockInput() {
+	public static Label getStockLabelQuantityInStockInput() {
 		return stockLabelQuantityInStockInput;
 	}
 
-	protected static Label getStockLabelStorageLocation() {
+	public static Label getStockLabelStorageLocation() {
 		return stockLabelStorageLocation;
 	}
 
-	protected static Label getStockLabelStorageLocationInput() {
+	public static Label getStockLabelStorageLocationInput() {
 		return stockLabelStorageLocationInput;
 	}
 
-	protected static Label getStockLabelQuantityToOrder() {
+	public static Label getStockLabelQuantityToOrder() {
 		return stockLabelQuantityToOrder;
 	}
 
-	protected static Text getStockTextBoxQuantityToOrder() {
+	public static Text getStockTextBoxQuantityToOrder() {
 		return stockTextBoxQuantityToOrder;
 	}
 
-	protected static Button getStockButtonClearOrder() {
+	public static Button getStockButtonClearOrder() {
 		return stockButtonClearOrder;
 	}
 
-	protected static Button getStockButtonPlaceOrder() {
+	public static Button getStockButtonPlaceOrder() {
 		return stockButtonPlaceOrder;
 	}
 
-	protected static Label getStockLabelOrders() {
+	public static Label getStockLabelOrders() {
 		return stockLabelOrders;
 	}
 
-	protected static Table getStockTableOrders() {
+	public static Table getStockTableOrders() {
 		return stockTableOrders;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersOrderID() {
+	public static TableColumn getStockTableColumnOrdersOrderID() {
 		return stockTableColumnOrdersOrderID;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersSupplierID() {
+	public static TableColumn getStockTableColumnOrdersSupplierID() {
 		return stockTableColumnOrdersSupplierID;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersAlbumID() {
+	public static TableColumn getStockTableColumnOrdersAlbumID() {
 		return stockTableColumnOrdersAlbumID;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersQuantity() {
+	public static TableColumn getStockTableColumnOrdersQuantity() {
 		return stockTableColumnOrdersQuantity;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersDate() {
+	public static TableColumn getStockTableColumnOrdersDate() {
 		return stockTableColumnOrdersDate;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersStatus() {
+	public static TableColumn getStockTableColumnOrdersStatus() {
 		return stockTableColumnOrdersStatus;
 	}
 
-	protected static TableColumn getStockTableColumnOrdersCompletionDate() {
+	public static TableColumn getStockTableColumnOrdersCompletionDate() {
 		return stockTableColumnOrdersCompletionDate;
 	}
 
-	protected static Button getStockButtonRemoveOrder() {
+	public static Button getStockButtonRemoveOrder() {
 		return stockButtonRemoveOrder;
 	}
 
-	protected static Button getStockButtonCancelOrder() {
+	public static Button getStockButtonCancelOrder() {
 		return stockButtonCancelOrder;
 	}
 
-	protected static Label getStockLabelRequests() {
+	public static Label getStockLabelRequests() {
 		return stockLabelRequests;
 	}
 
-	protected static Table getStockTableRequests() {
+	public static Table getStockTableRequests() {
 		return stockTableRequests;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsOrderID() {
+	public static TableColumn getStockTableColumnRequestsOrderID() {
 		return stockTableColumnRequestsOrderID;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsOrderingStoreID() {
+	public static TableColumn getStockTableColumnRequestsOrderingStoreID() {
 		return stockTableColumnRequestsOrderingStoreID;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsAlbumID() {
+	public static TableColumn getStockTableColumnRequestsAlbumID() {
 		return stockTableColumnRequestsAlbumID;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsQuantity() {
+	public static TableColumn getStockTableColumnRequestsQuantity() {
 		return stockTableColumnRequestsQuantity;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsDate() {
+	public static TableColumn getStockTableColumnRequestsDate() {
 		return stockTableColumnRequestsDate;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsStatus() {
+	public static TableColumn getStockTableColumnRequestsStatus() {
 		return stockTableColumnRequestsStatus;
 	}
 
-	protected static TableColumn getStockTableColumnRequestsCompletionDate() {
+	public static TableColumn getStockTableColumnRequestsCompletionDate() {
 		return stockTableColumnRequestsCompletionDate;
 	}
 
-	protected static Button getStockButtonDenyRequest() {
+	public static Button getStockButtonDenyRequest() {
 		return stockButtonDenyRequest;
 	}
 
-	protected static Button getStockButtonApproveRequest() {
+	public static Button getStockButtonApproveRequest() {
 		return stockButtonApproveRequest;
 	}
 
-	protected static TabItem getManagementTabItem() {
+	public static TabItem getManagementTabItem() {
 		return managementTabItem;
 	}
 
-	protected static Composite getManageMainComposite() {
+	public static Composite getManageMainComposite() {
 		return manageMainComposite;
 	}
 
-	protected static Label getManageLabelEmployees() {
+	public static Label getManageLabelEmployees() {
 		return manageLabelEmployees;
 	}
 
-	protected static Table getManageTableEmployees() {
+	public static Table getManageTableEmployees() {
 		return manageTableEmployees;
 	}
 
-	protected static TableColumn getManageTableColumnEmployeeID() {
+	public static TableColumn getManageTableColumnEmployeeID() {
 		return manageTableColumnEmployeeID;
 	}
 
-	protected static TableColumn getManageTableColumnEmployeePName() {
+	public static TableColumn getManageTableColumnEmployeePName() {
 		return manageTableColumnEmployeePName;
 	}
 
-	protected static TableColumn getManageTableColumnEmployeeLName() {
+	public static TableColumn getManageTableColumnEmployeeLName() {
 		return manageTableColumnEmployeeLName;
 	}
 
-	protected static TableColumn getManageTableColumnEmployeePosition() {
+	public static TableColumn getManageTableColumnEmployeePosition() {
 		return manageTableColumnEmployeePosition;
 	}
 
-	protected static Group getManageGroupEditEmployee() {
+	public static Group getManageGroupEditEmployee() {
 		return manageGroupEditEmployee;
 	}
 
-	protected static Label getManageLabelEmployeeEmploymentDateInput() {
+	public static Label getManageLabelEmployeeEmploymentDateInput() {
 		return manageLabelEmployeeEmploymentDateInput;
 	}
 
-	protected static Label getManageLabelEmployeeEmploymentDate() {
+	public static Label getManageLabelEmployeeEmploymentDate() {
 		return manageLabelEmployeeEmploymentDate;
 	}
 
-	protected static Label getManageLabelEmployeeStoreID() {
+	public static Label getManageLabelEmployeeStoreID() {
 		return manageLabelEmployeeStoreID;
 	}
 
-	protected static Label getManageLabelEmployeeEmployeeStoreIDInput() {
+	public static Label getManageLabelEmployeeEmployeeStoreIDInput() {
 		return manageLabelEmployeeEmployeeStoreIDInput;
 	}
 
-	protected static Label getManageLabelEmployeeID() {
+	public static Label getManageLabelEmployeeID() {
 		return manageLabelEmployeeID;
 	}
 
-	protected static Text getManageTextBoxEmployeeIDInput() {
+	public static Text getManageTextBoxEmployeeIDInput() {
 		return manageTextBoxEmployeeIDInput;
 	}
 
-	protected static Label getManageLabelEmployeeBirth() {
+	public static Label getManageLabelEmployeeBirth() {
 		return manageLabelEmployeeBirth;
 	}
 
-	protected static Text getManageTextBoxEmployeeBirthInput() {
+	public static Text getManageTextBoxEmployeeBirthInput() {
 		return manageTextBoxEmployeeBirthInput;
 	}
 
-	protected static Label getManageLabelEmployeeFName() {
+	public static Label getManageLabelEmployeeFName() {
 		return manageLabelEmployeeFName;
 	}
 
-	protected static Text getManageTextBoxEmployeeFNameInput() {
+	public static Text getManageTextBoxEmployeeFNameInput() {
 		return manageTextBoxEmployeeFNameInput;
 	}
 
-	protected static Label getManageLabelEmployeeLName() {
+	public static Label getManageLabelEmployeeLName() {
 		return manageLabelEmployeeLName;
 	}
 
-	protected static Text getManageTextBoxEmployeeLNameInput() {
+	public static Text getManageTextBoxEmployeeLNameInput() {
 		return manageTextBoxEmployeeLNameInput;
 	}
 
-	protected static Label getManageLabelEmployeeAddress() {
+	public static Label getManageLabelEmployeeAddress() {
 		return manageLabelEmployeeAddress;
 	}
 
-	protected static Text getManageTextBoxEmployeeAddressInput() {
+	public static Text getManageTextBoxEmployeeAddressInput() {
 		return manageTextBoxEmployeeAddressInput;
 	}
 
-	protected static Label getManageLabelEmployeePhone() {
+	public static Label getManageLabelEmployeePhone() {
 		return manageLabelEmployeePhone;
 	}
 
-	protected static Text getManageTextBoxEmployeePhoneInput() {
+	public static Text getManageTextBoxEmployeePhoneInput() {
 		return manageTextBoxEmployeePhoneInput;
 	}
 
-	protected static Label getManageLabelEmployeeCellPhone() {
+	public static Label getManageLabelEmployeeCellPhone() {
 		return manageLabelEmployeeCellPhone;
 	}
 
-	protected static Text getManageTextBoxEmployeeCellPhoneInput() {
+	public static Text getManageTextBoxEmployeeCellPhoneInput() {
 		return manageTextBoxEmployeeCellPhoneInput;
 	}
 
-	protected static Label getManageLabelEmployeePosition() {
+	public static Label getManageLabelEmployeePosition() {
 		return manageLabelEmployeePosition;
 	}
 
-	protected static Combo getManageComboEmployeePositionInput() {
+	public static Combo getManageComboEmployeePositionInput() {
 		return manageComboEmployeePositionInput;
 	}
 
-	protected static Button getManageButtonEmployeeNew() {
+	public static Button getManageButtonEmployeeNew() {
 		return manageButtonEmployeeNew;
 	}
 
-	protected static Button getManageButtonEmployeeInsert() {
+	public static Button getManageButtonEmployeeInsert() {
 		return manageButtonEmployeeInsert;
 	}
 
-	protected static Button getManageButtonEmployeeNoSave() {
+	public static Button getManageButtonEmployeeNoSave() {
 		return manageButtonEmployeeNoSave;
 	}
 
-	protected static Button getManageButtonEmployeeEdit() {
+	public static Button getManageButtonEmployeeEdit() {
 		return manageButtonEmployeeEdit;
 	}
 
-	protected static Button getManageButtonEmployeeSave() {
+	public static Button getManageButtonEmployeeSave() {
 		return manageButtonEmployeeSave;
 	}
 
-	protected static Button getManageButtonEmployeeRemove() {
+	public static Button getManageButtonEmployeeRemove() {
 		return manageButtonEmployeeRemove;
 	}
 
-	protected static Group getManageGroupDBSManage() {
+	public static Group getManageGroupDBSManage() {
 		return manageGroupDBSManage;
 	}
 
-	protected static Label getManageLabelDBSUpdate() {
+	public static Label getManageLabelDBSUpdate() {
 		return manageLabelDBSUpdate;
 	}
 
-	protected static Text getManageTextBoxDBSUpdateFileInput() {
+	public static Text getManageTextBoxDBSUpdateFileInput() {
 		return manageTextBoxDBSUpdateFileInput;
 	}
 
-	protected static Button getManageButtonDBSBrowse() {
+	public static Button getManageButtonDBSBrowse() {
 		return manageButtonDBSBrowse;
 	}
 
-	protected static Button getManageButtonDBSUpdate() {
+	public static Button getManageButtonDBSUpdate() {
 		return manageButtonDBSUpdate;
 	}
 
-	protected static ProgressBar getManageProgressBarDBSUpdate() {
+	public static ProgressBar getManageProgressBarDBSUpdate() {
 		return manageProgressBarDBSUpdate;
 	}
 }
