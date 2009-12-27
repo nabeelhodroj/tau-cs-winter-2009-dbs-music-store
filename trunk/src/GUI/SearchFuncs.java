@@ -20,9 +20,7 @@ import Tables.*;
  * 
  * Search tab handlers
  */
-public class SearchFuncs {
-
-	protected static AlbumsResultsTable results = null; // holds the current search results data structure 
+public class SearchFuncs { 
 	
 	/**
 	 * initializes the search tab view: enabled and disabled fields, default values etc.
@@ -219,14 +217,14 @@ public class SearchFuncs {
 	 * getter for the current search results data structure
 	 */
 	public static AlbumsResultsTable getCurrentSearchResults(){
-		return results;
+		return StaticProgramTables.results;
 	}
 	
 	/**
 	 * setter for the current search results data structure
 	 */
 	public static void setCurrentSearchResults(AlbumsResultsTable results){
-		SearchFuncs.results = results;
+		StaticProgramTables.results = results;
 	}
 	
 	/**
