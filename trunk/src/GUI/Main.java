@@ -1157,7 +1157,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableOrders.setBounds(5, 174, 770, 110);
 							stockTableOrders.setHeaderVisible(true);
 							stockTableOrders.setLinesVisible(true);
-							int numOfColumns = 7;
+							int numOfColumns = 6; //7
 							int tableWidth = stockTableOrders.getClientArea().width - getBorderWidth()*2;
 							
 							stockTableColumnOrdersOrderID = new TableColumn(stockTableOrders, SWT.NONE);
@@ -1185,7 +1185,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnOrdersQuantity.setWidth(tableWidth / numOfColumns);
 							
 							stockTableColumnOrdersDate = new TableColumn(stockTableOrders, SWT.NONE);
-							stockTableColumnOrdersDate.setText("Date");
+							stockTableColumnOrdersDate.setText("Order date");
 							stockTableColumnOrdersDate.setResizable(true);
 							stockTableColumnOrdersDate.setMoveable(true);
 							stockTableColumnOrdersDate.setWidth(tableWidth / numOfColumns);
@@ -1196,11 +1196,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnOrdersStatus.setMoveable(true);
 							stockTableColumnOrdersStatus.setWidth(tableWidth / numOfColumns);
 							
+							/*
 							stockTableColumnOrdersCompletionDate = new TableColumn(stockTableOrders, SWT.NONE);
 							stockTableColumnOrdersCompletionDate.setText("Completion Date");
 							stockTableColumnOrdersCompletionDate.setResizable(true);
 							stockTableColumnOrdersCompletionDate.setMoveable(true);
 							stockTableColumnOrdersCompletionDate.setWidth(tableWidth / numOfColumns);
+							*/
 						}
 						{
 							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI // TODO
@@ -1208,7 +1210,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableRequests.setBounds(4, 317, 770, 104);
 							stockTableRequests.setHeaderVisible(true);
 							stockTableRequests.setLinesVisible(true);
-							int numOfColumns = 7;
+							int numOfColumns = 6; // 7
 							int tableWidth = stockTableRequests.getClientArea().width - getBorderWidth()*2;
 							
 							stockTableColumnRequestsOrderID = new TableColumn(stockTableRequests, SWT.NONE);
@@ -1236,7 +1238,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnRequestsQuantity.setWidth(tableWidth / numOfColumns);
 							
 							stockTableColumnRequestsDate = new TableColumn(stockTableRequests, SWT.NONE);
-							stockTableColumnRequestsDate.setText("Date");
+							stockTableColumnRequestsDate.setText("Order date");
 							stockTableColumnRequestsDate.setResizable(true);
 							stockTableColumnRequestsDate.setMoveable(true);
 							stockTableColumnRequestsDate.setWidth(tableWidth / numOfColumns);
@@ -1247,11 +1249,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnRequestsStatus.setMoveable(true);
 							stockTableColumnRequestsStatus.setWidth(tableWidth / numOfColumns);
 							
+							/*
 							stockTableColumnRequestsCompletionDate = new TableColumn(stockTableRequests, SWT.NONE);
 							stockTableColumnRequestsCompletionDate.setText("Completion Date");
 							stockTableColumnRequestsCompletionDate.setResizable(true);
 							stockTableColumnRequestsCompletionDate.setMoveable(true);
 							stockTableColumnRequestsCompletionDate.setWidth(tableWidth / numOfColumns);
+							*/
 						}
 						{
 							stockLabelRequests = new Label(stockTabComposite, SWT.NONE);
