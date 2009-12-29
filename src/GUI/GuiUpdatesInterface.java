@@ -105,6 +105,7 @@ public class GuiUpdatesInterface {
 	 * - waiting
 	 * - denied
 	 * - completed
+	 * - canceled
 	 * @param orderID
 	 * @param status
 	 */
@@ -142,22 +143,20 @@ public class GuiUpdatesInterface {
 		// implement adding a request to the requests table and update gui
 	}
 	
-	/**
-	 * update request in requests table to given status. request in requests table will always appear:
-	 * - waiting
-	 * @param orderID
-	 * @param status
+	/*
+	 * no need for request status update method, since status in requests table
+	 * always appears "waiting", otherwise it will not appear in the table.
+	 * deny and approve request will update the order status in the DB orders table,
+	 * and will update the status in the requesting store's orders table.
 	 */
-	public static void updateRequestStatus(int requestID, OrderStatusEnum status){
-		//TODO
-		// implement request status update and gui update
-	}
 	
 	/////////////////
 	//	management //
 	/////////////////
 	
 	// all update functions are taken from GUI.ManageFuncs
+	
+	// employees table
 	
 	/**
 	 * initialize employees table and employees list on sale tab
@@ -169,10 +168,10 @@ public class GuiUpdatesInterface {
 	}
 	
 	/**
-	 * adds employee to employee table if not a member, or updates employee details if already exists
+	 * adds employee to employees table if not a member, or updates employee details if already exists
 	 * @param employee
 	 */
-	public static void addUpdateEmployee(EmployeesTableItem employee){
+	public static void insertUpdateEmployee(EmployeesTableItem employee){
 		//TODO
 		// implement update employee details in employee table and update gui
 	}
@@ -184,5 +183,16 @@ public class GuiUpdatesInterface {
 	public static void removeEmployee(int employeeID){
 		//TODO
 		// implement remove employee from  employees table
+	}
+	
+	// database update
+	
+	/**
+	 * notifies the gui that the given filename was added to the database
+	 * @param filename
+	 */
+	public static void notifyDataBaseUpdated(String filename){
+		//TODO
+		// implement gui message that database is updated
 	}
 }
