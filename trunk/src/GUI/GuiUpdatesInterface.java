@@ -44,6 +44,8 @@ public class GuiUpdatesInterface {
 	// Sale tab //
 	//////////////
 	
+	// all update functions are taken from GUI.SaleFuncs
+	
 	/**
 	 * clears the sale table (invoked after gui makes current sale) 
 	 */
@@ -55,6 +57,8 @@ public class GuiUpdatesInterface {
 	///////////////
 	// Stock tab //
 	///////////////
+	
+	// all update functions are taken from GUI.StockFuncs
 	
 	// order's available stores
 	
@@ -152,6 +156,8 @@ public class GuiUpdatesInterface {
 	/////////////////
 	//	management //
 	/////////////////
+	
+	// all update functions are taken from GUI.ManageFuncs
 	
 	/**
 	 * initialize employees table and employees list on sale tab
