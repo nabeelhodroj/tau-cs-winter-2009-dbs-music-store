@@ -19,6 +19,7 @@ import Tables.*;
  * created by Ariel
  * 
  * Search tab handlers
+ * *** System out prints are for debugging ***
  */
 public class SearchFuncs { 
 	
@@ -41,7 +42,7 @@ public class SearchFuncs {
 		Main.getSearchBulletByAlbum().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Album Selected"); //TODO remove
+						System.out.println("Search tab: by Album Selected");
 						// enable album ID and disable other parameters text boxes
 						switchAlbumSearchBullet(true);
 					}
@@ -51,17 +52,19 @@ public class SearchFuncs {
 		Main.getSearchBulletOtherParameters().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Other Parameters Selected!"); //TODO remove
+						System.out.println("Search tab: by Other Parameters Selected!");
 						// disable album ID and enable other parameters text boxes
 						switchAlbumSearchBullet(false);
 					}
 				}
 		);
 		
+		// search check boxes listeners
+		
 		Main.getSearchCheckBoxAlbumName().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: album name checkbox changed"); //TODO remove
+						System.out.println("Search tab: album name checkbox changed");
 						// change album name text box accordingly
 						setSearchAlbumNameState();
 					}
@@ -71,7 +74,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxArtist().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: artist checkbox changed"); //TODO remove
+						System.out.println("Search tab: artist checkbox changed");
 						// change artist text box accordingly
 						setSearchArtistState();
 					}
@@ -81,7 +84,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxYear().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: year checkbox changed"); //TODO remove
+						System.out.println("Search tab: year checkbox changed");
 						// change artist text box accordingly
 						setSearchYearState();
 					}
@@ -91,7 +94,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxSongNames().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: song names checkbox changed"); //TODO remove
+						System.out.println("Search tab: song names checkbox changed");
 						// change artist text box accordingly
 						setSearchSongNamesState();
 					}
@@ -101,7 +104,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenres().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: genres checkbox changed"); //TODO remove
+						System.out.println("Search tab: genres checkbox changed");
 						// change artist text box accordingly
 						setSearchGenresState();
 					}
@@ -111,13 +114,29 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenreOther().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: other genre checkbox changed"); //TODO remove
+						System.out.println("Search tab: other genre checkbox changed");
 						// change artist text box accordingly
 						setSearchGenreOtherState();
 					}
 				}
 		);
+		
+		// buttons
+		
+		Main.getSearchButtonClear().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: clear fields button clicked");
+						// clear all search fields
+						clearSearchFields();
+					}
+				}
+		);
 	}
+	
+	//////////////////////////////
+	// handle search parameters //
+	//////////////////////////////
 	
 	/**
 	 * sets search tab \ search by fields according to enableByAlbumID:
@@ -207,6 +226,28 @@ public class SearchFuncs {
 		boolean isEnabled = Main.getSearchCheckBoxGenreOther().getSelection() &&	// other genre check box is on
 							Main.getSearchCheckBoxGenres().getSelection();			// and genres check box is on
 		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
+	}
+	
+	/**
+	 * clear all search fields
+	 */
+	protected static void clearSearchFields(){
+		// clear all text boxes
+		Main.getSearchTextBoxAlbumID().setText("");
+		Main.getSearchTextBoxAlbumName().setText("");
+		Main.getSearchTextBoxArtist().setText("");
+		Main.getSearchTextBoxGenreOther().setText("");
+		Main.getSearchTextBoxSaleInfoQuantity().setText("");
+		Main.getSearchTextBoxSongNames().setText("");
+		Main.getSearchTextBoxYearFrom().setText("");
+		Main.getSearchTextBoxYearTo().setText("");
+		Main.getSearchTextBoxGenreOther().setText("");
+		// clear all check boxes in genres
+		for(Button g: Main.getSearchCheckBoxGenresArr()){
+			g.setSelection(false);
+		}
+		Main.getSearchCheckBoxGenreOther().setSelection(false);
+		Main.getSearchTextBoxGenreOther().setEnabled(false);
 	}
 	
 	//////////////////////////////
