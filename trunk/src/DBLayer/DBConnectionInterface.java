@@ -13,6 +13,8 @@ import Queries.*;
  * for each method, the corresponding method in GuiUpdatesInterface, the one that
  * should be called when finishing, is mentioned in the javadoc
  * 
+ * *** System out prints are for debugging ***
+ * 
  * ///////////////////////////////////////////////
  * //											//
  * //	to be implemented by Kalev and Vadim	//
@@ -32,6 +34,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initStoresTable
 	 */
 	public static void getStoresTable(){
+		System.out.println("DBConnectionInterface.getStoresTable is called"); //TODO remove
 		//TODO
 	}
 	
@@ -45,6 +48,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: updateAlbumResultsTable
 	 */
 	public static void getAlbumsSearchResults(){
+		System.out.println("DBConnectionInterface.getAlbumsSearchResults is called"); //TODO remove
 		//TODO
 	}
 	
@@ -58,6 +62,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: clearSaleTable
 	 */
 	public static void makeSale(){
+		System.out.println("DBConnectionInterface.makeSale is called"); //TODO remove
 		//TODO
 	}
 
@@ -74,6 +79,7 @@ public class DBConnectionInterface{
 	 * @param albumID
 	 */
 	public static void getOrderAvailableStores(long albumID){
+		System.out.println("DBConnectionInterface.getOrderAvailableStores is called"); //TODO remove
 		//TODO
 	}
 	
@@ -86,6 +92,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initOrdersTable
 	 */
 	public static void getOrdersTable(){
+		System.out.println("DBConnectionInterface.getOrdersTable is called"); //TODO remove
 		//TODO
 	}
 	
@@ -96,6 +103,7 @@ public class DBConnectionInterface{
 	 * @param orderID
 	 */
 	public static void removeOrder(int orderID){
+		System.out.println("DBConnectionInterface.removeOrder is called"); //TODO remove
 		//TODO
 	}
 	
@@ -105,6 +113,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: addOrder
 	 */
 	public static void placeOrder(){
+		System.out.println("DBConnectionInterface.placeOrder is called"); //TODO remove
 		//TODO
 	}
 	
@@ -124,6 +133,7 @@ public class DBConnectionInterface{
 	 * @param status
 	 */
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
+		System.out.println("DBConnectionInterface.updateOrderStatus is called"); //TODO remove
 		//TODO
 	}
 	
@@ -136,6 +146,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initRequestsTable
 	 */
 	public static void getRequestsTable(){
+		System.out.println("DBConnectionInterface.getRequestsTable is called"); //TODO remove
 		//TODO
 	}
 	
@@ -149,6 +160,7 @@ public class DBConnectionInterface{
 	 * @param orderID
 	 */
 	public static void removeRequest(int orderID){
+		System.out.println("DBConnectionInterface.removeRequest is called"); //TODO remove
 		//TODO
 	}
 	
@@ -159,6 +171,7 @@ public class DBConnectionInterface{
 	 * @param requestID
 	 */
 	public static void addRequest(OrdersOrRequestsTableItem request){
+		System.out.println("DBConnectionInterface.addRequest is called"); //TODO remove
 		//TODO
 	}
 
@@ -175,6 +188,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initEmployeesTable
 	 */
 	public static void getEmployeesTable(){
+		System.out.println("DBConnectionInterface.getEmployeesTable is called"); //TODO remove
 		//TODO
 	}
 	
@@ -187,6 +201,7 @@ public class DBConnectionInterface{
 	 * @param employee
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
+		System.out.println("DBConnectionInterface.insertUpdateEmployee is called"); //TODO remove
 		//TODO
 	}
 	
@@ -197,6 +212,7 @@ public class DBConnectionInterface{
 	 * @param employeeID
 	 */
 	public static void removeEmployee(int employeeID){
+		System.out.println("DBConnectionInterface.removeEmployee is called"); //TODO remove
 		//TODO
 	}
 	
@@ -209,6 +225,7 @@ public class DBConnectionInterface{
 	 * @param filename
 	 */
 	public static void updateDataBase(String filename){
+		System.out.println("DBConnectionInterface.updateDataBase is called"); //TODO remove
 		//TODO
 	}
 }
