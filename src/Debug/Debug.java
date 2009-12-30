@@ -15,6 +15,12 @@ public class Debug {
 		FILE
 	}
 
+	/**
+	 * A method for logging.
+	 * The usage is: Debug.log("This message goes to file..", DebugOutput.FILE);
+	 * @param message: The massage explaining the current stage/problem.
+	 * @param logger: The destination to write the message (STDOUT, STDERR, FILE) 
+	 */
 	public static void log(String message, DebugOutput logger) {
 		switch (logger) {
 			case STDOUT : {
