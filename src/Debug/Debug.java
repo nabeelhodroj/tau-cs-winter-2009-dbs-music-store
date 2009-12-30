@@ -12,8 +12,8 @@ public class Debug {
 	private static final boolean DEBUG_MODE = true; 
 	
 	//Time
-	private static final String DATE_FORMAT_NOW = "HH:mm:ss";
-	private static SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+	private static final String DATE_FORMAT = "HH:mm:ss";
+	private static SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 	
 	public enum DebugOutput {
 		STDOUT,
