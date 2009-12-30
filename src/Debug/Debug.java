@@ -14,6 +14,7 @@ public class Debug {
 	//Time
 	private static final String DATE_FORMAT = "HH:mm:ss";
 	private static SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+	private static Calendar cal = null;
 	
 	public enum DebugOutput {
 		STDOUT,
@@ -44,7 +45,7 @@ public class Debug {
 					if (outputFile == null) {
 						outputFile = new BufferedWriter(new FileWriter(LOG_FILE));
 					}
-					Calendar cal = Calendar.getInstance();
+					cal = Calendar.getInstance();
 					outputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
 					outputFile.flush();
 				} catch (IOException e) {
