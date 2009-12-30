@@ -6,6 +6,8 @@ package Queries;
  * Exception class for queries that are not defined properly
  */
 public class QueryErrorException extends Exception {
+	private static final long serialVersionUID = -8974147697593531573L;
+	
 	private String queryType;
 	
 	public QueryErrorException(String message, String queryType){
