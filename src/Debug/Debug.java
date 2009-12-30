@@ -3,11 +3,17 @@ package Debug;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Debug {
 	private static final String LOG_FILE = "DB_Music_Store_Log.txt";
 	private static BufferedWriter outputFile = null;
 	private static final boolean DEBUG_MODE = true; 
+	
+	//Time
+	private static final String DATE_FORMAT_NOW = "HH:mm:ss";
+	private static SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 	
 	public enum DebugOutput {
 		STDOUT,
@@ -38,7 +44,8 @@ public class Debug {
 					if (outputFile == null) {
 						outputFile = new BufferedWriter(new FileWriter(LOG_FILE));
 					}
-					outputFile.write(message + "\r\n");
+					Calendar cal = Calendar.getInstance();
+					outputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
 					outputFile.flush();
 				} catch (IOException e) {
 					System.err.println(e);
