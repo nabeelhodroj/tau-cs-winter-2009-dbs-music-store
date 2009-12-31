@@ -33,11 +33,14 @@ public class GuiUpdatesInterface {
 	
 	/**
 	 * updates the albums search results table by the given AlbumsResultsTable
+	 * and sets the search tab gui environment (enables search button)
 	 * @param albumResults
 	 */
 	public static void updateAlbumResultsTable(AlbumsResultsTable albumResults){
-		//TODO
-		// implement albums results table gui update
+		// update albums results table
+		SearchFuncs.updateAlbumsResultsTable(albumResults);
+		// set gui environment
+		SearchFuncs.setEnvSearchDone();
 	}
 	
 	//////////////
