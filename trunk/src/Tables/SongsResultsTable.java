@@ -16,17 +16,27 @@ import java.util.*;
  */
 public class SongsResultsTable extends Table {
 	private long albumID;
-	private boolean variousArtists;
 	private Map<Integer,SongsResultsTableItem> songs = new HashMap<Integer,SongsResultsTableItem>();
 	
 	/**
 	 * constructor for a songs results table
 	 * @param albumID
 	 */
-	public SongsResultsTable(long albumID, boolean variousArtists){
+	public SongsResultsTable(long albumID){
 		super("SongsResultsTable");
 		this.albumID = albumID;
-		this.variousArtists = variousArtists;
+	}
+	
+	/**
+	 * constructor for a songs results table with songs list
+	 * @param albumID
+	 * @param variousArtists
+	 * @param songs
+	 */
+	public SongsResultsTable(long albumID, HashMap<Integer,SongsResultsTableItem> songs){
+		super("SongsResultsTable");
+		this.albumID = albumID;
+		this.songs = songs;
 	}
 	
 	/**
@@ -39,7 +49,7 @@ public class SongsResultsTable extends Table {
 	}
 	
 	/**
-	 * detailed adder for song item, where song has an artist
+	 * detailed adder for song item
 	 * @param track
 	 * @param name
 	 * @param artist
@@ -49,19 +59,7 @@ public class SongsResultsTable extends Table {
 		SongsResultsTableItem s = new SongsResultsTableItem(track,name,artist,length);
 		songs.put(track, s);
 	}
-	
-	/**
-	 * detailed adder for song item, where song has no unique artist
-	 * @param track
-	 * @param name
-	 * @param artist
-	 * @param length
-	 */
-	public void addSong(int track, String name, int length){
-		SongsResultsTableItem s = new SongsResultsTableItem(track,name,length);
-		songs.put(track, s);
-	}
-	
+		
 	/**
 	 * song getter by track number
 	 * @param track
@@ -72,18 +70,18 @@ public class SongsResultsTable extends Table {
 	}
 	
 	/**
+	 * getter for the songs list
+	 * @return
+	 */
+	public Map<Integer,SongsResultsTableItem> getSongs(){
+		return songs;
+	}
+	
+	/**
 	 * getter for the album ID to which this songs table belongs
 	 * @return
 	 */
 	public long getAlbumID(){
 		return this.albumID;
-	}
-	
-	/**
-	 * returns true if the album has various artists, and false otherwise
-	 * @return
-	 */
-	public boolean hasVariousArtists(){
-		return this.variousArtists;
 	}
 }

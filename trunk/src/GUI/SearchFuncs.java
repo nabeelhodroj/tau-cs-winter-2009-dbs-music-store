@@ -30,8 +30,8 @@ public class SearchFuncs {
 	protected static void initSearchTabView(){
 		// set search parameters group to be set on "by album id"
 		switchAlbumSearchBullet(true);
-		// set all search parameters text boxes disabled except for album id
-		Main.getSearchTextBoxAlbumName().setEnabled(false);
+		Main.getSearchButtonStockInfoOrder().setEnabled(false);
+		Main.getSearchButtonSaleInfoSale().setEnabled(false);
 	}
 
 	protected static void initSearchListeners(){
@@ -150,7 +150,7 @@ public class SearchFuncs {
 						if (q != null)
 						{
 							// set gui environment
-							setEnvSearchActivatedOrFinished(true);
+							setEnvSearchInvoked();
 							// send query to DB
 							DBConnectionInterface.getAlbumsSearchResults(q);
 						}
@@ -162,16 +162,47 @@ public class SearchFuncs {
 		// Search results group //
 		//////////////////////////
 		
-		
+		// albums table listener
+		Main.getSearchTableAlbumResults().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: album result selected");
+						
+						// get selected album table item
+						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
+						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
+						// update songs table
+						updateSongsResultsTable(album);
+						// update stock information
+						setLabelPrice(Integer.toString(album.getPrice()));
+						setLabelStockLocation(Long.toString(album.getStorageLocation()));
+						setLabelStoreStock(Integer.toString(album.getQuantity()));
+						Main.getSearchButtonStockInfoOrder().setEnabled(true);
+						// enable add to sale
+						Main.getSearchButtonSaleInfoSale().setEnabled(true);
+					}
+				}
+		);
 		
 		//////////////////////
 		// Stock info group //
 		//////////////////////
 		
-		// stock info label listeners
-		/////////////////////////////
-		
 		// add to order button
+		Main.getSearchButtonStockInfoOrder().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: add to order button clicked");
+						//TODO clear order fields
+						
+						// set order album id to selected album
+						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
+						Main.getStockTextBoxAlbumIDInput().setText(Long.toString(albumID));
+						// move to stock tab
+						MainFuncs.switchTab(2);
+					}
+				}
+		);
 		
 		///////////////////////
 		// Add to sale group //
@@ -182,6 +213,14 @@ public class SearchFuncs {
 		// add to sale button listener
 		
 	}
+	
+	/*****************************************************
+	 * 						HANDLERS
+	 * 
+	 * all methods used to handle events in the search tab
+	 * 
+	 * ***************************************************
+	 */
 	
 	//////////////////////////////
 	// handle search parameters //
@@ -321,23 +360,19 @@ public class SearchFuncs {
 	}
 	
 	/**
-	 * sets the gui environment according to searchActivated:
-	 * - searchActivated = true: search is invoked, disables search button, clears tables...
-	 * - searchActivated = false: search results returned, enables all again
-	 * @param searchActivated
+	 * sets the gui environment when search is invoked: disables search button, clears tables
+	 * and disables stock and sale buttons from search tab
 	 */
-	public static void setEnvSearchActivatedOrFinished(boolean searchActivated){
+	public static void setEnvSearchInvoked(){
 		// buttons:
-		Main.getSearchButtonSearch().setEnabled(!searchActivated);
-		Main.getSearchButtonStockInfoOrder().setEnabled(!searchActivated);
-		Main.getSearchButtonSaleInfoSale().setEnabled(!searchActivated);
+		Main.getSearchButtonSearch().setEnabled(false);
+		Main.getSearchButtonStockInfoOrder().setEnabled(false);
+		Main.getSearchButtonSaleInfoSale().setEnabled(false);
 
 		// clear all results if search is invoked
-		if (searchActivated){
-			Main.getSearchTableAlbumResults().clearAll();
-			Main.getSearchTableSongResults().clearAll();
-			clearStockInfo();
-		}
+		Main.getSearchTableAlbumResults().removeAll();
+		Main.getSearchTableSongResults().removeAll();
+		clearStockInfo();
 	}
 	
 	//////////////////////////////
@@ -365,9 +400,32 @@ public class SearchFuncs {
 	public static void updateAlbumsResultsTable(AlbumsResultsTable results){
 		// set current results to the new ones
 		setCurrentSearchResults(results);
-		//TODO
-		// should implement update of the Albums results table according to the
-		// new results
+		
+		// first clear all results tables
+		Main.getSearchTableAlbumResults().removeAll();
+		Main.getSearchTableSongResults().removeAll();
+		// now enter new results
+		for(AlbumsResultsTableItem album: results.getAlbums().values()){
+			TableItem item = new TableItem(Main.getSearchTableAlbumResults(), SWT.NONE);
+			Integer[] minsSecs = getMinutesSeconds(album.getLength());
+			String[] entry = new String[]{
+					Long.toString(album.getAlbumID()),
+					album.getAlbumName(),
+					album.getArtist(),
+					Integer.toString(album.getYear()),
+					album.getGenre(),
+					minsSecs[0]+":"+minsSecs[1]
+			};
+			item.setText(entry);
+		}
+	}
+	
+	/**
+	 * restores search tab environment after albums results came back:
+	 * enables search button
+	 */
+	public static void setEnvSearchDone(){
+		Main.getSearchButtonSearch().setEnabled(true);
 	}
 	
 	/**
@@ -375,9 +433,22 @@ public class SearchFuncs {
 	 * (taken from the current results data structure)
 	 * @param albumID
 	 */
-	public static void updateSongsResultsTable(long albumID){
-		//TODO
-		// should get the songs list for the given album id from the current search results
+	public static void updateSongsResultsTable(AlbumsResultsTableItem album){
+		SongsResultsTable songs = album.getSongs();
+		
+		// first clear songs table
+		Main.getSearchTableSongResults().removeAll();
+		// now enter songs
+		for(SongsResultsTableItem song: songs.getSongs().values()){
+			TableItem item = new TableItem(Main.getSearchTableSongResults(), SWT.NONE);
+			Integer[] minsSecs = getMinutesSeconds(song.getSongLength());
+			String[] entry = new String[]{
+					song.getSongName(),
+					song.getSongArtist(),
+					minsSecs[0]+":"+minsSecs[1]
+			};
+			item.setText(entry);
+		}
 	}
 	
 	/**
@@ -385,20 +456,45 @@ public class SearchFuncs {
 	 * @param secs
 	 * @return
 	 */
-	public static List<Integer> getMinutesSeconds(int secs){
-		List<Integer> l =  new ArrayList<Integer>();
-		l.add(secs/60);
-		l.add(secs%60);
-		return l;
+	public static Integer[] getMinutesSeconds(int secs){
+		Integer[] a =  new Integer[]{secs/60,secs%60};
+		return a;
 	}
 	
 	///////////////////////
 	// handle stock info //
 	///////////////////////
 	
+	/**
+	 * clears stock information
+	 */
 	public static void clearStockInfo(){
 		Main.getSearchLabelStockInfoStoreStock().setText("Store stock: ");
 		Main.getSearchLabelStockInfoLocation().setText("Storage location: ");
 		Main.getSearchLabelStockInfoPrice().setText("Price: ");
+	}
+	
+	/**
+	 * set store stock label
+	 * @param str
+	 */
+	protected static void setLabelStoreStock(String str){
+		Main.getSearchLabelStockInfoStoreStock().setText("Store stock: "+str);
+	}
+	
+	/**
+	 * set stock location label
+	 * @param str
+	 */
+	protected static void setLabelStockLocation(String str){
+		Main.getSearchLabelStockInfoLocation().setText("Storage location: "+str);
+	}
+	
+	/**
+	 * set price label
+	 * @param str
+	 */
+	protected static void setLabelPrice(String str){
+		Main.getSearchLabelStockInfoPrice().setText("Price: "+str);
 	}
 }

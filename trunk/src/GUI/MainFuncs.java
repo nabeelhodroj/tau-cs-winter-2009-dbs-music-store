@@ -19,6 +19,14 @@ public class MainFuncs {
 	protected static String storePhone = "03-67890123";
 	protected static String storeManager = "John Smith";
 	
+	/**
+	 * tab switching
+	 * @param tab
+	 */
+	public static void switchTab(int tab){
+		Main.getMainTabFolder().setSelection(tab);
+	}
+	
 	//////////////////////////////
 	//	Date and Time getters	//
 	//////////////////////////////

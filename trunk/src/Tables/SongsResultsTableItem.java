@@ -9,7 +9,6 @@ public class SongsResultsTableItem {
 	private int track;
 	private String songName;
 	private String songArtist;
-	private boolean hasArtist;
 	private int songLength;
 	
 	/**
@@ -23,21 +22,6 @@ public class SongsResultsTableItem {
 		this.track = track;
 		this.songName = name;
 		this.songArtist = artist;
-		this.hasArtist = true;
-		this.songLength = length;
-	}
-	
-	/**
-	 * constructor for a song item in the songs results table
-	 * with artist same as the album's artist
-	 * @param track
-	 * @param name
-	 * @param length
-	 */
-	public SongsResultsTableItem(int track, String name, int length){
-		this.track = track;
-		this.songName = name;
-		this.hasArtist = false;
 		this.songLength = length;
 	}
 	
@@ -55,9 +39,5 @@ public class SongsResultsTableItem {
 
 	public int getSongLength() {
 		return songLength;
-	}
-	
-	public boolean hasUniqueArtist(){
-		return this.hasArtist;
 	}
 }

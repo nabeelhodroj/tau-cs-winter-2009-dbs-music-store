@@ -50,6 +50,9 @@ public class DBConnectionInterface{
 	public static void getAlbumsSearchResults(AlbumSearchQuery albumSearchQuery){
 		System.out.println("DBConnectionInterface.getAlbumsSearchResults is called");
 		//TODO
+
+		// until implemented, return an example:
+		TablesExamples.getAlbumsSearchResults();
 	}
 	
 	//////////////

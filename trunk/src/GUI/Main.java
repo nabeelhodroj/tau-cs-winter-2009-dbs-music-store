@@ -3,6 +3,9 @@ package GUI;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import Tables.TablesExamples;
+
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
@@ -151,7 +154,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static TableColumn searchTableColumnAlbumYear;
 	private static TableColumn searchTableColumnAlbumGenre;
 	private static TableColumn searchTableColumnAlbumLength;
-	private static ProgressBar searchProgressBar;
+	private static Label searchProgressBarLabel;
 	private static Table searchTableSongResults;
 	private static TableColumn searchTableColumnSongName;
 	private static TableColumn searchTableColumnSongArtist;
@@ -313,6 +316,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	public static void main(String[] args) {
 		// generate Quick Tips
 		MainFuncs.generateTips();
+		
+		//////////////////////////////////////////
+		//		INIT EAMPLES - TO BE REMOVED	//
+		//////////////////////////////////////////
+		TablesExamples.initTablesExamples();
+		
 		// Start GUI
 		showGUI();
 	}
@@ -755,8 +764,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupResults.setText("Search Results");
 							searchGroupResults.setBounds(366, 0, 419, 465);
 							{
-								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
-										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.FULL_SELECTION
+										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE); // single row selection
 								searchTableAlbumResults.setBounds(12, 20, 395, 225);
 								searchTableAlbumResults.setHeaderVisible(true);
 								searchTableAlbumResults.setLinesVisible(true);
@@ -800,8 +809,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableColumnAlbumLength.setWidth(tableWidth / numOfColumns);
 							}
 							{
-								searchProgressBar = new ProgressBar(searchGroupResults, SWT.NONE);
-								searchProgressBar.setBounds(15, 251, 392, 22);
+								searchProgressBarLabel = new Label(searchGroupResults, SWT.BORDER);
+								searchProgressBarLabel.setAlignment(SWT.CENTER);
+								searchProgressBarLabel.setText("No results");
+								searchProgressBarLabel.setBounds(15, 251, 392, 22);
 							}
 							{
 								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
@@ -1872,8 +1883,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		return searchTableColumnAlbumLength;
 	}
 
-	public static ProgressBar getSearchProgressBar() {
-		return searchProgressBar;
+	public static Label getSearchProgressBarLabel() {
+		return searchProgressBarLabel;
 	}
 
 	public static Table getSearchTableSongResults() {

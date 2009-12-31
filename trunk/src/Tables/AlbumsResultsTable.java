@@ -71,4 +71,12 @@ public class AlbumsResultsTable extends Table {
 	public AlbumsResultsTableItem getAlbum(long albumID){
 		return albums.get(albumID);
 	}
+	
+	/**
+	 * get albums results iterator
+	 * @return
+	 */
+	public Map<Long,AlbumsResultsTableItem> getAlbums(){
+		return albums;
+	}
 }
