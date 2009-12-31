@@ -1,7 +1,6 @@
 package GUI;
 
 import Tables.*;
-import Queries.*;
 
 /**
  * created by Ariel
@@ -23,6 +22,8 @@ public class GuiUpdatesInterface {
 	public static void initStoresTable(StoresTable stores){
 		//TODO
 		// implement stores table gui update - user store selection window (combo box)
+		StaticProgramTables.stores = stores;
+		// add stores to choice combobox
 	}
 
 	////////////////

@@ -4,6 +4,7 @@ import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import DBLayer.DBConnectionInterface;
 import Tables.TablesExamples;
 
 import com.cloudgarden.resource.SWTResourceManager;
@@ -128,18 +129,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Button searchBulletInStockInNetwork;
 	private static Button searchCheckBoxGenres;
 	private static Button[] searchCheckBoxGenresArr = new Button[10];
-	/*
-	private static Button searchCheckBoxGenreJazz;
-	private static Button searchCheckBoxGenreRock;
-	private static Button searchCheckBoxGenre03;
-	private static Button searchCheckBoxGenre04;
-	private static Button searchCheckBoxGenre05;
-	private static Button searchCheckBoxGenre06;
-	private static Button searchCheckBoxGenre07;
-	private static Button searchCheckBoxGenre08;
-	private static Button searchCheckBoxGenre09;
-	private static Button searchCheckBoxGenre10;
-	*/
 	private static Button searchCheckBoxGenreOther;
 	private static Text searchTextBoxGenreOther;
 	private static Button searchButtonClear;
@@ -314,13 +303,15 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	* org.eclipse.swt.widgets.Composite inside a new Shell.
 	*/
 	public static void main(String[] args) {
-		// generate Quick Tips
-		MainFuncs.generateTips();
-		
 		//////////////////////////////////////////
-		//		INIT EAMPLES - TO BE REMOVED	//
+		//		INIT EXAMPLES - TO BE REMOVED	//
 		//////////////////////////////////////////
 		TablesExamples.initTablesExamples();
+		
+		// generate Quick Tips
+		MainFuncs.generateTips();
+		// initialize stores table
+		DBConnectionInterface.initStoresTable();
 		
 		// Start GUI
 		showGUI();
@@ -372,11 +363,17 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	 * - Management
 	 */
 	private void initGUI() {
-		try {
+		try {			
 			this.setLayout(null);
 			this.layout();
 			pack();
 			this.setSize(800, 590);
+			{
+				/**
+				 * open initialize dialog
+				 */
+				initDialog.openInitDialog();
+			}
 			{
 				/**
 				 * Main menu
@@ -2381,5 +2378,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static ProgressBar getManageProgressBarDBSUpdate() {
 		return manageProgressBarDBSUpdate;
+	}
+
+	public static void setShell(Shell shell) {
+		Main.shell = shell;
 	}
 }

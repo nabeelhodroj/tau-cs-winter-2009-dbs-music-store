@@ -33,9 +33,12 @@ public class DBConnectionInterface{
 	 * invokes query to get initial stores table, for selection of current store
 	 * corresponding method in GUI.GuiUpdatesInterface: initStoresTable
 	 */
-	public static void getStoresTable(){
+	public static void initStoresTable(){
 		System.out.println("DBConnectionInterface.getStoresTable is called");
 		//TODO
+		
+		// until implemented, return an example:
+		TablesExamples.initStoresTable();
 	}
 	
 	////////////////

@@ -48,4 +48,12 @@ public class StoresTable extends Table {
 	public StoresTableItem getStore(int storeID){
 		return this.stores.get(storeID);
 	}
+	
+	/**
+	 * getter for stores list
+	 * @return
+	 */
+	public Map<Integer,StoresTableItem> getStores(){
+		return stores; 
+	}
 }
