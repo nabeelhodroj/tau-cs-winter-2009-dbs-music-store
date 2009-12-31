@@ -36,6 +36,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	//	Class Fields definitions	//
 	//////////////////////////////////
 	
+	// Main
+	private static Shell shell;
+	
 	// Main Menu
 	private static Menu mainMenuBar;
 	private static MenuItem menuItemSeperator;
@@ -326,7 +329,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	*/
 	public static void showGUI() {
 		Display display = Display.getDefault();
-		Shell shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
+		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
 		Main inst = new Main(shell, SWT.NULL);
 		Point size = inst.getSize();
@@ -1508,6 +1511,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	//////////////////////////
 	//	Getters and Setters	//
 	//////////////////////////
+	
+	public static Shell getMainShell(){
+		return shell;
+	}
 
 	public static Menu getMainMenuBar() {
 		return mainMenuBar;

@@ -98,7 +98,7 @@ public class AlbumSearchQuery extends Query {
 				String yearFromText = Main.getSearchTextBoxYearFrom().getText();
 				String yearToText = Main.getSearchTextBoxYearTo().getText();
 				QueryErrorException qee = new QueryErrorException("Year option selected, fields must have "
-						+"integer values between 1900 and "+thisYear+" with 'from' year less than or eauals "
+						+"integer values between 1900 and "+thisYear+" with 'from' year less than or equals "
 						+"'to' year", this.getQueryType());
 				
 				if (yearFromText == null || yearFromText.isEmpty() ||
@@ -107,8 +107,8 @@ public class AlbumSearchQuery extends Query {
 					try{
 						int fromYear = Integer.parseInt(yearFromText);
 						int toYear =  Integer.parseInt(yearToText);
-						if (!(1900 <= toYear && toYear <= thisYear) ||
-								!(1900 <= fromYear && fromYear <= thisYear) || toYear > fromYear) // years limits are illegal
+						if ((toYear < 1900) || (thisYear < toYear) ||
+							(fromYear < 1900) || (thisYear < fromYear) || (toYear < fromYear)) // years limits are illegal
 							throw qee;
 						else { // SET ALBUM YEAR FROM AND YEAR TO
 							this.yearFrom = fromYear;

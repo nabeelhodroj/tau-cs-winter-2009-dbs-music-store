@@ -47,7 +47,7 @@ public class DBConnectionInterface{
 	 * invokes albums search query
 	 * corresponding method in GUI.GuiUpdatesInterface: updateAlbumResultsTable
 	 */
-	public static void getAlbumsSearchResults(){
+	public static void getAlbumsSearchResults(AlbumSearchQuery albumSearchQuery){
 		System.out.println("DBConnectionInterface.getAlbumsSearchResults is called");
 		//TODO
 	}
