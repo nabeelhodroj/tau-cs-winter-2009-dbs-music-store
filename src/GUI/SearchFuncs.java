@@ -12,6 +12,7 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
 
+import DBLayer.DBConnectionInterface;
 import Queries.*;
 import Tables.*;
 
@@ -35,10 +36,13 @@ public class SearchFuncs {
 
 	protected static void initSearchListeners(){
 		
-		// Search parameters group
-		//////////////////////////
+		/////////////////////////////
+		// Search parameters group //
+		/////////////////////////////
 		
 		// search bullets listeners
+		///////////////////////////
+		
 		Main.getSearchBulletByAlbum().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
@@ -60,6 +64,7 @@ public class SearchFuncs {
 		);
 		
 		// search check boxes listeners
+		///////////////////////////////
 		
 		Main.getSearchCheckBoxAlbumName().addSelectionListener(
 				new SelectionAdapter(){
@@ -121,8 +126,10 @@ public class SearchFuncs {
 				}
 		);
 		
-		// buttons
+		// clear / search buttons
+		/////////////////////////
 		
+		// clear fields
 		Main.getSearchButtonClear().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
@@ -132,6 +139,48 @@ public class SearchFuncs {
 					}
 				}
 		);
+		
+		// search
+		Main.getSearchButtonSearch().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("Search tab: search button clicked");
+						// create AlbumSearchQuery
+						AlbumSearchQuery q = createAlbumSearchQuery();
+						if (q != null)
+						{
+							// set gui environment
+							setEnvSearchActivatedOrFinished(true);
+							// send query to DB
+							DBConnectionInterface.getAlbumsSearchResults(q);
+						}
+					}
+				}
+		);
+		
+		//////////////////////////
+		// Search results group //
+		//////////////////////////
+		
+		
+		
+		//////////////////////
+		// Stock info group //
+		//////////////////////
+		
+		// stock info label listeners
+		/////////////////////////////
+		
+		// add to order button
+		
+		///////////////////////
+		// Add to sale group //
+		///////////////////////
+		
+		// sale quantity listener
+		
+		// add to sale button listener
+		
 	}
 	
 	//////////////////////////////
@@ -228,6 +277,10 @@ public class SearchFuncs {
 		Main.getSearchTextBoxGenreOther().setEnabled(isEnabled);
 	}
 	
+	////////////////////////////
+	//	handle search buttons //
+	////////////////////////////
+	
 	/**
 	 * clear all search fields
 	 */
@@ -248,6 +301,43 @@ public class SearchFuncs {
 		}
 		Main.getSearchCheckBoxGenreOther().setSelection(false);
 		Main.getSearchTextBoxGenreOther().setEnabled(false);
+	}
+	
+	/**
+	 * returns current search query or pops a warning if search query is illegal
+	 * @return
+	 */
+	protected static AlbumSearchQuery createAlbumSearchQuery(){
+		try{
+			AlbumSearchQuery q = new AlbumSearchQuery();
+			return q;
+		}catch(QueryErrorException qee){
+			MessageBox queryErrorMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+			queryErrorMsg.setMessage(qee.getMessage());
+			queryErrorMsg.setText("Query Error");
+			queryErrorMsg.open();
+			return null;
+		}
+	}
+	
+	/**
+	 * sets the gui environment according to searchActivated:
+	 * - searchActivated = true: search is invoked, disables search button, clears tables...
+	 * - searchActivated = false: search results returned, enables all again
+	 * @param searchActivated
+	 */
+	public static void setEnvSearchActivatedOrFinished(boolean searchActivated){
+		// buttons:
+		Main.getSearchButtonSearch().setEnabled(!searchActivated);
+		Main.getSearchButtonStockInfoOrder().setEnabled(!searchActivated);
+		Main.getSearchButtonSaleInfoSale().setEnabled(!searchActivated);
+
+		// clear all results if search is invoked
+		if (searchActivated){
+			Main.getSearchTableAlbumResults().clearAll();
+			Main.getSearchTableSongResults().clearAll();
+			clearStockInfo();
+		}
 	}
 	
 	//////////////////////////////
@@ -300,5 +390,15 @@ public class SearchFuncs {
 		l.add(secs/60);
 		l.add(secs%60);
 		return l;
+	}
+	
+	///////////////////////
+	// handle stock info //
+	///////////////////////
+	
+	public static void clearStockInfo(){
+		Main.getSearchLabelStockInfoStoreStock().setText("Store stock: ");
+		Main.getSearchLabelStockInfoLocation().setText("Storage location: ");
+		Main.getSearchLabelStockInfoPrice().setText("Price: ");
 	}
 }
