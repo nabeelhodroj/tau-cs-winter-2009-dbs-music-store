@@ -2,8 +2,17 @@ package GUI;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.*;
+
+import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.swt.*;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.*;
+
+import DBLayer.DBConnectionInterface;
+import Tables.StoresTableItem;
 
 /**
  * created by Ariel
@@ -11,6 +20,53 @@ import java.util.*;
  * Main window handlers
  */
 public class MainFuncs {
+	
+	/////////////////////////
+	//	initialize program //
+	/////////////////////////
+	
+	/**
+	 * initialize initDialog listeners 
+	 */
+	public static void initiDialogBoxListeners(){
+		initDialog.getInitDialogButtonStart().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("init Dialog: Start button clicked");
+						//TODO
+						// get selected store id
+						int storeID = initDialog.getInitDialogCombo().getSelectionIndex();
+						// set current store to selected store and initialize fields
+						StaticProgramTables.thisStore = StaticProgramTables.stores.getStore(storeID);
+						
+						DBConnectionInterface.getOrdersTable();
+						DBConnectionInterface.getRequestsTable();
+						DBConnectionInterface.getEmployeesTable(); // will initialize also employees combo box
+						
+						// close init dialog
+						initDialog.closeInitDialog();
+					}
+				}
+		);
+		
+		initDialog.getInitDialogButtonExit().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						System.out.println("init Dialog: Exit button clicked");
+						System.exit(-1);
+					}
+				}
+		);
+	}
+	
+	/**
+	 * initialize init dialog combo box
+	 */
+	public static void initDialogComboBoxItems(){
+		for(StoresTableItem store : StaticProgramTables.stores.getStores().values()){
+			initDialog.getInitDialogCombo().add(store.getStoreID()+": "+store.getCity());
+		}
+	}
 	
 	// Store details fields, initialized on startup
 	protected static String storeID = "STR-ID-0000";
@@ -139,7 +195,7 @@ public class MainFuncs {
 	//	Quick Tips	//
 	//////////////////
 	
-	private static List<String> quickTips = new ArrayList<String>();
+	private static java.util.List<String> quickTips = new ArrayList<String>();
 	private static Iterator<String> quickTipsIter;
 	public static void generateTips(){
 		String tip;

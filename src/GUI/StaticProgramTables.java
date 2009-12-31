@@ -16,6 +16,8 @@ import Queries.*;
  * - employees table
  */
 public class StaticProgramTables {
+	// this store
+	public static StoresTableItem thisStore = null;
 	// stores table (for program initialization)
 	public static StoresTable stores = null;
 	// albums search results table
