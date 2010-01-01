@@ -27,8 +27,8 @@ import org.eclipse.swt.SWT;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class initDialog extends org.eclipse.swt.widgets.Dialog {
-	private static initDialog inst;
+public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
+	private static InitialDialog inst;
 	private static Shell shell;
 	private static Shell dialogShell;
 	private static Button initDialogButtonExit;
@@ -44,7 +44,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 		try {
 			Display display = Display.getDefault();
 			shell = new Shell(display);
-			inst = new initDialog(shell, SWT.NULL);
+			inst = new InitialDialog(shell, SWT.NULL);
 			inst.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 		shell.close();
 	}
 
-	public initDialog(Shell parent, int style) {
+	public InitialDialog(Shell parent, int style) {
 		super(parent, style);
 	}
 
@@ -111,7 +111,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 	}
 
 	public static void setDialogShell(Shell dialogShell) {
-		initDialog.dialogShell = dialogShell;
+		InitialDialog.dialogShell = dialogShell;
 	}
 
 	public static Button getInitDialogButtonExit() {
@@ -119,7 +119,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 	}
 
 	public static void setInitDialogButtonExit(Button initDialogButtonExit) {
-		initDialog.initDialogButtonExit = initDialogButtonExit;
+		InitialDialog.initDialogButtonExit = initDialogButtonExit;
 	}
 
 	public static Button getInitDialogButtonStart() {
@@ -127,7 +127,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 	}
 
 	public static void setInitDialogButtonStart(Button initDialogButtonStart) {
-		initDialog.initDialogButtonStart = initDialogButtonStart;
+		InitialDialog.initDialogButtonStart = initDialogButtonStart;
 	}
 
 	public static Group getInitDialogGroup() {
@@ -135,7 +135,7 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 	}
 
 	public static void setInitDialogGroup(Group initDialogGroup) {
-		initDialog.initDialogGroup = initDialogGroup;
+		InitialDialog.initDialogGroup = initDialogGroup;
 	}
 
 	public static Combo getInitDialogCombo() {
@@ -143,6 +143,6 @@ public class initDialog extends org.eclipse.swt.widgets.Dialog {
 	}
 
 	public static void setInitDialogCombo(Combo initDialogCombo) {
-		initDialog.initDialogCombo = initDialogCombo;
+		InitialDialog.initDialogCombo = initDialogCombo;
 	}	
 }

@@ -372,7 +372,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				/**
 				 * open initialize dialog
 				 */
-				initDialog.openInitDialog();
+				InitialDialog.openInitDialog();
 			}
 			{
 				/**
