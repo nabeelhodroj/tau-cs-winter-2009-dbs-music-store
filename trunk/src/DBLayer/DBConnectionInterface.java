@@ -2,6 +2,8 @@ package DBLayer;
 
 import Tables.*;
 import Queries.*;
+import Debug.*;
+import Debug.Debug.DebugOutput;
 
 /**
  * created by Ariel
@@ -34,7 +36,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initStoresTable
 	 */
 	public static void initStoresTable(){
-		System.out.println("DBConnectionInterface.getStoresTable is called");
+		Debug.log("DBConnectionInterface.getStoresTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
 		// until implemented, return an example:
@@ -51,7 +53,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: updateAlbumResultsTable
 	 */
 	public static void getAlbumsSearchResults(AlbumSearchQuery albumSearchQuery){
-		System.out.println("DBConnectionInterface.getAlbumsSearchResults is called");
+		Debug.log("DBConnectionInterface.getAlbumsSearchResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 
 		// until implemented, return an example:
@@ -68,7 +70,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: clearSaleTable
 	 */
 	public static void makeSale(){
-		System.out.println("DBConnectionInterface.makeSale is called");
+		Debug.log("DBConnectionInterface.makeSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 
@@ -85,7 +87,7 @@ public class DBConnectionInterface{
 	 * @param albumID
 	 */
 	public static void getOrderAvailableStores(long albumID){
-		System.out.println("DBConnectionInterface.getOrderAvailableStores is called");
+		Debug.log("DBConnectionInterface.getOrderAvailableStores is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -98,7 +100,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initOrdersTable
 	 */
 	public static void getOrdersTable(){
-		System.out.println("DBConnectionInterface.getOrdersTable is called");
+		Debug.log("DBConnectionInterface.getOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -109,7 +111,7 @@ public class DBConnectionInterface{
 	 * @param orderID
 	 */
 	public static void removeOrder(int orderID){
-		System.out.println("DBConnectionInterface.removeOrder is called");
+		Debug.log("DBConnectionInterface.removeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -119,7 +121,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: addOrder
 	 */
 	public static void placeOrder(){
-		System.out.println("DBConnectionInterface.placeOrder is called");
+		Debug.log("DBConnectionInterface.placeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -139,7 +141,7 @@ public class DBConnectionInterface{
 	 * @param status
 	 */
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
-		System.out.println("DBConnectionInterface.updateOrderStatus is called");
+		Debug.log("DBConnectionInterface.updateOrderStatus is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -152,7 +154,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initRequestsTable
 	 */
 	public static void getRequestsTable(){
-		System.out.println("DBConnectionInterface.getRequestsTable is called");
+		Debug.log("DBConnectionInterface.getRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -166,7 +168,7 @@ public class DBConnectionInterface{
 	 * @param orderID
 	 */
 	public static void removeRequest(int orderID){
-		System.out.println("DBConnectionInterface.removeRequest is called");
+		Debug.log("DBConnectionInterface.removeRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -177,7 +179,7 @@ public class DBConnectionInterface{
 	 * @param requestID
 	 */
 	public static void addRequest(OrdersOrRequestsTableItem request){
-		System.out.println("DBConnectionInterface.addRequest is called");
+		Debug.log("DBConnectionInterface.addRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 
@@ -194,7 +196,7 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: initEmployeesTable
 	 */
 	public static void getEmployeesTable(){
-		System.out.println("DBConnectionInterface.getEmployeesTable is called");
+		Debug.log("DBConnectionInterface.getEmployeesTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -207,7 +209,7 @@ public class DBConnectionInterface{
 	 * @param employee
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
-		System.out.println("DBConnectionInterface.insertUpdateEmployee is called");
+		Debug.log("DBConnectionInterface.insertUpdateEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -218,7 +220,7 @@ public class DBConnectionInterface{
 	 * @param employeeID
 	 */
 	public static void removeEmployee(int employeeID){
-		System.out.println("DBConnectionInterface.removeEmployee is called");
+		Debug.log("DBConnectionInterface.removeEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 	
@@ -231,7 +233,7 @@ public class DBConnectionInterface{
 	 * @param filename
 	 */
 	public static void updateDataBase(String filename){
-		System.out.println("DBConnectionInterface.updateDataBase is called");
+		Debug.log("DBConnectionInterface.updateDataBase is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 	}
 }
