@@ -29,13 +29,13 @@ public class MainFuncs {
 	 * initialize initDialog listeners 
 	 */
 	public static void initiDialogBoxListeners(){
-		initDialog.getInitDialogButtonStart().addSelectionListener(
+		InitialDialog.getInitDialogButtonStart().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						System.out.println("init Dialog: Start button clicked");
 						//TODO
 						// get selected store id
-						int storeID = initDialog.getInitDialogCombo().getSelectionIndex();
+						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex();
 						// set current store to selected store and initialize fields
 						StaticProgramTables.thisStore = StaticProgramTables.stores.getStore(storeID);
 						
@@ -44,12 +44,12 @@ public class MainFuncs {
 						DBConnectionInterface.getEmployeesTable(); // will initialize also employees combo box
 						
 						// close init dialog
-						initDialog.closeInitDialog();
+						InitialDialog.closeInitDialog();
 					}
 				}
 		);
 		
-		initDialog.getInitDialogButtonExit().addSelectionListener(
+		InitialDialog.getInitDialogButtonExit().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						System.out.println("init Dialog: Exit button clicked");
@@ -64,7 +64,7 @@ public class MainFuncs {
 	 */
 	public static void initDialogComboBoxItems(){
 		for(StoresTableItem store : StaticProgramTables.stores.getStores().values()){
-			initDialog.getInitDialogCombo().add(store.getStoreID()+": "+store.getCity());
+			InitialDialog.getInitDialogCombo().add(store.getStoreID()+": "+store.getCity());
 		}
 	}
 	
