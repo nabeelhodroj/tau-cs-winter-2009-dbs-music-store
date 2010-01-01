@@ -12,6 +12,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
+import Debug.Debug;
+import Debug.Debug.DebugOutput;
 import Tables.StoresTableItem;
 
 /**
@@ -32,7 +34,7 @@ public class MainFuncs {
 		InitialDialog.getInitDialogButtonStart().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("init Dialog: Start button clicked");
+						Debug.log("Initial Dialog: Start button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						//TODO
 						// get selected store id
 						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex();
@@ -52,7 +54,7 @@ public class MainFuncs {
 		InitialDialog.getInitDialogButtonExit().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("init Dialog: Exit button clicked");
+						Debug.log("Initial Dialog: Exit button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						System.exit(-1);
 					}
 				}
@@ -66,6 +68,8 @@ public class MainFuncs {
 		for(StoresTableItem store : StaticProgramTables.stores.getStores().values()){
 			InitialDialog.getInitDialogCombo().add(store.getStoreID()+": "+store.getCity());
 		}
+		// choose first by default
+		InitialDialog.getInitDialogCombo().select(0);
 	}
 	
 	// Store details fields, initialized on startup

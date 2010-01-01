@@ -68,7 +68,6 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 			dialogShell.setLayout(null);
 			{
 				initDialogGroup = new Group(dialogShell, SWT.NONE);
-				GridLayout initDialogGroupLayout = new GridLayout();
 				initDialogGroup.setLayout(null);
 				initDialogGroup.setText("Select store");
 				initDialogGroup.setBounds(0, 4, 306, 113);

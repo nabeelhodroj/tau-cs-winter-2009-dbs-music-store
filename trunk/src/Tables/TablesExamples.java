@@ -11,6 +11,8 @@ public class TablesExamples {
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static StoresTable storesTableExample = new StoresTable();
+	public static OrdersOrRequestsTable ordersTableExample = new OrdersOrRequestsTable(true);
+	public static OrdersOrRequestsTable requestsTableExample = new OrdersOrRequestsTable(false);
 	
 	/**
 	 * initialize tables examples
@@ -46,6 +48,32 @@ public class TablesExamples {
 		storesTableExample.addStore(store1);
 		storesTableExample.addStore(store2);
 		storesTableExample.addStore(store3);
+		
+		// orders table example
+		
+		OrdersOrRequestsTableItem order1 = new OrdersOrRequestsTableItem(1,store1.getStoreID(),
+				store2.getStoreID(),albumsResultsItem1.getAlbumID(),2,"12/04/08",OrderStatusEnum.WAITING);
+		OrdersOrRequestsTableItem order2 = new OrdersOrRequestsTableItem(2,store1.getStoreID(),
+				store3.getStoreID(),albumsResultsItem2.getAlbumID(),19,"15/08/09",OrderStatusEnum.WAITING);
+		OrdersOrRequestsTableItem order3 = new OrdersOrRequestsTableItem(3,store1.getStoreID(),
+				store2.getStoreID(),albumsResultsItem1.getAlbumID(),5,"30/01/09",OrderStatusEnum.COMPLETED);
+		
+		ordersTableExample.addOrder(order1);
+		ordersTableExample.addOrder(order2);
+		ordersTableExample.addOrder(order3);
+		
+		// requests table example
+		
+		OrdersOrRequestsTableItem request1 = new OrdersOrRequestsTableItem(4,store2.getStoreID(),
+				store1.getStoreID(),albumsResultsItem1.getAlbumID(),4,"01/03/09",OrderStatusEnum.WAITING);
+		OrdersOrRequestsTableItem request2 = new OrdersOrRequestsTableItem(5,store3.getStoreID(),
+				store1.getStoreID(),albumsResultsItem2.getAlbumID(),9,"23/10/09",OrderStatusEnum.WAITING);
+		OrdersOrRequestsTableItem request3 = new OrdersOrRequestsTableItem(6,store2.getStoreID(),
+				store1.getStoreID(),albumsResultsItem2.getAlbumID(),2,"11/11/09",OrderStatusEnum.WAITING);
+		
+		requestsTableExample.addOrder(request1);
+		requestsTableExample.addOrder(request2);
+		requestsTableExample.addOrder(request3);
 	}
 	
 	/**
@@ -60,5 +88,19 @@ public class TablesExamples {
 	 */
 	public static void initStoresTable(){
 		GuiUpdatesInterface.initStoresTable(storesTableExample);
+	}
+	
+	/**
+	 * invoke orders table initialize with example
+	 */
+	public static void getOrdersTable(){
+		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
+	}
+	
+	/**
+	 * invoke requests table initialize with example
+	 */
+	public static void getRequestsTable(){
+		GuiUpdatesInterface.initRequestsTable(requestsTableExample);
 	}
 }
