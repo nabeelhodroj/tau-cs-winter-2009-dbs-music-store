@@ -55,5 +55,15 @@ public class Debug {
 			}
 		}
 	}
-
+	
+	/**
+	 * calls log twice with two given loggers
+	 * @param message
+	 * @param logger1
+	 * @param logger2
+	 */
+	public static void log(String message, DebugOutput logger1, DebugOutput logger2) {
+		log(message, logger1);
+		log(message, logger2);
+	}
 }
