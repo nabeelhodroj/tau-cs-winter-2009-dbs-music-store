@@ -102,6 +102,9 @@ public class DBConnectionInterface{
 	public static void getOrdersTable(){
 		Debug.log("DBConnectionInterface.getOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, return an example:
+		TablesExamples.getOrdersTable();
 	}
 	
 	/**
@@ -156,6 +159,9 @@ public class DBConnectionInterface{
 	public static void getRequestsTable(){
 		Debug.log("DBConnectionInterface.getRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, return an example:
+		TablesExamples.getRequestsTable();
 	}
 	
 	/**

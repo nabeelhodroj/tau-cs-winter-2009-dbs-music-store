@@ -13,6 +13,8 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.custom.ScrolledComposite;
 
 import DBLayer.DBConnectionInterface;
+import Debug.Debug;
+import Debug.Debug.DebugOutput;
 import Queries.*;
 import Tables.*;
 
@@ -46,7 +48,7 @@ public class SearchFuncs {
 		Main.getSearchBulletByAlbum().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Album Selected");
+						Debug.log("Search tab: by Album Selected",DebugOutput.FILE,DebugOutput.STDOUT);
 						// enable album ID and disable other parameters text boxes
 						switchAlbumSearchBullet(true);
 					}
@@ -56,7 +58,7 @@ public class SearchFuncs {
 		Main.getSearchBulletOtherParameters().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: by Other Parameters Selected!");
+						Debug.log("Search tab: by Other Parameters Selected",DebugOutput.FILE,DebugOutput.STDOUT);
 						// disable album ID and enable other parameters text boxes
 						switchAlbumSearchBullet(false);
 					}
@@ -69,7 +71,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxAlbumName().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: album name checkbox changed");
+						Debug.log("Search tab: album name checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change album name text box accordingly
 						setSearchAlbumNameState();
 					}
@@ -79,7 +81,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxArtist().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: artist checkbox changed");
+						Debug.log("Search tab: artist checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change artist text box accordingly
 						setSearchArtistState();
 					}
@@ -89,7 +91,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxYear().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: year checkbox changed");
+						Debug.log("Search tab: year checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change artist text box accordingly
 						setSearchYearState();
 					}
@@ -99,7 +101,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxSongNames().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: song names checkbox changed");
+						Debug.log("Search tab: song names checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change artist text box accordingly
 						setSearchSongNamesState();
 					}
@@ -109,7 +111,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenres().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: genres checkbox changed");
+						Debug.log("Search tab: genres checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change artist text box accordingly
 						setSearchGenresState();
 					}
@@ -119,7 +121,7 @@ public class SearchFuncs {
 		Main.getSearchCheckBoxGenreOther().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: other genre checkbox changed");
+						Debug.log("Search tab: other genre checkbox changed",DebugOutput.FILE,DebugOutput.STDOUT);
 						// change artist text box accordingly
 						setSearchGenreOtherState();
 					}
@@ -133,7 +135,7 @@ public class SearchFuncs {
 		Main.getSearchButtonClear().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: clear fields button clicked");
+						Debug.log("Search tab: clear fields button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						// clear all search fields
 						clearSearchFields();
 					}
@@ -144,7 +146,7 @@ public class SearchFuncs {
 		Main.getSearchButtonSearch().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: search button clicked");
+						Debug.log("Search tab: search button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						// create AlbumSearchQuery
 						AlbumSearchQuery q = createAlbumSearchQuery();
 						if (q != null)
@@ -166,7 +168,7 @@ public class SearchFuncs {
 		Main.getSearchTableAlbumResults().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: album result selected");
+						Debug.log("Search tab: album result selected",DebugOutput.FILE,DebugOutput.STDOUT);
 						
 						// get selected album table item
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
@@ -192,7 +194,7 @@ public class SearchFuncs {
 		Main.getSearchButtonStockInfoOrder().addSelectionListener(
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
-						System.out.println("Search tab: add to order button clicked");
+						Debug.log("Search tab: add to order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						//TODO clear order fields
 						
 						// set order album id to selected album
