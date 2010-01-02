@@ -76,6 +76,35 @@ public class DBConnectionInterface{
 		// until implemented, use example:
 		TablesExamples.makeSale(sale);
 	}
+	
+	/**
+	 * invoked in Main \ search-tab \ "Add to Sale" button
+	 * add item to current sale table and updates quantity in DB
+	 * corresponding method in GUI.GuiUpdatesInterface: addItemToSale
+	 * @param quantity
+	 * @param albumID
+	 */
+	public static void addItemToSale(SaleTableItem saleItem){
+		Debug.log("DBConnectionInterface.addItemToSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.addItemToSale(saleItem);
+	}
+	
+	/**
+	 * invoked in Main \ sale-tab \ "Remove Item" button
+	 * removes item from current sale table and updates quantity in DB
+	 * corresponding method in GUI.GuiUpdatesInterface: removeItemFromSale
+	 * @param saleItem
+	 */
+	public static void removeItemFromSale(SaleTableItem saleItem){
+		Debug.log("DBConnectionInterface.removeItemFromSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.removeItemFromSale(saleItem);
+	}
 
 	///////////////
 	// Stock tab //
