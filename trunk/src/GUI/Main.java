@@ -145,6 +145,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static TableColumn searchTableColumnAlbumLength;
 	private static Label searchProgressBarLabel;
 	private static Table searchTableSongResults;
+	private static TableColumn searchTableColumnSongTrack;
 	private static TableColumn searchTableColumnSongName;
 	private static TableColumn searchTableColumnSongArtist;
 	private static TableColumn searchTableColumnSongLength;
@@ -827,7 +828,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableSongResults.setLinesVisible(true);
 								
 								int tableWidth = searchTableSongResults.getClientArea().width - getBorderWidth()*2;
-								int numOfColumns = 3;
+								int numOfColumns = 4;
+								
+								searchTableColumnSongTrack = new TableColumn(searchTableSongResults, SWT.NONE);
+								searchTableColumnSongTrack.setText("Track");
+								searchTableColumnSongTrack.setResizable(true);
+								searchTableColumnSongTrack.setMoveable(true);
+								searchTableColumnSongTrack.setWidth(tableWidth / numOfColumns);
 								
 								searchTableColumnSongName = new TableColumn(searchTableSongResults, SWT.NONE);
 								searchTableColumnSongName.setText("Song name");
