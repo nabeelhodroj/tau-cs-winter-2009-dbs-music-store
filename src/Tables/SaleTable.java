@@ -15,7 +15,6 @@ import java.util.*;
  * - list of sale items (SaleTableItems)
  */
 public class SaleTable extends Table {
-	private int saleID;
 	private String salesmanName;
 	private String date;			//TODO format may be changed later on
 	private Map<Integer,SaleTableItem> saleItems = new HashMap<Integer,SaleTableItem>();
@@ -24,21 +23,15 @@ public class SaleTable extends Table {
 	 * constructor for the sale table
 	 * @param saleID
 	 */
-	public SaleTable(int saleID){
+	public SaleTable(){
 		super("SaleTable");
-		this.saleID = saleID;
 	}
 	
-	public SaleTable(int saleID, String salesmanName, String date, HashMap<Integer,SaleTableItem> saleItems){
+	public SaleTable(String salesmanName, String date, HashMap<Integer,SaleTableItem> saleItems){
 		super("SaleTable");
-		this.saleID = saleID;
 		this.salesmanName = salesmanName;
 		this.date = date;
 		this.saleItems = saleItems;
-	}
-
-	public int getSaleID() {
-		return saleID;
 	}
 
 	public String getSalesmanName() {

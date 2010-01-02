@@ -32,4 +32,13 @@ public class StaticProgramTables {
 	public static OrdersOrRequestsTable requests = null;
 	// employees table
 	public static EmployeesTable employees = null;
+	
+	// getters and setters
+	
+	public static StoresTableItem getThisStore() {
+		return thisStore;
+	}
+	public static void setThisStore(StoresTableItem thisStore) {
+		StaticProgramTables.thisStore = thisStore;
+	}
 }

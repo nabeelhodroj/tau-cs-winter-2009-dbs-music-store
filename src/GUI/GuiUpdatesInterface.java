@@ -1,6 +1,8 @@
 package GUI;
 
 import Tables.*;
+import Debug.*;
+import Debug.Debug.DebugOutput;
 
 /**
  * created by Ariel
@@ -20,11 +22,12 @@ public class GuiUpdatesInterface {
 	 * @param stores
 	 */
 	public static void initStoresTable(StoresTable stores){
-		//TODO
+		Debug.log("GuiUpdatesInterface: initStoresTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// implement stores table gui update - user store selection window (combo box)
+		// update the stores list
 		StaticProgramTables.stores = stores;
-		// add stores to choice combobox
+		// add stores to choice combobox in initial dialog is done when opening the initial dialog
+		// in InitialDialog.open()
 	}
 
 	////////////////
@@ -39,6 +42,8 @@ public class GuiUpdatesInterface {
 	 * @param albumResults
 	 */
 	public static void updateAlbumResultsTable(AlbumsResultsTable albumResults){
+		Debug.log("GuiUpdatesInterface: updateAlbumResultsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
 		// update albums results table
 		SearchFuncs.updateAlbumsResultsTable(albumResults);
 		// set gui environment
@@ -55,8 +60,8 @@ public class GuiUpdatesInterface {
 	 * clears the sale table (invoked after gui makes current sale) 
 	 */
 	public static void clearSaleTable(){
-		//TODO
-		// implement sale table gui clear
+		Debug.log("GuiUpdatesInterface: clearSaleTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		SaleFuncs.clearSaleTable();
 	}
 	
 	///////////////

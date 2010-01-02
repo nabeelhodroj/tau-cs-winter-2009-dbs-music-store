@@ -35,12 +35,15 @@ public class MainFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Initial Dialog: Start button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
 						// get selected store id
 						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex();
-						// set current store to selected store and initialize fields
-						StaticProgramTables.thisStore = StaticProgramTables.stores.getStore(storeID);
+						// set current store to selected store
+						StaticProgramTables.setThisStore(StaticProgramTables.stores.getStore(storeID));
+						// update the stores details representation in main window is done in Main
 						
+						//TODO
+						// update orders, requests and employees table
 						DBConnectionInterface.getOrdersTable();
 						DBConnectionInterface.getRequestsTable();
 						DBConnectionInterface.getEmployeesTable(); // will initialize also employees combo box
@@ -62,7 +65,7 @@ public class MainFuncs {
 	}
 	
 	/**
-	 * initialize init dialog combo box
+	 * initialize initial dialog combo box
 	 */
 	public static void initDialogComboBoxItems(){
 		for(StoresTableItem store : StaticProgramTables.stores.getStores().values()){
@@ -72,12 +75,16 @@ public class MainFuncs {
 		InitialDialog.getInitDialogCombo().select(0);
 	}
 	
-	// Store details fields, initialized on startup
-	protected static String storeID = "STR-ID-0000";
-	protected static String storeCity = "Tel-Aviv";
-	protected static String storeAddress = "Ben-Yehuda 12";
-	protected static String storePhone = "03-67890123";
-	protected static String storeManager = "John Smith";
+	/**
+	 * initialize stores details view in main window
+	 */
+	public static void initStoreDetails(){
+		Main.getMainLabelStoreDetailsStoreID().setText("Store: "+StaticProgramTables.getThisStore().getStoreID());
+		Main.getMainLabelStoreDetailsStoreAddress().setText("Address: "+
+				StaticProgramTables.thisStore.getAddress()+", "+StaticProgramTables.getThisStore().getCity());
+		Main.getMainLabelStoreDetailsStorePhone().setText("Phone: "+StaticProgramTables.getThisStore().getPhone());
+		Main.getMainLabelStoreDetailsStoreManager().setText("Manager: "+StaticProgramTables.getThisStore().getManagerID()); //TODO convert manager id to manager name	
+	}
 	
 	/**
 	 * tab switching
@@ -120,80 +127,6 @@ public class MainFuncs {
         Date date = new Date();
         return dateFormat.format(date);
     }
-	
-	//////////////////////////////////////////
-	//	Store details getters and setters	//
-	//////////////////////////////////////////
-	
-	/**
-	 * getter for storeID
-	 */
-	public static String getStoreID(){
-		return storeID;
-	}
-	
-	/**
-	 * setter for storeID
-	 */
-	public static void setStoreID(String storeID){
-		MainFuncs.storeID = storeID;
-	}
-
-	/**
-	 * getter for storeCity
-	 */
-	public static String getStoreCity(){
-		return storeCity;
-	}
-	
-	/**
-	 * setter for storeCity
-	 */
-	public static void setStoreCity(String storeCity){
-		MainFuncs.storeCity = storeCity;
-	}
-
-	/**
-	 * getter for storeAddress
-	 */
-	public static String getStoreAddress(){
-		return storeAddress;
-	}
-	
-	/**
-	 * setter for storeAddress
-	 */
-	public static void setStoreAddress(String storeAddress){
-		MainFuncs.storeAddress = storeAddress;
-	}
-
-	/**
-	 * getter for storePhone
-	 */
-	public static String getStorePhone(){
-		return storePhone;
-	}
-	
-	/**
-	 * setter for storePhone
-	 */
-	public static void setStorePhone(String storePhone){
-		MainFuncs.storePhone = storePhone;
-	}
-	
-	/**
-	 * getter for storeManager
-	 */
-	public static String getStoreManager(){
-		return storeManager;
-	}
-	
-	/**
-	 * setter for storeManager
-	 */
-	public static void setStoreManager(String storeManager){
-		MainFuncs.storeManager = storeManager;
-	}
 	
 	//////////////////
 	//	Quick Tips	//

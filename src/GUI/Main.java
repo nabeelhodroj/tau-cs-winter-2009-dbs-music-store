@@ -169,8 +169,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	// Sale details group
 	private static Group saleGroupSaleDetails;
-	private static Label saleLabelSaleID;
-	private static Label saleLabelSaleIDInput;
 	private static Label saleLabelSaleDate;
 	private static Label saleLabelDateInput;
 	private static Label saleLabelSalesmanIDName;
@@ -373,7 +371,19 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				 * open initialize dialog
 				 */
 				InitialDialog.openInitDialog();
+				// when openning the initial dialog, the stores list is initialized by
+				// the data updated by initStoresTable() that was called earlier before showGUI()
 			}
+			
+			/**
+			 * **************************************************
+			 * 
+			 * After initial dialog is opened and selected store,
+			 * opens main program window
+			 * 
+			 * **************************************************
+			 */
+			
 			{
 				/**
 				 * Main menu
@@ -535,22 +545,18 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
 				{
 					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreID.setText("Store: "+MainFuncs.getStoreID());
 					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
 				}
 				{
 					mainLabelStoreDetailsStoreAddress = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreAddress.setText("Address: "+MainFuncs.getStoreAddress()+", "+MainFuncs.getStoreCity());
 					mainLabelStoreDetailsStoreAddress.setBounds(5, 41, 245, 20);
 				}
 				{
 					mainLabelStoreDetailsStorePhone = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStorePhone.setText("Phone: "+MainFuncs.getStorePhone());
 					mainLabelStoreDetailsStorePhone.setBounds(5, 63, 133, 20);
 				}
 				{
 					mainLabelStoreDetailsStoreManager = new Label(mainGroupStoreDetails, SWT.NONE);
-					mainLabelStoreDetailsStoreManager.setText("Manager: "+MainFuncs.getStoreManager());
 					mainLabelStoreDetailsStoreManager.setBounds(150, 62, 162, 22);
 				}
 				{
@@ -558,6 +564,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
 					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
 				}
+				// initialize store details view
+				MainFuncs.initStoreDetails();
 			}
 			{
 				mainGroupQuickTips = new Group(this, SWT.NONE);
@@ -913,52 +921,41 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleGroupSaleDetails = new Group(saleCompositeMain, SWT.NONE);
 							saleGroupSaleDetails.setLayout(null);
 							saleGroupSaleDetails.setText("Manage Current Sale");
-							saleGroupSaleDetails.setBounds(0, 0, 423, 90);
-							{
-								saleLabelSaleID = new Label(saleGroupSaleDetails, SWT.NONE);
-								saleLabelSaleID.setText("Sale ID:");
-								saleLabelSaleID.setBounds(7, 24, 47, 21);
-								saleLabelSaleID.setSize(47, 18);
-							}
-							{
-								saleLabelSaleIDInput = new Label(saleGroupSaleDetails, SWT.BORDER);
-								saleLabelSaleIDInput.setText("STR0000-000000-0000");
-								saleLabelSaleIDInput.setBounds(66, 24, 126, 18);
-							}
+							saleGroupSaleDetails.setBounds(12, 0, 761, 56);
 							{
 								saleLabelSalesmanIDName = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSalesmanIDName.setText("Salesman:");
-								saleLabelSalesmanIDName.setBounds(7, 54, 47, 18);
+								saleLabelSalesmanIDName.setBounds(25, 24, 47, 18);
 							}
 							{
 								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.NONE);
-								saleComboSalesmanIDNameInput.setBounds(66, 53, 191, 21);
+								saleComboSalesmanIDNameInput.setBounds(84, 23, 309, 21);
 							}
 							{
 								saleLabelSaleDate = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleDate.setText("Date of sale:");
-								saleLabelSaleDate.setBounds(269, 24, 73, 18);
+								saleLabelSaleDate.setBounds(405, 24, 73, 18);
 							}
 							{
 								saleLabelSaleTime = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleTime.setText("Time of sale:");
-								saleLabelSaleTime.setBounds(269, 54, 73, 18);
+								saleLabelSaleTime.setBounds(583, 24, 73, 18);
 							}
 							{
 								saleLabelDateInput = new Label(saleGroupSaleDetails, SWT.BORDER);
-								saleLabelDateInput.setBounds(343, 24, 69, 18);
+								saleLabelDateInput.setBounds(485, 24, 75, 18);
 								saleLabelDateInput.setText(MainFuncs.getDate());
 							}
 							{
 								saleLabelTimeInput = new Label(saleGroupSaleDetails, SWT.BORDER);
-								saleLabelTimeInput.setBounds(343, 54, 69, 18);
+								saleLabelTimeInput.setBounds(663, 24, 69, 18);
 								saleLabelTimeInput.setText(MainFuncs.getTime());
 							}
 						}
 						{
 							saleTableSaleItems = new Table(saleCompositeMain, SWT.BORDER | SWT.MULTI
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
-							saleTableSaleItems.setBounds(16, 108, 759, 267);
+							saleTableSaleItems.setBounds(12, 63, 759, 315);
 							saleTableSaleItems.setHeaderVisible(true);
 							saleTableSaleItems.setLinesVisible(true);
 							int tableWidth = saleTableSaleItems.getClientArea().width - getBorderWidth()*2;
@@ -1946,14 +1943,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static Group getSaleGroupSaleDetails() {
 		return saleGroupSaleDetails;
-	}
-
-	public static Label getSaleLabelSaleID() {
-		return saleLabelSaleID;
-	}
-
-	public static Label getSaleLabelSaleIDInput() {
-		return saleLabelSaleIDInput;
 	}
 
 	public static Label getSaleLabelSaleDate() {
