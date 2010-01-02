@@ -1374,12 +1374,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageTableColumnEmployeePosition.setMoveable(true);
 							manageTableColumnEmployeePosition.setWidth(tableWidth / numOfColumns);
 						}
-						
-						// initialize employees table
-						ManageFuncs.updateEmployeesTableView();
-						// initialize current sale
-						SaleFuncs.initCurrentSale();
-						
 						{
 							manageGroupEditEmployee = new Group(manageMainComposite, SWT.NONE);
 							manageGroupEditEmployee.setLayout(null);
@@ -1519,6 +1513,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								manageTextBoxDBSUpdateFileInput = new Text(manageGroupDBSManage, SWT.BORDER);
 								manageTextBoxDBSUpdateFileInput.setBounds(13, 49, 393, 22);
+								manageTextBoxDBSUpdateFileInput.setEnabled(false);
 							}
 							{
 								manageButtonDBSBrowse = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
@@ -1536,7 +1531,14 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 						}
 					}
-
+					
+					// initialize employees table
+					ManageFuncs.initManageTabView();
+					// initialize employee tab listeners
+					ManageFuncs.initManageListeners();
+					// initialize current sale
+					// initialized only here, after employees are initialized
+					SaleFuncs.initCurrentSale();
 				}	
 			}
 		} catch (Exception e) {
