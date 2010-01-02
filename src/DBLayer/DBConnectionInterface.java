@@ -39,7 +39,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getStoresTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, return an example:
+		// until implemented, use example:
 		TablesExamples.initStoresTable();
 	}
 	
@@ -56,7 +56,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getAlbumsSearchResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 
-		// until implemented, return an example:
+		// until implemented, use example:
 		TablesExamples.getAlbumsSearchResults();
 	}
 	
@@ -69,9 +69,12 @@ public class DBConnectionInterface{
 	 * invokes sale creation and adds to sales table
 	 * corresponding method in GUI.GuiUpdatesInterface: clearSaleTable
 	 */
-	public static void makeSale(){
+	public static void makeSale(SaleTable sale){
 		Debug.log("DBConnectionInterface.makeSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.makeSale(sale);
 	}
 
 	///////////////
@@ -89,13 +92,16 @@ public class DBConnectionInterface{
 	public static void getOrderAvailableStores(long albumID){
 		Debug.log("DBConnectionInterface.getOrderAvailableStores is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.getOrderAvailableStores(albumID);
 	}
 	
 	// orders table
 	
 	/**
-	 * invoked in Startup \ "OK"	// yet to be implemented - when program starts, after choosing the
-	 * 								// current store-id, "OK" is selected to initialize data view
+	 * invoked in InitialDialog \ "Start" - when program starts, after choosing the
+	 * current store-id, "Start" is selected to initialize data view
 	 * invokes query to get initial orders table for selected store
 	 * corresponding method in GUI.GuiUpdatesInterface: initOrdersTable
 	 */
@@ -103,7 +109,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, return an example:
+		// until implemented, use example:
 		TablesExamples.getOrdersTable();
 	}
 	
@@ -116,6 +122,9 @@ public class DBConnectionInterface{
 	public static void removeOrder(int orderID){
 		Debug.log("DBConnectionInterface.removeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.removeOrder(orderID);
 	}
 	
 	/**
@@ -123,9 +132,12 @@ public class DBConnectionInterface{
 	 * invokes add order to orders table
 	 * corresponding method in GUI.GuiUpdatesInterface: addOrder
 	 */
-	public static void placeOrder(){
+	public static void placeOrder(OrdersOrRequestsTableItem order){
 		Debug.log("DBConnectionInterface.placeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.placeOrder(order);
 	}
 	
 	/**
@@ -146,13 +158,16 @@ public class DBConnectionInterface{
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		Debug.log("DBConnectionInterface.updateOrderStatus is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.updateOrderStatus(orderID, status);
 	}
 	
 	// requests table
 	
 	/**
-	 * invoked in Startup \ "OK"	// yet to be implemented - when program starts, after choosing the
-	 * 								// current store-id, "OK" is selected to initialize data view
+	 * invoked in InitialDialog \ "Start" - when program starts, after choosing the
+	 * current store-id, "Start" is selected to initialize data view
 	 * invokes query to get initial requests table for selected store
 	 * corresponding method in GUI.GuiUpdatesInterface: initRequestsTable
 	 */
@@ -160,7 +175,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, return an example:
+		// until implemented, use example:
 		TablesExamples.getRequestsTable();
 	}
 	
@@ -176,6 +191,9 @@ public class DBConnectionInterface{
 	public static void removeRequest(int orderID){
 		Debug.log("DBConnectionInterface.removeRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.removeRequest(orderID);
 	}
 	
 	/**
@@ -187,6 +205,9 @@ public class DBConnectionInterface{
 	public static void addRequest(OrdersOrRequestsTableItem request){
 		Debug.log("DBConnectionInterface.addRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.addRequest(request);
 	}
 
 	////////////////////
@@ -196,14 +217,17 @@ public class DBConnectionInterface{
 	// employees table
 	
 	/**
-	 * invoked in Startup \ "OK"	// yet to be implemented - when program starts, after choosing the
-	 * 								// current store-id, "OK" is selected to initialize data view
+	 * invoked in InitialDialog \ "Start" - when program starts, after choosing the
+	 * current store-id, "Start" is selected to initialize data view
 	 * invokes query to get initial employees table for selected store
 	 * corresponding method in GUI.GuiUpdatesInterface: initEmployeesTable
 	 */
 	public static void getEmployeesTable(){
 		Debug.log("DBConnectionInterface.getEmployeesTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.getEmployeesTable();
 	}
 	
 	/**
@@ -217,6 +241,9 @@ public class DBConnectionInterface{
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
 		Debug.log("DBConnectionInterface.insertUpdateEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.insertUpdateEmployee(employee);
 	}
 	
 	/**
@@ -228,6 +255,9 @@ public class DBConnectionInterface{
 	public static void removeEmployee(int employeeID){
 		Debug.log("DBConnectionInterface.removeEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.removeEmployee(employeeID);
 	}
 	
 	// database update
@@ -241,5 +271,8 @@ public class DBConnectionInterface{
 	public static void updateDataBase(String filename){
 		Debug.log("DBConnectionInterface.updateDataBase is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.updateDataBase(filename);
 	}
 }
