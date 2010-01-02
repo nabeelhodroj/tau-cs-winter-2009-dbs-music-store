@@ -59,7 +59,7 @@ public class GuiUpdatesInterface {
 	/**
 	 * clears the sale table (invoked after gui makes current sale) 
 	 */
-	public static void clearSaleTable(){
+	public static void initSaleTable(){
 		Debug.log("GuiUpdatesInterface: clearSaleTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
 		// initialize new sale table and clear gui view

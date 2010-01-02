@@ -1,20 +1,12 @@
 package GUI;
 
-import java.util.*;
-import java.util.List;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import com.cloudgarden.resource.SWTResourceManager;
-import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
-import org.eclipse.swt.custom.ScrolledComposite;
 
-import DBLayer.DBConnectionInterface;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
+import DBLayer.*;
+import Debug.*;
+import Debug.Debug.*;
 import Queries.*;
 import Tables.*;
 
@@ -340,7 +332,7 @@ public class SearchFuncs {
 		Main.getSearchTextBoxAlbumName().setText("");
 		Main.getSearchTextBoxArtist().setText("");
 		Main.getSearchTextBoxGenreOther().setText("");
-		Main.getSearchTextBoxSaleInfoQuantity().setText("");
+		Main.getSearchTextBoxSaleInfoQuantity().setText("1");
 		Main.getSearchTextBoxSongNames().setText("");
 		Main.getSearchTextBoxYearFrom().setText("");
 		Main.getSearchTextBoxYearTo().setText("");
@@ -553,7 +545,7 @@ public class SearchFuncs {
 				}
 				
 			} catch (NumberFormatException nfe){
-				System.out.println("*** DEBUG: SearchFuncs 'add to sale button' but");
+				System.out.println("*** DEBUG: SearchFuncs 'add to sale' button bug");
 			}
 		} catch (NumberFormatException nfe){
 			// given quantity is not a number

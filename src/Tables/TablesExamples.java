@@ -132,7 +132,7 @@ public class TablesExamples {
 	 */
 	public static void makeSale(SaleTable sale){
 		sales.add(sale);
-		GuiUpdatesInterface.clearSaleTable();
+		GuiUpdatesInterface.initSaleTable();
 	}
 	
 	/**

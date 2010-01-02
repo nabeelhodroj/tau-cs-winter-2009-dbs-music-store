@@ -958,7 +958,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 						}
 						{
-							saleTableSaleItems = new Table(saleCompositeMain, SWT.BORDER | SWT.MULTI
+							saleTableSaleItems = new Table(saleCompositeMain, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 							saleTableSaleItems.setBounds(12, 63, 759, 315);
 							saleTableSaleItems.setHeaderVisible(true);

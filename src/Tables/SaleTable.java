@@ -17,6 +17,7 @@ import java.util.*;
 public class SaleTable extends Table {
 	private EmployeesTableItem salesman;
 	private String date;			//TODO format may be changed later on
+	private String time;
 	private Map<Long,SaleTableItem> saleItems = new HashMap<Long,SaleTableItem>();
 	
 	/**
@@ -92,5 +93,13 @@ public class SaleTable extends Table {
 			sum += sti.getTotalPerItem();
 		}
 		return sum;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

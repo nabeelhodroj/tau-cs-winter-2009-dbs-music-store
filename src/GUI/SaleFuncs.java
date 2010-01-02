@@ -3,8 +3,13 @@ package GUI;
 import java.util.StringTokenizer;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.TableItem;
 
+import DBLayer.DBConnectionInterface;
+import Debug.Debug;
+import Debug.Debug.DebugOutput;
 import Tables.EmployeesTableItem;
 import Tables.SaleTable;
 import Tables.SaleTableItem;
@@ -31,7 +36,55 @@ public class SaleFuncs {
 	 * initialize search tab listeners
 	 */
 	public static void initSaleListeners(){
+				
+		// sale table listener
+		Main.getSaleTableSaleItems().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Sale tab: sale item selected",DebugOutput.FILE,DebugOutput.STDOUT);
+						// enable remove item
+						Main.getSaleButtonRemoveItem().setEnabled(true);
+					}
+				}
+		);
 		
+		// remove item button
+		Main.getSaleButtonRemoveItem().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Sale tab: remove item button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						// remove selected item
+						removeItemFromSale();
+					}
+				}
+		);
+		
+		// clear sale button
+		Main.getSaleButtonClearSale().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Sale tab: clear sale button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						// clear sale table
+						clearSaleTable();
+					}
+				}
+		);
+		
+		// make sale button
+		Main.getSaleButtonMakeSale().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Sale tab: make sale button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						// update sale's time and date
+						StaticProgramTables.sale.setTime(MainFuncs.getTime());
+						StaticProgramTables.sale.setDate(MainFuncs.getDate());
+						// update current sale salesman
+						StaticProgramTables.sale.setSalesman(getSelectedSalesman());
+						// make sale 
+						DBConnectionInterface.makeSale(StaticProgramTables.sale);
+					}
+				}
+		);
 	}
 	
 	////////////////////
@@ -47,7 +100,7 @@ public class SaleFuncs {
 	public static void clearSaleTable(){
 		// clear fields
 		Main.getSaleTableSaleItems().removeAll();
-		Main.getSaleLabelTotalPriceValue().setText("");
+		Main.getSaleLabelTotalPriceValue().setText("0");
 		Main.getSaleLabelDateInput().setText(MainFuncs.getDate());
 		Main.getSaleLabelTimeInput().setText(MainFuncs.getTime());
 		// set buttons
@@ -161,6 +214,22 @@ public class SaleFuncs {
 		}
 		
 		// update gui view
+		updateSaleTableView();
+	}
+	
+	/**
+	 * removes selected sale item from sale table
+	 */
+	public static void removeItemFromSale(){
+		try{
+			// remove sale item from sale
+			long saleItemAlbumID = Long.parseLong(Main.getSaleTableSaleItems().getSelection()[0].getText());
+			StaticProgramTables.sale.getSaleItems().remove(saleItemAlbumID);
+		} catch (NumberFormatException nfe){
+			System.out.println("*** BUG: SaleFuncs.removeItemFromSale bug");
+		}
+		
+		// update view
 		updateSaleTableView();
 	}
 }
