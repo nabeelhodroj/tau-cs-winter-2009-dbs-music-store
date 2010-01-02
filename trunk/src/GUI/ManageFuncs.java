@@ -231,6 +231,11 @@ public class ManageFuncs {
 				Integer.toString(StaticProgramTables.thisStore.getStoreID()));
 	}
 	
+	
+	/////////////////////////////
+	//	employees view updates //
+	/////////////////////////////
+	
 	/**
 	 * update requests table view according to current requests table
 	 */
