@@ -22,7 +22,6 @@ import Tables.*;
  * created by Ariel
  * 
  * Search tab handlers
- * *** System out prints are for debugging ***
  */
 public class SearchFuncs { 
 	

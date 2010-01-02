@@ -1,6 +1,7 @@
 package Tables;
 
 import GUI.*;
+import java.util.*;
 
 /**
  * created by Ariel
@@ -13,6 +14,7 @@ public class TablesExamples {
 	public static StoresTable storesTableExample = new StoresTable();
 	public static OrdersOrRequestsTable ordersTableExample = new OrdersOrRequestsTable(true);
 	public static OrdersOrRequestsTable requestsTableExample = new OrdersOrRequestsTable(false);
+	public static List<SaleTable> sales = new ArrayList<SaleTable>();
 	
 	/**
 	 * initialize tables examples
@@ -96,7 +98,8 @@ public class TablesExamples {
 	 * @param sale
 	 */
 	public static void makeSale(SaleTable sale){
-		//TODO
+		sales.add(sale);
+		GuiUpdatesInterface.clearSaleTable();
 	}
 	
 	public static void getOrderAvailableStores(long albumID){
