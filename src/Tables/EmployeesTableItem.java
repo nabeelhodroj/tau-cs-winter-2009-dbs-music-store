@@ -56,14 +56,14 @@ public class EmployeesTableItem {
 	public EmployeesTableItem(int employeeID, String firstName, String lastName, String employmentDate,
 			String birthDate, String address, String phone, String cellPhone, int storeID, EmployeePositionsEnum position){
 		this.employeeID = employeeID;
-		this.firstName = address;
-		this.lastName = address;
-		this.employmentDate = address;
-		this.birthDate = address;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.employmentDate = employmentDate;
+		this.birthDate = birthDate;
 		this.address = address;
-		this.phone = address;
-		this.cellPhone = address;
-		this.storeID = employeeID;
+		this.phone = phone;
+		this.cellPhone = cellPhone;
+		this.storeID = storeID;
 		this.position = position;
 	}
 
