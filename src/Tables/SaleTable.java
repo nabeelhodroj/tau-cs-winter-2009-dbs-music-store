@@ -47,6 +47,16 @@ public class SaleTable extends Table {
 	public void addSaleItem(SaleTableItem saleItem){
 		this.saleItems.put(saleItem.getAlbumID(), saleItem);
 	}
+	
+	/**
+	 * getter for sale item by album id
+	 * returns null if doesn't exist in sale table
+	 * @param albumID
+	 * @return
+	 */
+	public SaleTableItem getSaleItem(long albumID){
+		return this.saleItems.get(albumID);
+	}
 
 	public EmployeesTableItem getSalesman() {
 		return salesman;
