@@ -66,4 +66,11 @@ public class Debug {
 		log(message, logger1);
 		log(message, logger2);
 	}
+	
+	/**
+	 * Calls log with FILE as DebugOutput
+	 */
+	public static void log(String message){
+		log(message, DebugOutput.FILE);
+	}
 }
