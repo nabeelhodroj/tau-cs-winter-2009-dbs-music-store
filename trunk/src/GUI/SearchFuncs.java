@@ -209,10 +209,16 @@ public class SearchFuncs {
 		// Add to sale group //
 		///////////////////////
 		
-		// sale quantity listener
-		
 		// add to sale button listener
-		
+		Main.getSearchButtonSaleInfoSale().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Search tab: add to sale button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						
+						
+					}
+				}
+		);
 	}
 	
 	/*****************************************************
