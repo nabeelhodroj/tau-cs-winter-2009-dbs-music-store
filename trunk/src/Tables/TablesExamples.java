@@ -91,10 +91,35 @@ public class TablesExamples {
 	}
 	
 	/**
+	 * invoke make sale as example
+	 * real method should insert given sale to data base
+	 * @param sale
+	 */
+	public static void makeSale(SaleTable sale){
+		//TODO
+	}
+	
+	public static void getOrderAvailableStores(long albumID){
+		//TODO
+	}
+	
+	/**
 	 * invoke orders table initialize with example
 	 */
 	public static void getOrdersTable(){
 		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
+	}
+	
+	public static void removeOrder(int orderID){
+		//TODO
+	}
+	
+	public static void placeOrder(OrdersOrRequestsTableItem order){
+		// TODO
+	}
+	
+	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
+		// TODO
 	}
 	
 	/**
@@ -102,5 +127,31 @@ public class TablesExamples {
 	 */
 	public static void getRequestsTable(){
 		GuiUpdatesInterface.initRequestsTable(requestsTableExample);
+	}
+	
+	public static void removeRequest(int orderID){
+		//TODO
+	}
+	
+	public static void addRequest(OrdersOrRequestsTableItem request){
+		//TODO
+	}
+	
+	// Management tab
+	
+	public static void getEmployeesTable(){
+		//TODO
+	}
+	
+	public static void insertUpdateEmployee(EmployeesTableItem employee){
+		//TODO
+	}
+	
+	public static void removeEmployee(int employeeID){
+		//TODO
+	}
+	
+	public static void updateDataBase(String filename){
+		//TODO
 	}
 }
