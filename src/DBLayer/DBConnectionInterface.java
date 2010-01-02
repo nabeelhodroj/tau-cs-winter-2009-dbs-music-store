@@ -67,7 +67,7 @@ public class DBConnectionInterface{
 	/**
 	 * invoked in Main \ sale-tab \ "Make Sale" button
 	 * invokes sale creation and adds to sales table
-	 * corresponding method in GUI.GuiUpdatesInterface: clearSaleTable
+	 * corresponding method in GUI.GuiUpdatesInterface: initSaleTable
 	 */
 	public static void makeSale(SaleTable sale){
 		Debug.log("DBConnectionInterface.makeSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
