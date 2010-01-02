@@ -35,6 +35,9 @@ public class SearchFuncs {
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
 	}
 
+	/**
+	 * initialize search tab listeners
+	 */
 	protected static void initSearchListeners(){
 		
 		/////////////////////////////
@@ -214,8 +217,9 @@ public class SearchFuncs {
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Search tab: add to sale button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						// check if quantity ok
 						
-						
+						checkAndAddSaleItem();
 					}
 				}
 		);
@@ -503,5 +507,57 @@ public class SearchFuncs {
 	 */
 	protected static void setLabelPrice(String str){
 		Main.getSearchLabelStockInfoPrice().setText("Price: "+str);
+	}
+	
+	///////////////////////
+	// handle sale group //
+	///////////////////////
+	
+	public static void checkAndAddSaleItem(){
+		MessageBox addToSaleErrorMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		addToSaleErrorMsg.setMessage("Quantity must be an integer greater than 0");
+		addToSaleErrorMsg.setText("Add to sale Error");
+		
+		try{
+			int addToSaleQuantity = Integer.parseInt(Main.getSearchTextBoxSaleInfoQuantity().getText());
+			// if quantity <= 0, pop error message
+			if (addToSaleQuantity <= 0) addToSaleErrorMsg.open();
+			
+			else try{ // quantity ok, check that stock has wanted quantity
+				// get selected album
+				AlbumsResultsTableItem selectedAlbum = StaticProgramTables.results.getAlbum(
+						Integer.parseInt(Main.getSearchTableAlbumResults().getSelection()[0].getText()));
+				// get current stock quantity
+				int stockQuantity = selectedAlbum.getQuantity();
+				
+				// check if quantity is allowed:
+				// check if album quantity that is already in sale + wanted quantity
+				// given now is <= total album quantity in stock
+				
+				SaleTableItem saleItem = StaticProgramTables.sale.getSaleItem(selectedAlbum.getAlbumID());
+				int quantityAlreadyInSale = (saleItem == null) ? 0 : saleItem.getQuantity(); 
+				if (stockQuantity < addToSaleQuantity + quantityAlreadyInSale){
+					addToSaleErrorMsg.setMessage("You don't have enough in stock!");
+					addToSaleErrorMsg.open();
+				} else {
+					///////////////////////////
+					// quantity ok, add to sale
+					///////////////////////////
+					
+					SaleFuncs.addItemToSale(selectedAlbum.getAlbumID(),
+							selectedAlbum.getAlbumName(), addToSaleQuantity,
+							selectedAlbum.getPrice());
+					
+					// jump to sale tab
+					MainFuncs.switchTab(1);
+				}
+				
+			} catch (NumberFormatException nfe){
+				System.out.println("*** DEBUG: SearchFuncs 'add to sale button' but");
+			}
+		} catch (NumberFormatException nfe){
+			// given quantity is not a number
+			addToSaleErrorMsg.open();
+		}
 	}
 }

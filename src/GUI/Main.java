@@ -1024,6 +1024,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleButtonMakeSale.setBounds(680, 412, 93, 41);
 						}
 					}
+					
+					// initialize sale tab view
+					SaleFuncs.initSaleTabView();
+					// initialize sale listeners
+					SaleFuncs.initSaleListeners();
 				}
 				{
 					/**
@@ -1365,6 +1370,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						
 						// initialize employees table
 						ManageFuncs.updateEmployeesTableView();
+						// initialize current sale
+						SaleFuncs.initCurrentSale();
 						
 						{
 							manageGroupEditEmployee = new Group(manageMainComposite, SWT.NONE);

@@ -61,7 +61,9 @@ public class GuiUpdatesInterface {
 	 */
 	public static void clearSaleTable(){
 		Debug.log("GuiUpdatesInterface: clearSaleTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
-		SaleFuncs.clearSaleTable();
+		
+		// initialize new sale table and clear gui view
+		SaleFuncs.initCurrentSale();
 	}
 	
 	///////////////
