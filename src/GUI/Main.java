@@ -931,6 +931,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.NONE);
 								saleComboSalesmanIDNameInput.setBounds(84, 23, 309, 21);
 							}
+							
+							// initialize salesman list
+							SaleFuncs.updateSalesmenList();
+							saleComboSalesmanIDNameInput.select(0);
+							
 							{
 								saleLabelSaleDate = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleDate.setText("Date of sale:");
@@ -1160,7 +1165,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 						}
 						{
-							stockTableOrders = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI
+							stockTableOrders = new Table(stockTabComposite, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 							stockTableOrders.setBounds(5, 174, 770, 110);
 							stockTableOrders.setHeaderVisible(true);
@@ -1212,8 +1217,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnOrdersCompletionDate.setWidth(tableWidth / numOfColumns);
 							*/
 						}
+						
+						// initialize orders table values
+						StockFuncs.updateOrdersTableView();
+						
 						{
-							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.MULTI // TODO
+							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 							stockTableRequests.setBounds(4, 317, 770, 104);
 							stockTableRequests.setHeaderVisible(true);
@@ -1265,6 +1274,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnRequestsCompletionDate.setWidth(tableWidth / numOfColumns);
 							*/
 						}
+						
+						// initialize requests table values
+						StockFuncs.updateRequestsTableView();
+						
 						{
 							stockLabelRequests = new Label(stockTabComposite, SWT.NONE);
 							stockLabelRequests.setText("Requests:");
@@ -1317,7 +1330,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageLabelEmployees.setBounds(12, 12, 60, 22);
 						}
 						{
-							manageTableEmployees = new Table(manageMainComposite, SWT.BORDER | SWT.MULTI // TODO
+							manageTableEmployees = new Table(manageMainComposite, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 							manageTableEmployees.setBounds(13, 35, 423, 250);
 							manageTableEmployees.setHeaderVisible(true);
@@ -1349,6 +1362,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageTableColumnEmployeePosition.setMoveable(true);
 							manageTableColumnEmployeePosition.setWidth(tableWidth / numOfColumns);
 						}
+						
+						// initialize employees table
+						ManageFuncs.updateEmployeesTableView();
+						
 						{
 							manageGroupEditEmployee = new Group(manageMainComposite, SWT.NONE);
 							manageGroupEditEmployee.setLayout(null);

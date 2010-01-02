@@ -77,8 +77,10 @@ public class GuiUpdatesInterface {
 	 * @param availableStores
 	 */
 	public static void updateOrderAvailableStores(OrderAvailableStoresTable availableStores){
-		//TODO
-		// implement order available stores gui update
+		Debug.log("GuiUpdatesInterface: updateOrderAvailableStores is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+
+		StaticProgramTables.availableStores = availableStores;
+		StockFuncs.updateOrderAvailableStoresTable();
 	}
 	
 	// orders table
@@ -88,8 +90,10 @@ public class GuiUpdatesInterface {
 	 * @param orders
 	 */
 	public static void initOrdersTable(OrdersOrRequestsTable orders){
-		//TODO
-		// implement orders table gui initialization
+		Debug.log("GuiUpdatesInterface: initOrdersTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		StockFuncs.setCurrentOrders(orders);
+		// gui initialization will be done in Main
 	}
 	
 	/**
@@ -131,8 +135,10 @@ public class GuiUpdatesInterface {
 	 * @param requests
 	 */
 	public static void initRequestsTable(OrdersOrRequestsTable requests){
-		//TODO
-		// implement requests table gui initialization
+		Debug.log("GuiUpdatesInterface: initRequestsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		StockFuncs.setCurrentRequests(requests);
+		// gui initialization will be done in Main
 	}
 	
 	/**
@@ -173,8 +179,12 @@ public class GuiUpdatesInterface {
 	 * @param employees
 	 */
 	public static void initEmployeesTable(EmployeesTable employees){
-		//TODO
-		// implement initialize employees table and available employees list on sale tab
+		Debug.log("GuiUpdatesInterface: initEmployeesTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		ManageFuncs.setCurrentEmployees(employees);
+		// gui initialization will be done in Main:
+		// - employees table
+		// - employees list in sale tab
 	}
 	
 	/**
