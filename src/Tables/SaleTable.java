@@ -15,9 +15,9 @@ import java.util.*;
  * - list of sale items (SaleTableItems)
  */
 public class SaleTable extends Table {
-	private String salesmanName;
+	private EmployeesTableItem salesman;
 	private String date;			//TODO format may be changed later on
-	private Map<Integer,SaleTableItem> saleItems = new HashMap<Integer,SaleTableItem>();
+	private Map<Long,SaleTableItem> saleItems = new HashMap<Long,SaleTableItem>();
 	
 	/**
 	 * constructor for the sale table
@@ -27,19 +27,33 @@ public class SaleTable extends Table {
 		super("SaleTable");
 	}
 	
-	public SaleTable(String salesmanName, String date, HashMap<Integer,SaleTableItem> saleItems){
+	/**
+	 * constructor for the sale table with all values
+	 * @param salesman
+	 * @param date
+	 * @param saleItems
+	 */
+	public SaleTable(EmployeesTableItem salesman, String date, HashMap<Long,SaleTableItem> saleItems){
 		super("SaleTable");
-		this.salesmanName = salesmanName;
+		this.salesman = salesman;
 		this.date = date;
 		this.saleItems = saleItems;
 	}
-
-	public String getSalesmanName() {
-		return salesmanName;
+	
+	/**
+	 * add sale item to sale table
+	 * @param saleItem
+	 */
+	public void addSaleItem(SaleTableItem saleItem){
+		this.saleItems.put(saleItem.getAlbumID(), saleItem);
 	}
 
-	public void setSalesmanName(String salesmanName) {
-		this.salesmanName = salesmanName;
+	public EmployeesTableItem getSalesman() {
+		return salesman;
+	}
+
+	public void setSalesman(EmployeesTableItem salesman) {
+		this.salesman = salesman;
 	}
 
 	public String getDate() {
@@ -50,11 +64,11 @@ public class SaleTable extends Table {
 		this.date = date;
 	}
 
-	public Map<Integer, SaleTableItem> getSaleItems() {
+	public Map<Long, SaleTableItem> getSaleItems() {
 		return saleItems;
 	}
 
-	public void setSaleItems(Map<Integer, SaleTableItem> saleItems) {
+	public void setSaleItems(Map<Long, SaleTableItem> saleItems) {
 		this.saleItems = saleItems;
 	}
 	
