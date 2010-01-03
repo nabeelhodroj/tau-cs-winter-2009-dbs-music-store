@@ -231,6 +231,20 @@ public class DBConnectionInterface{
 	}
 	
 	/**
+	 * invoked in Main \ manage-tab \ "Insert" button
+	 * check if employee exists in network employees table
+	 * corresponding method in GUI.GuiUpdatesInterface: getDoesEmployeeExist
+	 * @param employeeID
+	 */
+	public static void checkIfEmployeeExists(int employeeID){
+		Debug.log("DBConnectionInterface.checkIfEmployeeExists is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		//TODO
+		
+		// until implemented, use example:
+		TablesExamples.checkIfEmployeeExists(employeeID);
+	}
+	
+	/**
 	 * invoked in Main \ management-tab \
 	 * 		- "Insert" button
 	 * 		- "Save" button
