@@ -3,6 +3,7 @@ package GUI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 
 import DBLayer.DBConnectionInterface;
@@ -69,7 +70,7 @@ public class ManageFuncs {
 
 						// disable new, edit, remove employee buttons
 						// enable insert, exit without saving, save buttons
-						setEnableEmployeeButtons(false,true,true,false,true,false);
+						setEnableEmployeeButtons(false,true,true,false,false,false);
 						// setup employee details fields
 						newButtonInvokation();
 						// disable new employee selection
@@ -83,7 +84,6 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Insert button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
 						
 						// check fields validity
 						try{
@@ -104,7 +104,8 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Exit without saving button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
+						exitWithoutSavingInvokation();
 					}
 				}
 		);
@@ -114,7 +115,8 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Edit button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
+						editInvokation();
 					}
 				}
 		);
@@ -124,7 +126,16 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Save button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
+						// check fields validity
+						try{
+							int employeeID = checkEmployeeDetailsValidity();
+							// if valid, change employee in DB
+							DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
+						}catch(EmployeeDetailsValidityException edve){
+							// in case the fields are not valid
+							edve.getMsgBox().open();
+						}
 					}
 				}
 		);
@@ -134,7 +145,8 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Remove employee button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
+						removeEmployeeInvokation();
 					}
 				}
 		);
@@ -243,6 +255,9 @@ public class ManageFuncs {
 		Main.getManageComboEmployeePositionInput().setText("");
 	}
 	
+	// New button
+	/////////////
+	
 	/**
 	 * enable employee input fields and clear them
 	 * initialize employment date and store id
@@ -257,6 +272,9 @@ public class ManageFuncs {
 		Main.getManageLabelEmployeeEmployeeStoreIDInput().setText(
 				Integer.toString(StaticProgramTables.thisStore.getStoreID()));
 	}
+	
+	// Insert button
+	////////////////
 	
 	/**
 	 * checks for employee details validity upon insert / save
@@ -313,20 +331,6 @@ public class ManageFuncs {
 		return false;
 	}
 	
-	/*
-	 * returns true iff this store already has employee with this id
-	 * @param givenEmployeeID
-	 * @return
-	 *
-	protected static boolean alreadyHasEmployeeID(int givenEmployeeID){
-		for(EmployeesTableItem employee: StaticProgramTables.employees.getEmployees().values()){
-			if (employee.getEmployeeID() == givenEmployeeID)
-				return true;
-		}
-		return false;
-	}
-	*/
-	
 	/**
 	 * this method is called by GuiUpdatesInterface.tryInsertNewEmployee
 	 * if employee exists in DB, pops an error message
@@ -341,20 +345,29 @@ public class ManageFuncs {
 			ndve.getMsgBox().open();
 		}else{ // insert employee
 			// by now the employee details are correct
-			EmployeesTableItem employee = new EmployeesTableItem(
-					employeeID,
-					Main.getManageTextBoxEmployeeFNameInput().getText(),
-					Main.getManageTextBoxEmployeeLNameInput().getText(),
-					MainFuncs.getDate(),
-					Main.getManageTextBoxEmployeeBirthInput().getText(),
-					Main.getManageTextBoxEmployeeAddressInput().getText(),
-					Main.getManageTextBoxEmployeePhoneInput().getText(),
-					Main.getManageTextBoxEmployeeCellPhoneInput().getText(),
-					StaticProgramTables.thisStore.getStoreID(),
-					getPositionFromText());
 			// insert employee to DB
-			DBConnectionInterface.insertUpdateEmployee(employee);
+			DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
 		}
+	}
+	
+	/**
+	 * creates employees table item (assumes fields are ok) and returns it
+	 * @param employeeID
+	 * @return
+	 */
+	public static EmployeesTableItem getEmployeeFromDetails(int employeeID){
+		EmployeesTableItem employee = new EmployeesTableItem(
+				employeeID,
+				Main.getManageTextBoxEmployeeFNameInput().getText(),
+				Main.getManageTextBoxEmployeeLNameInput().getText(),
+				MainFuncs.getDate(),
+				Main.getManageTextBoxEmployeeBirthInput().getText(),
+				Main.getManageTextBoxEmployeeAddressInput().getText(),
+				Main.getManageTextBoxEmployeePhoneInput().getText(),
+				Main.getManageTextBoxEmployeeCellPhoneInput().getText(),
+				StaticProgramTables.thisStore.getStoreID(),
+				getPositionFromText());
+		return employee;
 	}
 	
 	/**
@@ -388,19 +401,120 @@ public class ManageFuncs {
 		// update table view
 		updateEmployeesTableView();
 		// update employee details view
-		setEnableEmployeeButtons(true, false, false, false, false, false);
-		Main.getManageTableEmployees().deselectAll();
-		clearEmployeeDetails();
-		switchEnableEmployeesDetails(false);
-		Main.getManageTableEmployees().setEnabled(true);
+		setNoEmployeeSelectedState();
 		
 		// update employees list in sale tab
+		SaleFuncs.updateSalesmenList();
+	}
+	
+	// Exit without saving button
+	/////////////////////////////
+	
+	/**
+	 * invoked by "Exit without Saving" button
+	 * clears employee details and restores to initial state
+	 */
+	public static void exitWithoutSavingInvokation(){
+		setNoEmployeeSelectedState();		
+	}
+	
+	// Edit button
+	//////////////
+	
+	/**
+	 * invoked by "Edit" button
+	 * sets view to edit selected employee (except id)
+	 */
+	public static void editInvokation(){
+		// disable employees table change
+		Main.getManageTableEmployees().setEnabled(false);
+		// enable change fields
+		switchEnableEmployeesDetails(true);
+		Main.getManageTextBoxEmployeeIDInput().setEnabled(false);
+		// setup buttons
+		setEnableEmployeeButtons(false, false, true, false, true, false);
+	}
+	
+	// Save button
+	//////////////
+	
+	// handled in listener
+	
+	// Remove employee button
+	/////////////////////////
+	
+	/**
+	 * invoked by "Remove employee" button
+	 * removes employee
+	 */
+	public static void removeEmployeeInvokation(){
+		// setup "Are you sure" message
+		MessageBox areYouSureMsg = new MessageBox(Main.getMainShell(),SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+		areYouSureMsg.setText("Remove employee");
+		areYouSureMsg.setMessage("Are you sure you want to remove employee "+
+				Main.getManageTextBoxEmployeeFNameInput().getText()+" "+
+				Main.getManageTextBoxEmployeeLNameInput().getText()+"?");
+		
+		// pop message and handle "Yes" event
+		if (areYouSureMsg.open() == SWT.YES){
+			try{
+				int employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
+				DBConnectionInterface.removeEmployee(employeeID);
+			}catch(NumberFormatException nfe){
+				Debug.log("*** BUG: ManageFuncs.removeEmployeeInvokation bug", DebugOutput.FILE, DebugOutput.STDOUT);
+			}
+		}
+	}
+	
+	/**
+	 * called by DB after employee was removed from DB
+	 * removes employee from employees table in gui and updates view
+	 * @param employeeID
+	 */
+	public static void removeEmployee(int employeeID){
+		// remove employee from employees table
+		StaticProgramTables.employees.removeEmployee(employeeID);
+		
+		// update view
+		updateEmployeesTableView();
+		setNoEmployeeSelectedState();
+		
+		// update salesmen list in sale tab
+		SaleFuncs.updateSalesmenList();
+	}
+	
+	/**
+	 * invoked by "Save" button
+	 * check 
+	 */
+	public static void saveInvokation(){
 		
 	}
 	
 	/////////////////////////////
 	//	employees view updates //
 	/////////////////////////////
+	
+	/**
+	 * sets employees table and details to initial none-selected state
+	 * invoked by:
+	 * - insert button
+	 * - exit without saving button
+	 * - save button
+	 * - remove employee button
+	 */
+	public static void setNoEmployeeSelectedState(){
+		// set buttons
+		setEnableEmployeeButtons(true, false, false, false, false, false);
+		// unselect items in employees table
+		Main.getManageTableEmployees().deselectAll();
+		// clear details
+		clearEmployeeDetails();
+		// disable details
+		switchEnableEmployeesDetails(false);
+		// enable table selection
+		Main.getManageTableEmployees().setEnabled(true);
+	}
 	
 	/**
 	 * update requests table view according to current requests table
@@ -428,5 +542,17 @@ public class ManageFuncs {
 	 */
 	public static void setCurrentEmployees(EmployeesTable employees){
 		StaticProgramTables.employees = employees;
+	}
+	
+	/////////////////////
+	// update database //
+	/////////////////////
+	
+	/**
+	 * invokes open dialog
+	 */
+	public static void browseInvokation(){
+		// initialize open dialog
+				
 	}
 }
