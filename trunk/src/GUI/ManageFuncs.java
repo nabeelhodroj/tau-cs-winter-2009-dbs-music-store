@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.TableItem;
 
 import Debug.Debug;
 import Debug.Debug.DebugOutput;
+import Tables.EmployeePositionsEnum;
 import Tables.EmployeesTable;
 import Tables.EmployeesTableItem;
 import Tables.OrdersOrRequestsTable;
@@ -31,6 +32,11 @@ public class ManageFuncs {
 		Main.getManageButtonDBSUpdate().setEnabled(false);
 		// initialize buttons
 		setEnableEmployeeButtons(true, false, false, false, false, false);
+		// initialize positions
+		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.NETWORK_MANAGER.getStrRep());
+		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.MANAGER.getStrRep());
+		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.ASSIST_MANAGER.getStrRep());
+		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.SALESMAN.getStrRep());
 	}
 
 	/**
@@ -231,6 +237,57 @@ public class ManageFuncs {
 				Integer.toString(StaticProgramTables.thisStore.getStoreID()));
 	}
 	
+	/**
+	 * checks for employee details validity upon insert / save
+	 * throws EmployeeDetailsValidityException in case of illegal entries
+	 * @throws EmployeeDetailsValidityException
+	 */
+	protected static void checkEmployeeDetailsValidity() throws EmployeeDetailsValidityException{
+		//TODO
+		// check that id field is not empty and is valid
+		try{
+			int employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
+			if (alreadyHasEmployeeID(employeeID))
+				throw new EmployeeDetailsValidityException("Employee with same ID already exists");
+		}catch(NumberFormatException nfe){
+			throw new EmployeeDetailsValidityException("Employee ID must be an integer");
+		}
+		
+		// check that first name and last name are not empty
+		
+		// check that date of birth is entered and valid
+		
+		// check that phone and cell phone, if entered, are numbers
+		
+		// check that position is valid - not empty and no double managers
+		
+		
+	}
+	
+	/**
+	 * returns true iff this store already has a manager
+	 * @return
+	 */
+	protected static boolean alreadyHasManager(){
+		for(EmployeesTableItem employee: StaticProgramTables.employees.getEmployees().values()){
+			if (employee.getPosition() == EmployeePositionsEnum.MANAGER)
+				return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * returns true iff this store already has employee with this id
+	 * @param givenEmployeeID
+	 * @return
+	 */
+	protected static boolean alreadyHasEmployeeID(int givenEmployeeID){
+		for(EmployeesTableItem employee: StaticProgramTables.employees.getEmployees().values()){
+			if (employee.getEmployeeID() == givenEmployeeID)
+				return true;
+		}
+		return false;
+	}
 	
 	/////////////////////////////
 	//	employees view updates //
