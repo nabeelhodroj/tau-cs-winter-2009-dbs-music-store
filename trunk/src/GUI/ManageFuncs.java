@@ -1,19 +1,13 @@
 package GUI;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.*;
+import org.eclipse.swt.events.*;
+import org.eclipse.swt.widgets.*;
 
-import DBLayer.DBConnectionInterface;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
-import Tables.EmployeePositionsEnum;
-import Tables.EmployeesTable;
-import Tables.EmployeesTableItem;
-import Tables.OrdersOrRequestsTable;
-import Tables.OrdersOrRequestsTableItem;
+import DBLayer.*;
+import Debug.*;
+import Debug.Debug.*;
+import Tables.*;
 
 /**
  * created by Ariel
@@ -156,7 +150,8 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Browse button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+						
+						browseInvokation();
 					}
 				}
 		);
@@ -166,7 +161,8 @@ public class ManageFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Update DBS button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO
+
+						updateDBInvokation();
 					}
 				}
 		);
@@ -552,7 +548,45 @@ public class ManageFuncs {
 	 * invokes open dialog
 	 */
 	public static void browseInvokation(){
-		// initialize open dialog
-				
+		// initialize and open file dialog
+		FileDialog openUpdateFile = new FileDialog(Main.getMainShell(),SWT.OPEN);
+		openUpdateFile.setText("Open update file");
+		String[] extensions = new String[]{"*.bz2","*.tar"};
+		openUpdateFile.setFilterExtensions(extensions);
+		String selected = openUpdateFile.open();
+		
+		// update text
+		Main.getManageTextBoxDBSUpdateFileInput().setText(selected);
+		// enable update button
+		Main.getManageButtonDBSUpdate().setEnabled(true);
+	}
+	
+	/**
+	 * invoke updating database
+	 */
+	public static void updateDBInvokation(){
+		// disable update button
+		Main.getManageButtonDBSUpdate().setEnabled(false);
+		
+		//TODO start progress animation
+		
+		// send update to DB
+		String filename = Main.getManageTextBoxDBSUpdateFileInput().getText();
+		DBConnectionInterface.updateDataBase(filename);
+	}
+	
+	/**
+	 * invoked by DB when update is complete
+	 * pops a message to the user
+	 * @param filename
+	 */
+	public static void updateComplete(String filename){
+		MessageBox updateCompleteMsg = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION | SWT.OK);
+		updateCompleteMsg.setText("Update complete");
+		updateCompleteMsg.setMessage("updating database from archive "+filename+" has completed successfuly");
+		if (updateCompleteMsg.open() == SWT.OK){
+			//TODO stop progress animation
+			Main.getManageTextBoxDBSUpdateFileInput().setText("");
+		}		
 	}
 }

@@ -12,6 +12,7 @@ import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.*;
 
 /**
@@ -295,7 +296,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Text manageTextBoxDBSUpdateFileInput;
 	private static Button manageButtonDBSBrowse;
 	private static Button manageButtonDBSUpdate;
-	private static ProgressBar manageProgressBarDBSUpdate;
 
 	/**
 	* Auto-generated main method to display this 
@@ -1344,7 +1344,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						{
 							manageTableEmployees = new Table(manageMainComposite, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
-							manageTableEmployees.setBounds(13, 35, 423, 250);
+							manageTableEmployees.setBounds(14, 34, 430, 216);
 							manageTableEmployees.setHeaderVisible(true);
 							manageTableEmployees.setLinesVisible(true);
 							int numOfColumns = 4;
@@ -1504,30 +1504,26 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageGroupDBSManage = new Group(manageMainComposite, SWT.NONE);
 							manageGroupDBSManage.setLayout(null);
 							manageGroupDBSManage.setText("Manage Database");
-							manageGroupDBSManage.setBounds(12, 293, 425, 160);
+							manageGroupDBSManage.setBounds(12, 296, 425, 157);
 							{
 								manageLabelDBSUpdate = new Label(manageGroupDBSManage, SWT.NONE);
 								manageLabelDBSUpdate.setText("Select update file:");
-								manageLabelDBSUpdate.setBounds(12, 26, 96, 18);
+								manageLabelDBSUpdate.setBounds(12, 21, 96, 18);
 							}
 							{
 								manageTextBoxDBSUpdateFileInput = new Text(manageGroupDBSManage, SWT.BORDER);
-								manageTextBoxDBSUpdateFileInput.setBounds(13, 49, 393, 22);
+								manageTextBoxDBSUpdateFileInput.setBounds(14, 42, 399, 22);
 								manageTextBoxDBSUpdateFileInput.setEnabled(false);
 							}
 							{
 								manageButtonDBSBrowse = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
 								manageButtonDBSBrowse.setText("Browse...");
-								manageButtonDBSBrowse.setBounds(214, 82, 74, 30);
+								manageButtonDBSBrowse.setBounds(221, 69, 74, 23);
 							}
 							{
 								manageButtonDBSUpdate = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
 								manageButtonDBSUpdate.setText("Update Database");
-								manageButtonDBSUpdate.setBounds(294, 82, 112, 30);
-							}
-							{
-								manageProgressBarDBSUpdate = new ProgressBar(manageGroupDBSManage, SWT.NONE);
-								manageProgressBarDBSUpdate.setBounds(13, 123, 393, 25);
+								manageButtonDBSUpdate.setBounds(301, 69, 112, 23);
 							}
 						}
 					}
@@ -2396,10 +2392,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static Button getManageButtonDBSUpdate() {
 		return manageButtonDBSUpdate;
-	}
-
-	public static ProgressBar getManageProgressBarDBSUpdate() {
-		return manageProgressBarDBSUpdate;
 	}
 
 	public static void setShell(Shell shell) {

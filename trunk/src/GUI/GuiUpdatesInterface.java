@@ -230,7 +230,8 @@ public class GuiUpdatesInterface {
 	 * @param filename
 	 */
 	public static void notifyDataBaseUpdated(String filename){
-		//TODO
-		// implement gui message that database is updated
+		Debug.log("GuiUpdatesInterface: notifyDataBaseUpdated is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		ManageFuncs.updateComplete(filename);
 	}
 }
