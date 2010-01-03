@@ -206,6 +206,8 @@ public class GuiUpdatesInterface {
 	 * @param employee
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
+		Debug.log("GuiUpdatesInterface: insertUpdateEmployee is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
 		// inserts employee / update its details and update view
 		ManageFuncs.insertUpdateEmployee(employee);
 	}
@@ -215,8 +217,10 @@ public class GuiUpdatesInterface {
 	 * @param employeeID
 	 */
 	public static void removeEmployee(int employeeID){
-		//TODO
-		// implement remove employee from  employees table
+		Debug.log("GuiUpdatesInterface: removeEmployee is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		// remove employee from  employees table in gui and update view
+		ManageFuncs.removeEmployee(employeeID);
 	}
 	
 	// database update

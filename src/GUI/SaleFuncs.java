@@ -133,6 +133,9 @@ public class SaleFuncs {
 			Main.getSaleComboSalesmanIDNameInput().add(Integer.toString(employee.getEmployeeID())+
 					": "+employee.getFirstName()+" "+employee.getLastName());
 		}
+		
+		// select first in list
+		Main.getSaleComboSalesmanIDNameInput().select(0);
 	}
 	
 	/**

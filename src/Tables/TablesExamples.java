@@ -217,8 +217,12 @@ public class TablesExamples {
 		GuiUpdatesInterface.insertUpdateEmployee(employee);
 	}
 	
+	/**
+	 * remove employee from gui
+	 * @param employeeID
+	 */
 	public static void removeEmployee(int employeeID){
-		//TODO
+		GuiUpdatesInterface.removeEmployee(employeeID);
 	}
 	
 	public static void updateDataBase(String filename){
