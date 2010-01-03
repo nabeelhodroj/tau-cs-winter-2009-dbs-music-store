@@ -5,6 +5,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.TableItem;
 
+import DBLayer.DBConnectionInterface;
 import Debug.Debug;
 import Debug.Debug.DebugOutput;
 import Tables.EmployeePositionsEnum;
@@ -83,6 +84,17 @@ public class ManageFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Insert button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						//TODO
+						
+						// check fields validity
+						try{
+							int employeeID = checkEmployeeDetailsValidity();
+							// if valid, check if employee exists in DB
+							// there it will insert employee if allowed
+							DBConnectionInterface.checkIfEmployeeExists(employeeID);
+						}catch(EmployeeDetailsValidityException edve){
+							// in case the fields are not valid
+							edve.getMsgBox().open();
+						}
 					}
 				}
 		);
@@ -193,7 +205,7 @@ public class ManageFuncs {
 	}
 	
 	/**
-	 * set employees buttons enablement
+	 * set employees buttons enable
 	 * @param newEnable
 	 * @param insertEnable
 	 * @param noSaveEnable
@@ -216,13 +228,11 @@ public class ManageFuncs {
 	///////////////////////
 	
 	/**
-	 * enable employee input fields and clear them
-	 * initialize employment date and store id
+	 * clear all employee details fields
 	 */
-	public static void newButtonInvokation(){
-		// enable fields and clear them
-		switchEnableEmployeesDetails(true);
-		// clear fields
+	public static void clearEmployeeDetails(){
+		Main.getManageLabelEmployeeEmploymentDateInput().setText("");
+		Main.getManageLabelEmployeeEmployeeStoreIDInput().setText("");
 		Main.getManageTextBoxEmployeeIDInput().setText("");
 		Main.getManageTextBoxEmployeeBirthInput().setText("");
 		Main.getManageTextBoxEmployeeFNameInput().setText("");
@@ -231,6 +241,17 @@ public class ManageFuncs {
 		Main.getManageTextBoxEmployeePhoneInput().setText("");
 		Main.getManageTextBoxEmployeeCellPhoneInput().setText("");
 		Main.getManageComboEmployeePositionInput().setText("");
+	}
+	
+	/**
+	 * enable employee input fields and clear them
+	 * initialize employment date and store id
+	 */
+	public static void newButtonInvokation(){
+		// enable fields and clear them
+		switchEnableEmployeesDetails(true);
+		// clear fields
+		clearEmployeeDetails();
 		// set employment date and store id
 		Main.getManageLabelEmployeeEmploymentDateInput().setText(MainFuncs.getDate());
 		Main.getManageLabelEmployeeEmployeeStoreIDInput().setText(
@@ -239,29 +260,45 @@ public class ManageFuncs {
 	
 	/**
 	 * checks for employee details validity upon insert / save
+	 * returns employee id as integer
 	 * throws EmployeeDetailsValidityException in case of illegal entries
 	 * @throws EmployeeDetailsValidityException
 	 */
-	protected static void checkEmployeeDetailsValidity() throws EmployeeDetailsValidityException{
-		//TODO
-		// check that id field is not empty and is valid
+	protected static int checkEmployeeDetailsValidity() throws EmployeeDetailsValidityException{
+		// check that id field is not empty and is valid (an integer)
+		// NOTE: checking if the employee exist is done later in button "insert" listener
+		int employeeID = -1;
 		try{
-			int employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
-			if (alreadyHasEmployeeID(employeeID))
-				throw new EmployeeDetailsValidityException("Employee with same ID already exists");
+			employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
 		}catch(NumberFormatException nfe){
 			throw new EmployeeDetailsValidityException("Employee ID must be an integer");
 		}
 		
 		// check that first name and last name are not empty
+		if (Main.getManageTextBoxEmployeeFNameInput().getText().isEmpty() ||
+				Main.getManageTextBoxEmployeeLNameInput().getText().isEmpty())
+			throw new EmployeeDetailsValidityException("Employee full name must be specified");
 		
-		// check that date of birth is entered and valid
-		
-		// check that phone and cell phone, if entered, are numbers
+		// check that phone and cell phone are numbers
+		try{
+			int phone = Integer.parseInt(Main.getManageTextBoxEmployeePhoneInput().getText());
+		}catch(NumberFormatException nfe){
+			throw new EmployeeDetailsValidityException("Employee phone format illegal");
+		}
+		try{
+			long cellPhone = Long.parseLong(Main.getManageTextBoxEmployeeCellPhoneInput().getText());
+		}catch(NumberFormatException nfe){
+			throw new EmployeeDetailsValidityException("Employee cell-phone format illegal");
+		}
 		
 		// check that position is valid - not empty and no double managers
+		if (Main.getManageComboEmployeePositionInput().getText().isEmpty())
+			throw new EmployeeDetailsValidityException("Must select employee position");
+		if (Main.getManageComboEmployeePositionInput().getText().equals(EmployeePositionsEnum.MANAGER.getStrRep())
+				&& alreadyHasManager())
+			throw new EmployeeDetailsValidityException("Store already has a manager");
 		
-		
+		return employeeID;
 	}
 	
 	/**
@@ -276,17 +313,89 @@ public class ManageFuncs {
 		return false;
 	}
 	
-	/**
+	/*
 	 * returns true iff this store already has employee with this id
 	 * @param givenEmployeeID
 	 * @return
-	 */
+	 *
 	protected static boolean alreadyHasEmployeeID(int givenEmployeeID){
 		for(EmployeesTableItem employee: StaticProgramTables.employees.getEmployees().values()){
 			if (employee.getEmployeeID() == givenEmployeeID)
 				return true;
 		}
 		return false;
+	}
+	*/
+	
+	/**
+	 * this method is called by GuiUpdatesInterface.tryInsertNewEmployee
+	 * if employee exists in DB, pops an error message
+	 * otherwise inserts employee to DB and updates view
+	 * @param exists
+	 * @param employeeID
+	 */
+	public static void tryInsert(boolean exists, int employeeID){
+		if (exists){ // employee already exists in DB
+			EmployeeDetailsValidityException ndve = new EmployeeDetailsValidityException(
+					"Employee already employed by the network");
+			ndve.getMsgBox().open();
+		}else{ // insert employee
+			// by now the employee details are correct
+			EmployeesTableItem employee = new EmployeesTableItem(
+					employeeID,
+					Main.getManageTextBoxEmployeeFNameInput().getText(),
+					Main.getManageTextBoxEmployeeLNameInput().getText(),
+					MainFuncs.getDate(),
+					Main.getManageTextBoxEmployeeBirthInput().getText(),
+					Main.getManageTextBoxEmployeeAddressInput().getText(),
+					Main.getManageTextBoxEmployeePhoneInput().getText(),
+					Main.getManageTextBoxEmployeeCellPhoneInput().getText(),
+					StaticProgramTables.thisStore.getStoreID(),
+					getPositionFromText());
+			// insert employee to DB
+			DBConnectionInterface.insertUpdateEmployee(employee);
+		}
+	}
+	
+	/**
+	 * returns the position enum by text in position combobox
+	 * @return
+	 */
+	public static EmployeePositionsEnum getPositionFromText(){
+		String pos = Main.getManageComboEmployeePositionInput().getText();
+		if (pos.equals(EmployeePositionsEnum.NETWORK_MANAGER.getStrRep()))
+			return EmployeePositionsEnum.NETWORK_MANAGER;
+		else if (pos.equals(EmployeePositionsEnum.MANAGER.getStrRep()))
+			return EmployeePositionsEnum.MANAGER;
+		else if (pos.equals(EmployeePositionsEnum.ASSIST_MANAGER.getStrRep()))
+			return EmployeePositionsEnum.ASSIST_MANAGER;
+		else return EmployeePositionsEnum.SALESMAN;
+	}
+	
+	/**
+	 * called after employee was inserted to DB / updated in DB
+	 * updates current employees table and gui view
+	 * @param employee
+	 */
+	public static void insertUpdateEmployee(EmployeesTableItem employee){
+		// first check if employee exists in table, if so remove it
+		if (StaticProgramTables.employees.getEmployee(employee.getEmployeeID()) != null)
+			StaticProgramTables.employees.removeEmployee(employee.getEmployeeID());
+		
+		// insert new employee
+		StaticProgramTables.employees.addEmployee(employee);
+		
+		// update table view
+		updateEmployeesTableView();
+		// update employee details view
+		setEnableEmployeeButtons(true, false, false, false, false, false);
+		Main.getManageTableEmployees().deselectAll();
+		clearEmployeeDetails();
+		switchEnableEmployeesDetails(false);
+		Main.getManageTableEmployees().setEnabled(true);
+		
+		// update employees list in sale tab
+		
 	}
 	
 	/////////////////////////////

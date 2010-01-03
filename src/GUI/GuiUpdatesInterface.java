@@ -190,12 +190,24 @@ public class GuiUpdatesInterface {
 	}
 	
 	/**
+	 * receives true iff employee exists in DB, and if so pops an error
+	 * otherwise continues to new employee insertion 
+	 * @param exists
+	 */
+	public static void tryInsertNewEmployee(int employeeID, boolean exists){
+		Debug.log("GuiUpdatesInterface: getDoesEmployeeExist is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		// try to insert employee
+		ManageFuncs.tryInsert(exists, employeeID);
+	}
+	
+	/**
 	 * adds employee to employees table if not a member, or updates employee details if already exists
 	 * @param employee
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
-		//TODO
-		// implement update employee details in employee table and update gui
+		// inserts employee / update its details and update view
+		ManageFuncs.insertUpdateEmployee(employee);
 	}
 	
 	/**
