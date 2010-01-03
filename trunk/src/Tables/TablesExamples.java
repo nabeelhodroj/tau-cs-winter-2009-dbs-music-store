@@ -193,9 +193,28 @@ public class TablesExamples {
 	public static void getEmployeesTable(){
 		GuiUpdatesInterface.initEmployeesTable(employees);
 	}
+
+	/**
+	 * check if employee exists in network
+	 * this example returns "false" always, as if the employee doesn't exist in DB
+	 * @param employeeID
+	 */
+	public static void checkIfEmployeeExists(int employeeID){
+		GuiUpdatesInterface.tryInsertNewEmployee(employeeID, false);
+	}
 	
+	/**
+	 * inserts employee to "DB" if new, or updates details if employee exists
+	 * @param employee
+	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
-		//TODO
+		if (employees.getEmployee(employee.getEmployeeID()) != null) // employee exists, remove it
+			employees.getEmployees().remove(employee.getEmployeeID());
+		// now insert new one
+		employees.addEmployee(employee);
+		
+		// update store's employees list
+		GuiUpdatesInterface.insertUpdateEmployee(employee);
 	}
 	
 	public static void removeEmployee(int employeeID){

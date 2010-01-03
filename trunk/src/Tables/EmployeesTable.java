@@ -67,6 +67,14 @@ public class EmployeesTable extends Table {
 	}
 	
 	/**
+	 * remove employee
+	 * @param employeeID
+	 */
+	public void removeEmployee(int employeeID){
+		this.employees.remove(employeeID);
+	}
+	
+	/**
 	 * employee getter
 	 * @param employeeID
 	 * @return
