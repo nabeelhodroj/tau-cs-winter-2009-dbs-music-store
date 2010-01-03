@@ -225,7 +225,11 @@ public class TablesExamples {
 		GuiUpdatesInterface.removeEmployee(employeeID);
 	}
 	
+	/**
+	 * notify gui that update is complete
+	 * @param filename
+	 */
 	public static void updateDataBase(String filename){
-		//TODO
+		GuiUpdatesInterface.notifyDataBaseUpdated(filename);
 	}
 }
