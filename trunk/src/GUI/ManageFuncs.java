@@ -553,12 +553,13 @@ public class ManageFuncs {
 		openUpdateFile.setText("Open update file");
 		String[] extensions = new String[]{"*.bz2","*.tar"};
 		openUpdateFile.setFilterExtensions(extensions);
-		String selected = openUpdateFile.open();
-		
-		// update text
-		Main.getManageTextBoxDBSUpdateFileInput().setText(selected);
-		// enable update button
-		Main.getManageButtonDBSUpdate().setEnabled(true);
+		try{
+			String selected = openUpdateFile.open();
+			// update text
+			Main.getManageTextBoxDBSUpdateFileInput().setText(selected);
+			// enable update button
+			Main.getManageButtonDBSUpdate().setEnabled(true);
+		}catch(IllegalArgumentException iae){} // in case "cancel" is pressed
 	}
 	
 	/**
@@ -587,6 +588,6 @@ public class ManageFuncs {
 		if (updateCompleteMsg.open() == SWT.OK){
 			//TODO stop progress animation
 			Main.getManageTextBoxDBSUpdateFileInput().setText("");
-		}		
+		}
 	}
 }

@@ -1,8 +1,16 @@
 package GUI;
 
 import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.Panel;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import DBLayer.DBConnectionInterface;
 import Tables.TablesExamples;
@@ -12,6 +20,7 @@ import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
+import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.*;
 
@@ -220,6 +229,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label stockLabelQuantityToOrder;
 	private static Text stockTextBoxQuantityToOrder;
 	private static Button stockButtonClearOrder;
+	
+	// update DB progress bar
+	private Panel managePanelDBProgress;
+	private Frame manageFrameDBProgress;
+	private Composite manageCompositeDBProgressContainer;
+	private JLabel manageJLabelDBProgressBar;
 	private static Button stockButtonPlaceOrder;
 	
 	// Orders table
@@ -1525,6 +1540,23 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageButtonDBSUpdate.setText("Update Database");
 								manageButtonDBSUpdate.setBounds(301, 69, 112, 23);
 							}
+							{
+								manageCompositeDBProgressContainer = new Composite(manageGroupDBSManage, SWT.EMBEDDED);
+								manageCompositeDBProgressContainer.setBounds(12, 92, 401, 59);
+								{
+									URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									manageJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
+									manageJLabelDBProgressBar.setBounds(16, 97, 397, 48);
+									
+									manageFrameDBProgress = SWT_AWT.new_Frame(manageCompositeDBProgressContainer);
+									{
+										managePanelDBProgress = new Panel();
+										manageFrameDBProgress.add(managePanelDBProgress);
+										managePanelDBProgress.add(manageJLabelDBProgressBar);
+									}
+								}
+							}
+							
 						}
 					}
 					
