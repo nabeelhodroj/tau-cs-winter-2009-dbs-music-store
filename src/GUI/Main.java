@@ -160,6 +160,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static TableColumn searchTableColumnSongArtist;
 	private static TableColumn searchTableColumnSongLength;
 	
+	// search results progress bar
+	private static Panel searchPanelDBProgress;
+	private static Frame searchFrameDBProgress;
+	private static Composite searchCompositeDBProgressContainer;
+	private static JLabel searchJLabelDBProgressBar;
+	
 	// Stock information group
 	private static Group searchGroupStockInfo;
 	private static Label searchLabelStockInfoStoreStock;
@@ -229,12 +235,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label stockLabelQuantityToOrder;
 	private static Text stockTextBoxQuantityToOrder;
 	private static Button stockButtonClearOrder;
-	
-	// update DB progress bar
-	private Panel managePanelDBProgress;
-	private Frame manageFrameDBProgress;
-	private Composite manageCompositeDBProgressContainer;
-	private JLabel manageJLabelDBProgressBar;
+	private Composite composite1;
 	private static Button stockButtonPlaceOrder;
 	
 	// Orders table
@@ -311,6 +312,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Text manageTextBoxDBSUpdateFileInput;
 	private static Button manageButtonDBSBrowse;
 	private static Button manageButtonDBSUpdate;
+	
+	// update DB progress bar
+	private static Panel managePanelDBProgress;
+	private static Frame manageFrameDBProgress;
+	private static Composite manageCompositeDBProgressContainer;
+	private static JLabel manageJLabelDBProgressBar;
 
 	/**
 	* Auto-generated main method to display this 
@@ -787,7 +794,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.FULL_SELECTION
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE); // single row selection
-								searchTableAlbumResults.setBounds(12, 20, 395, 225);
+								searchTableAlbumResults.setBounds(13, 23, 395, 200);
 								searchTableAlbumResults.setHeaderVisible(true);
 								searchTableAlbumResults.setLinesVisible(true);
 								int numOfColumns = 6;
@@ -830,15 +837,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableColumnAlbumLength.setWidth(tableWidth / numOfColumns);
 							}
 							{
-								searchProgressBarLabel = new Label(searchGroupResults, SWT.BORDER);
-								searchProgressBarLabel.setAlignment(SWT.CENTER);
-								searchProgressBarLabel.setText("No results");
-								searchProgressBarLabel.setBounds(15, 251, 392, 22);
-							}
-							{
 								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
-								searchTableSongResults.setBounds(12, 286, 395, 170);
+								searchTableSongResults.setBounds(13, 296, 395, 162);
 								searchTableSongResults.setHeaderVisible(true);
 								searchTableSongResults.setLinesVisible(true);
 								
@@ -869,7 +870,21 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableColumnSongLength.setMoveable(true);
 								searchTableColumnSongLength.setWidth(tableWidth / numOfColumns);
 							}
-							
+							{
+								searchCompositeDBProgressContainer = new Composite(searchGroupResults, SWT.EMBEDDED);
+								searchCompositeDBProgressContainer.setBounds(15, 230, 390, 60);
+								{
+									URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									searchJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
+									searchJLabelDBProgressBar.setBounds(15, 230, 390, 50);									
+									searchFrameDBProgress = SWT_AWT.new_Frame(searchCompositeDBProgressContainer);
+									{
+										searchPanelDBProgress = new Panel();
+										searchFrameDBProgress.add(searchPanelDBProgress);
+										searchPanelDBProgress.add(searchJLabelDBProgressBar);
+									}
+								}
+							}
 						}
 						{
 							searchGroupStockInfo = new Group(searchTabComposite, SWT.NONE);
@@ -2428,5 +2443,47 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static void setShell(Shell shell) {
 		Main.shell = shell;
+	}
+
+	public static Panel getManagePanelDBProgress() {
+		return managePanelDBProgress;
+	}
+
+	public static void setManagePanelDBProgress(Panel managePanelDBProgress) {
+		managePanelDBProgress = managePanelDBProgress;
+	}
+
+	public static Frame getManageFrameDBProgress() {
+		return manageFrameDBProgress;
+	}
+
+	public static void setManageFrameDBProgress(Frame manageFrameDBProgress) {
+		manageFrameDBProgress = manageFrameDBProgress;
+	}
+
+	public static Composite getManageCompositeDBProgressContainer() {
+		return manageCompositeDBProgressContainer;
+	}
+
+	public static void setManageCompositeDBProgressContainer(
+			Composite manageCompositeDBProgressContainer) {
+		manageCompositeDBProgressContainer = manageCompositeDBProgressContainer;
+	}
+
+	public static JLabel getManageJLabelDBProgressBar() {
+		return manageJLabelDBProgressBar;
+	}
+
+	public static void setManageJLabelDBProgressBar(JLabel manageJLabelDBProgressBar) {
+		manageJLabelDBProgressBar = manageJLabelDBProgressBar;
+	}
+
+	public static Composite getSearchCompositeDBProgressContainer() {
+		return searchCompositeDBProgressContainer;
+	}
+
+	public static void setSearchCompositeDBProgressContainer(
+			Composite searchCompositeDBProgressContainer) {
+		Main.searchCompositeDBProgressContainer = searchCompositeDBProgressContainer;
 	}
 }

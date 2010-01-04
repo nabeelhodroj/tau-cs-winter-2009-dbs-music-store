@@ -25,6 +25,8 @@ public class SearchFuncs {
 		switchAlbumSearchBullet(true);
 		Main.getSearchButtonStockInfoOrder().setEnabled(false);
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
+		// set progress visibility off
+		showDBProgress(false);
 	}
 
 	/**
@@ -147,6 +149,8 @@ public class SearchFuncs {
 						{
 							// set gui environment
 							setEnvSearchInvoked();
+							// set progress visibility
+							showDBProgress(true);
 							// send query to DB
 							DBConnectionInterface.getAlbumsSearchResults(q);
 						}
@@ -383,6 +387,14 @@ public class SearchFuncs {
 	//////////////////////////////
 	
 	/**
+	 * sets the progress bar visibility on and off
+	 * @param show
+	 */
+	public static void showDBProgress(boolean show){
+		Main.getSearchCompositeDBProgressContainer().setVisible(show);
+	}
+	
+	/**
 	 * getter for the current search results data structure
 	 */
 	public static AlbumsResultsTable getCurrentSearchResults(){
@@ -421,6 +433,9 @@ public class SearchFuncs {
 			};
 			item.setText(entry);
 		}
+		
+		// set progress visibility on
+		showDBProgress(false);
 	}
 	
 	/**

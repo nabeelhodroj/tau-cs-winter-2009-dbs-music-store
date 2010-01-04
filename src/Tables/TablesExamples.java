@@ -115,6 +115,13 @@ public class TablesExamples {
 	 * invoke GUI albums search results update with example
 	 */
 	public static void getAlbumsSearchResults(){
+		try {
+			// simulate DB action
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// sleep didn't work
+			System.err.println("*** BUG: Sleep didn't work...");
+		}
 		GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
 	}
 	
@@ -230,6 +237,13 @@ public class TablesExamples {
 	 * @param filename
 	 */
 	public static void updateDataBase(String filename){
+		try {
+			// simulate DB action
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// sleep didn't work
+			System.err.println("*** BUG: Sleep didn't work...");
+		}
 		GuiUpdatesInterface.notifyDataBaseUpdated(filename);
 	}
 }

@@ -33,6 +33,8 @@ public class ManageFuncs {
 		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.MANAGER.getStrRep());
 		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.ASSIST_MANAGER.getStrRep());
 		Main.getManageComboEmployeePositionInput().add(EmployeePositionsEnum.SALESMAN.getStrRep());
+		// initialize DB update progress animation to be invisible
+		showDBProgress(false);
 	}
 
 	/**
@@ -569,7 +571,8 @@ public class ManageFuncs {
 		// disable update button
 		Main.getManageButtonDBSUpdate().setEnabled(false);
 		
-		//TODO start progress animation
+		//start progress animation
+		showDBProgress(true);
 		
 		// send update to DB
 		String filename = Main.getManageTextBoxDBSUpdateFileInput().getText();
@@ -584,10 +587,20 @@ public class ManageFuncs {
 	public static void updateComplete(String filename){
 		MessageBox updateCompleteMsg = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION | SWT.OK);
 		updateCompleteMsg.setText("Update complete");
-		updateCompleteMsg.setMessage("updating database from archive "+filename+" has completed successfuly");
+		updateCompleteMsg.setMessage("Updating database from archive "+filename+" has completed successfuly");
+		// stop progress animation
+		showDBProgress(false);
 		if (updateCompleteMsg.open() == SWT.OK){
-			//TODO stop progress animation
+			// clear file input
 			Main.getManageTextBoxDBSUpdateFileInput().setText("");
 		}
+	}
+	
+	/**
+	 * sets the DB progress bar visibility on and off
+	 * @param show
+	 */
+	public static void showDBProgress(boolean show){
+		Main.getManageCompositeDBProgressContainer().setVisible(show);
 	}
 }
