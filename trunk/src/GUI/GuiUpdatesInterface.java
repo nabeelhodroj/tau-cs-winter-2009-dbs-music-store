@@ -112,8 +112,7 @@ public class GuiUpdatesInterface {
 	 * @param orderID
 	 */
 	public static void addOrder(OrdersOrRequestsTableItem order){
-		//TODO
-		// implement adding an order to the orders table and update gui
+		StockFuncs.addOrder(order);
 	}
 	
 	/**
