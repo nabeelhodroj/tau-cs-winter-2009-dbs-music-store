@@ -138,34 +138,17 @@ public class MainFuncs {
         return dateFormat.format(date);
     }
 	
-	//////////////////
-	//	Quick Tips	//
-	//////////////////
+	//////////////
+	//	Welcome	//
+	//////////////
 	
-	private static java.util.List<String> quickTips = new ArrayList<String>();
-	private static Iterator<String> quickTipsIter;
-	public static void generateTips(){
-		String tip;
-				
-		tip =	"For adding an album to current sale, search album by album ID or other parameters,\n"+
-				"go to the \"Sale\" box on the bottom of the search tab, enter wanted quantity and\n"+
-				"click the \"Add to sale\" button.";
-		quickTips.add(tip);
-		
-		// initialize iterator
-		quickTipsIter = quickTips.iterator();
-	}
-	
-	/**
-	 * cyclic getter for quick-tips
-	 * @return
-	 */
-	public static String getTip(){
-		if (quickTipsIter.hasNext()) return quickTipsIter.next();
-		else {
-			quickTipsIter = quickTips.iterator();
-			return getTip();
-		}
+	public static void initWelcomeGroup(){
+		Main.getMainLabelWelcomeText().setText(
+				"Welcome to the SSDA Music Store Manager!\n"+
+				"Select your choice:\n"+
+				"Search for albums, place an order or add to sale, manage sales, manage stock (orders \n"+
+				"and requests) and manage HR and database"
+				);
 	}
 	
 	/////////////////////
