@@ -207,14 +207,11 @@ public class SearchFuncs {
 						// set order parameters to selected album
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
 						AlbumsResultsTableItem selectedAlbum = StaticProgramTables.results.getAlbum(albumID);
-						// album id
-						Main.getStockLabelAlbumIDInput().setText(Long.toString(albumID));
-						// storage location
-						Main.getStockLabelStorageLocationInput().setText(Long.toString(selectedAlbum.getStorageLocation()));
-						// quantity
-						Main.getStockLabelQuantityInStockInput().setText(Integer.toString(selectedAlbum.getQuantity()));
-						// price
-						Main.getStockLabelStorePriceInput().setText(Integer.toString(selectedAlbum.getPrice()));
+						StockFuncs.setOrderFields(
+								Long.toString(albumID),
+								Long.toString(selectedAlbum.getStorageLocation()),
+								Integer.toString(selectedAlbum.getQuantity()),
+								Integer.toString(selectedAlbum.getPrice()));
 						
 						// move to stock tab
 						MainFuncs.switchTab(2);
