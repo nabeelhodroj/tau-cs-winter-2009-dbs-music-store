@@ -24,6 +24,12 @@ import Tables.OrdersOrRequestsTableItem;
  */
 public class StockFuncs {
 	
+	// order form fields
+	private static long albumID;
+	private static long storageLocation;
+	private static int quantity;
+	private static int price;
+	
 	/**
 	 * initialize stock tab view
 	 */
@@ -101,10 +107,8 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: place order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						try{
-							
+						try{							
 							OrdersOrRequestsTableItem order = getOrder();
-							
 							// check if DB is not busy, else pop a message
 							if (MainFuncs.isAllowDBAction()){
 								// flag DB as busy
@@ -119,7 +123,7 @@ public class StockFuncs {
 							}
 							
 						}catch(InvalidOrderException ioe){
-							
+							ioe.getMsgBox().open();
 						}
 					}
 				}
@@ -310,6 +314,28 @@ public class StockFuncs {
 		Main.getStockLabelStorePriceInput().setText(price);
 	}
 	
+	/**
+	 * invoked by add to order button in search-tab
+	 * set current order fields
+	 * @param albumID
+	 * @param storageLocation
+	 * @param quantity
+	 * @param price
+	 */
+	public static void setOrderFields(long albumID, long storageLocation, int quantity, int price){
+		StockFuncs.albumID = albumID;
+		StockFuncs.storageLocation = storageLocation;
+		StockFuncs.quantity = quantity;
+		StockFuncs.price = price;
+		
+		// set fields
+		setOrderFields(
+				Long.toString(albumID),
+				Long.toString(storageLocation),
+				Integer.toString(quantity),
+				Integer.toString(price));
+	}
+	
 	// order available stores table
 	
 	/**
@@ -337,19 +363,17 @@ public class StockFuncs {
 			
 			// get selected store's quantity
 			int selectedStoreQuantity = Integer.parseInt(
-					Main.getStockTableOrderAvailableStores().getSelection()[2].getText());
+					Main.getStockTableOrderAvailableStores().getSelection()[0].getText(2));
 			if (quantity > selectedStoreQuantity)
 				throw new InvalidOrderException("Selected store doesn't have enough in stock");
 			else{
 				// get selected store id
 				int selectedStoreID = Integer.parseInt(
-						Main.getStockTableOrderAvailableStores().getSelection()[0].getText());
+						Main.getStockTableOrderAvailableStores().getSelection()[0].getText(0));
 				// get album id
-				long albumID = Long.parseLong(
-						Main.getStockLabelAlbumIDInput().getText());
 
 				OrdersOrRequestsTableItem order = new OrdersOrRequestsTableItem(
-						-1, // to be set be DB
+						-1, // to be set by DB
 						StaticProgramTables.thisStore.getStoreID(),
 						selectedStoreID,
 						albumID,

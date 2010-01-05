@@ -99,4 +99,8 @@ public class OrdersOrRequestsTableItem {
 	public int getOrderID() {
 		return orderID;
 	}
+
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
 }

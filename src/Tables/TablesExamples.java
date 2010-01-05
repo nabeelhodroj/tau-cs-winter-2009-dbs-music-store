@@ -20,6 +20,7 @@ public class TablesExamples {
 	public static List<SaleTable> sales = new ArrayList<SaleTable>();
 	public static OrderAvailableStoresTable orderAvailableStoresExample = new OrderAvailableStoresTable();
 	public static EmployeesTable employees = new EmployeesTable(0);
+	public static int ordersRequestsCounter = 7;
 	
 	/**
 	 * initialize tables examples
@@ -172,6 +173,8 @@ public class TablesExamples {
 	 */
 	public static void placeOrder(OrdersOrRequestsTableItem order){
 		waitSome(1000);
+		// give order its id and update orders-requests counter
+		order.setOrderID(ordersRequestsCounter++);
 		GuiUpdatesInterface.addOrder(order);
 	}
 	
