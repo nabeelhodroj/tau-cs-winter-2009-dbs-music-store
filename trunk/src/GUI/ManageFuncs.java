@@ -15,7 +15,7 @@ import Tables.*;
  * Management tab handlers
  */
 public class ManageFuncs {
-
+	
 	/**
 	 * initializes the manage tab view: enabled and disabled fields, default values etc.
 	 */
@@ -81,12 +81,25 @@ public class ManageFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Insert button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
+						
+						
 						// check fields validity
 						try{
 							int employeeID = checkEmployeeDetailsValidity();
 							// if valid, check if employee exists in DB
 							// there it will insert employee if allowed
-							DBConnectionInterface.checkIfEmployeeExists(employeeID);
+							
+							// check if DB is not busy, else pop a message
+							if (MainFuncs.isAllowDBAction()){
+								// flag DB as busy
+								MainFuncs.setAllowDBAction(false);
+								
+								DBConnectionInterface.checkIfEmployeeExists(employeeID);
+								
+							} else {
+								MainFuncs.getMsgDBActionNotAllowed().open();
+							}
+							
 						}catch(EmployeeDetailsValidityException edve){
 							// in case the fields are not valid
 							edve.getMsgBox().open();
@@ -127,7 +140,18 @@ public class ManageFuncs {
 						try{
 							int employeeID = checkEmployeeDetailsValidity();
 							// if valid, change employee in DB
-							DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
+							
+							// check if DB is not busy, else pop a message
+							if (MainFuncs.isAllowDBAction()){
+								// flag DB as busy
+								MainFuncs.setAllowDBAction(false);
+								
+								DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
+								
+							} else {
+								MainFuncs.getMsgDBActionNotAllowed().open();
+							}
+							
 						}catch(EmployeeDetailsValidityException edve){
 							// in case the fields are not valid
 							edve.getMsgBox().open();
@@ -142,7 +166,16 @@ public class ManageFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Remove employee button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
-						removeEmployeeInvokation();
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							removeEmployeeInvokation();
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -164,7 +197,16 @@ public class ManageFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Update DBS button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						updateDBInvokation();
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							updateDBInvokation();
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -284,8 +326,14 @@ public class ManageFuncs {
 		// check that id field is not empty and is valid (an integer)
 		// NOTE: checking if the employee exist is done later in button "insert" listener
 		int employeeID = -1;
+		boolean amIManager = false;
 		try{
 			employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
+			// set if I am a manager (if I'm new, set false, if I exist, check my position)
+			if (StaticProgramTables.employees.getEmployee(employeeID) == null)
+				amIManager = false;
+			else
+				amIManager = StaticProgramTables.employees.getEmployee(employeeID).getPosition() == EmployeePositionsEnum.MANAGER;
 		}catch(NumberFormatException nfe){
 			throw new EmployeeDetailsValidityException("Employee ID must be an integer");
 		}
@@ -296,22 +344,31 @@ public class ManageFuncs {
 			throw new EmployeeDetailsValidityException("Employee full name must be specified");
 		
 		// check that phone and cell phone are numbers
-		try{
-			int phone = Integer.parseInt(Main.getManageTextBoxEmployeePhoneInput().getText());
-		}catch(NumberFormatException nfe){
-			throw new EmployeeDetailsValidityException("Employee phone format illegal");
+		String[] tokens = Main.getManageTextBoxEmployeePhoneInput().getText().split("-");
+		for(String str: tokens){
+			try{
+				//int phone = 
+				Integer.parseInt(str);
+			}catch(NumberFormatException nfe){
+				throw new EmployeeDetailsValidityException("Employee phone format illegal");
+			}
 		}
-		try{
-			long cellPhone = Long.parseLong(Main.getManageTextBoxEmployeeCellPhoneInput().getText());
-		}catch(NumberFormatException nfe){
-			throw new EmployeeDetailsValidityException("Employee cell-phone format illegal");
+		
+		tokens = Main.getManageTextBoxEmployeeCellPhoneInput().getText().split("-");
+		for(String str: tokens){
+			try{
+				//long cellPhone = 
+				Long.parseLong(str);
+			}catch(NumberFormatException nfe){
+				throw new EmployeeDetailsValidityException("Employee cell-phone format illegal");
+			}
 		}
 		
 		// check that position is valid - not empty and no double managers
 		if (Main.getManageComboEmployeePositionInput().getText().isEmpty())
 			throw new EmployeeDetailsValidityException("Must select employee position");
 		if (Main.getManageComboEmployeePositionInput().getText().equals(EmployeePositionsEnum.MANAGER.getStrRep())
-				&& alreadyHasManager())
+				&& alreadyHasManager() && !amIManager)
 			throw new EmployeeDetailsValidityException("Store already has a manager");
 		
 		return employeeID;
@@ -321,7 +378,7 @@ public class ManageFuncs {
 	 * returns true iff this store already has a manager
 	 * @return
 	 */
-	protected static boolean alreadyHasManager(){
+	protected static boolean alreadyHasManager(){		
 		for(EmployeesTableItem employee: StaticProgramTables.employees.getEmployees().values()){
 			if (employee.getPosition() == EmployeePositionsEnum.MANAGER)
 				return true;
@@ -403,6 +460,9 @@ public class ManageFuncs {
 		
 		// update employees list in sale tab
 		SaleFuncs.updateSalesmenList();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	// Exit without saving button
@@ -413,7 +473,7 @@ public class ManageFuncs {
 	 * clears employee details and restores to initial state
 	 */
 	public static void exitWithoutSavingInvokation(){
-		setNoEmployeeSelectedState();		
+		setNoEmployeeSelectedState();	
 	}
 	
 	// Edit button
@@ -479,14 +539,9 @@ public class ManageFuncs {
 		
 		// update salesmen list in sale tab
 		SaleFuncs.updateSalesmenList();
-	}
-	
-	/**
-	 * invoked by "Save" button
-	 * check 
-	 */
-	public static void saveInvokation(){
 		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/////////////////////////////
