@@ -2087,4 +2087,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			Composite searchCompositeDBProgressContainer) {
 		Main.searchCompositeDBProgressContainer = searchCompositeDBProgressContainer;
 	}
+
+	public static Display getMainDisplay() {
+		return display;
+	}
+
+	public static void setDisplay(Display display) {
+		Main.display = display;
+	}
 }

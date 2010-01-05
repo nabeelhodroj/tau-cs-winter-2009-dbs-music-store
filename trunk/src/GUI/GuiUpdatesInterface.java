@@ -41,13 +41,19 @@ public class GuiUpdatesInterface {
 	 * and sets the search tab gui environment (enables search button)
 	 * @param albumResults
 	 */
-	public static void updateAlbumResultsTable(AlbumsResultsTable albumResults){
+	public static void updateAlbumResultsTable(final AlbumsResultsTable albumResults){
 		Debug.log("GuiUpdatesInterface: updateAlbumResultsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// update albums results table
-		SearchFuncs.updateAlbumsResultsTable(albumResults);
-		// set gui environment
-		SearchFuncs.setEnvSearchDone();
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// update albums results table
+				SearchFuncs.updateAlbumsResultsTable(albumResults);
+				// set gui environment
+				SearchFuncs.setEnvSearchDone();
+				
+				}
+			});
 	}
 	
 	//////////////
@@ -62,8 +68,14 @@ public class GuiUpdatesInterface {
 	public static void initSaleTable(){
 		Debug.log("GuiUpdatesInterface: clearSaleTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// initialize new sale table and clear gui view
-		SaleFuncs.initCurrentSale();
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// initialize new sale table and clear gui view
+				SaleFuncs.initCurrentSale();
+				
+				}
+			});
 	}
 	
 	///////////////
@@ -78,11 +90,17 @@ public class GuiUpdatesInterface {
 	 * updates the order's available stores table by the given availableStores
 	 * @param availableStores
 	 */
-	public static void updateOrderAvailableStores(OrderAvailableStoresTable availableStores){
+	public static void updateOrderAvailableStores(final OrderAvailableStoresTable availableStores){
 		Debug.log("GuiUpdatesInterface: updateOrderAvailableStores is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 
-		StaticProgramTables.availableStores = availableStores;
-		StockFuncs.updateOrderAvailableStoresTable();
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StaticProgramTables.availableStores = availableStores;
+				StockFuncs.updateOrderAvailableStoresTable();
+				
+				}
+			});
 	}
 	
 	// orders table
@@ -102,17 +120,33 @@ public class GuiUpdatesInterface {
 	 * removes order with given order-id from orders table
 	 * @param orderID
 	 */
-	public static void removeOrder(int orderID){
-		//TODO
-		// implement removal of given order from orders table and update gui
+	public static void removeOrder(final int orderID){
+		Debug.log("GuiUpdatesInterface: removeOrder is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				//TODO
+				// implement removal of given order from orders table and update gui
+				
+				}
+			});
 	}
 	
 	/**
 	 * adds order to orders table
 	 * @param orderID
 	 */
-	public static void addOrder(OrdersOrRequestsTableItem order){
-		StockFuncs.addOrder(order);
+	public static void addOrder(final OrdersOrRequestsTableItem order){
+		Debug.log("GuiUpdatesInterface: addOrder is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StockFuncs.addOrder(order);
+				
+				}
+			});
 	}
 	
 	/**
@@ -124,9 +158,17 @@ public class GuiUpdatesInterface {
 	 * @param orderID
 	 * @param status
 	 */
-	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
-		//TODO
-		// implement order status update and gui update
+	public static void updateOrderStatus(final int orderID, final OrderStatusEnum status){
+		Debug.log("GuiUpdatesInterface: updateOrderStatus is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				//TODO
+				// implement order status update and gui update
+				
+				}
+			});
 	}
 	
 	// requests table
@@ -146,18 +188,34 @@ public class GuiUpdatesInterface {
 	 * removes request with given request-id (order-id in database) from requests table
 	 * @param orderID
 	 */
-	public static void removeRequest(int requestID){
-		//TODO
-		// implement removal of given request from requests table and update gui
+	public static void removeRequest(final int requestID){
+		Debug.log("GuiUpdatesInterface: removeRequest is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				//TODO
+				// implement removal of given request from requests table and update gui
+				
+				}
+			});
 	}
 	
 	/**
 	 * adds request to requests table
 	 * @param requestID
 	 */
-	public static void addRequest(OrdersOrRequestsTableItem request){
-		//TODO
-		// implement adding a request to the requests table and update gui
+	public static void addRequest(final OrdersOrRequestsTableItem request){
+		Debug.log("GuiUpdatesInterface: addRequest is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				//TODO
+				// implement adding a request to the requests table and update gui
+				
+				}
+			});
 	}
 	
 	/*
@@ -193,33 +251,51 @@ public class GuiUpdatesInterface {
 	 * otherwise continues to new employee insertion 
 	 * @param exists
 	 */
-	public static void tryInsertNewEmployee(int employeeID, boolean exists){
+	public static void tryInsertNewEmployee(final int employeeID, final boolean exists){
 		Debug.log("GuiUpdatesInterface: getDoesEmployeeExist is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// try to insert employee
-		ManageFuncs.tryInsert(exists, employeeID);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// try to insert employee
+				ManageFuncs.tryInsert(exists, employeeID);
+				
+				}
+			});
 	}
 	
 	/**
 	 * adds employee to employees table if not a member, or updates employee details if already exists
 	 * @param employee
 	 */
-	public static void insertUpdateEmployee(EmployeesTableItem employee){
+	public static void insertUpdateEmployee(final EmployeesTableItem employee){
 		Debug.log("GuiUpdatesInterface: insertUpdateEmployee is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// inserts employee / update its details and update view
-		ManageFuncs.insertUpdateEmployee(employee);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// inserts employee / update its details and update view
+				ManageFuncs.insertUpdateEmployee(employee);
+				
+				}
+			});
 	}
 	
 	/**
 	 * removes employee with given employee-id from employees table
 	 * @param employeeID
 	 */
-	public static void removeEmployee(int employeeID){
+	public static void removeEmployee(final int employeeID){
 		Debug.log("GuiUpdatesInterface: removeEmployee is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// remove employee from  employees table in gui and update view
-		ManageFuncs.removeEmployee(employeeID);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// remove employee from  employees table in gui and update view
+				ManageFuncs.removeEmployee(employeeID);
+				
+				}
+			});
 	}
 	
 	// database update
@@ -228,9 +304,15 @@ public class GuiUpdatesInterface {
 	 * notifies the gui that the given filename was added to the database
 	 * @param filename
 	 */
-	public static void notifyDataBaseUpdated(String filename){
+	public static void notifyDataBaseUpdated(final String filename){
 		Debug.log("GuiUpdatesInterface: notifyDataBaseUpdated is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		ManageFuncs.updateComplete(filename);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				ManageFuncs.updateComplete(filename);
+				
+				}
+			});
 	}
 }
