@@ -9,7 +9,7 @@ public class DBConnectionManage {
 	public class GetEmployeesTable implements Runnable{
 		@Override
 		public void run() {
-			Debug.log("DBConnectionManage.GetEmployeeManage thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionManage.GetEmployeesTable thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			//TODO
 			
 			// until implemented, use example:
