@@ -26,6 +26,11 @@ public class MainFuncs {
 	public static boolean allowDBAction = false;
 	public static MessageBox msgDBActionNotAllowed;
 	
+	// flags for tables initialization
+	public static boolean isOrdersInitialized = false;
+	public static boolean isRequestsInitialized = false;
+	public static boolean isEmployeesInitialized = false;
+	
 	/////////////////////////
 	//	initialize program //
 	/////////////////////////
@@ -39,15 +44,51 @@ public class MainFuncs {
 	 * then updates gui fields
 	 */
 	public static void initializeTablesAndFields(){
-		
+		// wait until all tables are initialized
+		while (!isOrdersInitialized || !isRequestsInitialized || !isEmployeesInitialized){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				System.out.println("*** BUG: sleep failed");
+			}
+		}
 		// initialize all fields:
 		/////////////////////////
 		
 		// initialize store details view
 		MainFuncs.initStoreDetails();
+		// initialize welcome group
+		MainFuncs.initWelcomeGroup();
 		
+		// initialize search tab view
+		SearchFuncs.initSearchTabView();
+		// initialize search listeners
+		SearchFuncs.initSearchListeners();
 		
+		// initialize sale tab view
+		SaleFuncs.initSaleTabView();
+		// initialize sale listeners
+		SaleFuncs.initSaleListeners();
 		
+		// initialize orders table values
+		StockFuncs.updateOrdersTableView();
+		// initialize requests table values
+		StockFuncs.updateRequestsTableView();
+		// initialize stock tab view
+		StockFuncs.initStockTabView();
+		// initialize stock tab listeners
+		StockFuncs.initStockTabListeners();
+		
+		// initialize employees table
+		ManageFuncs.initManageTabView();
+		// initialize sale salesman list
+		SaleFuncs.updateSalesmenList();
+		Main.getSaleComboSalesmanIDNameInput().select(0);
+		// initialize employee tab listeners
+		ManageFuncs.initManageListeners();
+		// initialize current sale
+		// initialized only here, after employees are initialized
+		SaleFuncs.initCurrentSale();
 	}
 	
 	public static void initMsgDBActionNotAllowed(){
@@ -200,5 +241,29 @@ public class MainFuncs {
 
 	public static void setMsgDBActionNotAllowed(MessageBox msgDBActionNotAllowed) {
 		MainFuncs.msgDBActionNotAllowed = msgDBActionNotAllowed;
+	}
+
+	public static boolean isOrdersInitialized() {
+		return isOrdersInitialized;
+	}
+
+	public static void setOrdersInitialized(boolean isOrdersInitialized) {
+		MainFuncs.isOrdersInitialized = isOrdersInitialized;
+	}
+
+	public static boolean isRequestsInitialized() {
+		return isRequestsInitialized;
+	}
+
+	public static void setRequestsInitialized(boolean isRequestsInitialized) {
+		MainFuncs.isRequestsInitialized = isRequestsInitialized;
+	}
+
+	public static boolean isEmployeesInitialized() {
+		return isEmployeesInitialized;
+	}
+
+	public static void setEmployeesInitialized(boolean isEmployeesInitialized) {
+		MainFuncs.isEmployeesInitialized = isEmployeesInitialized;
 	}
 }

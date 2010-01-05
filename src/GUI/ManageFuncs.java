@@ -599,6 +599,8 @@ public class ManageFuncs {
 	 */
 	public static void setCurrentEmployees(EmployeesTable employees){
 		StaticProgramTables.employees = employees;
+		// flag that employees initialization is done
+		MainFuncs.setEmployeesInitialized(true);
 	}
 	
 	/////////////////////

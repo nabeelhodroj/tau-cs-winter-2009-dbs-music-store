@@ -4,7 +4,6 @@ import java.awt.Frame;
 import java.awt.Panel;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
 import javax.swing.*;
 
 import DBLayer.DBConnectionInterface;
@@ -390,8 +389,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
 					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
 				}
-				// initialize store details view
-				MainFuncs.initStoreDetails();
 			}
 			{
 				mainGroupWelcome = new Group(this, SWT.NONE);
@@ -402,8 +399,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					mainLabelWelcomeText = new Label(mainGroupWelcome, SWT.NONE);
 					mainLabelWelcomeText.setBounds(8, 19, 445, 61);
 				}
-				// initialize welcome group
-				MainFuncs.initWelcomeGroup();
 			}
 			{
 				mainTabFolder = new TabFolder(this, SWT.NONE);
@@ -738,11 +733,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 						}
 					}
-					
-					// initialize search tab view
-					SearchFuncs.initSearchTabView();
-					// initialize search listeners
-					SearchFuncs.initSearchListeners();
 				}
 				{
 					/**
@@ -771,12 +761,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.NONE);
 								saleComboSalesmanIDNameInput.setBounds(84, 23, 309, 21);
-							}
-							
-							// initialize salesman list
-							SaleFuncs.updateSalesmenList();
-							saleComboSalesmanIDNameInput.select(0);
-							
+							}							
 							{
 								saleLabelSaleDate = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleDate.setText("Date of sale:");
@@ -865,11 +850,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleButtonMakeSale.setBounds(680, 412, 93, 41);
 						}
 					}
-					
-					// initialize sale tab view
-					SaleFuncs.initSaleTabView();
-					// initialize sale listeners
-					SaleFuncs.initSaleListeners();
 				}
 				{
 					/**
@@ -1137,15 +1117,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
 						}
 					}
-
-					// initialize orders table values
-					StockFuncs.updateOrdersTableView();
-					// initialize requests table values
-					StockFuncs.updateRequestsTableView();
-					// initialize stock tab view
-					StockFuncs.initStockTabView();
-					// initialize stock tab listeners
-					StockFuncs.initStockTabListeners();
 				}
 				{
 					/**
@@ -1369,16 +1340,16 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							
 						}
 					}
-					
-					// initialize employees table
-					ManageFuncs.initManageTabView();
-					// initialize employee tab listeners
-					ManageFuncs.initManageListeners();
-					// initialize current sale
-					// initialized only here, after employees are initialized
-					SaleFuncs.initCurrentSale();
 				}
 			}
+			
+			// initialize gui view
+			//////////////////////
+			
+			MainFuncs.initializeTablesAndFields();
+			
+			//////////////////////
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
