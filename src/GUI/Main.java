@@ -45,6 +45,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	// Main
 	private static Shell shell;
+	private static Display display;
 	
 	// Main Menu
 
@@ -301,7 +302,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	* org.eclipse.swt.widgets.Composite inside a new Shell.
 	*/
 	public static void showGUI() {
-		Display display = Display.getDefault();
+		display = Display.getDefault();
 		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
 		Main inst = new Main(shell, SWT.NULL);
@@ -676,7 +677,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchCompositeDBProgressContainer = new Composite(searchGroupResults, SWT.EMBEDDED);
 								searchCompositeDBProgressContainer.setBounds(15, 230, 390, 60);
 								{
-									URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									//URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									URL url = new URL(MainFuncs.getAnimationURL());
 									searchJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
 									searchJLabelDBProgressBar.setBounds(15, 230, 390, 50);									
 									searchFrameDBProgress = SWT_AWT.new_Frame(searchCompositeDBProgressContainer);
@@ -1361,7 +1363,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageCompositeDBProgressContainer = new Composite(manageGroupDBSManage, SWT.EMBEDDED);
 								manageCompositeDBProgressContainer.setBounds(12, 92, 401, 59);
 								{
-									URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									//URL url = new URL("file:///d:/tmp/rubi_animation.gif");
+									URL url = new URL(MainFuncs.getAnimationURL());
 									manageJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
 									manageJLabelDBProgressBar.setBounds(16, 97, 397, 48);
 									
