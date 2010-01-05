@@ -227,8 +227,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Table manageTableEmployees;
 	private static TableColumn manageTableColumnEmployeeID;
 	private static TableColumn manageTableColumnEmployeePName;
-	static private Button button1;
-	static private Label label1;
 	private static TableColumn manageTableColumnEmployeeLName;
 	private static TableColumn manageTableColumnEmployeePosition;
 	
@@ -353,7 +351,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				 * open initialize dialog
 				 */
 				InitialDialog.openInitDialog();
-				// when openning the initial dialog, the stores list is initialized by
+				// when opening the initial dialog, the stores list is initialized by
 				// the data updated by initStoresTable() that was called earlier before showGUI()
 			}
 			
