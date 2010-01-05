@@ -1,16 +1,11 @@
 package GUI;
 
-import java.util.*;
-import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.Panel;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import DBLayer.DBConnectionInterface;
 import Tables.TablesExamples;
@@ -21,8 +16,6 @@ import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.custom.*;
 
 /**
  * created by Ariel
@@ -235,7 +228,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label stockLabelQuantityToOrder;
 	private static Text stockTextBoxQuantityToOrder;
 	private static Button stockButtonClearOrder;
-	private Composite composite1;
 	private static Button stockButtonPlaceOrder;
 	
 	// Orders table
@@ -2449,33 +2441,16 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		return managePanelDBProgress;
 	}
 
-	public static void setManagePanelDBProgress(Panel managePanelDBProgress) {
-		managePanelDBProgress = managePanelDBProgress;
-	}
-
 	public static Frame getManageFrameDBProgress() {
 		return manageFrameDBProgress;
-	}
-
-	public static void setManageFrameDBProgress(Frame manageFrameDBProgress) {
-		manageFrameDBProgress = manageFrameDBProgress;
 	}
 
 	public static Composite getManageCompositeDBProgressContainer() {
 		return manageCompositeDBProgressContainer;
 	}
 
-	public static void setManageCompositeDBProgressContainer(
-			Composite manageCompositeDBProgressContainer) {
-		manageCompositeDBProgressContainer = manageCompositeDBProgressContainer;
-	}
-
 	public static JLabel getManageJLabelDBProgressBar() {
 		return manageJLabelDBProgressBar;
-	}
-
-	public static void setManageJLabelDBProgressBar(JLabel manageJLabelDBProgressBar) {
-		manageJLabelDBProgressBar = manageJLabelDBProgressBar;
 	}
 
 	public static Composite getSearchCompositeDBProgressContainer() {
