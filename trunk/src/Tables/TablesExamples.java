@@ -3,6 +3,8 @@ package Tables;
 import GUI.*;
 import java.util.*;
 import Queries.*;
+import Debug.*;
+import Debug.Debug.*;
 
 /**
  * created by Ariel
@@ -115,13 +117,7 @@ public class TablesExamples {
 	 * invoke GUI albums search results update with example
 	 */
 	public static void getAlbumsSearchResults(){
-		try {
-			// simulate DB action
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// sleep didn't work
-			System.err.println("*** BUG: Sleep didn't work...");
-		}
+		waitSome(3000);
 		GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
 	}
 	
@@ -129,6 +125,7 @@ public class TablesExamples {
 	 * invoke GUI stores table initialize with example
 	 */
 	public static void initStoresTable(){
+		waitSome(1000);
 		GuiUpdatesInterface.initStoresTable(storesTableExample);
 	}
 	
@@ -138,6 +135,7 @@ public class TablesExamples {
 	 * @param sale
 	 */
 	public static void makeSale(SaleTable sale){
+		waitSome(1000);
 		sales.add(sale);
 		GuiUpdatesInterface.initSaleTable();
 	}
@@ -147,6 +145,7 @@ public class TablesExamples {
 	 * @param albumID
 	 */
 	public static void getOrderAvailableStores(OrderAvailableStoresQuery query){
+		waitSome(1000);
 		GuiUpdatesInterface.updateOrderAvailableStores(orderAvailableStoresExample);
 	}
 	
@@ -154,6 +153,7 @@ public class TablesExamples {
 	 * invoke orders table initialize with example
 	 */
 	public static void getOrdersTable(){
+		waitSome(1000);
 		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
 	}
 	
@@ -162,6 +162,7 @@ public class TablesExamples {
 	 * @param orderID
 	 */
 	public static void removeOrder(int orderID){
+		waitSome(1000);
 		GuiUpdatesInterface.removeOrder(orderID);
 	}
 	
@@ -170,10 +171,12 @@ public class TablesExamples {
 	 * @param order
 	 */
 	public static void placeOrder(OrdersOrRequestsTableItem order){
+		waitSome(1000);
 		GuiUpdatesInterface.addOrder(order);
 	}
 	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
+		waitSome(1000);
 		// TODO
 	}
 	
@@ -181,14 +184,17 @@ public class TablesExamples {
 	 * invoke requests table initialize with example
 	 */
 	public static void getRequestsTable(){
+		waitSome(1000);
 		GuiUpdatesInterface.initRequestsTable(requestsTableExample);
 	}
 	
 	public static void removeRequest(int orderID){
+		waitSome(1000);
 		//TODO
 	}
 	
 	public static void addRequest(OrdersOrRequestsTableItem request){
+		waitSome(1000);
 		//TODO
 	}
 	
@@ -198,6 +204,7 @@ public class TablesExamples {
 	 * invoke employees table initialize with example
 	 */
 	public static void getEmployeesTable(){
+		waitSome(1000);
 		GuiUpdatesInterface.initEmployeesTable(employees);
 	}
 
@@ -207,6 +214,7 @@ public class TablesExamples {
 	 * @param employeeID
 	 */
 	public static void checkIfEmployeeExists(int employeeID){
+		waitSome(1000);
 		GuiUpdatesInterface.tryInsertNewEmployee(employeeID, false);
 	}
 	
@@ -215,6 +223,7 @@ public class TablesExamples {
 	 * @param employee
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
+		waitSome(1000);
 		if (employees.getEmployee(employee.getEmployeeID()) != null) // employee exists, remove it
 			employees.getEmployees().remove(employee.getEmployeeID());
 		// now insert new one
@@ -229,6 +238,7 @@ public class TablesExamples {
 	 * @param employeeID
 	 */
 	public static void removeEmployee(int employeeID){
+		waitSome(1000);
 		GuiUpdatesInterface.removeEmployee(employeeID);
 	}
 	
@@ -237,13 +247,22 @@ public class TablesExamples {
 	 * @param filename
 	 */
 	public static void updateDataBase(String filename){
+		waitSome(3000);
+		GuiUpdatesInterface.notifyDataBaseUpdated(filename);
+	}
+	
+	/**
+	 * sleep some for testing purposes
+	 * @param milisecs
+	 */
+	public static void waitSome(int milisecs){
 		try {
+			Debug.log("<< TablesExamples: waiting some... >>",DebugOutput.FILE,DebugOutput.STDOUT);
 			// simulate DB action
-			Thread.sleep(3000);
+			Thread.sleep(milisecs);
 		} catch (InterruptedException e) {
 			// sleep didn't work
 			System.err.println("*** BUG: Sleep didn't work...");
 		}
-		GuiUpdatesInterface.notifyDataBaseUpdated(filename);
 	}
 }
