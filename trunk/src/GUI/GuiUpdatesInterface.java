@@ -82,7 +82,7 @@ public class GuiUpdatesInterface {
 		Debug.log("GuiUpdatesInterface: updateOrderAvailableStores is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 
 		StaticProgramTables.availableStores = availableStores;
-		StockFuncs.updateOrderAvailableStoresTable();
+		StockFuncs.updateOrderAvailableStoresTableView();
 	}
 	
 	// orders table
