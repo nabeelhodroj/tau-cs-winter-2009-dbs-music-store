@@ -4,11 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.*;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
@@ -23,9 +21,20 @@ import Tables.StoresTableItem;
  */
 public class MainFuncs {
 	
+	// this flag is false if a DB action runs in background and false otherwise
+	// DB actions are allowed one at a time
+	public static boolean allowDBAction = false;
+	public static MessageBox msgDBActionNotAllowed;
+	
 	/////////////////////////
 	//	initialize program //
 	/////////////////////////
+	
+	public static void initMsgDBActionNotAllowed(){
+		msgDBActionNotAllowed = new MessageBox(Main.getMainShell(),SWT.ICON_WARNING);
+		msgDBActionNotAllowed.setText("Cannot invoke action");
+		msgDBActionNotAllowed.setMessage("Cannot invoke action, DB is busy.\nPlease try again later.");
+	}
 	
 	/**
 	 * initialize initDialog listeners 
@@ -93,6 +102,7 @@ public class MainFuncs {
 	public static void switchTab(int tab){
 		Main.getMainTabFolder().setSelection(tab);
 	}
+
 	
 	//////////////////////////////
 	//	Date and Time getters	//
@@ -171,5 +181,21 @@ public class MainFuncs {
 		String str = projectPath.replaceAll(" ","%20");
 		String url = "file:///"+str.replaceAll("\\\\","/")+"/../src/GUI/rubi_animation.gif";
 		return url;
+	}
+
+	public static boolean isAllowDBAction() {
+		return allowDBAction;
+	}
+
+	public static void setAllowDBAction(boolean allowDBAction) {
+		MainFuncs.allowDBAction = allowDBAction;
+	}
+
+	public static MessageBox getMsgDBActionNotAllowed() {
+		return msgDBActionNotAllowed;
+	}
+
+	public static void setMsgDBActionNotAllowed(MessageBox msgDBActionNotAllowed) {
+		MainFuncs.msgDBActionNotAllowed = msgDBActionNotAllowed;
 	}
 }

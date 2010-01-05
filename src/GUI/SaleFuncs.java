@@ -75,13 +75,23 @@ public class SaleFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Sale tab: make sale button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						// update sale's time and date
-						StaticProgramTables.sale.setTime(MainFuncs.getTime());
-						StaticProgramTables.sale.setDate(MainFuncs.getDate());
-						// update current sale salesman
-						StaticProgramTables.sale.setSalesman(getSelectedSalesman());
-						// make sale 
-						DBConnectionInterface.makeSale(StaticProgramTables.sale);
+						
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							// update sale's time and date
+							StaticProgramTables.sale.setTime(MainFuncs.getTime());
+							StaticProgramTables.sale.setDate(MainFuncs.getDate());
+							// update current sale salesman
+							StaticProgramTables.sale.setSalesman(getSelectedSalesman());
+							// make sale 
+							DBConnectionInterface.makeSale(StaticProgramTables.sale);
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -119,6 +129,9 @@ public class SaleFuncs {
 
 		// update view
 		clearSaleTable();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**

@@ -15,8 +15,8 @@ import Tables.*;
  * 
  * Search tab handlers
  */
-public class SearchFuncs { 
-	
+public class SearchFuncs {
+
 	/**
 	 * initializes the search tab view: enabled and disabled fields, default values etc.
 	 */
@@ -143,16 +143,25 @@ public class SearchFuncs {
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Search tab: search button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						// create AlbumSearchQuery
-						AlbumSearchQuery q = createAlbumSearchQuery();
-						if (q != null)
-						{
-							// set gui environment
-							setEnvSearchInvoked();
-							// set progress visibility
-							showDBProgress(true);
-							// send query to DB
-							DBConnectionInterface.getAlbumsSearchResults(q);
+						
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							// create AlbumSearchQuery
+							AlbumSearchQuery q = createAlbumSearchQuery();
+							if (q != null)
+							{
+								// set gui environment
+								setEnvSearchInvoked();
+								// set progress visibility
+								showDBProgress(true);
+								// send query to DB
+								DBConnectionInterface.getAlbumsSearchResults(q);
+							}
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
 						}
 					}
 				}
@@ -434,8 +443,11 @@ public class SearchFuncs {
 			item.setText(entry);
 		}
 		
-		// set progress visibility on
+		// set progress visibility off
 		showDBProgress(false);
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**

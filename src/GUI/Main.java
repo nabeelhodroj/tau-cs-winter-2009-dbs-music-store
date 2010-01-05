@@ -227,6 +227,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Table manageTableEmployees;
 	private static TableColumn manageTableColumnEmployeeID;
 	private static TableColumn manageTableColumnEmployeePName;
+	static private Button button1;
+	static private Label label1;
 	private static TableColumn manageTableColumnEmployeeLName;
 	private static TableColumn manageTableColumnEmployeePosition;
 	
@@ -342,6 +344,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			this.layout();
 			pack();
 			this.setSize(800, 590);
+			
+			// initialize allow DB message box
+			MainFuncs.initMsgDBActionNotAllowed();
+			
 			{
 				/**
 				 * open initialize dialog
@@ -677,7 +683,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchCompositeDBProgressContainer = new Composite(searchGroupResults, SWT.EMBEDDED);
 								searchCompositeDBProgressContainer.setBounds(15, 230, 390, 60);
 								{
-									//URL url = new URL("file:///d:/tmp/rubi_animation.gif");
 									URL url = new URL(MainFuncs.getAnimationURL());
 									searchJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
 									searchJLabelDBProgressBar.setBounds(15, 230, 390, 50);									
@@ -1363,7 +1368,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageCompositeDBProgressContainer = new Composite(manageGroupDBSManage, SWT.EMBEDDED);
 								manageCompositeDBProgressContainer.setBounds(12, 92, 401, 59);
 								{
-									//URL url = new URL("file:///d:/tmp/rubi_animation.gif");
 									URL url = new URL(MainFuncs.getAnimationURL());
 									manageJLabelDBProgressBar = new JLabel(new ImageIcon(url), JLabel.CENTER);
 									manageJLabelDBProgressBar.setBounds(16, 97, 397, 48);
@@ -1387,7 +1391,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					// initialize current sale
 					// initialized only here, after employees are initialized
 					SaleFuncs.initCurrentSale();
-				}	
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
