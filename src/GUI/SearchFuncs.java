@@ -144,24 +144,27 @@ public class SearchFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Search tab: search button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
-						// check if DB is not busy, else pop a message
-						if (MainFuncs.isAllowDBAction()){
-							// flag DB as busy
-							MainFuncs.setAllowDBAction(false);
+						// create AlbumSearchQuery
+						AlbumSearchQuery q = createAlbumSearchQuery();
+						if (q != null)
+						{
+							// set gui environment
+							setEnvSearchInvoked();
+							// set progress visibility
+							showDBProgress(true);
+							// send query to DB
 							
-							// create AlbumSearchQuery
-							AlbumSearchQuery q = createAlbumSearchQuery();
-							if (q != null)
-							{
-								// set gui environment
-								setEnvSearchInvoked();
-								// set progress visibility
-								showDBProgress(true);
-								// send query to DB
+							// check if DB is not busy, else pop a message
+							if (MainFuncs.isAllowDBAction()){
+								// flag DB as busy
+								MainFuncs.setAllowDBAction(false);
+								
 								DBConnectionInterface.getAlbumsSearchResults(q);
+								
+							} else {
+								MainFuncs.getMsgDBActionNotAllowed().open();
 							}
-						} else {
-							MainFuncs.getMsgDBActionNotAllowed().open();
+							
 						}
 					}
 				}
@@ -212,6 +215,9 @@ public class SearchFuncs {
 								Long.toString(selectedAlbum.getStorageLocation()),
 								Integer.toString(selectedAlbum.getQuantity()),
 								Integer.toString(selectedAlbum.getPrice()));
+						
+						// enable check availability button in stock tab
+						Main.getStockButtonCheckAvailability().setEnabled(true);
 						
 						// move to stock tab
 						MainFuncs.switchTab(2);
@@ -451,9 +457,6 @@ public class SearchFuncs {
 		
 		// set progress visibility off
 		showDBProgress(false);
-		
-		// flag DB as free
-		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**
@@ -462,6 +465,8 @@ public class SearchFuncs {
 	 */
 	public static void setEnvSearchDone(){
 		Main.getSearchButtonSearch().setEnabled(true);
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**
