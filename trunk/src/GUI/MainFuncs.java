@@ -156,5 +156,20 @@ public class MainFuncs {
 			quickTipsIter = quickTips.iterator();
 			return getTip();
 		}
-	}	
+	}
+	
+	/////////////////////
+	//	animation path //
+	/////////////////////
+	
+	public static String getAnimationURL(){
+		// get class path
+		String classPath = System.getProperty("java.class.path");
+		StringTokenizer tokenizer = new StringTokenizer(classPath, ";");
+		
+		String projectPath = tokenizer.nextToken();  
+		String str = projectPath.replaceAll(" ","%20");
+		String url = "file:///"+str.replaceAll("\\\\","/")+"/../src/GUI/rubi_animation.gif";
+		return url;
+	}
 }
