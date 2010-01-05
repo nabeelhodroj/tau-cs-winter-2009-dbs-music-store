@@ -210,11 +210,8 @@ public class SearchFuncs {
 						// set order parameters to selected album
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
 						AlbumsResultsTableItem selectedAlbum = StaticProgramTables.results.getAlbum(albumID);
-						StockFuncs.setOrderFields(
-								Long.toString(albumID),
-								Long.toString(selectedAlbum.getStorageLocation()),
-								Integer.toString(selectedAlbum.getQuantity()),
-								Integer.toString(selectedAlbum.getPrice()));
+						StockFuncs.setOrderFields(albumID, selectedAlbum.getStorageLocation(),
+								selectedAlbum.getQuantity(), selectedAlbum.getPrice());
 						
 						// enable check availability button in stock tab
 						Main.getStockButtonCheckAvailability().setEnabled(true);
