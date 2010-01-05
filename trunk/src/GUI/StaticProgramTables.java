@@ -25,7 +25,7 @@ public class StaticProgramTables {
 	// current sale table
 	public static SaleTable sale = null;
 	// order available stores table
-	public static OrderAvailableStoresTable availableStores = null;
+	public static OrderAvailableStoresTable availableStores = new OrderAvailableStoresTable();
 	// orders table
 	public static OrdersOrRequestsTable orders = null;
 	// requests table
