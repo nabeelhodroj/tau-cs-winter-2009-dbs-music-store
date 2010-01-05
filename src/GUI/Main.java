@@ -60,8 +60,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label mainLabelStoreDetailsStoreManager;
 	
 	// Quick tips
-	private static Group mainGroupQuickTips;
-	private static Label mainLabelQuickTipsTip;
+	private static Group mainGroupWelcome;
+	private static Label mainLabelWelcomeText;
 	
 	// Tab folder
 	private static TabFolder mainTabFolder;
@@ -280,8 +280,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		//////////////////////////////////////////
 		TablesExamples.initTablesExamples();
 		
-		// generate Quick Tips
-		MainFuncs.generateTips();
 		// initialize stores table
 		DBConnectionInterface.initStoresTable();
 		
@@ -396,15 +394,16 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				MainFuncs.initStoreDetails();
 			}
 			{
-				mainGroupQuickTips = new Group(this, SWT.NONE);
-				mainGroupQuickTips.setLayout(null);
-				mainGroupQuickTips.setBounds(337, 0, 460, 86);
-				mainGroupQuickTips.setText("Quick Tips");
+				mainGroupWelcome = new Group(this, SWT.NONE);
+				mainGroupWelcome.setLayout(null);
+				mainGroupWelcome.setBounds(337, 0, 460, 86);
+				mainGroupWelcome.setText("Welcome");
 				{
-					mainLabelQuickTipsTip = new Label(mainGroupQuickTips, SWT.NONE);
-					mainLabelQuickTipsTip.setBounds(8, 19, 445, 61);
-					mainLabelQuickTipsTip.setText(MainFuncs.getTip());
+					mainLabelWelcomeText = new Label(mainGroupWelcome, SWT.NONE);
+					mainLabelWelcomeText.setBounds(8, 19, 445, 61);
 				}
+				// initialize welcome group
+				MainFuncs.initWelcomeGroup();
 			}
 			{
 				mainTabFolder = new TabFolder(this, SWT.NONE);
@@ -1421,12 +1420,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		return mainLabelStoreDetailsStoreManager;
 	}
 
-	public static Group getMainGroupQuickTips() {
-		return mainGroupQuickTips;
+	public static Group getMainGroupWelcome() {
+		return mainGroupWelcome;
 	}
 
-	public static Label getMainLabelQuickTipsTip() {
-		return mainLabelQuickTipsTip;
+	public static Label getMainLabelWelcomeText() {
+		return mainLabelWelcomeText;
 	}
 
 	public static TabFolder getMainTabFolder() {
