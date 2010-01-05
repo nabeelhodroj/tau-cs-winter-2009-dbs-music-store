@@ -167,10 +167,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	// Order group
 	private static Group stockGroupOrderForm;
-	private static Label stockLabelOrderID;
-	private static Label stockLabelOrderIDInput;
 	private static Label stockLabelAlbumID;
-	private static Text stockTextBoxAlbumIDInput;
+	private static Label stockLabelAlbumIDInput;
 	private static Label stockLabelDate;
 	private static Label stockLabelOrderDateInput;
 	private static Button stockButtonCheckAvailability;
@@ -894,38 +892,28 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockGroupOrderForm.setText("Order Albums");
 							stockGroupOrderForm.setBounds(2, 0, 779, 147);
 							{
-								stockLabelOrderID = new Label(stockGroupOrderForm, SWT.NONE);
-								stockLabelOrderID.setText("Order ID:");
-								stockLabelOrderID.setBounds(8, 19, 74, 22);
-							}
-							{
-								stockLabelOrderIDInput = new Label(stockGroupOrderForm, SWT.BORDER);
-								stockLabelOrderIDInput.setBounds(88, 18, 153, 22);
-								stockLabelOrderIDInput.setText("ORD-0000-0000-000000-000");
-							}
-							{
 								stockLabelAlbumID = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelAlbumID.setText("Album ID:");
-								stockLabelAlbumID.setBounds(8, 49, 74, 22);
+								stockLabelAlbumID.setBounds(8, 38, 74, 22);
 							}
 							{
-								stockTextBoxAlbumIDInput = new Text(stockGroupOrderForm, SWT.BORDER);
-								stockTextBoxAlbumIDInput.setBounds(87, 47, 154, 22);
+								stockLabelAlbumIDInput = new Label(stockGroupOrderForm, SWT.BORDER);
+								stockLabelAlbumIDInput.setBounds(90, 36, 154, 22);
 							}
 							{
 								stockLabelDate = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelDate.setText("Order date:");
-								stockLabelDate.setBounds(8, 79, 74, 22);
+								stockLabelDate.setBounds(12, 71, 74, 22);
 							}
 							{
 								stockLabelOrderDateInput = new Label(stockGroupOrderForm, SWT.BORDER);
-								stockLabelOrderDateInput.setBounds(86, 79, 70, 22);
+								stockLabelOrderDateInput.setBounds(92, 71, 70, 22);
 								stockLabelOrderDateInput.setText(MainFuncs.getDate());
 							}
 							{
 								stockButtonCheckAvailability = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonCheckAvailability.setText("Check Availability");
-								stockButtonCheckAvailability.setBounds(8, 108, 235, 30);
+								stockButtonCheckAvailability.setBounds(8, 105, 235, 33);
 							}
 							{
 								stockLabelOrderFromStore = new Label(stockGroupOrderForm, SWT.NONE);
@@ -1768,20 +1756,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		return stockGroupOrderForm;
 	}
 
-	public static Label getStockLabelOrderID() {
-		return stockLabelOrderID;
-	}
-
-	public static Label getStockLabelOrderIDInput() {
-		return stockLabelOrderIDInput;
-	}
-
 	public static Label getStockLabelAlbumID() {
 		return stockLabelAlbumID;
 	}
 
-	public static Text getStockTextBoxAlbumIDInput() {
-		return stockTextBoxAlbumIDInput;
+	public static Label getStockLabelAlbumIDInput() {
+		return stockLabelAlbumIDInput;
 	}
 
 	public static Label getStockLabelDate() {
