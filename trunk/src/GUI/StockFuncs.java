@@ -438,6 +438,8 @@ public class StockFuncs {
 	 */
 	public static void setCurrentOrders(OrdersOrRequestsTable orders){
 		StaticProgramTables.orders = orders;
+		// flag that orders initialization is done
+		MainFuncs.setOrdersInitialized(true);
 	}
 	
 	////////////////////////
@@ -472,5 +474,7 @@ public class StockFuncs {
 	 */
 	public static void setCurrentRequests(OrdersOrRequestsTable requests){
 		StaticProgramTables.requests = requests;
+		// flag that requests initialization is done
+		MainFuncs.setRequestsInitialized(true);
 	}
 }
