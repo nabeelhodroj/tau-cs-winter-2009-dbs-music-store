@@ -30,6 +30,26 @@ public class MainFuncs {
 	//	initialize program //
 	/////////////////////////
 	
+	/**
+	 * invoked when main window opens
+	 * waits until all tables are updated from DB:
+	 * - orders
+	 * - requests
+	 * - employees
+	 * then updates gui fields
+	 */
+	public static void initializeTablesAndFields(){
+		
+		// initialize all fields:
+		/////////////////////////
+		
+		// initialize store details view
+		MainFuncs.initStoreDetails();
+		
+		
+		
+	}
+	
 	public static void initMsgDBActionNotAllowed(){
 		msgDBActionNotAllowed = new MessageBox(Main.getMainShell(),SWT.ICON_WARNING);
 		msgDBActionNotAllowed.setText("Cannot invoke action");
