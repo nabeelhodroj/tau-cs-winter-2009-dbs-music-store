@@ -8,6 +8,8 @@ import javax.swing.*;
 
 import DBLayer.DBConnectionInterface;
 import Tables.TablesExamples;
+import Debug.*;
+import Debug.Debug.*; 
 
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
@@ -1352,6 +1354,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			Debug.log(e.getMessage(),DebugOutput.FILE,DebugOutput.STDERR);
 		}
 	}
 
