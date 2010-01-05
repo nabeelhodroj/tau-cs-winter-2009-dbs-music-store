@@ -1,8 +1,12 @@
 package GUI;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.TableItem;
 
+import Debug.Debug;
+import Debug.Debug.DebugOutput;
 import Tables.OrdersOrRequestsTable;
 import Tables.OrdersOrRequestsTableItem;
 
@@ -12,6 +16,143 @@ import Tables.OrdersOrRequestsTableItem;
  * Stock tab handlers
  */
 public class StockFuncs {
+	
+	/**
+	 * initialize stock tab view
+	 */
+	public static void initStockTabView(){
+		// disable (almost) all buttons
+		Main.getStockButtonCheckAvailability().setEnabled(false);
+		Main.getStockButtonPlaceOrder().setEnabled(false);
+		Main.getStockButtonRemoveOrder().setEnabled(false);
+		Main.getStockButtonCancelOrder().setEnabled(false);
+		Main.getStockButtonApproveRequest().setEnabled(false);
+		Main.getStockButtonDenyRequest().setEnabled(false);
+	}
+	
+	/**
+	 * initialize stock tab listeners
+	 */
+	public static void initStockTabListeners(){
+		// order form listeners
+		///////////////////////
+		
+		// check availability button listener
+		Main.getStockButtonCheckAvailability().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: check availability button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// available stores table listener
+		Main.getStockTableOrderAvailableStores().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: available stores table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// clear fields button listener
+		Main.getStockButtonClearOrder().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: clear fields button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// place order button listener
+		Main.getStockButtonCheckAvailability().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: place order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// orders
+		/////////
+		
+		// orders table listener
+		Main.getStockTableOrders().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: orders table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// cancel order button listener
+		Main.getStockButtonCancelOrder().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: cancel order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// remove order button listener
+		Main.getStockButtonRemoveOrder().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: remove order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// requests
+		///////////
+		
+		// requests table listener
+		Main.getStockTableRequests().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: requests table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// deny request button listener
+		Main.getStockButtonDenyRequest().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: deny request button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+		
+		// approve request button listener
+		Main.getStockButtonApproveRequest().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: approve request button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						//TODO
+					}
+				}
+		);
+	}
 
 	//////////////////////////
 	//	Order form handlers //

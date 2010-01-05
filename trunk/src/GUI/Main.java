@@ -1146,6 +1146,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
 						}
 					}
+					
+					// initialize stock tab view
+					StockFuncs.initStockTabView();
+					// initialize stock tab listeners
+					StockFuncs.initStockTabListeners();
 				}
 				{
 					/**
