@@ -3,10 +3,17 @@ package GUI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 
+import DBLayer.DBConnectionInterface;
 import Debug.Debug;
 import Debug.Debug.DebugOutput;
+import Queries.OrderAvailableStoresQuery;
+import Queries.QueryErrorException;
+import Tables.InvalidOrderException;
+import Tables.OrderAvailableStoresTableItem;
+import Tables.OrderStatusEnum;
 import Tables.OrdersOrRequestsTable;
 import Tables.OrdersOrRequestsTableItem;
 
@@ -42,8 +49,26 @@ public class StockFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: check availability button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-
-						//TODO
+						
+						try{
+							// create query
+							OrderAvailableStoresQuery query = new OrderAvailableStoresQuery();
+							// send to DB
+							
+							// check if DB is not busy, else pop a message
+							if (MainFuncs.isAllowDBAction()){
+								// flag DB as busy
+								MainFuncs.setAllowDBAction(false);
+								
+								DBConnectionInterface.getOrderAvailableStores(query);
+								
+							} else {
+								MainFuncs.getMsgDBActionNotAllowed().open();
+							}
+							
+						}catch(QueryErrorException qee){
+							Debug.log("*** BUG: Stock tab \\ check availability query error", DebugOutput.FILE,DebugOutput.STDERR);
+						}
 					}
 				}
 		);
@@ -54,7 +79,7 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: available stores table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						availableStoreSelected();
 					}
 				}
 		);
@@ -65,18 +90,37 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: clear fields button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						clearFieldsButtonInvokation();
 					}
 				}
 		);
 		
 		// place order button listener
-		Main.getStockButtonCheckAvailability().addSelectionListener(
+		Main.getStockButtonPlaceOrder().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: place order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						try{
+							
+							OrdersOrRequestsTableItem order = getOrder();
+							
+							// check if DB is not busy, else pop a message
+							if (MainFuncs.isAllowDBAction()){
+								// flag DB as busy
+								MainFuncs.setAllowDBAction(false);
+								
+								DBConnectionInterface.placeOrder(order);
+								// clear order form (invoke clear button)
+								clearFieldsButtonInvokation();
+								
+							} else {
+								MainFuncs.getMsgDBActionNotAllowed().open();
+							}
+							
+						}catch(InvalidOrderException ioe){
+							
+						}
 					}
 				}
 		);
@@ -101,7 +145,16 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: cancel order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							//TODO
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -112,7 +165,16 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: remove order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							//TODO
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -137,7 +199,16 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: deny request button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							//TODO
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -148,7 +219,16 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: approve request button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							//TODO
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -158,9 +238,144 @@ public class StockFuncs {
 	//	Order form handlers //
 	//////////////////////////
 	
+	/**
+	 * updates order's available stores table view according to current table
+	 * and releases DB
+	 */
 	public static void updateOrderAvailableStoresTable(){
-		//TODO
-		// implement order available stores gui update
+		// update table results
+		updateOrderAvailableStoresTableView();		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
+	/**
+	 * updates order's available stores table view according to current table
+	 */
+	public static void updateOrderAvailableStoresTableView(){
+		// first remove all orders table items
+		Main.getStockTableOrderAvailableStores().removeAll();
+		
+		// then insert all items
+		for(OrderAvailableStoresTableItem availableStore: StaticProgramTables.availableStores.getAvailableStores().values()){
+			TableItem item = new TableItem(Main.getStockTableOrderAvailableStores(),SWT.NONE);
+			String[] entry = new String[]{
+					Integer.toString(availableStore.getStoreID()),
+					availableStore.getCity(),
+					Integer.toString(availableStore.getQuantity()),
+					Integer.toString(availableStore.getPrice())
+			};
+			item.setText(entry);
+		}
+	}
+	
+	// check availability button
+	
+	/*
+	 * handled in listener
+	 */
+	
+	// clear fields button
+	
+	/**
+	 * clears order form fields and disables relevant buttons
+	 */
+	public static void clearFieldsButtonInvokation(){
+		// clear table view
+		Main.getStockTableOrderAvailableStores().removeAll();
+		// disable buttons
+		Main.getStockButtonCheckAvailability().setEnabled(false);
+		Main.getStockButtonPlaceOrder().setEnabled(false);
+		// clear fields
+		setOrderFields("", "", "", "");
+		// set quantity to default - 1
+		Main.getStockTextBoxQuantityToOrder().setText("1");
+	}
+	
+	/**
+	 * set order form fields
+	 * @param albumID
+	 * @param storageLocation
+	 * @param quantity
+	 * @param price
+	 */
+	public static void setOrderFields(String albumID, String storageLocation, String quantity, String price){
+		// album id
+		Main.getStockLabelAlbumIDInput().setText(albumID);
+		// storage location
+		Main.getStockLabelStorageLocationInput().setText(storageLocation);
+		// quantity
+		Main.getStockLabelQuantityInStockInput().setText(quantity);
+		// price
+		Main.getStockLabelStorePriceInput().setText(price);
+	}
+	
+	// order available stores table
+	
+	/**
+	 * invoked when an available store is selected from the table
+	 * sets place order button available
+	 */
+	public static void availableStoreSelected(){
+		Main.getStockButtonPlaceOrder().setEnabled(true);
+	}
+	
+	// place order button
+	
+	/**
+	 * returns the current order from the order form
+	 * or throws exception on invalid order
+	 * @return
+	 */
+	public static OrdersOrRequestsTableItem getOrder() throws InvalidOrderException{
+		try{
+			int quantity = Integer.parseInt(Main.getStockTextBoxQuantityToOrder().getText());
+			
+			if(quantity <=0 )
+				// quantity <= 0
+				throw new InvalidOrderException("Quantity must be larger than 0");
+			
+			// get selected store's quantity
+			int selectedStoreQuantity = Integer.parseInt(
+					Main.getStockTableOrderAvailableStores().getSelection()[2].getText());
+			if (quantity > selectedStoreQuantity)
+				throw new InvalidOrderException("Selected store doesn't have enough in stock");
+			else{
+				// get selected store id
+				int selectedStoreID = Integer.parseInt(
+						Main.getStockTableOrderAvailableStores().getSelection()[0].getText());
+				// get album id
+				long albumID = Long.parseLong(
+						Main.getStockLabelAlbumIDInput().getText());
+
+				OrdersOrRequestsTableItem order = new OrdersOrRequestsTableItem(
+						-1, // to be set be DB
+						StaticProgramTables.thisStore.getStoreID(),
+						selectedStoreID,
+						albumID,
+						quantity,
+						MainFuncs.getDate(),
+						OrderStatusEnum.WAITING);
+				return order;
+			}
+			
+		}catch(NumberFormatException nfe){
+			// quantity is not a number
+			throw new InvalidOrderException("Quantity must be an integer");
+		}
+	}
+	
+	/**
+	 * add order to orders table in GUI
+	 * @param order
+	 */
+	public static void addOrder(OrdersOrRequestsTableItem order){
+		// add order to orders table
+		StaticProgramTables.orders.addOrder(order);
+		// update orders table view
+		updateOrdersTableView();
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	//////////////////////
@@ -187,6 +402,10 @@ public class StockFuncs {
 			};
 			item.setText(entry);
 		}
+		
+		// disable order buttons
+		Main.getStockButtonRemoveOrder().setEnabled(false);
+		Main.getStockButtonCancelOrder().setEnabled(false);
 	}
 	
 	/**

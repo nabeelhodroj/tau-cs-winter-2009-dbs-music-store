@@ -920,7 +920,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								stockLabelOrderFromStore.setBounds(256, 18, 79, 24);
 							}
 							{
-								stockTableOrderAvailableStores = new Table(stockGroupOrderForm, SWT.BORDER | SWT.MULTI
+								stockTableOrderAvailableStores = new Table(stockGroupOrderForm, SWT.BORDER | SWT.FULL_SELECTION
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 								stockTableOrderAvailableStores.setBounds(254, 42, 284, 94);
 								stockTableOrderAvailableStores.setHeaderVisible(true);
@@ -1053,10 +1053,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnOrdersCompletionDate.setWidth(tableWidth / numOfColumns);
 							*/
 						}
-						
-						// initialize orders table values
-						StockFuncs.updateOrdersTableView();
-						
 						{
 							stockTableRequests = new Table(stockTabComposite, SWT.BORDER | SWT.FULL_SELECTION
 									| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
@@ -1109,11 +1105,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableColumnRequestsCompletionDate.setMoveable(true);
 							stockTableColumnRequestsCompletionDate.setWidth(tableWidth / numOfColumns);
 							*/
-						}
-						
-						// initialize requests table values
-						StockFuncs.updateRequestsTableView();
-						
+						}						
 						{
 							stockLabelRequests = new Label(stockTabComposite, SWT.NONE);
 							stockLabelRequests.setText("Requests:");
@@ -1145,7 +1137,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
 						}
 					}
-					
+
+					// initialize orders table values
+					StockFuncs.updateOrdersTableView();
+					// initialize requests table values
+					StockFuncs.updateRequestsTableView();
 					// initialize stock tab view
 					StockFuncs.initStockTabView();
 					// initialize stock tab listeners
