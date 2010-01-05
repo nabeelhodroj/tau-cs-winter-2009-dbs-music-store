@@ -26,6 +26,12 @@ import Debug.Debug.DebugOutput;
  */
 public class DBConnectionInterface{
 	
+	// static fields for all thread holders:
+	private static DBConnectionSearch dbcSearch = new DBConnectionSearch();
+	private static DBConnectionSale dbcSale = new DBConnectionSale();
+	private static DBConnectionStock dbcStock = new DBConnectionStock();
+	private static DBConnectionManage dbcManage= new DBConnectionManage();
+	
 	//////////
 	// Main //
 	//////////
@@ -55,9 +61,8 @@ public class DBConnectionInterface{
 	public static void getAlbumsSearchResults(AlbumSearchQuery albumSearchQuery){
 		Debug.log("DBConnectionInterface.getAlbumsSearchResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
-
-		// until implemented, use example:
-		TablesExamples.getAlbumsSearchResults();
+		
+		(new Thread(dbcSearch.new GetAlbumsSearchResults(albumSearchQuery))).start();		
 	}
 	
 	//////////////
@@ -73,8 +78,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.makeSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.makeSale(sale);
+		(new Thread(dbcSale.new MakeSale(sale))).start();		
 	}
 	
 	///////////////
@@ -93,8 +97,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getOrderAvailableStores is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.getOrderAvailableStores(query);
+		(new Thread(dbcStock.new GetOrderAvailableStores(query))).start();
 	}
 	
 	// orders table
@@ -109,8 +112,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.getOrdersTable();
+		(new Thread(dbcStock.new GetOrdersTable())).start();
 	}
 	
 	/**
@@ -123,8 +125,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.removeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.removeOrder(orderID);
+		(new Thread(dbcStock.new RemoveOrder(orderID))).start();
 	}
 	
 	/**
@@ -136,8 +137,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.placeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.placeOrder(order);
+		(new Thread(dbcStock.new PlaceOrder(order))).start();
 	}
 	
 	/**
@@ -159,8 +159,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.updateOrderStatus is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.updateOrderStatus(orderID, status);
+		(new Thread(dbcStock.new UpdateOrderStatus(orderID, status))).start();
 	}
 	
 	// requests table
@@ -175,8 +174,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.getRequestsTable();
+		(new Thread(dbcStock.new GetRequestTable())).start();
 	}
 	
 	/**
@@ -192,8 +190,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.removeRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.removeRequest(orderID);
+		(new Thread(dbcStock.new RemoveRequest(orderID))).start();
 	}
 	
 	/**
@@ -206,8 +203,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.addRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.addRequest(request);
+		(new Thread(dbcStock.new AddRequest(request))).start();
 	}
 
 	////////////////////
@@ -226,8 +222,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.getEmployeesTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.getEmployeesTable();
+		(new Thread(dbcManage.new GetEmployeesTable())).start();
 	}
 	
 	/**
@@ -240,8 +235,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.checkIfEmployeeExists is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.checkIfEmployeeExists(employeeID);
+		(new Thread(dbcManage.new CheckIfEmployeeExists(employeeID))).start();
 	}
 	
 	/**
@@ -256,8 +250,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.insertUpdateEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.insertUpdateEmployee(employee);
+		(new Thread(dbcManage.new InsertUpdateEmployee(employee))).start();
 	}
 	
 	/**
@@ -270,8 +263,7 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.removeEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.removeEmployee(employeeID);
+		(new Thread(dbcManage.new RemoveEmployee(employeeID))).start();
 	}
 	
 	// database update
@@ -286,7 +278,6 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.updateDataBase is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.updateDataBase(filename);
+		(new Thread(dbcManage.new UpdateDatabase(filename))).start();
 	}
 }
