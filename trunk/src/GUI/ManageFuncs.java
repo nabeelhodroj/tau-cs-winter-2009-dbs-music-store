@@ -649,6 +649,9 @@ public class ManageFuncs {
 			// clear file input
 			Main.getManageTextBoxDBSUpdateFileInput().setText("");
 		}
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**
