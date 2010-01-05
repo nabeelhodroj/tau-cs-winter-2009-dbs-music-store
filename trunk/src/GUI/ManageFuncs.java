@@ -461,6 +461,10 @@ public class ManageFuncs {
 		// update employees list in sale tab
 		SaleFuncs.updateSalesmenList();
 		
+		// update the store details if the employee is the manager
+		if (employee.getPosition() == EmployeePositionsEnum.MANAGER)
+			Main.getMainLabelStoreDetailsStoreManager().setText("Manager: "+employee.getEmployeeID());
+		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);
 	}
