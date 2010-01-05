@@ -2,6 +2,7 @@ package Tables;
 
 import GUI.*;
 import java.util.*;
+import Queries.*;
 
 /**
  * created by Ariel
@@ -145,7 +146,7 @@ public class TablesExamples {
 	 * invoke GUI order's available stores update with example
 	 * @param albumID
 	 */
-	public static void getOrderAvailableStores(long albumID){
+	public static void getOrderAvailableStores(OrderAvailableStoresQuery query){
 		GuiUpdatesInterface.updateOrderAvailableStores(orderAvailableStoresExample);
 	}
 	

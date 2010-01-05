@@ -89,12 +89,12 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: updateOrderAvailableStores
 	 * @param albumID
 	 */
-	public static void getOrderAvailableStores(long albumID){
+	public static void getOrderAvailableStores(OrderAvailableStoresQuery query){
 		Debug.log("DBConnectionInterface.getOrderAvailableStores is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
 		// until implemented, use example:
-		TablesExamples.getOrderAvailableStores(albumID);
+		TablesExamples.getOrderAvailableStores(query);
 	}
 	
 	// orders table
