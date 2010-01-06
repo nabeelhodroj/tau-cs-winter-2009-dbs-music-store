@@ -192,8 +192,7 @@ public class GuiUpdatesInterface {
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {
 				
-				//TODO
-				// implement order status update and gui update
+				StockFuncs.updateOrderRequestStatus(orderID,status);
 				
 				}
 			});

@@ -33,6 +33,9 @@ public class StockFuncs {
 	private static int quantity;
 	private static int price;
 	
+	// will hold true if an order-status change is invoked and false if a request-status change is invoked
+	private static boolean isOrderStatusChanged;
+	
 	/**
 	 * initialize stock tab view
 	 */
@@ -157,7 +160,7 @@ public class StockFuncs {
 							// flag DB as busy
 							MainFuncs.setAllowDBAction(false);
 							
-							//TODO
+							cancelOrderInvokation();
 							
 						} else {
 							MainFuncs.getMsgDBActionNotAllowed().open();
@@ -462,6 +465,34 @@ public class StockFuncs {
 		}
 	}
 	
+	/**
+	 * update the input order / request status and update gui view
+	 * @param orderID
+	 * @param status
+	 */
+	public static void updateOrderRequestStatus(int orderID, OrderStatusEnum status){
+		if (isOrderStatusChanged){ // an order status was changed
+			// update order status
+			StaticProgramTables.orders.getOrder(orderID).setStatus(status);
+			
+			// update gui view and disable orders buttons
+			updateOrdersTableView();
+			Main.getStockButtonRemoveOrder().setEnabled(false);
+			Main.getStockButtonCancelOrder().setEnabled(false);
+		} else { // a request status was changed
+			// update request status
+			StaticProgramTables.requests.getOrder(orderID).setStatus(status);
+			
+			// update gui view and disable requests buttons
+			updateRequestsTableView();
+			Main.getStockButtonDenyRequest().setEnabled(false);
+			Main.getStockButtonApproveRequest().setEnabled(false);
+		}		
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
 	//////////////////////
 	//	Orders handlers //
 	//////////////////////
@@ -469,7 +500,7 @@ public class StockFuncs {
 	/**
 	 * set orders table's buttons when table item is selected
 	 */
-	public static void ordersTableItemSelected(){		
+	public static void ordersTableItemSelected(){
 		String selectedOrderStatus = Main.getStockTableOrders().getSelection()[0].getText(5);
 		
 		// if selected order is still waiting, allow only cancel order
@@ -480,6 +511,23 @@ public class StockFuncs {
 		}else{
 			Main.getStockButtonRemoveOrder().setEnabled(true);
 			Main.getStockButtonCancelOrder().setEnabled(false);
+		}
+	}
+	
+	/**
+	 * invoked by "Cancel Order" button
+	 * calls change of order status to canceled
+	 */
+	public static void cancelOrderInvokation(){
+		// set flag that order status change is invoked
+		isOrderStatusChanged = true;
+		
+		// call DB action
+		try{
+			int selectedOrderID = Integer.parseInt(Main.getStockTableOrders().getSelection()[0].getText(0));
+			DBConnectionInterface.updateOrderStatus(selectedOrderID,OrderStatusEnum.CANCELED);
+		} catch (NumberFormatException nfe){
+			Debug.log("*** BUG: StockFuncs.cancelOrderInvokation bug", DebugOutput.FILE, DebugOutput.STDERR);
 		}
 	}
 	

@@ -10,7 +10,7 @@ public enum OrderStatusEnum {
 	WAITING(0,"Waiting"),
 	COMPLETED(1,"Completed"),
 	DENIED(2,"Denied"),
-	CANCELED(3,"Canceled by requestor");
+	CANCELED(3,"Canceled");
 	
 	private int intRepresentation;
 	private String strRepresentation;
