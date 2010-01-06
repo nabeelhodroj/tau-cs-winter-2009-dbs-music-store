@@ -474,10 +474,13 @@ public class StockFuncs {
 		
 		// if selected order is still waiting, allow only cancel order
 		// otherwise allow only remove order from table
-		if(selectedOrderStatus.equals(OrderStatusEnum.WAITING.getStrRep()))
+		if(selectedOrderStatus.equals(OrderStatusEnum.WAITING.getStrRep())){
+			Main.getStockButtonRemoveOrder().setEnabled(false);
 			Main.getStockButtonCancelOrder().setEnabled(true);
-		else
+		}else{
 			Main.getStockButtonRemoveOrder().setEnabled(true);
+			Main.getStockButtonCancelOrder().setEnabled(false);
+		}
 	}
 	
 	//TODO
@@ -499,7 +502,7 @@ public class StockFuncs {
 					Long.toString(order.getAlbumID()),
 					Integer.toString(order.getQuantity()),
 					order.getDate(),
-					order.getStatus().toString()
+					order.getStatus().getStrRep()
 			};
 			item.setText(entry);
 		}
@@ -539,7 +542,7 @@ public class StockFuncs {
 					Long.toString(request.getAlbumID()),
 					Integer.toString(request.getQuantity()),
 					request.getDate(),
-					request.getStatus().toString()
+					request.getStatus().getStrRep()
 			};
 			item.setText(entry);
 		}

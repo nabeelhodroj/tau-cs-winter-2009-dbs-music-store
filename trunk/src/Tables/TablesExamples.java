@@ -87,7 +87,7 @@ public class TablesExamples {
 		OrdersOrRequestsTableItem request2 = new OrdersOrRequestsTableItem(5,store3.getStoreID(),
 				store1.getStoreID(),albumsResultsItem2.getAlbumID(),9,"23/10/09",OrderStatusEnum.WAITING);
 		OrdersOrRequestsTableItem request3 = new OrdersOrRequestsTableItem(6,store2.getStoreID(),
-				store1.getStoreID(),albumsResultsItem2.getAlbumID(),2,"11/11/09",OrderStatusEnum.WAITING);
+				store1.getStoreID(),albumsResultsItem2.getAlbumID(),2,"11/11/09",OrderStatusEnum.COMPLETED);
 		
 		requestsTableExample.addOrder(request1);
 		requestsTableExample.addOrder(request2);
