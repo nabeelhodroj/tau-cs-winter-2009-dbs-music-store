@@ -639,7 +639,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableColumnAlbumLength.setWidth(tableWidth / numOfColumns);
 							}
 							{
-								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.MULTI
+								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.FULL_SELECTION
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 								searchTableSongResults.setBounds(13, 296, 395, 162);
 								searchTableSongResults.setHeaderVisible(true);

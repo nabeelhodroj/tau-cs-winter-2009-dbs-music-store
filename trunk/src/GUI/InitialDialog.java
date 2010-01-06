@@ -3,18 +3,11 @@ package GUI;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.*;
 
-
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+* Initial Dialog
+* ==============
+* presents stores table for selection by user
+* program is initiated by selected store's view 
 */
 public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 	private static InitialDialog inst;
@@ -42,6 +35,7 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 	
 	public static void closeInitDialog(){
 		shell.close();
+		shell.dispose();
 	}
 
 	public InitialDialog(Shell parent, int style) {

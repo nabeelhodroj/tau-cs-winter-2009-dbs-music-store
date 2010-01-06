@@ -481,6 +481,7 @@ public class SearchFuncs {
 			TableItem item = new TableItem(Main.getSearchTableSongResults(), SWT.NONE);
 			Integer[] minsSecs = getMinutesSeconds(song.getSongLength());
 			String[] entry = new String[]{
+					Integer.toString(song.getTrack()),
 					song.getSongName(),
 					song.getSongArtist(),
 					minsSecs[0]+":"+minsSecs[1]
