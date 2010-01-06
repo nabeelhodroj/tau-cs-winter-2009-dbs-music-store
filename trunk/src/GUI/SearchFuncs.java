@@ -440,14 +440,13 @@ public class SearchFuncs {
 		// now enter new results
 		for(AlbumsResultsTableItem album: results.getAlbums().values()){
 			TableItem item = new TableItem(Main.getSearchTableAlbumResults(), SWT.NONE);
-			Integer[] minsSecs = getMinutesSeconds(album.getLength());
 			String[] entry = new String[]{
 					Long.toString(album.getAlbumID()),
 					album.getAlbumName(),
 					album.getArtist(),
 					Integer.toString(album.getYear()),
 					album.getGenre(),
-					minsSecs[0]+":"+minsSecs[1]
+					getMinutesSeconds(album.getLength())
 			};
 			item.setText(entry);
 		}
@@ -479,12 +478,11 @@ public class SearchFuncs {
 		// now enter songs
 		for(SongsResultsTableItem song: songs.getSongs().values()){
 			TableItem item = new TableItem(Main.getSearchTableSongResults(), SWT.NONE);
-			Integer[] minsSecs = getMinutesSeconds(song.getSongLength());
 			String[] entry = new String[]{
 					Integer.toString(song.getTrack()),
 					song.getSongName(),
 					song.getSongArtist(),
-					minsSecs[0]+":"+minsSecs[1]
+					getMinutesSeconds(song.getSongLength())
 			};
 			item.setText(entry);
 		}
@@ -495,9 +493,14 @@ public class SearchFuncs {
 	 * @param secs
 	 * @return
 	 */
-	public static Integer[] getMinutesSeconds(int secs){
-		Integer[] a =  new Integer[]{secs/60,secs%60};
-		return a;
+	public static String getMinutesSeconds(int seconds){
+		String mins = Integer.toString(seconds/60);
+		seconds = seconds%60;
+		String secs = Integer.toString(seconds);
+		if (seconds < 10)
+			secs = "0"+secs;
+		
+		return mins+":"+secs;
 	}
 	
 	///////////////////////
