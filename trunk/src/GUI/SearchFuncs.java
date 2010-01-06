@@ -148,17 +148,16 @@ public class SearchFuncs {
 						AlbumSearchQuery q = createAlbumSearchQuery();
 						if (q != null)
 						{
-							// set gui environment
-							setEnvSearchInvoked();
-							// set progress visibility
-							showDBProgress(true);
-							// send query to DB
-							
 							// check if DB is not busy, else pop a message
 							if (MainFuncs.isAllowDBAction()){
 								// flag DB as busy
 								MainFuncs.setAllowDBAction(false);
 								
+								// set gui environment
+								setEnvSearchInvoked();
+								// set progress visibility
+								showDBProgress(true);
+								// send query to DB
 								DBConnectionInterface.getAlbumsSearchResults(q);
 								
 							} else {
