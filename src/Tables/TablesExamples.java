@@ -180,7 +180,7 @@ public class TablesExamples {
 	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		waitSome(1000);
-		// TODO
+		GuiUpdatesInterface.updateOrderStatus(orderID, status);
 	}
 	
 	/**
