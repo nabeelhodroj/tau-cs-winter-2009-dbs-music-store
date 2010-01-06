@@ -340,7 +340,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			this.layout();
 			pack();
 			this.setSize(800, 590);
-			
+
 			// initialize allow DB message box
 			MainFuncs.initMsgDBActionNotAllowed();
 			
