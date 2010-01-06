@@ -60,9 +60,9 @@ public class TablesExamples {
 		// order's available stores example
 		
 		OrderAvailableStoresTableItem availableStore1 = new OrderAvailableStoresTableItem(store2.getStoreID(),
-				store2.getCity(),3, 55);
+				store2.getCity(),3);
 		OrderAvailableStoresTableItem availableStore2 = new OrderAvailableStoresTableItem(store3.getStoreID(),
-				store3.getCity(),2, 59);
+				store3.getCity(),2);
 		
 		orderAvailableStoresExample.addStore(availableStore1);
 		orderAvailableStoresExample.addStore(availableStore2);
