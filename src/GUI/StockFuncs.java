@@ -1,5 +1,7 @@
 package GUI;
 
+import oracle.net.aso.e;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,6 +13,7 @@ import Debug.Debug;
 import Debug.Debug.DebugOutput;
 import Queries.OrderAvailableStoresQuery;
 import Queries.QueryErrorException;
+import Tables.EmployeePositionsEnum;
 import Tables.InvalidOrderException;
 import Tables.OrderAvailableStoresTableItem;
 import Tables.OrderStatusEnum;
@@ -138,7 +141,7 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: orders table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						ordersTableItemSelected();
 					}
 				}
 		);
@@ -401,9 +404,84 @@ public class StockFuncs {
 		MainFuncs.setAllowDBAction(true);
 	}
 	
+	///////////////////////////////////
+	//	Orders and Requests handlers //
+	///////////////////////////////////
+	
+	/**
+	 * invoked by DB to notify that the requested orders/requests table action was denied
+	 * and update orders and requests view
+	 */
+	public static void denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum actionTried,
+			OrdersRequestsActionsEnum actionTaken, int orderID){
+		// initialize message box
+		String str1, str2;
+		if(actionTried == OrdersRequestsActionsEnum.CANCEL_ORDER){
+			str1 = "Order could not be canceled ";
+		} else if(actionTried == OrdersRequestsActionsEnum.DENY_REQUEST){
+			str1 = "Request could not be denied ";
+		} else { // APPROVE_REQUEST
+			str1 = "Request could not be approved ";
+		}
+		if(actionTaken == OrdersRequestsActionsEnum.CANCEL_ORDER){
+			str2 = "since it was canceled by requester";
+		} else if(actionTaken == OrdersRequestsActionsEnum.DENY_REQUEST){
+			str2 = "since it was already denied by supplier";
+		} else { // APPROVE_REQUEST
+			str2 = "since it was already approved by supplier";
+		}
+		
+		MessageBox errorMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
+		errorMsg.setText("Action could not be invoked");
+		errorMsg.setMessage(str1+str2);
+		
+		// pop error message
+		errorMsg.open();
+		
+		// update view according to action taken
+		// request was canceled by requester
+		if (actionTaken == OrdersRequestsActionsEnum.CANCEL_ORDER){
+			// remove request from requests table
+			StaticProgramTables.requests.getOrders().remove(orderID);
+			// update requests table view
+			updateRequestsTableView();
+		}
+		// order was denied by supplier
+		else if (actionTaken == OrdersRequestsActionsEnum.DENY_REQUEST){
+			// set order as "denied"
+			StaticProgramTables.orders.getOrder(orderID).setStatus(OrderStatusEnum.DENIED);
+			// update orders table view
+			updateOrdersTableView();
+		}
+		// else - order was approved by supplier
+		else {
+			// set order as "approved"
+			StaticProgramTables.orders.getOrder(orderID).setStatus(OrderStatusEnum.COMPLETED);
+			// update orders table view
+			updateOrdersTableView();
+		}
+	}
+	
 	//////////////////////
 	//	Orders handlers //
 	//////////////////////
+	
+	/**
+	 * set orders table's buttons when table item is selected
+	 */
+	public static void ordersTableItemSelected(){		
+		String selectedOrderStatus = Main.getStockTableOrders().getSelection()[0].getText(5);
+		
+		// if selected order is still waiting, allow only cancel order
+		// otherwise allow only remove order from table
+		if(selectedOrderStatus.equals(OrderStatusEnum.WAITING.getStrRep()))
+			Main.getStockButtonCancelOrder().setEnabled(true);
+		else
+			Main.getStockButtonRemoveOrder().setEnabled(true);
+	}
+	
+	//TODO
+	
 	
 	/**
 	 * updates current orders table view according to current orders table
