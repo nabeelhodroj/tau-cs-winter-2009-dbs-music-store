@@ -103,6 +103,34 @@ public class GuiUpdatesInterface {
 			});
 	}
 	
+	// joint actions for orders table and requests table
+	
+	/**
+	 * in case of a collision in the DB when trying to process an order / request
+	 * but its status was changed by other store, deny action and update view
+	 * @param actionTried: action that the user tried to invoke
+	 * @param actionTaken: action that the other store already did
+	 * @param orderID: the relevant order id
+	 * 
+	 * possible collisions:
+	 * - this store: cancel order		- succeeded other store: deny request
+	 * - this store: cancel order		- succeeded other store: approve request
+	 * - this store: deny request		- succeeded other store: cancel order
+	 * - this store: approve request	- succeeded other store: cancel order
+	 */
+	public static void denyOrdersOrRequestsTableAction(final OrdersRequestsActionsEnum actionTried,
+			final OrdersRequestsActionsEnum actionTaken, final int orderID){
+		Debug.log("GuiUpdatesInterface: denyOrdersOrRequestsTableAction is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StockFuncs.denyOrdersOrRequestsTableAction(actionTried,actionTaken,orderID);
+				
+				}
+			});
+	}
+	
 	// orders table
 	
 	/**
