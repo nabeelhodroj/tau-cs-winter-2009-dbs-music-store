@@ -61,7 +61,7 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 				initDialogGroup.setText("Select store");
 				initDialogGroup.setBounds(0, 4, 306, 113);
 				{
-					initDialogCombo = new Combo(initDialogGroup, SWT.NONE);
+					initDialogCombo = new Combo(initDialogGroup, SWT.READ_ONLY);
 					initDialogCombo.setBounds(12, 29, 276, 21);
 				}
 				{

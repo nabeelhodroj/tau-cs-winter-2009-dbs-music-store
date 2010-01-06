@@ -761,7 +761,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								saleLabelSalesmanIDName.setBounds(25, 24, 47, 18);
 							}
 							{
-								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.NONE);
+								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.READ_ONLY);
 								saleComboSalesmanIDNameInput.setBounds(84, 23, 309, 21);
 							}							
 							{
@@ -1264,7 +1264,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageLabelEmployeePosition.setBounds(12, 291, 60, 22);
 							}
 							{
-								manageComboEmployeePositionInput = new Combo(manageGroupEditEmployee, SWT.NONE);
+								manageComboEmployeePositionInput = new Combo(manageGroupEditEmployee, SWT.READ_ONLY);
 								manageComboEmployeePositionInput.setBounds(78, 291, 229, 21);
 							}
 							{
