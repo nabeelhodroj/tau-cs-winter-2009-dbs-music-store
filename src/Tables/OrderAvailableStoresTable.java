@@ -47,9 +47,9 @@ public class OrderAvailableStoresTable extends Table {
 	 * @param quantity
 	 * @param price
 	 */
-	public void addStore(int storeID, String city, int quantity, int price){
+	public void addStore(int storeID, String city, int quantity){
 		OrderAvailableStoresTableItem store = new OrderAvailableStoresTableItem(storeID,
-				city, quantity, price);
+				city, quantity);
 		this.availableStores.put(storeID, store);
 	}
 	

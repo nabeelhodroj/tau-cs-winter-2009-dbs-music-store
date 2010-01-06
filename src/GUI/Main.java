@@ -174,11 +174,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label stockLabelOrderDateInput;
 	private static Button stockButtonCheckAvailability;
 	private static Label stockLabelOrderFromStore;
+	
 	private static Table stockTableOrderAvailableStores;
 	private static TableColumn stockTableColumnStoreID;
 	private static TableColumn stockTableColumnStoreCity;
 	private static TableColumn stockTableColumnQuantity;
-	private static TableColumn stockTableColumnPrice;
+	
 	private static Label stockLabelPrice;
 	private static Label stockLabelStorePriceInput;
 	private static Label stockLabelQuantityInStock;
@@ -927,12 +928,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								stockTableColumnQuantity.setResizable(true);
 								stockTableColumnQuantity.setMoveable(true);
 								stockTableColumnQuantity.setWidth(tableWidth / numOfColumns);
-								
-								stockTableColumnPrice = new TableColumn(stockTableOrderAvailableStores, SWT.NONE);
-								stockTableColumnPrice.setText("Price");
-								stockTableColumnPrice.setResizable(true);
-								stockTableColumnPrice.setMoveable(true);
-								stockTableColumnPrice.setWidth(tableWidth / numOfColumns);
 							}
 							{
 								stockLabelQuantityInStock = new Label(stockGroupOrderForm, SWT.NONE);
@@ -1768,10 +1763,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static TableColumn getStockTableColumnQuantity() {
 		return stockTableColumnQuantity;
-	}
-
-	public static TableColumn getStockTableColumnPrice() {
-		return stockTableColumnPrice;
 	}
 
 	public static Label getStockLabelPrice() {

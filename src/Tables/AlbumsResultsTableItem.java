@@ -19,7 +19,7 @@ package Tables;
  * 	* artist
  * 	* length (in seconds)
  * additional information:
- * - price (in this store)
+ * - price
  * - storage location
  * - quantity in stock
  */

@@ -267,7 +267,6 @@ public class StockFuncs {
 					Integer.toString(availableStore.getStoreID()),
 					availableStore.getCity(),
 					Integer.toString(availableStore.getQuantity()),
-					Integer.toString(availableStore.getPrice())
 			};
 			item.setText(entry);
 		}
