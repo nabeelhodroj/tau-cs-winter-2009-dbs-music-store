@@ -32,8 +32,8 @@ public class DBConnectionSale {
 			List<String> dbUpdatArg2List = new ArrayList<String>();	
 			
 			// Update the quantity in all the stores
-			String queryPattern = "UPDATE stock SET quantity=quantity - ? " +
-			   			   "WHERE (album_id = ?) AND (store_id = "+StaticProgramTables.getThisStore().getStoreID()+")";
+			String queryPattern = "UPDATE stock SET quantity=quantity-? " +
+			   			   "WHERE (album_id=?) AND (store_id="+StaticProgramTables.getThisStore().getStoreID()+")";
 			for (SaleTableItem saleTableItem : sale.getSaleItems().values()) {
 				dbUpdatArg1List.add(saleTableItem.getQuantity()+"");
 				dbUpdatArg2List.add(saleTableItem.getAlbumID()+"");
