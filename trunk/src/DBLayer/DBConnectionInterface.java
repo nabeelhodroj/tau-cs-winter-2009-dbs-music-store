@@ -38,11 +38,13 @@ public class DBConnectionInterface{
 	
 	/**
 	 * invoked automatically when program starts
-	 * invokes query to get initial stores table, for selection of current store
+	 * initializes connection with given parameters
+	 * after connection is done, DB invokes initialization of stores table,
+	 * for selection of current store in initial dialog
 	 * corresponding method in GUI.GuiUpdatesInterface: initStoresTable
 	 */
-	public static void initStoresTable(){
-		Debug.log("DBConnectionInterface.getStoresTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
+	public static void initDBConnection(ConfigurationManager confMan){
+		Debug.log("DBConnectionInterface.initDBConnection is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		//TODO
 		
 		// until implemented, use example:
