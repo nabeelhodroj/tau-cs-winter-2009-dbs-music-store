@@ -207,7 +207,7 @@ public class MainFuncs {
 	 * @return string: current time in format HH:mm
 	 */
 	public static String getTime(){
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("kk:mm");
         Date date = new Date();
         return dateFormat.format(date);
     }
