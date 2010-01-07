@@ -65,6 +65,7 @@ public class DBConnectionSale {
 			Debug.log("DBConnectionSale.MakeSale: Done working with DB, calling GUI's initSaleTable");
 			GuiUpdatesInterface.initSaleTable();
 			
+			// ARIEL'S : TablesExamples.initStoresTable();
 			
 		}		
 	}
