@@ -118,6 +118,18 @@ public class DBConnectionInterface{
 	}
 	
 	/**
+	 * invoked in Main \ stock-tab \ "Refresh" (orders) button
+	 * updates orders table according to DB
+	 * corresponding method in GUI.GuiUpdatesInterface: refreshOrdersTable
+	 */
+	public static void refreshOrdersTable(){
+		Debug.log("DBConnectionInterface.refreshOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		
+		//TODO
+		TablesExamples.refreshOrdersTable();
+	}
+	
+	/**
 	 * invoked in Main \ stock-tab \ "Remove Order" button
 	 * removes order with given order-id from orders table
 	 * corresponding method in GUI.GuiUpdatesInterface: removeOrder
@@ -144,7 +156,6 @@ public class DBConnectionInterface{
 	
 	/**
 	 * invoked in Main \ stock-tab \
-	 * 		- "Place Order" button by current store -> waiting
 	 *  	- "Cancel Order" button by current store -> canceled
 	 * 		- "Deny Request" button by requested store -> denied
 	 * 		- "Approve Request" button by requested store -> completed
@@ -153,7 +164,9 @@ public class DBConnectionInterface{
 	 * - denied
 	 * - completed
 	 * - canceled (by requester)
-	 * corresponding method in GUI.GuiUpdatesInterface: updateOrderStatus
+	 * corresponding method in GUI.GuiUpdatesInterface:
+	 * - if was called by requester (orders table button invoked): updateOrderStatus
+	 * - if was called by supplier (requests table button invoked): removeRequest
 	 * @param orderID
 	 * @param status
 	 */
@@ -180,22 +193,16 @@ public class DBConnectionInterface{
 	}
 	
 	/**
-	 * invoked in Main \ stock-tab \
-	 * 		- "Deny Request" button by current store
-	 * 		- "Approve Request" button by current store
-	 * 		- "Cancel Order" button by requesting store
-	 * removes request with given order-id from requests table
-	 * corresponding method in GUI.GuiUpdatesInterface: removeRequest
-	 * @param orderID
+	 * invoked in Main \ stock-tab \ "Refresh" (requests) button
+	 * updates requests table according to DB
+	 * corresponding method in GUI.GuiUpdatesInterface: refreshRequestsTable
 	 */
-	public static void removeRequest(int orderID){
-		Debug.log("DBConnectionInterface.removeRequest is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
-		
-		(new Thread(dbcStock.new RemoveRequest(orderID))).start();
-	}
-	
+	public static void refreshRequestsTable(){
+		Debug.log("DBConnectionInterface.refreshRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 
+		//TODO
+		TablesExamples.refreshRequestsTable();
+	}
 
 	////////////////////
 	// Management tab //
