@@ -282,9 +282,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		//////////////////////////////////////////
 		TablesExamples.initTablesExamples();
 		
-		// initialize stores table
-		DBConnectionInterface.initStoresTable();
-		
 		// Start GUI
 		showGUI();
 	}
@@ -348,9 +345,10 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				/**
 				 * open initialize dialog
 				 */
+				// initialize DB Connection (will initialize stores table)
+				MainFuncs.initDBConnection();
+				// open initial dialog
 				InitialDialog.openInitDialog();
-				// when opening the initial dialog, the stores list is initialized by
-				// the data updated by initStoresTable() that was called earlier before showGUI()
 			}
 			
 			/**
