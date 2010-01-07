@@ -10,6 +10,7 @@ import org.eclipse.swt.*;
 * program is initiated by selected store's view 
 */
 public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
+	private static Display display;
 	private static InitialDialog inst;
 	private static Shell shell;
 	private static Shell dialogShell;
@@ -24,7 +25,7 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 	*/
 	public static void openInitDialog() {
 		try {
-			Display display = Display.getDefault();
+			display = Display.getDefault();
 			shell = new Shell(display);
 			inst = new InitialDialog(shell, SWT.NULL);
 			inst.open();
@@ -75,10 +76,6 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 			dialogShell.open();
 			Display display = dialogShell.getDisplay();
 			
-			// initialize combo box and listeners
-			MainFuncs.initDialogComboBoxItems();
-			MainFuncs.initiDialogBoxListeners();
-			
 			while (!dialogShell.isDisposed()) {
 				if (!display.readAndDispatch())
 					display.sleep();
@@ -126,5 +123,13 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 
 	public static void setInitDialogCombo(Combo initDialogCombo) {
 		InitialDialog.initDialogCombo = initDialogCombo;
+	}
+
+	public static Display getInitDisplay() {
+		return display;
+	}
+
+	public static void setDisplay(Display display) {
+		InitialDialog.display = display;
 	}	
 }
