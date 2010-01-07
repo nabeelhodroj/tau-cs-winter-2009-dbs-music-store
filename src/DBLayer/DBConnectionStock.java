@@ -279,4 +279,26 @@ public class DBConnectionStock {
 		}
 	}
 	
+	public class RefreshOrdersTable implements Runnable{
+
+		@Override
+		public void run() {
+			TablesExamples.refreshOrdersTable();
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	public class RefreshRequestsTable implements Runnable{
+
+		@Override
+		public void run() {
+			TablesExamples.refreshRequestsTable();
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
 }
