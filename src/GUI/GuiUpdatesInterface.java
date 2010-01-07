@@ -20,13 +20,22 @@ public class GuiUpdatesInterface {
 	 * initialize stores table (for choosing a store when program starts)
 	 * @param stores
 	 */
-	public static void initStoresTable(StoresTable stores){
+	public static void initStoresTable(final StoresTable stores){
 		Debug.log("GuiUpdatesInterface: initStoresTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		// update the stores list
-		StaticProgramTables.stores = stores;
-		// add stores to choice combobox in initial dialog is done when opening the initial dialog
-		// in InitialDialog.open()
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// update the stores list
+				StaticProgramTables.stores = stores;
+				// add stores to choice combobox in initial dialog is done when opening the initial dialog
+				// in InitialDialog.open()
+				// initialize combo box and listeners
+				MainFuncs.initDialogComboBoxItems();
+				MainFuncs.initiDialogBoxListeners();
+				
+				}
+			});
 	}
 
 	////////////////
