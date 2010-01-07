@@ -40,4 +40,13 @@ public enum EmployeePositionsEnum {
 	public String getStrRep(){
 		return this.strRepresentation;
 	}
+	
+	/**
+	 * A static method that converts the integer i to its EmployeePositionsEnum enum value
+	 * @param i
+	 * @return
+	 */
+	public static EmployeePositionsEnum convertFromInt(int i){
+		return values()[i];
+	}
 }
