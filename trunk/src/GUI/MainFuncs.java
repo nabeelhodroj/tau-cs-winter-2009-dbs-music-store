@@ -42,7 +42,7 @@ public class MainFuncs {
 	 */
 	public static void initDBConnection(){
 		// create connection
-		String classPath = System.getProperty("java.class.path");
+		String classPath = System.getProperty("java.class.path").split(";")[0];
 		ConfigurationManager confMan = new ConfigurationManager(classPath+"\\..\\src\\General\\Store.props");
 		
 		DBConnectionInterface.initDBConnection(confMan);
