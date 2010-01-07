@@ -10,8 +10,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
+import General.Debug;
+import General.Debug.DebugOutput;
 import Tables.StoresTableItem;
 
 /**

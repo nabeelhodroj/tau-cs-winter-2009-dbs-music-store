@@ -5,8 +5,8 @@ import org.eclipse.swt.events.*;
 import org.eclipse.swt.*;
 
 import DBLayer.*;
-import Debug.*;
-import Debug.Debug.*;
+import General.Debug;
+import General.Debug.DebugOutput;
 import Queries.*;
 import Tables.*;
 

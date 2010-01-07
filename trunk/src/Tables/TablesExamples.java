@@ -1,10 +1,11 @@
 package Tables;
 
 import GUI.*;
+import General.Debug;
+import General.Debug.DebugOutput;
+
 import java.util.*;
 import Queries.*;
-import Debug.*;
-import Debug.Debug.*;
 
 /**
  * created by Ariel

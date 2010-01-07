@@ -1,7 +1,7 @@
 package DBLayer;
 
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
+import General.Debug;
+import General.Debug.DebugOutput;
 import Queries.OrderAvailableStoresQuery;
 import Tables.OrderStatusEnum;
 import Tables.OrdersOrRequestsTableItem;

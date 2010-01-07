@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 
 import DBLayer.DBConnectionInterface;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
+import General.Debug;
+import General.Debug.DebugOutput;
 import Tables.EmployeesTableItem;
 import Tables.SaleTable;
 import Tables.SaleTableItem;

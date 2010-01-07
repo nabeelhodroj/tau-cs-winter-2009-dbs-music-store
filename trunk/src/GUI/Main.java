@@ -8,8 +8,8 @@ import javax.swing.*;
 
 import DBLayer.DBConnectionInterface;
 import Tables.TablesExamples;
-import Debug.*;
-import Debug.Debug.*; 
+import General.Debug;
+import General.Debug.DebugOutput;
 
 import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.layout.*;
