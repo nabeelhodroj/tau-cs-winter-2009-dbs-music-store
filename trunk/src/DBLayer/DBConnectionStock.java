@@ -114,10 +114,10 @@ public class DBConnectionStock {
 			
 			
 			Debug.log("DBConnectionStock.RemoveOrder done with DB, calling GUI's removeOrder");
-			GuiUpdatesInterface.removeOrder(orderID);
+			//TODO un-comment: GuiUpdatesInterface.removeOrder(orderID);
 			
 			
-			// ARIEL'S: TablesExamples.removeOrder(orderID);
+			TablesExamples.removeOrder(orderID);
 		}
 	}
 	
@@ -151,9 +151,9 @@ public class DBConnectionStock {
 			retOrder.setAlbumID(retOrderID);
 			
 			Debug.log("DBConnectionStock.PlaceOrder done with DB, calling GUI's addOrder");
-			GuiUpdatesInterface.addOrder(retOrder);			
+			//TODO un-comment: GuiUpdatesInterface.addOrder(retOrder);			
 			
-			// ARIEL'S :TablesExamples.placeOrder(order);
+			TablesExamples.placeOrder(order);
 		}
 	}
 	
