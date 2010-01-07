@@ -78,7 +78,6 @@ public class DBConnectionInterface{
 	 */
 	public static void makeSale(SaleTable sale){
 		Debug.log("DBConnectionInterface.makeSale is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcSale.new MakeSale(sale))).start();		
 	}
@@ -97,7 +96,6 @@ public class DBConnectionInterface{
 	 */
 	public static void getOrderAvailableStores(OrderAvailableStoresQuery query){
 		Debug.log("DBConnectionInterface.getOrderAvailableStores is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new GetOrderAvailableStores(query))).start();
 	}
@@ -112,7 +110,6 @@ public class DBConnectionInterface{
 	 */
 	public static void getOrdersTable(){
 		Debug.log("DBConnectionInterface.getOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new GetOrdersTable())).start();
 	}
@@ -123,10 +120,9 @@ public class DBConnectionInterface{
 	 * corresponding method in GUI.GuiUpdatesInterface: refreshOrdersTable
 	 */
 	public static void refreshOrdersTable(){
-		Debug.log("DBConnectionInterface.refreshOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		Debug.log("DBConnectionInterface.refreshOrdersTable is called",DebugOutput.FILE,DebugOutput.STDOUT);	
 		
-		//TODO
-		TablesExamples.refreshOrdersTable();
+		(new Thread(dbcStock.new RefreshOrdersTable())).start();
 	}
 	
 	/**
@@ -137,7 +133,6 @@ public class DBConnectionInterface{
 	 */
 	public static void removeOrder(int orderID){
 		Debug.log("DBConnectionInterface.removeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new RemoveOrder(orderID))).start();
 	}
@@ -149,7 +144,6 @@ public class DBConnectionInterface{
 	 */
 	public static void placeOrder(OrdersOrRequestsTableItem order){
 		Debug.log("DBConnectionInterface.placeOrder is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new PlaceOrder(order))).start();
 	}
@@ -172,7 +166,6 @@ public class DBConnectionInterface{
 	 */
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		Debug.log("DBConnectionInterface.updateOrderStatus is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new UpdateOrderStatus(orderID, status))).start();
 	}
@@ -187,7 +180,6 @@ public class DBConnectionInterface{
 	 */
 	public static void getRequestsTable(){
 		Debug.log("DBConnectionInterface.getRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcStock.new GetRequestTable())).start();
 	}
@@ -199,9 +191,8 @@ public class DBConnectionInterface{
 	 */
 	public static void refreshRequestsTable(){
 		Debug.log("DBConnectionInterface.refreshRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
-
-		//TODO
-		TablesExamples.refreshRequestsTable();
+		
+		(new Thread(dbcStock.new RefreshRequestsTable())).start();
 	}
 
 	////////////////////
