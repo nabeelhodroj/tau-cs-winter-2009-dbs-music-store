@@ -10,9 +10,9 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
-import General.Debug;
-import General.Debug.DebugOutput;
 import Tables.StoresTableItem;
+import General.*;
+import General.Debug.*;
 
 /**
  * created by Ariel
@@ -34,6 +34,19 @@ public class MainFuncs {
 	/////////////////////////
 	//	initialize program //
 	/////////////////////////
+	
+	/**
+	 * invoked automatically on program startup
+	 * - creates initial connection with DB
+	 * - initializes stores list
+	 */
+	public static void initDBConnection(){
+		// create connection
+		String classPath = System.getProperty("java.class.path");
+		ConfigurationManager confMan = new ConfigurationManager(classPath+"\\..\\src\\General\\Store.props");
+		
+		DBConnectionInterface.initDBConnection(confMan);
+	}
 	
 	/**
 	 * invoked when main window opens
