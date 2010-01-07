@@ -26,7 +26,7 @@ public class DBConnectionStock {
 
 		@Override
 		public void run() {
-			Debug.log("DBConnectionStock.GetOrderAvailableStores thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.GetOrderAvailableStores thread is started");
 			/* TODO un-comment
 			OrderAvailableStoresTable availableStores = new OrderAvailableStoresTable();
 			
@@ -61,7 +61,7 @@ public class DBConnectionStock {
 	public class GetOrdersTable implements Runnable{
 		@Override
 		public void run() {
-			Debug.log("DBConnectionStock.GetOrdersTable thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.GetOrdersTable thread is started");
 			/*
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
@@ -107,7 +107,7 @@ public class DBConnectionStock {
 		}
 		
 		public void run() {
-			Debug.log("DBConnectionStock.RemoveOrder thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.RemoveOrder thread is started");
 			
 			String queryStr = "DELETE FROM orders WHERE order_id="+orderID;
 			// TODO : execute the query :: rotemExecuteUpdate(queryStr) 
@@ -131,7 +131,7 @@ public class DBConnectionStock {
 
 		@Override
 		public void run() {
-			Debug.log("DBConnectionStock.PlaceOrder thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.PlaceOrder thread is started");
 			
 			OrdersOrRequestsTableItem retOrder = new OrdersOrRequestsTableItem(-1, // Default
 																			   StaticProgramTables.getThisStore().getStoreID(),
@@ -168,7 +168,7 @@ public class DBConnectionStock {
 		
 		@Override
 		public void run() {
-			Debug.log("DBConnectionStock.UpdateOrderStatus thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.UpdateOrderStatus thread is started");
 			/*
 			String queryStr = "SELECT * FROM orders WHERE order_id="+orderID;
 			ResultSet rs = null ; //TODO : execute :: =rotemexecuteQuery(queryStr)
@@ -244,7 +244,7 @@ public class DBConnectionStock {
 
 		@Override
 		public void run() {
-			Debug.log("DBConnectionStock.GetRequestTable thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			Debug.log("DBConnectionStock.GetRequestTable thread is started");
 			/*
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
@@ -283,6 +283,7 @@ public class DBConnectionStock {
 
 		@Override
 		public void run() {
+			Debug.log("DBConnectionStock.RefreshOrdersTable thread is started");
 			TablesExamples.refreshOrdersTable();
 			// TODO Auto-generated method stub
 			
@@ -294,6 +295,7 @@ public class DBConnectionStock {
 
 		@Override
 		public void run() {
+			Debug.log("DBConnectionStock.RefreshRequestsTable thread is started");
 			TablesExamples.refreshRequestsTable();
 			// TODO Auto-generated method stub
 			
