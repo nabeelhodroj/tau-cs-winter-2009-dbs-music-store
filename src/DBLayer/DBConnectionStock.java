@@ -212,7 +212,7 @@ public class DBConnectionStock {
 						// if NOT then need to add the album to the store (rather then just update the stock):  
 						queryStr = "INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
 									"VALUES('"+rs.getInt("album_id")+"','"+rs.getInt("ordering_store_id")+"','"+rs.getInt("quantity")+"','"+(new Random()).nextLong() % 1000+"')";
-						Debug.log("DBConnectionStock.UpdateOrderStatus updated the reciever");
+						Debug.log("DBConnectionStock.UpdateOrderStatus updated the receiver");
 						
 						// Update the Orders table
 						queryStr = "UPDATE orders SET status=Completed WHERE order_id="+orderID;
