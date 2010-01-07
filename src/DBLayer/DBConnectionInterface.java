@@ -2,8 +2,8 @@ package DBLayer;
 
 import Tables.*;
 import Queries.*;
-import Debug.*;
-import Debug.Debug.DebugOutput;
+import General.*;
+import General.Debug.DebugOutput;
 
 /**
  * created by Ariel

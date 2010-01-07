@@ -1,9 +1,8 @@
 package GUI;
 
 import Tables.*;
-import Debug.*;
-import Debug.Debug.DebugOutput;
-
+import General.Debug;
+import General.Debug.DebugOutput;
 /**
  * created by Ariel
  * 

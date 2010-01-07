@@ -9,8 +9,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 
 import DBLayer.DBConnectionInterface;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
 import Queries.OrderAvailableStoresQuery;
 import Queries.QueryErrorException;
 import Tables.EmployeePositionsEnum;
@@ -19,6 +17,8 @@ import Tables.OrderAvailableStoresTableItem;
 import Tables.OrderStatusEnum;
 import Tables.OrdersOrRequestsTable;
 import Tables.OrdersOrRequestsTableItem;
+import General.Debug;
+import General.Debug.*;
 
 /**
  * created by Ariel

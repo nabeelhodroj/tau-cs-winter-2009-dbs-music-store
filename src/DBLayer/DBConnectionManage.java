@@ -2,8 +2,8 @@ package DBLayer;
 
 import Tables.EmployeesTableItem;
 import Tables.TablesExamples;
-import Debug.Debug;
-import Debug.Debug.DebugOutput;
+import General.Debug;
+import General.Debug.DebugOutput;
 
 public class DBConnectionManage {
 	public class GetEmployeesTable implements Runnable{
