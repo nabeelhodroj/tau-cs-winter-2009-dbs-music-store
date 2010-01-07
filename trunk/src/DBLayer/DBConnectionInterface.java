@@ -195,6 +195,8 @@ public class DBConnectionInterface{
 		(new Thread(dbcStock.new RemoveRequest(orderID))).start();
 	}
 	
+	
+	// TODO the following function never called. TO BE REMOVED !!
 	/**
 	 * invoked in Main \ stock-tab \ "Place Order" button by requesting store
 	 * adds request to requests table
