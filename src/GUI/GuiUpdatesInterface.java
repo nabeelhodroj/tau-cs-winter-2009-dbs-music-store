@@ -249,8 +249,7 @@ public class GuiUpdatesInterface {
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {
 				
-				//TODO
-				// implement removal of given request from requests table and update gui
+				StockFuncs.removeRequest(requestID);
 				
 				}
 			});

@@ -33,9 +33,6 @@ public class StockFuncs {
 	private static int quantity;
 	private static int price;
 	
-	// will hold true if an order-status change is invoked and false if a request-status change is invoked
-	private static boolean isOrderStatusChanged;
-	
 	/**
 	 * initialize stock tab view
 	 */
@@ -511,23 +508,13 @@ public class StockFuncs {
 	 * @param status
 	 */
 	public static void updateOrderRequestStatus(int orderID, OrderStatusEnum status){
-		if (isOrderStatusChanged){ // an order status was changed
-			// update order status
-			StaticProgramTables.orders.getOrder(orderID).setStatus(status);
-			
-			// update gui view and disable orders buttons
-			updateOrdersTableView();
-			Main.getStockButtonRemoveOrder().setEnabled(false);
-			Main.getStockButtonCancelOrder().setEnabled(false);
-		} else { // a request status was changed
-			// update request status
-			StaticProgramTables.requests.getOrder(orderID).setStatus(status);
-			
-			// update gui view and disable requests buttons
-			updateRequestsTableView();
-			Main.getStockButtonDenyRequest().setEnabled(false);
-			Main.getStockButtonApproveRequest().setEnabled(false);
-		}		
+		// update order status
+		StaticProgramTables.orders.getOrder(orderID).setStatus(status);
+		
+		// update gui view and disable orders buttons
+		updateOrdersTableView();
+		Main.getStockButtonRemoveOrder().setEnabled(false);
+		Main.getStockButtonCancelOrder().setEnabled(false);	
 		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);
@@ -574,9 +561,6 @@ public class StockFuncs {
 	 * calls change of order status to canceled
 	 */
 	public static void cancelOrderInvokation(){
-		// set flag that order status change is invoked
-		isOrderStatusChanged = true;
-		
 		// call DB action
 		try{
 			int selectedOrderID = Integer.parseInt(Main.getStockTableOrders().getSelection()[0].getText(0));
@@ -686,7 +670,13 @@ public class StockFuncs {
 	 * DB will call its removal from requests table
 	 */
 	public static void denyRequestInvokation(){
-		//TODO
+		// call DB action
+		try{
+			int selectedRequestID = Integer.parseInt(Main.getStockTableRequests().getSelection()[0].getText(0));
+			DBConnectionInterface.updateOrderStatus(selectedRequestID, OrderStatusEnum.DENIED);
+		} catch (NumberFormatException nfe){
+			Debug.log("*** BUG: StockFuncs.denyRequestInvokation bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
 	}
 	
 	/**
@@ -695,7 +685,13 @@ public class StockFuncs {
 	 * DB will call its removal from requests table
 	 */
 	public static void approveRequestInvokation(){
-		//TODO
+		// call DB action
+		try{
+			int selectedRequestID = Integer.parseInt(Main.getStockTableRequests().getSelection()[0].getText(0));
+			DBConnectionInterface.updateOrderStatus(selectedRequestID, OrderStatusEnum.COMPLETED);
+		} catch (NumberFormatException nfe){
+			Debug.log("*** BUG: StockFuncs.approveRequestInvokation bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
 	}
 	
 	/**
@@ -704,7 +700,14 @@ public class StockFuncs {
 	 * @param requestID
 	 */
 	public static void removeRequest(int requestID){
-		//TODO
+		// remove request from requests table
+		StaticProgramTables.requests.getOrders().remove(requestID);
+		System.out.println("999");
+		// update view
+		updateRequestsTableView();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**

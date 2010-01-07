@@ -189,7 +189,11 @@ public class TablesExamples {
 	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		waitSome(1000);
-		GuiUpdatesInterface.updateOrderStatus(orderID, status);
+		if (status == OrderStatusEnum.CANCELED) // called by orders
+			GuiUpdatesInterface.updateOrderStatus(orderID, status);
+		else { // called by requests
+			GuiUpdatesInterface.removeRequest(orderID);
+		}
 	}
 	
 	/**
