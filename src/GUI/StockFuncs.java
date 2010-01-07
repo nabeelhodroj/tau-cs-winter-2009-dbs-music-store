@@ -148,7 +148,27 @@ public class StockFuncs {
 					}
 				}
 		);
-		
+
+		// refresh orders button listener
+		Main.getStockButtonRefreshOrders().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: refresh orders table button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							DBConnectionInterface.refreshOrdersTable();
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
+					}
+				}
+		);
+
 		// cancel order button listener
 		Main.getStockButtonCancelOrder().addSelectionListener(
 				new SelectionAdapter() {
@@ -180,7 +200,7 @@ public class StockFuncs {
 							// flag DB as busy
 							MainFuncs.setAllowDBAction(false);
 							
-							//TODO
+							removeOrderInvokation();
 							
 						} else {
 							MainFuncs.getMsgDBActionNotAllowed().open();
@@ -198,7 +218,27 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: requests table item selected",DebugOutput.FILE,DebugOutput.STDOUT);
 
-						//TODO
+						requestsTableItemSelected();
+					}
+				}
+		);
+		
+		// refresh requests button listener
+		Main.getStockButtonRefreshRequests().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: refresh requests table button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+
+						// check if DB is not busy, else pop a message
+						if (MainFuncs.isAllowDBAction()){
+							// flag DB as busy
+							MainFuncs.setAllowDBAction(false);
+							
+							DBConnectionInterface.refreshRequestsTable();
+							
+						} else {
+							MainFuncs.getMsgDBActionNotAllowed().open();
+						}
 					}
 				}
 		);
@@ -214,7 +254,7 @@ public class StockFuncs {
 							// flag DB as busy
 							MainFuncs.setAllowDBAction(false);
 							
-							//TODO
+							denyRequestInvokation();
 							
 						} else {
 							MainFuncs.getMsgDBActionNotAllowed().open();
@@ -234,7 +274,7 @@ public class StockFuncs {
 							// flag DB as busy
 							MainFuncs.setAllowDBAction(false);
 							
-							//TODO
+							approveRequestInvokation();
 							
 						} else {
 							MainFuncs.getMsgDBActionNotAllowed().open();
@@ -515,6 +555,21 @@ public class StockFuncs {
 	}
 	
 	/**
+	 * invoked from DB after "Refresh" orders table button is invoked
+	 * updates store's orders and updates view
+	 * @param orders
+	 */
+	public static void refreshOrdersTable(OrdersOrRequestsTable orders){
+		// update orders
+		setCurrentOrders(orders);
+		// update view
+		updateOrdersTableView();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
+	/**
 	 * invoked by "Cancel Order" button
 	 * calls change of order status to canceled
 	 */
@@ -531,8 +586,35 @@ public class StockFuncs {
 		}
 	}
 	
-	//TODO
+	/**
+	 * invoked by "Remove Order" button
+	 * calls removal of selected order from DB
+	 */
+	public static void removeOrderInvokation(){
+		// call DB action
+		try{
+			int selectedOrderID = Integer.parseInt(Main.getStockTableOrders().getSelection()[0].getText(0));
+			DBConnectionInterface.removeOrder(selectedOrderID);
+		} catch (NumberFormatException nfe){
+			Debug.log("*** BUG: StockFuncs.removeOrderInvokation bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
+	}
 	
+	/**
+	 * invoked from DB after "Remove Order" button is invoked
+	 * removes order from orders table and updates view
+	 * @param orderID
+	 */
+	public static void removeOrder(int orderID){
+		// remove order from orders table
+		StaticProgramTables.orders.getOrders().remove(orderID);
+		
+		// update view
+		updateOrdersTableView();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}	
 	
 	/**
 	 * updates current orders table view according to current orders table
@@ -575,6 +657,57 @@ public class StockFuncs {
 	////////////////////////
 	
 	/**
+	 * set requests table's buttons when table item is selected
+	 */
+	public static void requestsTableItemSelected(){
+		// enable both buttons
+		Main.getStockButtonDenyRequest().setEnabled(true);
+		Main.getStockButtonApproveRequest().setEnabled(true);
+	}
+	
+	/**
+	 * invoked from DB after "Refresh" requests table button is invoked
+	 * updates store's requests and updates view
+	 * @param requests
+	 */
+	public static void refreshRequestsTable(OrdersOrRequestsTable requests){
+		// update requests
+		setCurrentRequests(requests);
+		// update view
+		updateRequestsTableView();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
+	/**
+	 * invoked by "Deny Request" button
+	 * calls status change of order id to "denied"
+	 * DB will call its removal from requests table
+	 */
+	public static void denyRequestInvokation(){
+		//TODO
+	}
+	
+	/**
+	 * invoked by "Approve Request" button
+	 * calls status change of order id to "approved"
+	 * DB will call its removal from requests table
+	 */
+	public static void approveRequestInvokation(){
+		//TODO
+	}
+	
+	/**
+	 * invoked from DB after a request was approved or denied
+	 * removes request from requests table
+	 * @param requestID
+	 */
+	public static void removeRequest(int requestID){
+		//TODO
+	}
+	
+	/**
 	 * update requests table view according to current requests table
 	 */
 	public static void updateRequestsTableView(){
@@ -594,6 +727,10 @@ public class StockFuncs {
 			};
 			item.setText(entry);
 		}
+		
+		// disable both buttons
+		Main.getStockButtonDenyRequest().setEnabled(false);
+		Main.getStockButtonApproveRequest().setEnabled(false);
 	}
 	
 	/**

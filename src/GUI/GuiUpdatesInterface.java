@@ -153,6 +153,16 @@ public class GuiUpdatesInterface {
 	}
 	
 	/**
+	 * update the orders table and update gui
+	 * @param orders
+	 */
+	public static void refreshOrdersTable(OrdersOrRequestsTable orders){
+		Debug.log("GuiUpdatesInterface: refreshOrdersTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		StockFuncs.refreshOrdersTable(orders);
+	}
+	
+	/**
 	 * removes order with given order-id from orders table
 	 * @param orderID
 	 */
@@ -162,8 +172,7 @@ public class GuiUpdatesInterface {
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {
 				
-				//TODO
-				// implement removal of given order from orders table and update gui
+				StockFuncs.removeOrder(orderID);
 				
 				}
 			});
@@ -220,7 +229,18 @@ public class GuiUpdatesInterface {
 	}
 	
 	/**
+	 * update the requests table and update gui
+	 * @param requests
+	 */
+	public static void refreshRequestsTable(OrdersOrRequestsTable requests){
+		Debug.log("GuiUpdatesInterface: refreshRequestsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		StockFuncs.refreshRequestsTable(requests);
+	}
+	
+	/**
 	 * removes request with given request-id (order-id in database) from requests table
+	 * will be invoked from DB when a request is denied or approved
 	 * @param orderID
 	 */
 	public static void removeRequest(final int requestID){
@@ -231,23 +251,6 @@ public class GuiUpdatesInterface {
 				
 				//TODO
 				// implement removal of given request from requests table and update gui
-				
-				}
-			});
-	}
-	
-	/**
-	 * adds request to requests table
-	 * @param requestID
-	 */
-	public static void addRequest(final OrdersOrRequestsTableItem request){
-		Debug.log("GuiUpdatesInterface: addRequest is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
-		
-		Main.getMainDisplay().asyncExec(new Runnable() {
-			public void run() {
-				
-				//TODO
-				// implement adding a request to the requests table and update gui
 				
 				}
 			});

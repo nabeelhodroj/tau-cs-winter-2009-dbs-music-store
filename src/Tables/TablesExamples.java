@@ -160,6 +160,14 @@ public class TablesExamples {
 	}
 	
 	/**
+	 * invoke refresh orders in gui
+	 */
+	public static void refreshOrdersTable(){
+		waitSome(1000);
+		GuiUpdatesInterface.refreshOrdersTable(ordersTableExample);
+	}
+	
+	/**
 	 * invoke remove order from orders table in gui
 	 * @param orderID
 	 */
@@ -192,14 +200,12 @@ public class TablesExamples {
 		GuiUpdatesInterface.initRequestsTable(requestsTableExample);
 	}
 	
-	public static void removeRequest(int orderID){
+	/**
+	 * invoke refresh requests in gui
+	 */
+	public static void refreshRequestsTable(){
 		waitSome(1000);
-		//TODO
-	}
-	
-	public static void addRequest(OrdersOrRequestsTableItem request){
-		waitSome(1000);
-		//TODO
+		GuiUpdatesInterface.refreshRequestsTable(requestsTableExample);
 	}
 	
 	// Management tab

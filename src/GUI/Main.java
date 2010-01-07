@@ -201,6 +201,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static TableColumn stockTableColumnOrdersDate;
 	private static TableColumn stockTableColumnOrdersStatus;
 	private static TableColumn stockTableColumnOrdersCompletionDate;
+	private static Button stockButtonRefreshOrders;
 	private static Button stockButtonRemoveOrder;
 	private static Button stockButtonCancelOrder;
 	
@@ -214,6 +215,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static TableColumn stockTableColumnRequestsDate;
 	private static TableColumn stockTableColumnRequestsStatus;
 	private static TableColumn stockTableColumnRequestsCompletionDate;
+	private static Button stockButtonRefreshRequests;
 	private static Button stockButtonDenyRequest;
 	private static Button stockButtonApproveRequest;
 	
@@ -1097,6 +1099,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockButtonDenyRequest.setBounds(567, 429, 101, 24);
 						}
 						{
+							stockButtonRefreshRequests = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonRefreshRequests.setText("Refresh");
+							stockButtonRefreshRequests.setBounds(460, 429, 101, 24);
+						}
+						{
 							stockLabelOrders = new Label(stockTabComposite, SWT.NONE);
 							stockLabelOrders.setText("Orders:");
 							stockLabelOrders.setBounds(7, 153, 60, 20);
@@ -1110,6 +1117,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockButtonRemoveOrder = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonRemoveOrder.setText("Remove Order");
 							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
+						}
+						{
+							stockButtonRefreshOrders = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
+							stockButtonRefreshOrders.setText("Refresh");
+							stockButtonRefreshOrders.setBounds(458, 286, 101, 24);
 						}
 					}
 				}
@@ -2086,5 +2098,22 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static void setDisplay(Display display) {
 		Main.display = display;
+	}
+
+	public static Button getStockButtonRefreshOrders() {
+		return stockButtonRefreshOrders;
+	}
+
+	public static void setStockButtonRefreshOrders(Button stockButtonRefreshOrders) {
+		Main.stockButtonRefreshOrders = stockButtonRefreshOrders;
+	}
+
+	public static Button getStockButtonRefreshRequests() {
+		return stockButtonRefreshRequests;
+	}
+
+	public static void setStockButtonRefreshRequests(
+			Button stockButtonRefreshRequests) {
+		Main.stockButtonRefreshRequests = stockButtonRefreshRequests;
 	}
 }
