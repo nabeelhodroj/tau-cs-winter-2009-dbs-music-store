@@ -67,6 +67,19 @@ public class DBConnectionInterface{
 		(new Thread(dbcSearch.new GetAlbumsSearchResults(albumSearchQuery))).start();		
 	}
 	
+	/**
+	 * invoked in Main \ search-tab \ album search result selection
+	 * invokes query to get all songs (in a SongsResultsTable structure) for the given album
+	 * corresponding method in GUI.GuiUpdatesInterface: updateSongsResultsTable
+	 * @param albumID
+	 */
+	public static void getSongsResults(long albumID){
+		Debug.log("DBConnectionInterface.getSongsResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		
+		//TODO
+		TablesExamples.getSongsResults(albumID);
+	}
+	
 	//////////////
 	// Sale tab //
 	//////////////
