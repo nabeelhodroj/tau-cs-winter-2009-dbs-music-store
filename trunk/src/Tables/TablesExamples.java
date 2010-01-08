@@ -15,6 +15,8 @@ import Queries.*;
 public class TablesExamples {
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
+	public static SongsResultsTable songsResultsTableExample1;
+	public static SongsResultsTable songsResultsTableExample2;
 	public static StoresTable storesTableExample = new StoresTable();
 	public static OrdersOrRequestsTable ordersTableExample = new OrdersOrRequestsTable(true);
 	public static OrdersOrRequestsTable requestsTableExample = new OrdersOrRequestsTable(false);
@@ -30,20 +32,20 @@ public class TablesExamples {
 		
 		// albums and songs results table example
 		
-		SongsResultsTable songs1 = new SongsResultsTable(1);
-		songs1.addSong(1, "You are my Sima", "Shimon", 180);
-		songs1.addSong(2,"Here in Ashdod", "Shimon", 200);
+		songsResultsTableExample1 = new SongsResultsTable(1);
+		songsResultsTableExample1.addSong(1, "You are my Sima", "Shimon", 180);
+		songsResultsTableExample1.addSong(2,"Here in Ashdod", "Shimon", 200);
 		
 		AlbumsResultsTableItem albumsResultsItem1 = new AlbumsResultsTableItem(1, "Shimon Comes Live",
-				"Shimon", 1998, "Rock", 1800, songs1, 60, 17, 30);
+				"Shimon", 1998, "Rock", 1800, null, 60, 17, 30);
 		
-		SongsResultsTable songs2 = new SongsResultsTable(2);
-		songs2.addSong(1, "You are my Sima", "Shimon", 180);
-		songs2.addSong(2,"Who is your Sami", "Shimon feat. Sami", 200);
-		songs2.addSong(3,"Who is your Susu", "Shimon feat. Susu", 150);
+		songsResultsTableExample2 = new SongsResultsTable(2);
+		songsResultsTableExample2.addSong(1, "You are my Sima", "Shimon", 180);
+		songsResultsTableExample2.addSong(2,"Who is your Sami", "Shimon feat. Sami", 200);
+		songsResultsTableExample2.addSong(3,"Who is your Susu", "Shimon feat. Susu", 150);
 		
 		AlbumsResultsTableItem albumsResultsItem2 = new AlbumsResultsTableItem(2, "Shimon and Friends",
-				"Various", 1995, "Rock", 2000, songs2, 49, 19, 56);
+				"Various", 1995, "Rock", 2000, null, 49, 19, 56);
 		
 		albumsResultsTableExample.addAlbum(albumsResultsItem1);
 		albumsResultsTableExample.addAlbum(albumsResultsItem2);
@@ -121,6 +123,18 @@ public class TablesExamples {
 	public static void getAlbumsSearchResults(){
 		waitSome(3000);
 		GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
+	}
+	
+	/**
+	 * invoke GUI songs results update with example
+	 * @param albumID
+	 */
+	public static void getSongsResults(long albumID){
+		waitSome(1000);
+		if (albumID == 1)
+			GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample1);
+		else // albumID == 2
+			GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample2);
 	}
 	
 	/**

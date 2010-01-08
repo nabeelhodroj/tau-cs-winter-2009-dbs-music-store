@@ -64,6 +64,23 @@ public class GuiUpdatesInterface {
 			});
 	}
 	
+	/**
+	 * updates the selected album result's songs list and updates the songs table view
+	 * @param songsResults
+	 */
+	public static void updateSongsResultsTable(final long albumID, final SongsResultsTable songsResults){
+		Debug.log("GuiUpdatesInterface: updateSongsResultsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				// update songs results table
+				SearchFuncs.updateSongsResultsTable(albumID, songsResults);
+				
+				}
+			});
+	}
+	
 	//////////////
 	// Sale tab //
 	//////////////
