@@ -173,10 +173,16 @@ public class GuiUpdatesInterface {
 	 * update the orders table and update gui
 	 * @param orders
 	 */
-	public static void refreshOrdersTable(OrdersOrRequestsTable orders){
+	public static void refreshOrdersTable(final OrdersOrRequestsTable orders){
 		Debug.log("GuiUpdatesInterface: refreshOrdersTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		StockFuncs.refreshOrdersTable(orders);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StockFuncs.refreshOrdersTable(orders);
+				
+				}
+			});
 	}
 	
 	/**
@@ -249,10 +255,16 @@ public class GuiUpdatesInterface {
 	 * update the requests table and update gui
 	 * @param requests
 	 */
-	public static void refreshRequestsTable(OrdersOrRequestsTable requests){
+	public static void refreshRequestsTable(final OrdersOrRequestsTable requests){
 		Debug.log("GuiUpdatesInterface: refreshRequestsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
-		StockFuncs.refreshRequestsTable(requests);
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StockFuncs.refreshRequestsTable(requests);
+				
+				}
+			});
 	}
 	
 	/**
