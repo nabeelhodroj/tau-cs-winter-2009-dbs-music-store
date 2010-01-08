@@ -183,7 +183,7 @@ public class SearchFuncs {
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
 						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
 						// update songs table
-						updateSongsResultsTable(album);
+						getSongsResultsTable(album);
 						// update stock information
 						setLabelPrice(Integer.toString(album.getPrice()));
 						setLabelStockLocation(Long.toString(album.getStorageLocation()));
@@ -465,13 +465,51 @@ public class SearchFuncs {
 	}
 	
 	/**
-	 * update the Songs results table to show the given album's songs
-	 * (taken from the current results data structure)
-	 * @param albumID
+	 * updates the songs results table according to selected album
+	 * if album is selected for the first time, gets the songs list from DB
+	 * else gets it from the current album results table
+	 * @param album
 	 */
-	public static void updateSongsResultsTable(AlbumsResultsTableItem album){
+	public static void getSongsResultsTable(AlbumsResultsTableItem album){
+		// try to fetch songs list from album results
 		SongsResultsTable songs = album.getSongs();
 		
+		// check if songs list is empty / null, if so call results from DB
+		if (songs == null || songs.getSongs().isEmpty()){
+			// check if DB is not busy, else pop a message
+			if (MainFuncs.isAllowDBAction()){
+				// flag DB as busy
+				MainFuncs.setAllowDBAction(false);
+				
+				DBConnectionInterface.getSongsResults(album.getAlbumID());
+				
+			} else {
+				MainFuncs.getMsgDBActionNotAllowed().open();
+			}
+		} else { // album result already has songs table
+			updateSongsResultsTableView(songs);
+		}
+	}
+	
+	/**
+	 * updates the album search results - sets the given album its songs table
+	 * updates songs table view
+	 * @param albumID
+	 */
+	public static void updateSongsResultsTable(long albumID, SongsResultsTable songs){
+		// update album results
+		StaticProgramTables.results.getAlbum(albumID).setSongs(songs);
+		// update songs table view
+		updateSongsResultsTableView(songs);
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
+	/**
+	 * updates the songs results table view with given songs table
+	 * @param songs
+	 */
+	public static void updateSongsResultsTableView(SongsResultsTable songs){
 		// first clear songs table
 		Main.getSearchTableSongResults().removeAll();
 		// now enter songs
