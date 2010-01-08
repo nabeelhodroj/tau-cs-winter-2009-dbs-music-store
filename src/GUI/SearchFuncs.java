@@ -204,7 +204,8 @@ public class SearchFuncs {
 				new SelectionAdapter(){
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Search tab: add to order button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						//TODO clear order fields
+						// clear order fields
+						StockFuncs.clearFieldsButtonInvokation();
 						
 						// set order parameters to selected album
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
