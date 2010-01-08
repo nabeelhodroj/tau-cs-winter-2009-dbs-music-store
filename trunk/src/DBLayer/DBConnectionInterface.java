@@ -45,12 +45,25 @@ public class DBConnectionInterface{
 	 */
 	public static void initDBConnection(ConfigurationManager confMan){
 		Debug.log("DBConnectionInterface.initDBConnection is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
-		// until implemented, use example:
-		TablesExamples.initStoresTable();
+		(new Thread(new InitDBConnection(confMan))).start();
 	}
 	
+	public static class InitDBConnection implements Runnable{
+		private ConfigurationManager confMan;
+		
+		public InitDBConnection(ConfigurationManager confMan){
+			this.confMan = confMan;
+		}
+		
+		public void run() {
+			Debug.log("DBConnectionInterface.InitDBConnection thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			//TODO
+			
+			// until implemented, use example:
+			TablesExamples.initStoresTable();
+		}
+	}
 	////////////////
 	// Search tab //
 	////////////////
