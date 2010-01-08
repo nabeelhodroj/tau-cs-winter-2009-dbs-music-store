@@ -63,9 +63,9 @@ public class DBConnectionSale {
 			// TODO : execute the updates :: rotemExecuteBatch(queryPattern, dbUpdatArg2List, dbUpdatArg1List)
 			
 			Debug.log("DBConnectionSale.MakeSale: Done working with DB, calling GUI's initSaleTable");
-			GuiUpdatesInterface.initSaleTable();
+			// TODO un-comment: GuiUpdatesInterface.initSaleTable();
 			
-			// ARIEL'S : TablesExamples.initStoresTable();
+			TablesExamples.initStoresTable();
 			
 		}		
 	}
