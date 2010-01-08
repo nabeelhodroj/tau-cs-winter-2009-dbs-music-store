@@ -344,7 +344,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			MainFuncs.initMsgDBActionNotAllowed();
 			
 			{
-				/**
+				/*
 				 * open initialize dialog
 				 */
 				// initialize DB Connection (will initialize stores table)
@@ -353,7 +353,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				InitialDialog.openInitDialog();
 			}
 			
-			/**
+			/*
 			 * **************************************************
 			 * 
 			 * After initial dialog is opened and selected store,
@@ -364,7 +364,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			
 			
 			{
-				/**
+				/*
 				 * Main window details: store details and quick tips
 				 */
 				mainGroupStoreDetails = new Group(this, SWT.NONE);
@@ -409,7 +409,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				mainTabFolder.setBounds(7, 92, 793, 491);
 
 				{
-					/**
+					/*
 					 * Search Tab
 					 * ==========
 					 * Contains search fields, results and stock and sale actions
@@ -738,7 +738,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					}
 				}
 				{
-					/**
+					/*
 					 * Sale tab
 					 * ========
 					 * Manage current sale
@@ -855,7 +855,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					}
 				}
 				{
-					/**
+					/*
 					 * Stock tab
 					 * =========
 					 * Manage Stock, orders and requests
@@ -1126,7 +1126,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 					}
 				}
 				{
-					/**
+					/*
 					 * Management tab
 					 * ==============
 					 * Manage Employees and database
