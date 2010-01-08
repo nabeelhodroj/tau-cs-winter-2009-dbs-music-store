@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
+import General.Debug;
+
 
 public class DBConnectionPool {
 	
@@ -54,6 +56,7 @@ public class DBConnectionPool {
 		 */
 		if (!SetParams)
 		{
+			Debug.log("DBConnectionPool::getConnection: ERROR - connection parameter haven't been set yet");			
 			return null;			
 		}
 		try
@@ -68,7 +71,7 @@ public class DBConnectionPool {
 				}
 				catch (ClassNotFoundException e)
 				{
-					System.out.println("Unable to load the Oracle JDBC driver..");
+					Debug.log("DBConnectionPool::getConnection: ERROR - Unable to load the Oracle JDBC driver");
 					return null;
 				}
 				FirstConnection = false;
@@ -90,7 +93,7 @@ public class DBConnectionPool {
 				}
 				catch (SQLException e)
 				{
-					System.out.println("Unable to connect - " + e.toString());
+					Debug.log("DBConnectionPool::getConnection: ERROR - Unable to connect - " + e.toString());
 					return null;
 				}								
 			}
@@ -115,7 +118,7 @@ public class DBConnectionPool {
 		try
 		{	
 			lock.lock();
-			connectionPool.add(conn);
+			connectionPool.add(conn);			
 		}
 		finally
 		{
@@ -142,7 +145,7 @@ public class DBConnectionPool {
 				}
 				catch (SQLException e)
 				{
-					System.out.println("Unable to close the connection - " + e.toString());
+					Debug.log("DBConnectionPool::closeAllConnections: ERROR - exception when closing connection: " + e.toString());
 				}					
 			}
 		}
