@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.*;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.Random;
+import General.*;
 
 public class DiscDBParser {
 	
@@ -16,6 +18,8 @@ public class DiscDBParser {
 	private	static	int		bufferSize = 1000000;
 	private	static	int		TRACK_FRAMES_IN_SEC = 75;
 	private static 	int		MAX_ALBUMS_IN_LIST = 10000;
+	private	static	int		MIN_ALBUM_PRICE = 30;
+	private	static	int		MAX_ALBUM_PRICE = 120;
 	
 	
 	/** this list holds the albums read from file
@@ -31,6 +35,7 @@ public class DiscDBParser {
 		lock.lock();
 		generalAlbumList.addAll(listToAdd);
 		lock.unlock();
+		Debug.log("DiscDBParser::addAlbumDataToList: Added " + listToAdd.size() + " albums to outer list", Debug.DebugOutput.STDOUT);
 	}
 	
 	
@@ -48,6 +53,12 @@ public class DiscDBParser {
 				{
 					albumList.add(i, generalAlbumList.remove(0));
 				}
+				Debug.log("DiscDBParser::removeAllbumsDataFromList: - retrived " + size + "albums from list", Debug.DebugOutput.STDOUT);				
+			}
+			else
+			{
+				Debug.log("DiscDBParser::removeAllbumsDataFromList: ERROR - can't retrive " + size + "albums, because list contains only " + generalAlbumList.size(), Debug.DebugOutput.STDOUT);
+				Debug.log("DiscDBParser::removeAllbumsDataFromList: ERROR - can't retrive " + size + "albums, because list contains only " + generalAlbumList.size());
 			}
 		}
 		finally
@@ -68,6 +79,9 @@ public class DiscDBParser {
 		TarArchiveEntry entry;
 		int index = 0;
 		int legalsDiscs = 0;
+		
+		long startTime = System.nanoTime();		// for performance measuring
+		
 		try
 		{		
 			 while ((entry = tarInput.getNextTarEntry()) != null)
@@ -93,6 +107,7 @@ public class DiscDBParser {
 					 // parse file
 					 File file = new File(entryFileName);
 					 Parser par = new Parser(file);
+					 Random random = new Random();
 					 
 					 try
 					 {
@@ -107,8 +122,12 @@ public class DiscDBParser {
 								if (par.getDgenre().trim().length() > 0) 
 								{
 									sGenere = par.getDgenre().toLowerCase();
-								}							
-								DiscDBAlbumData discData = new DiscDBAlbumData(par.getDtitle(), sGenere, par.getDyear(), par.getDiscLength()); 								
+								}			
+								
+								// Generate (random) price for albums
+								int price = MIN_ALBUM_PRICE + random.nextInt(MAX_ALBUM_PRICE - MIN_ALBUM_PRICE + 1);								
+								
+								DiscDBAlbumData discData = new DiscDBAlbumData(par.getDtitle(), sGenere, par.getDyear(), par.getDiscLength(), price); 								
 								Pattern _notAsciiPattern = Pattern.compile("[^\\p{ASCII}]"); 
 								boolean ascii = !(_notAsciiPattern.matcher(par.getDtitle()).find());
 								for (int i = 0; i < par.getTrackOffsets().size() && ascii ; i++)
@@ -122,7 +141,7 @@ public class DiscDBParser {
 									else
 									{
 										trackLnegthSec = getLastTrackLengthInSec(par.getTrackOffsets().get(i), discData.getLengthSec());
-									}
+									}									
 									
 									// does album has an artist ? if so - add it to all the tracks
 									String albumArtist = null;
@@ -150,7 +169,7 @@ public class DiscDBParser {
 									if (albumList.size() > MAX_ALBUMS_IN_LIST)
 									{
 										addAlbumDataToList(albumList);
-										albumList.clear();							
+										albumList.clear();											
 									}
 									albumList.add(discData);
 								}
@@ -162,13 +181,13 @@ public class DiscDBParser {
 						}
 						else 
 						{
-							System.err.println("Parse error: " + file
-								+ " is not a CDDB(tm) format CD text data file.");
+							Debug.log("DiscDBParser::parseTarFile: ERROR - Cannot parse file " + file + " which is not a CDDB format CD text data file");								
 						}
 					 }
 					 catch	(Exception ex)
 					 {
-						int num = 1;
+						Debug.log("DiscDBParser::parseTarFile: ERROR - Exception occurred during parsing of file: " + file + " (" + ex.toString() + ")");						 
+
 					 }
 					 finally
 					 {
@@ -176,9 +195,11 @@ public class DiscDBParser {
 						 file.delete();
 					 }
 				 }
-			 }			 
-			// System.out.println(index + " files, " + legalsDiscs + " legal discs, " + genereList.size() + " generes");
-			 
+			 }
+			 // calculate how much time the process took
+			 long estimatedTime = System.nanoTime() - startTime;
+			 estimatedTime /= 1000000000;	// convert to seconds
+			 Debug.log("DiscDBParser::parseTarFile: SUCCESS - Parsed " + index + " albums (" + legalsDiscs + " valid), " + genereList.size() + " generes. Parse time: " + estimatedTime + " seconds");			 
 		}
 		finally
 		{
