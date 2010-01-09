@@ -191,9 +191,7 @@ public class MainFuncs {
 	 * - if the action was an initial action, allows him to retry or quit program
 	 * - if the action wasn't crucial, notifies and restores gui
 	 */
-	public static void notifyDBFailure(DBActionFailureEnum failure){
-		//TODO
-		
+	public static void notifyDBFailure(DBActionFailureEnum failure){		
 		switch (failure){
 		case DB_CONN_FAILURE:
 			// could not initiate connection with DB
@@ -215,39 +213,39 @@ public class MainFuncs {
 			// could not fetch album search results
 			SearchFuncs.notifySearchFailure();
 			break;
-		case GET_SONGS_FAILURE:
+		case GET_SONGS_FAILURE://TODO
 			// could not get song list
 			SearchFuncs.notifyFetchSongsFailure();
 			break;
-		case MAKE_SALE_FAILURE:
+		case MAKE_SALE_FAILURE://TODO
 			// could not make sale
 			SaleFuncs.notifyMakeSaleFailure();
 			break;
-		case CHECK_AVAIL_FAILURE:
+		case CHECK_AVAIL_FAILURE://TODO
 			// could not get order's available stores
 			StockFuncs.notifyOrderAvailableStoresFailure();
 			break;
-		case PLACE_ORDER_FAILURE:
+		case PLACE_ORDER_FAILURE://TODO
 			// could not place new order
 			StockFuncs.notifyPlaceOrderFailure();
 			break;
-		case ORDERS_ACTION_FAILURE:
+		case ORDERS_ACTION_FAILURE://TODO
 			// could not refresh / remove / cancel orders
 			StockFuncs.notifyOrdersActionFailure();
 			break;
-		case REQUESTS_ACTION_FAILURE:
+		case REQUESTS_ACTION_FAILURE://TODO
 			// could not deny / approve requests
 			StockFuncs.notifyRequestsActionFailure();
 			break;
-		case UPDATE_DB_FAILURE:
+		case UPDATE_DB_FAILURE://TODO
 			// could not update database
 			ManageFuncs.notifyDBUpdateFailure();
 			break;
-		case INSERT_SAVE_EMP_FAILURE:
+		case INSERT_SAVE_EMP_FAILURE://TODO
 			// could not save / insert employee
 			ManageFuncs.notifySaveInsertEmployeeFailure();
 			break;
-		case REM_EMP_FAILURE:
+		case REM_EMP_FAILURE://TODO
 			// could not remove employee
 			ManageFuncs.notifyRemoveEmployeeFailure();
 			break;

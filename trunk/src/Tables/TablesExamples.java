@@ -5,6 +5,9 @@ import General.Debug;
 import General.Debug.DebugOutput;
 
 import java.util.*;
+
+import javax.naming.directory.SearchControls;
+
 import Queries.*;
 
 /**
@@ -20,6 +23,10 @@ public class TablesExamples {
 	public static boolean debugInitOrders = false;
 	public static boolean debugInitRequests = false;
 	public static boolean debugInitEmployees = false;
+	public static boolean debugSearch = false;
+	public static int searchCounter = 0;
+	public static boolean debugSongList = true;
+	public static int songListCounter = 0;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static SongsResultsTable songsResultsTableExample1;
@@ -128,8 +135,13 @@ public class TablesExamples {
 	 * invoke GUI albums search results update with example
 	 */
 	public static void getAlbumsSearchResults(){
-		waitSome(3000);
-		GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
+		waitSome(2000);
+		if (debugSearch){
+			if (searchCounter < 1){
+				searchCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
+			} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
+		} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
 	}
 	
 	/**
@@ -138,10 +150,22 @@ public class TablesExamples {
 	 */
 	public static void getSongsResults(long albumID){
 		waitSome(1000);
-		if (albumID == 1)
-			GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample1);
-		else // albumID == 2
-			GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample2);
+		if (debugSongList){
+			if (songListCounter < 2){
+				songListCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.GET_SONGS_FAILURE);
+			}else {
+				if (albumID == 1)
+					GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample1);
+				else // albumID == 2
+					GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample2);
+			}
+		} else {
+			if (albumID == 1)
+				GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample1);
+			else // albumID == 2
+				GuiUpdatesInterface.updateSongsResultsTable(albumID, songsResultsTableExample2);
+		}		
 	}
 	
 	/**
