@@ -15,16 +15,24 @@ public class DiscDBAlbumData {
 	private	String 	year;
 	private String 	artist;
 	private	int		lengthSec;
+	private int		Price;
 	private boolean isVariousArtists ;
 	
 	public static final String DB_NULL_VALUE = "NULL";
+
+	
+	public DiscDBAlbumData(String title, String genere, int year, int lengthSec)	
+	{	
+		this(title, genere, year, lengthSec, 0);
+	}
 	
 	
-	public DiscDBAlbumData(String title, String genere, int year, int lengthSec)
+	public DiscDBAlbumData(String title, String genere, int year, int lengthSec, int price)
 	{
 		this.title = title.trim();
 		this.genere = genere.trim();
 		this.lengthSec = lengthSec;
+		this.Price = price;
 		if (year > 0)
 		{
 			this.year = Integer.toString(year);
@@ -106,7 +114,14 @@ public class DiscDBAlbumData {
 	public void setVariousArtists(boolean isVariousArtists) {
 		this.isVariousArtists = isVariousArtists;
 	}
-	
+		
+	public int getPrice() {
+		return Price;
+	}
+
+	public void setPrice(int price) {
+		Price = price;
+	}	
 	
 	public boolean checkVariousArtist()
 	{
