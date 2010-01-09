@@ -12,6 +12,26 @@ import General.Debug.DebugOutput;
  */
 public class GuiUpdatesInterface {
 	
+	//////////////
+	//	General	//
+	//////////////
+	
+	/**
+	 * notify the GUI that the action that was invoked could not be held in the DB
+	 * @param failure
+	 */
+	public static void notifyDBFailure(final DBActionFailureEnum failure){
+		Debug.log("GuiUpdatesInterface: initStoresTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				MainFuncs.notifyDBFailure(failure);
+				
+				}
+			});
+	}
+	
 	//////////
 	// Main	//
 	//////////
