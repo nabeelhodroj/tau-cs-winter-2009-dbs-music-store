@@ -690,7 +690,19 @@ public class ManageFuncs {
 	 * and restores gui
 	 */
 	public static void notifyDBUpdateFailure(){
-		//TODO
+		// stop progress animation
+		showDBProgress(false);
+		
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could invoke update database due to a connection error or a file mismatch.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+			Main.getManageButtonDBSUpdate().setEnabled(true);
+		}
 	}
 	
 	/**
@@ -698,14 +710,30 @@ public class ManageFuncs {
 	 * and restores gui
 	 */
 	public static void notifySaveInsertEmployeeFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not save employee due to a connection error or a file mismatch.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 	
 	/**
 	 * notifies the employee could not be removed
-	 * and resoters gui
+	 * and restores gui
 	 */
 	public static void notifyRemoveEmployeeFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not remove employee due to a connection error or a file mismatch.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 }
