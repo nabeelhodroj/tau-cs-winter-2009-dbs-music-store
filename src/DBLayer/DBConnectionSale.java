@@ -13,7 +13,15 @@ import Tables.SaleTable;
 import Tables.SaleTableItem;
 import Tables.TablesExamples;
 
+/**
+ *	This class contains the Runnable classes for handling the GUI tab "SALE".
+ * 	Each class corresponds to a single method in DBConnectionInterface class.
+ */
 public class DBConnectionSale {
+	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void makeSale(SaleTable sale);"
+	 */
 	public class MakeSale implements Runnable{
 		private SaleTable sale;
 		

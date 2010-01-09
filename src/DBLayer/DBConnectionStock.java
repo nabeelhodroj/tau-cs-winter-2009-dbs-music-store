@@ -12,8 +12,15 @@ import General.Debug.DebugOutput;
 import Queries.*;
 import Tables.*;
 
-
+/**
+ *	This class contains the Runnable classes for handling the GUI tab "SALE".
+ * 	Each class corresponds to a single method in DBConnectionInterface class.
+ */
 public class DBConnectionStock {
+	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void getOrderAvailableStores(OrderAvailableStoresQuery query);"
+	 */
 	public class GetOrderAvailableStores implements Runnable{
 		private OrderAvailableStoresQuery query;
 		
@@ -58,6 +65,9 @@ public class DBConnectionStock {
 		}
 	}
 	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void getOrdersTable();"
+	 */
 	public class GetOrdersTable implements Runnable{
 		@Override
 		public void run() {
@@ -101,7 +111,9 @@ public class DBConnectionStock {
 		}
 	}
 	
-	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void refreshOrdersTable();"
+	 */
 	public class RefreshOrdersTable implements Runnable{
 
 		@Override
@@ -145,7 +157,9 @@ public class DBConnectionStock {
 		
 	}
 	
-	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void removeOrder(int orderID);"
+	 */
 	public class RemoveOrder implements Runnable{
 		private int orderID;
 			
@@ -174,6 +188,9 @@ public class DBConnectionStock {
 		}
 	}
 	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void placeOrder(OrdersOrRequestsTableItem order);"
+	 */
 	public class PlaceOrder implements Runnable{
 		private OrdersOrRequestsTableItem order;
 
@@ -216,6 +233,9 @@ public class DBConnectionStock {
 		}
 	}
 	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void updateOrderStatus(int orderID, OrderStatusEnum status);"
+	 */
 	public class UpdateOrderStatus implements Runnable{
 		private int orderID;
 		private OrderStatusEnum status;
@@ -354,6 +374,9 @@ public class DBConnectionStock {
 		}
 	}
 	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void getRequestsTable();"
+	 */
 	public class GetRequestTable implements Runnable{
 
 		@Override
@@ -397,7 +420,9 @@ public class DBConnectionStock {
 		}
 	}
 	
-	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void refreshRequestsTable();"
+	 */
 	public class RefreshRequestsTable implements Runnable{
 
 		@Override
