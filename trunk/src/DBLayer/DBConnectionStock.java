@@ -1,20 +1,17 @@
 package DBLayer;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Random;
+import java.sql.*;
+import java.util.*;
 
+import GUI.DBActionFailureEnum;
 import GUI.GuiUpdatesInterface;
 import GUI.OrdersRequestsActionsEnum;
 import GUI.StaticProgramTables;
 import General.Debug;
 import General.Debug.DebugOutput;
-import Queries.OrderAvailableStoresQuery;
-import Tables.OrderAvailableStoresTable;
-import Tables.OrderStatusEnum;
-import Tables.OrdersOrRequestsTable;
-import Tables.OrdersOrRequestsTableItem;
-import Tables.TablesExamples;
+import Queries.*;
+import Tables.*;
+
 
 public class DBConnectionStock {
 	public class GetOrderAvailableStores implements Runnable{
@@ -27,33 +24,36 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.GetOrderAvailableStores thread is started");
-			/* TODO un-comment
+			/*
 			OrderAvailableStoresTable availableStores = new OrderAvailableStoresTable();
 			
 			String queryStr = "SELECT DISTINCT store_id, city, quantity FROM stores, stock " +
 							  "WHERE (stores.store_id=stock.store_id) AND (stock.album_id="+query.getAlbumID()+")";
-			ResultSet rs = null ; //TODO : execute query ::  =rotemexecuteQuery(queryStr) 
-			if (rs == null) {
-				Debug.log("DBConnectionStock.GetOrderAvailableStores [ERROR]: DB access failed, NULL pointer returned.");
-				GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr);
+
+			if (dBQRes == null) {
+				Debug.log("DBConnectionStock.GetOrderAvailableStores [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.CHECK_AVAIL_FAILURE);
 				return;
 			}
-			else {try {
-					while (rs.next()){
-						availableStores.addStore(rs.getInt(1), rs.getString(2), rs.getInt(3));
-					}
-				} catch (SQLException e) {
-					Debug.log("DBConnectionStock.GetOrderAvailableStores [ERROR] encountered an database access error:");
-					Debug.log(e.getStackTrace().toString());
-					GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
-					return;
+			ResultSet rs = dBQRes.getResultSet(); 
+			try {
+				while (rs.next()){
+					availableStores.addStore(rs.getInt(1), rs.getString(2), rs.getInt(3));
 				}
-			}				
+			} catch (SQLException e) {
+				Debug.log("DBConnectionStock.GetOrderAvailableStores [ERROR] encountered an database access error", DebugOutput.STDERR, DebugOutput.FILE);
+				Debug.log(e.getStackTrace().toString());
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.CHECK_AVAIL_FAILURE);
+				dBQRes.close();
+				return;
+			}
+							
 				
 			Debug.log("DBConnectionStock.GetOrderAvailableStores done with DB, calling GUI's updateOrderAvailableStores");
 			GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
-			 */
-			// until implemented, use example:
+			*/
+			// TODO remove:
 			TablesExamples.getOrderAvailableStores(query);
 		}
 	}
@@ -67,36 +67,84 @@ public class DBConnectionStock {
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
 								"WHERE ordering_store_id="+thisStoreID;
-			ResultSet rs = null ; //TODO : execute query ::  =rotemexecuteQuery(queryStr) 
-			if (rs == null) {
-				Debug.log("DBConnectionStock.GetOrdersTable [ERROR]: DB access failed, NULL pointer returned.");
-				GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
+			if (dBQRes == null) {
+				Debug.log("DBConnectionStock.GetOrdersTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.initOrdersTable(new OrdersOrRequestsTable(true));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_ORDERS_FAILURE);
 				return;
 			}
-			else {try {
-					while (rs.next()){
-						String ordStat = rs.getString(6);
-						ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-								(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-									(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-										(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
-											OrderStatusEnum.CANCELED)))); 
-					}
-				} catch (SQLException e) {
-					Debug.log("DBConnectionStock.GetOrdersTable [ERROR] encountered an database access error:");
-					Debug.log(e.getStackTrace().toString());
-					GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-					return;
+			ResultSet rs = dBQRes.getResultSet();
+			try {
+				while (rs.next()){
+					String ordStat = rs.getString(6);
+					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
+								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
+									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+										OrderStatusEnum.CANCELED)))); 
 				}
+			} catch (SQLException e) {
+				Debug.log("DBConnectionStock.GetOrdersTable [ERROR] encountered an database access error:");
+				Debug.log(e.getStackTrace().toString());
+				GuiUpdatesInterface.initOrdersTable(new OrdersOrRequestsTable(true));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_ORDERS_FAILURE);
+				return;
 			}
 			
-			Debug.log("DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable");
-			GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
+		Debug.log("DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable");
+		GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
+		*/
+		// TODO remove:
+		TablesExamples.getOrdersTable();
 			
-			*/
-			TablesExamples.getOrdersTable();
-		}		
+		}
 	}
+	
+	
+	public class RefreshOrdersTable implements Runnable{
+
+		@Override
+		public void run() {
+			Debug.log("DBConnectionStock.RefreshOrdersTable thread is started");
+			/*
+			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
+			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
+			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
+								"WHERE ordering_store_id="+thisStoreID;
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
+			if (dBQRes == null) {
+				Debug.log("DBConnectionStock.RefreshOrdersTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+				return;
+			}
+			ResultSet rs = dBQRes.getResultSet();
+			try {
+				while (rs.next()){
+					String ordStat = rs.getString(6);
+					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
+								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
+									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+										OrderStatusEnum.CANCELED)))); 
+				}
+			} catch (SQLException e) {
+				Debug.log("DBConnectionStock.RefreshOrdersTable [ERROR] encountered an database access error:");
+				Debug.log(e.getStackTrace().toString());
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+				return;
+			}
+			
+		Debug.log("DBConnectionStock.RefreshOrdersTable done with DB, calling GUI's initOrdersTable");
+		GuiUpdatesInterface.refreshOrdersTable(ordersOrRequestsTable);
+		*/	
+			// TODO remove:
+			TablesExamples.refreshOrdersTable();
+			
+		}
+		
+	}
+	
 	
 	public class RemoveOrder implements Runnable{
 		private int orderID;
@@ -108,15 +156,20 @@ public class DBConnectionStock {
 		
 		public void run() {
 			Debug.log("DBConnectionStock.RemoveOrder thread is started");
-			
+			/*
 			String queryStr = "DELETE FROM orders WHERE order_id="+orderID;
-			// TODO : execute the query :: rotemExecuteUpdate(queryStr) 
-			
+ 
+			if (DBAccessLayer.executeUpdate(queryStr) < 1){
+				Debug.log("DBConnectionStock.RemoveOrder [ERROR]: Couldn't remove order with ID: '"+orderID+"'", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+				return;
+			}
 			
 			Debug.log("DBConnectionStock.RemoveOrder done with DB, calling GUI's removeOrder");
-			//TODO un-comment: GuiUpdatesInterface.removeOrder(orderID);
+			GuiUpdatesInterface.removeOrder(orderID);
 			
-			
+			*/
+			// TODO remove:
 			TablesExamples.removeOrder(orderID);
 		}
 	}
@@ -132,7 +185,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.PlaceOrder thread is started");
-			
+			/*
 			OrdersOrRequestsTableItem retOrder = new OrdersOrRequestsTableItem(-1, // Default
 																			   StaticProgramTables.getThisStore().getStoreID(),
 																			   order.getSupplyingStoreID(),
@@ -147,12 +200,18 @@ public class DBConnectionStock {
 							"VALUES('"+StaticProgramTables.getThisStore().getStoreID()+"','"+order.getSupplyingStoreID()+"','"+order.getAlbumID()+"'," +
 									"'"+order.getQuantity()+"',TO_DATE("+toDateString+"),'Waiting')";
 			
-			int retOrderID = 0; // TODO : execute :: =rotemExecuteUpdateReturnID(String query)
+			int retOrderID = DBAccessLayer.insertAndGetID(query, "order_id");
+			if (retOrderID < 0){
+				Debug.log("DBConnectionStock.PlaceOrder thread [ERROR]: Unable to insert album with ID "+order.getAlbumID()+" to DB");
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
+				return;
+			}
 			retOrder.setAlbumID(retOrderID);
 			
 			Debug.log("DBConnectionStock.PlaceOrder done with DB, calling GUI's addOrder");
-			//TODO un-comment: GuiUpdatesInterface.addOrder(retOrder);			
-			
+			GuiUpdatesInterface.addOrder(retOrder);			
+			*/
+			// TODO remove:
 			TablesExamples.placeOrder(order);
 		}
 	}
@@ -170,72 +229,127 @@ public class DBConnectionStock {
 		public void run() {
 			Debug.log("DBConnectionStock.UpdateOrderStatus thread is started");
 			/*
-			String queryStr = "SELECT * FROM orders WHERE order_id="+orderID;
-			ResultSet rs = null ; //TODO : execute :: =rotemexecuteQuery(queryStr)
-			if (rs == null) {
+			DBQueryResults dBQres = DBAccessLayer.executeQuery("SELECT * FROM orders WHERE order_id="+orderID);
+			if (dBQres == null) {
 				Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: DB access failed, NULL pointer returned.");
+				GuiUpdatesInterface.notifyDBFailure(status.compareTo(OrderStatusEnum.CANCELED) == 0 ? 
+													DBActionFailureEnum.ORDERS_ACTION_FAILURE : DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
 				return;
 			}
- 
+			ResultSet rs = dBQres.getResultSet();
 			try {
 				switch (status){
 				case CANCELED:
 					if (!rs.next()){
 						Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: Tried to cancel non existing order");
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+						dBQres.close();
 						return;
 					}
 					if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){
+						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.CANCEL_ORDER,
-								(rs.getString("status").compareToIgnoreCase("Completed") == 0 ? OrdersRequestsActionsEnum.APPROVE_REQUEST : OrdersRequestsActionsEnum.DENY_REQUEST), orderID);
+								(rs.getString("status").compareToIgnoreCase("Completed") == 0 ? 
+										OrdersRequestsActionsEnum.APPROVE_REQUEST : OrdersRequestsActionsEnum.DENY_REQUEST), orderID);
+						dBQres.close();
+						return;
 					}
-					queryStr = "UPDATE orders SET status=Canceled WHERE order_id="+orderID;
-					// TODO execute : rotemExecuteUpdate(queryStr) & assert that EXACTLY ONE entry changed
+					if (DBAccessLayer.executeUpdate("UPDATE orders SET status=Canceled WHERE order_id="+orderID) != 1){ 
+						//Filed to execute UPDATE
+						Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: couldn't change order status to "+status);
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+						dBQres.close();
+						return;
+					}
+					
 					GuiUpdatesInterface.updateOrderStatus(orderID, status);
 					break;
 				case COMPLETED:
-					if (!rs.next()){																								//SHOULD BE REMOVE_ORDER
+					if (!rs.next()){						
+						Debug.log("DBConnectionStock.UpdateOrderStatus [NOTICE]: Tried to approve non existing order.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
-					} else if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){											
+						dBQres.close();
+						return;
+					} else if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){	
+						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
-					} else { // Approving request, updating stocks.
+						dBQres.close();
+						return;
+					} else { 
+						// Approving request, updating stocks.
+						
+						List<String> queryList = new ArrayList<String>();
 						
 						// Update the supplier
-						queryStr = "UPDATE stock SET quantity=quantity-"+rs.getInt("quantity")+" " +
-									"WHERE (store_id="+rs.getInt("supplying_store_id")+") AND (album_id="+rs.getLong("album_id")+")";
-						// TODO execute :: rotemExecuteUpdate(queryStr)
-						Debug.log("DBConnectionStock.UpdateOrderStatus updated the supplier");
+						queryList.add("UPDATE stock SET quantity=quantity-"+rs.getInt("quantity")+" " +
+									"WHERE (store_id="+rs.getInt("supplying_store_id")+") AND (album_id="+rs.getLong("album_id")+")");
 						
 						// Update the receiver
-						queryStr = "UPDATE stock SET quantity=quantity+"+rs.getInt("quantity")+" " +
-						"WHERE (store_id="+rs.getInt("ordering_store_id")+") AND (album_id="+rs.getLong("album_id")+")";
-						// TODO execute :: rotemExecuteUpdate(queryStr) && assert that EXACTLY ONE entry changed
-						// if NOT then need to add the album to the store (rather then just update the stock):  
-						queryStr = "INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
-									"VALUES('"+rs.getInt("album_id")+"','"+rs.getInt("ordering_store_id")+"','"+rs.getInt("quantity")+"','"+(new Random()).nextLong() % 1000+"')";
-						Debug.log("DBConnectionStock.UpdateOrderStatus updated the receiver");
+						queryList.add("UPDATE stock SET quantity=quantity+"+rs.getInt("quantity")+" " +
+						"WHERE (store_id="+rs.getInt("ordering_store_id")+") AND (album_id="+rs.getLong("album_id")+")");
 						
-						// Update the Orders table
-						queryStr = "UPDATE orders SET status=Completed WHERE order_id="+orderID;
-						//TODO execute :: rotemExecuteUpdate(queryStr) && assert that EXACTLY ONE entry changed
-						
+						// Change order status to COMPLETED
+						queryList.add("UPDATE orders SET status=Completed WHERE order_id="+orderID);
 						
 						// Update the Stock table
-						queryStr = "DELETE FROM stock WHERE quantity=0";
-						//TODO execute :: rotemExecuteUpdate(queryStr)
+						queryList.add("DELETE FROM stock WHERE quantity=0");
+						
+						
+						int [] minUpdatesPerCommand = {1, 1, 1, 0};
+						int retCode = DBAccessLayer.executeCommandsAtomic(queryList, minUpdatesPerCommand);
+						
+						if (retCode == 1){// The receiver doesn't have the CD in stock table.
+							queryList.remove(1);
+							queryList.add(1, "INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
+											"VALUES('"+rs.getInt("album_id")+"','"+rs.getInt("ordering_store_id")+"','"+
+												rs.getInt("quantity")+"','"+(new Random()).nextLong() % 1000+"')");
+							retCode = DBAccessLayer.executeCommandsAtomic(queryList, minUpdatesPerCommand);
+						}
+						
+						if (retCode < queryList.size()){
+							Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: couldn't change order status to "+status);
+							GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+							dBQres.close();
+							return;
+						}
 						
 						Debug.log("DBConnectionStock.UpdateOrderStatus updated Orders and Stock tables");
 						GuiUpdatesInterface.removeRequest(orderID);
 					}
 					break;
 				case DENIED: 
+					if (!rs.next()){							
+						Debug.log("DBConnectionStock.UpdateOrderStatus [NOTICE]: Tried to deny non existing order");
+						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
+						dBQres.close();
+						return;
+					} else if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){		
+						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
+						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
+						dBQres.close();
+						return;
+					} else { 
+						// Denying request
+						if (DBAccessLayer.executeUpdate("UPDATE orders SET status=Denied WHERE order_id="+orderID) < 1){
+							Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: Failed to update statuc of the order to 'Denied'");
+							GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+							dBQres.close();
+							return;
+						}
+					}
 					break;
-			}		
-			} catch (SQLException e) {
-				Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: DB access failed.");
-				e.printStackTrace();
-				return;
-			}
+				}// closes Switch		
+				} catch (SQLException e) {
+					Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: DB access failed. Switch statement interrupted.");
+					Debug.log(e.getStackTrace().toString());
+					GuiUpdatesInterface.notifyDBFailure(status.compareTo(OrderStatusEnum.CANCELED) == 0 ? 
+							DBActionFailureEnum.ORDERS_ACTION_FAILURE : DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+					dBQres.close();
+					return;
+				}
+			dBQres.close();
 			*/
+			// TODO remove:
 			TablesExamples.updateOrderStatus(orderID, status);
 		}
 	}
@@ -248,59 +362,83 @@ public class DBConnectionStock {
 			/*
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
-			String queryStr = "SELECT order_id, ordering_store_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
+			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
 								"WHERE supplying_store_id="+thisStoreID;
-			ResultSet rs = null ; //TODO : execute query ::  =rotemexecuteQuery(queryStr) 
-			if (rs == null) {
-				Debug.log("DBConnectionStock.GetRequestTable [ERROR]: DB access failed, NULL pointer returned.");
-				GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
+			if (dBQRes == null) {
+				Debug.log("DBConnectionStock.GetRequestTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.initRequestsTable(new OrdersOrRequestsTable(false));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_REQUESTS_FAILURE);
 				return;
 			}
-			else try {
-					while (rs.next()){
-						String ordStat = rs.getString(6);
-						ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID ,rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-								(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-									(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-										(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
-											OrderStatusEnum.CANCELED)))); 
-					}
-				} catch (SQLException e) {
-					Debug.log("DBConnectionStock.GetRequestTable [ERROR] encountered an database access error:");
-					Debug.log(e.getStackTrace().toString());
-					GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-					return;
+			ResultSet rs = dBQRes.getResultSet();
+			try {
+				while (rs.next()){
+					String ordStat = rs.getString(6);
+					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
+								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
+									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+										OrderStatusEnum.CANCELED)))); 
 				}
+			} catch (SQLException e) {
+				Debug.log("DBConnectionStock.GetRequestTable [ERROR] encountered an database access error:");
+				Debug.log(e.getStackTrace().toString());
+				GuiUpdatesInterface.initRequestsTable(new OrdersOrRequestsTable(false));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_REQUESTS_FAILURE);
+				return;
+			}
 			
-			Debug.log("DBConnectionStock.GetRequestTable done with DB, calling GUI's initOrdersTable");
-			GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-			*/
-			TablesExamples.getRequestsTable();
+		Debug.log("DBConnectionStock.GetRequestTable done with DB, calling GUI's initRequestsTable");
+		GuiUpdatesInterface.initRequestsTable(ordersOrRequestsTable);
+		*/	
+		// TODO remove:
+		TablesExamples.getRequestsTable();
 		}
 	}
 	
-	public class RefreshOrdersTable implements Runnable{
-
-		@Override
-		public void run() {
-			Debug.log("DBConnectionStock.RefreshOrdersTable thread is started");
-			TablesExamples.refreshOrdersTable();
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
 	
 	public class RefreshRequestsTable implements Runnable{
 
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.RefreshRequestsTable thread is started");
+			/*
+			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
+			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
+			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
+								"WHERE supplying_store_id="+thisStoreID;
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
+			if (dBQRes == null) {
+				Debug.log("DBConnectionStock.RefreshRequestsTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+				return;
+			}
+			ResultSet rs = dBQRes.getResultSet();
+			try {
+				while (rs.next()){
+					String ordStat = rs.getString(6);
+					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
+								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
+									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+										OrderStatusEnum.CANCELED)))); 
+				}
+			} catch (SQLException e) {
+				Debug.log("DBConnectionStock.RefreshRequestsTable [ERROR] encountered an database access error:");
+				Debug.log(e.getStackTrace().toString());
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+				return;
+			}
+			
+		Debug.log("DBConnectionStock.RefreshRequestsTable done with DB, calling GUI's initRequestsTable");
+		GuiUpdatesInterface.refreshRequestsTable(ordersOrRequestsTable);
+		
+		*/
+			// TODO remove:
 			TablesExamples.refreshRequestsTable();
-			// TODO Auto-generated method stub
 			
 		}
 		
 	}
-	
 }
