@@ -229,23 +229,23 @@ public class MainFuncs {
 			// could not place new order
 			StockFuncs.notifyPlaceOrderFailure();
 			break;
-		case ORDERS_ACTION_FAILURE://TODO
+		case ORDERS_ACTION_FAILURE:
 			// could not refresh / remove / cancel orders
 			StockFuncs.notifyOrdersActionFailure();
 			break;
-		case REQUESTS_ACTION_FAILURE://TODO
+		case REQUESTS_ACTION_FAILURE:
 			// could not deny / approve requests
 			StockFuncs.notifyRequestsActionFailure();
 			break;
-		case UPDATE_DB_FAILURE://TODO
+		case UPDATE_DB_FAILURE:
 			// could not update database
 			ManageFuncs.notifyDBUpdateFailure();
 			break;
-		case INSERT_SAVE_EMP_FAILURE://TODO
+		case INSERT_SAVE_EMP_FAILURE:
 			// could not save / insert employee
 			ManageFuncs.notifySaveInsertEmployeeFailure();
 			break;
-		case REM_EMP_FAILURE://TODO
+		case REM_EMP_FAILURE:
 			// could not remove employee
 			ManageFuncs.notifyRemoveEmployeeFailure();
 			break;

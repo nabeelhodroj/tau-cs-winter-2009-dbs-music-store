@@ -29,10 +29,16 @@ public class TablesExamples {
 	public static int availableStoresCounter = 0;
 	public static boolean debugPlaceOrder = false;
 	public static int placeOrerCounter = 0;
-	public static boolean debugOrdersAction = true;
+	public static boolean debugOrdersAction = false;
 	public static int ordersActionCounter = 0;
-	public static boolean debugRequestsAction = true;
+	public static boolean debugRequestsAction = false;
 	public static int requestsActionCounter = 0;
+	public static boolean debugUpdateDB = false;
+	public static int updateDBCounter = 0;
+	public static boolean debugInsertSaveEmployee = false;
+	public static int insertSaveEmployeeCounter = 0;
+	public static boolean debugRemEmployee = false;
+	public static int remEmployeeCounter = 0;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static SongsResultsTable songsResultsTableExample1;
@@ -358,13 +364,28 @@ public class TablesExamples {
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
 		waitSome(1000);
-		if (employees.getEmployee(employee.getEmployeeID()) != null) // employee exists, remove it
-			employees.getEmployees().remove(employee.getEmployeeID());
-		// now insert new one
-		employees.addEmployee(employee);
-		
-		// update store's employees list
-		GuiUpdatesInterface.insertUpdateEmployee(employee);
+		if (debugInsertSaveEmployee){
+			if (insertSaveEmployeeCounter < 2){
+				insertSaveEmployeeCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+			} else {
+				if (employees.getEmployee(employee.getEmployeeID()) != null) // employee exists, remove it
+					employees.getEmployees().remove(employee.getEmployeeID());
+				// now insert new one
+				employees.addEmployee(employee);
+				
+				// update store's employees list
+				GuiUpdatesInterface.insertUpdateEmployee(employee);
+			}
+		} else {
+			if (employees.getEmployee(employee.getEmployeeID()) != null) // employee exists, remove it
+				employees.getEmployees().remove(employee.getEmployeeID());
+			// now insert new one
+			employees.addEmployee(employee);
+			
+			// update store's employees list
+			GuiUpdatesInterface.insertUpdateEmployee(employee);
+		}
 	}
 	
 	/**
@@ -373,7 +394,12 @@ public class TablesExamples {
 	 */
 	public static void removeEmployee(int employeeID){
 		waitSome(1000);
-		GuiUpdatesInterface.removeEmployee(employeeID);
+		if (debugRemEmployee){
+			if (remEmployeeCounter < 2){
+				remEmployeeCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REM_EMP_FAILURE);
+			} else GuiUpdatesInterface.removeEmployee(employeeID);
+		} else GuiUpdatesInterface.removeEmployee(employeeID);
 	}
 	
 	/**
@@ -382,7 +408,12 @@ public class TablesExamples {
 	 */
 	public static void updateDataBase(String filename){
 		waitSome(3000);
-		GuiUpdatesInterface.notifyDataBaseUpdated(filename);
+		if (debugUpdateDB){
+			if (updateDBCounter < 2){
+				updateDBCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+			} else GuiUpdatesInterface.notifyDataBaseUpdated(filename); 
+		} else GuiUpdatesInterface.notifyDataBaseUpdated(filename);
 	}
 	
 	/**
