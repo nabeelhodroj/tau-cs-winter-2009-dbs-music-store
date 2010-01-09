@@ -3,11 +3,11 @@ package DBLayer;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import Tables.EmployeePositionsEnum;
 import Tables.EmployeesTable;
 import Tables.EmployeesTableItem;
 import Tables.TablesExamples;
+import GUI.DBActionFailureEnum;
 import GUI.GuiUpdatesInterface;
 import GUI.StaticProgramTables;
 import General.Debug;
@@ -24,12 +24,19 @@ public class DBConnectionManage {
 				"SELECT *\n"+
 				"FROM Employees\n"+
 				"WHERE store_id = " + StaticProgramTables.thisStore.getStoreID();
-			ResultSet rs = null;//TODO: add a call with employeesQuery
+			/* TODO: return to code
+			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeesQuery);
+			if (queryResults == null){
+				GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_EMP_FAILURE);
+
+				return;
+			}
+			ResultSet rs = queryResults.getResultSet();
 			
 			EmployeesTable employees = new EmployeesTable(StaticProgramTables.thisStore.getStoreID());
 			
-			//TODO: return to code
-			/*try {
+			try {
 				while (rs.next()){
 					employees.addEmployee(rs.getInt("Employee_id"), 
 							rs.getString("First_name"),
@@ -41,14 +48,17 @@ public class DBConnectionManage {
 							rs.getString("Cell_phone_number"), 
 							EmployeePositionsEnum.convertFromInt(rs.getInt("Position")));
 				}
-				rs.close();
+				queryResults.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+				GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_EMP_FAILURE);
+				
+				queryResults.close();
+				return;
+			}
 			
-			// TODO: return to code once works
-			//GuiUpdatesInterface.initEmployeesTable(employees);
+			
+			GuiUpdatesInterface.initEmployeesTable(employees); */
 			// until implemented, use example
 			TablesExamples.getEmployeesTable();
 		}
@@ -72,20 +82,28 @@ public class DBConnectionManage {
 				"SELECT *\n"+
 				"FROM Employees\n"+
 				"WHERE employee_id = " + employeeID;
-			ResultSet rs = null;//TODO: add a call with employeeExistsQuery
+			
+			/* TODO: return to code
+			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeeExistsQuery);
+			if (queryResults == null){
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+				return;
+			}
+			ResultSet rs = queryResults.getResultSet();
 			
 			boolean empExists = false;
 			
-			//TODO: return to code
-			/*try {
+			try {
 				empExists = rs.next();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/ 
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+				queryResults.close();
+				
+				return;	
+			}
 
-			// TODO: return to code once works
-			//GuiUpdatesInterface.tryInsertNewEmployee(employeeID,empExists);
+			
+			GuiUpdatesInterface.tryInsertNewEmployee(employeeID,empExists);*/
 			// until implemented, use example:
 			TablesExamples.checkIfEmployeeExists(employeeID);
 		}
@@ -105,26 +123,15 @@ public class DBConnectionManage {
 		public void run() {
 			Debug.log("DBConnectionManage.InsertUpdateEmployee thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 
-			String employeeExistsQuery = 
-				"SELECT *\n"+
-				"FROM Employees\n"+
+			String employeeRemove = 
+				"DELETE FROM Employees\n"+
 				"WHERE employee_id = " + employee.getEmployeeID();
-			
-			ResultSet rs = null;//TODO: add a call with employeeExistsQuery
-			
-			//TODO: return to code
-			/*try {
-				if(rs.next()){
-					String employeeRemove = 
-						"DELETE FROM Employees\n"+
-						"WHERE employee_id = " + employee.getEmployeeID();
-					//TODO: add a DB call with employeeRemove
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			
+			/* TODO: return to code
+			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+				return;
+			}
+
 			String employeeInsert = 
 				"INSERT INTO Employees(" +
 				"employee_id, " +
@@ -150,10 +157,12 @@ public class DBConnectionManage {
 				employee.getStoreID()+","+
 				employee.getPosition().getIntRep()+")";
 			
-			//TODO: a DB insert call with employeeInsert
+			if (DBAccessLayer.executeUpdate(employeeInsert) == -1){
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+				return;
+			}
 			
-			// TODO: return to code:
-			//GuiUpdatesInterface.insertUpdateEmployee(employee);
+			GuiUpdatesInterface.insertUpdateEmployee(employee);*/
 			// until implemented, use example:
 			TablesExamples.insertUpdateEmployee(employee);
 		}
@@ -173,12 +182,15 @@ public class DBConnectionManage {
 		public void run() {
 			Debug.log("DBConnectionManage.RemoveEmployee thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
-			String removeEmployee = "REMOVE FROM Employees\n" +
+			String employeeRemove = "REMOVE FROM Employees\n" +
 					"WHERE employee_id = "+employeeID;
+			/* TODO: return to code
+			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
+				return;
+			}
 			
-			//TODO: add a DB call with removeEmployee
-			//TODO: return to code:
-			//GuiUpdatesInterface.removeEmployee(employeeID);
+			GuiUpdatesInterface.removeEmployee(employeeID); */
 			// until implemented, use example:
 			TablesExamples.removeEmployee(employeeID);
 		}		
