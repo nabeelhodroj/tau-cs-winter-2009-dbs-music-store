@@ -141,7 +141,7 @@ public class TablesExamples {
 	 * invoke GUI stores table initialize with example
 	 */
 	public static void initStoresTable(){
-		waitSome(1000);
+		waitSome(5000);
 		GuiUpdatesInterface.initStoresTable(storesTableExample);
 	}
 	
