@@ -2,6 +2,7 @@ package GUI;
 
 import Tables.*;
 import Queries.*;
+import General.*;
 
 /**
  * created by Ariel
@@ -16,6 +17,8 @@ import Queries.*;
  * - employees table
  */
 public class StaticProgramTables {
+	// configuration manager
+	public static ConfigurationManager confMan = null;
 	// this store
 	public static StoresTableItem thisStore = null;
 	// stores table (for program initialization)

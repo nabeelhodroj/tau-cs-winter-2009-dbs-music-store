@@ -25,7 +25,7 @@ public class OrdersOrRequestsTable extends Table {
 	/**
 	 * constructor for orders / requests table with orders
 	 */
-	public OrdersOrRequestsTable(HashMap<Integer,OrdersOrRequestsTableItem> orders){
+	public OrdersOrRequestsTable(boolean isOrder, HashMap<Integer,OrdersOrRequestsTableItem> orders){
 		super("OrdersOrRequestsTable");
 		this.orders = orders;
 	}

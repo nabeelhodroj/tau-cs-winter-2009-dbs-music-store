@@ -13,6 +13,13 @@ import Queries.*;
  * holds examples of tables classes, for debugging
  */
 public class TablesExamples {
+
+	// for error checking
+	public static boolean debugInitDBConn = false;
+	public static int initConnCounter = 0;
+	public static boolean debugInitOrders = false;
+	public static boolean debugInitRequests = false;
+	public static boolean debugInitEmployees = false;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static SongsResultsTable songsResultsTableExample1;
@@ -141,8 +148,13 @@ public class TablesExamples {
 	 * invoke GUI stores table initialize with example
 	 */
 	public static void initStoresTable(){
-		waitSome(5000);
-		GuiUpdatesInterface.initStoresTable(storesTableExample);
+		waitSome(500);
+		if (debugInitDBConn){
+			if (initConnCounter < 1){
+				initConnCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.DB_CONN_FAILURE);
+			} else GuiUpdatesInterface.initStoresTable(storesTableExample);
+		} else GuiUpdatesInterface.initStoresTable(storesTableExample);
 	}
 	
 	/**
@@ -170,7 +182,11 @@ public class TablesExamples {
 	 */
 	public static void getOrdersTable(){
 		waitSome(1000);
-		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
+		if (debugInitOrders){
+			GuiUpdatesInterface.initOrdersTable(new OrdersOrRequestsTable(true));
+			GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_ORDERS_FAILURE);
+		}
+		else GuiUpdatesInterface.initOrdersTable(ordersTableExample);
 	}
 	
 	/**
@@ -216,7 +232,11 @@ public class TablesExamples {
 	 */
 	public static void getRequestsTable(){
 		waitSome(1000);
-		GuiUpdatesInterface.initRequestsTable(requestsTableExample);
+		if (debugInitRequests){
+			GuiUpdatesInterface.initRequestsTable(new OrdersOrRequestsTable(false));
+			GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_REQUESTS_FAILURE);
+		}
+		else GuiUpdatesInterface.initRequestsTable(requestsTableExample);		
 	}
 	
 	/**
@@ -234,7 +254,11 @@ public class TablesExamples {
 	 */
 	public static void getEmployeesTable(){
 		waitSome(1000);
-		GuiUpdatesInterface.initEmployeesTable(employees);
+		if (debugInitEmployees){
+			GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
+			GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_EMP_FAILURE);
+		}
+		else GuiUpdatesInterface.initEmployeesTable(employees);
 	}
 
 	/**

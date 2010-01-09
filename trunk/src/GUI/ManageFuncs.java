@@ -667,4 +667,45 @@ public class ManageFuncs {
 	public static void showDBProgress(boolean show){
 		Main.getManageCompositeDBProgressContainer().setVisible(show);
 	}
+	
+	//////////////////////////
+	//	DB failure handling	//
+	//////////////////////////
+	
+	/**
+	 * notifies the employees table could not be initialized
+	 * and allows retry or exit program
+	 */
+	public static void notifyInitEmployeesFailure(){
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not initialize employees table due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) System.exit(-1);
+	}
+	
+	/**
+	 * notifies that the DB could not be updated
+	 * and restores gui
+	 */
+	public static void notifyDBUpdateFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies the employee could not be saved
+	 * and restores gui
+	 */
+	public static void notifySaveInsertEmployeeFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies the employee could not be removed
+	 * and resoters gui
+	 */
+	public static void notifyRemoveEmployeeFailure(){
+		//TODO
+	}
 }

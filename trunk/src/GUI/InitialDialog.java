@@ -36,7 +36,6 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 	
 	public static void closeInitDialog(){
 		shell.close();
-		shell.dispose();
 	}
 
 	public InitialDialog(Shell parent, int style) {
