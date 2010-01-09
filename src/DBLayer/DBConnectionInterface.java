@@ -73,6 +73,7 @@ public class DBConnectionInterface{
 												 confMan.getSID(),
 												 confMan.getUsername(),
 												 confMan.getPassword());
+			Debug.log("DBConnectionInterface.InitDBConnection initialized DBConnectionPool");
 			
 			// Get Stores Table From The DataBase:
 			StoresTable stores = new StoresTable();
@@ -94,7 +95,8 @@ public class DBConnectionInterface{
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.DB_CONN_FAILURE);
 					dBQRes.close();
 					return;
-				}			
+				}	
+				Debug.log("DBConnectionInterface.InitDBConnection done with the DB.");	
 				GuiUpdatesInterface.initStoresTable(stores);
 				dBQRes.close();
 			}
