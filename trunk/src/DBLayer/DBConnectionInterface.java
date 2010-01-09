@@ -1,7 +1,12 @@
 package DBLayer;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import Tables.*;
 import Queries.*;
+import GUI.DBActionFailureEnum;
+import GUI.GuiUpdatesInterface;
 import General.*;
 import General.Debug.DebugOutput;
 
@@ -49,6 +54,10 @@ public class DBConnectionInterface{
 		(new Thread(new InitDBConnection(confMan))).start();
 	}
 	
+	/**
+	 * This class corresponds to the above method "public static void initDBConnection(ConfigurationManager confMan)"
+	 * This thread role is to initialize the Connection Pool and to get the "Stores" table from the DataBase to the GUI.
+	 */
 	public static class InitDBConnection implements Runnable{
 		private ConfigurationManager confMan;
 		
@@ -58,9 +67,39 @@ public class DBConnectionInterface{
 		
 		public void run() {
 			Debug.log("DBConnectionInterface.InitDBConnection thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			//TODO
+			/*
+			DBConnectionPool.SetConnectionParams(confMan.getHost(),
+												 confMan.getPort(), 
+												 confMan.getSID(),
+												 confMan.getUsername(),
+												 confMan.getPassword());
 			
-			// until implemented, use example:
+			// Get Stores Table From The DataBase:
+			StoresTable stores = new StoresTable();
+			
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT store_id, city, address, phone_number, manager_id FROM stores");	
+			if (dBQRes == null){
+				Debug.log("DBConnectionInterface.InitDBConnection [ERROR]: Failed to get stores table from DB. NULL pointer returned.");
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.DB_CONN_FAILURE);
+				return;
+			} else {
+				ResultSet rs = dBQRes.getResultSet();
+				try {
+					while (rs.next()){
+						stores.addStore(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+					}
+				} catch (SQLException e) {
+					Debug.log("DBConnectionInterface.InitDBConnection [ERROR]: Failed extracting stores from ResultSet");
+					Debug.log(e.getStackTrace().toString());
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.DB_CONN_FAILURE);
+					dBQRes.close();
+					return;
+				}			
+				GuiUpdatesInterface.initStoresTable(stores);
+				dBQRes.close();
+			}
+			*/
+			// TODO remove:
 			TablesExamples.initStoresTable();
 		}
 	}
