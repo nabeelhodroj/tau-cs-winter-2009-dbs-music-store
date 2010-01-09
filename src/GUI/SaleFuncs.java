@@ -262,6 +262,14 @@ public class SaleFuncs {
 	 * and restores gui
 	 */
 	public static void notifyMakeSaleFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not make sale due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 }

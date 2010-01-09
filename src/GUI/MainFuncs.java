@@ -213,19 +213,19 @@ public class MainFuncs {
 			// could not fetch album search results
 			SearchFuncs.notifySearchFailure();
 			break;
-		case GET_SONGS_FAILURE://TODO
+		case GET_SONGS_FAILURE:
 			// could not get song list
 			SearchFuncs.notifyFetchSongsFailure();
 			break;
-		case MAKE_SALE_FAILURE://TODO
+		case MAKE_SALE_FAILURE:
 			// could not make sale
 			SaleFuncs.notifyMakeSaleFailure();
 			break;
-		case CHECK_AVAIL_FAILURE://TODO
+		case CHECK_AVAIL_FAILURE:
 			// could not get order's available stores
 			StockFuncs.notifyOrderAvailableStoresFailure();
 			break;
-		case PLACE_ORDER_FAILURE://TODO
+		case PLACE_ORDER_FAILURE:
 			// could not place new order
 			StockFuncs.notifyPlaceOrderFailure();
 			break;

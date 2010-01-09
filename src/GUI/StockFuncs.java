@@ -120,8 +120,6 @@ public class StockFuncs {
 								MainFuncs.setAllowDBAction(false);
 								
 								DBConnectionInterface.placeOrder(order);
-								// clear order form (invoke clear button)
-								clearFieldsButtonInvokation();
 								
 							} else {
 								MainFuncs.getMsgDBActionNotAllowed().open();
@@ -438,6 +436,8 @@ public class StockFuncs {
 	 * @param order
 	 */
 	public static void addOrder(OrdersOrRequestsTableItem order){
+		// clear order form (invoke clear button)
+		clearFieldsButtonInvokation();
 		// add order to orders table
 		StaticProgramTables.orders.addOrder(order);
 		// update orders table view
@@ -783,7 +783,15 @@ public class StockFuncs {
 	 * and restores gui
 	 */
 	public static void notifyOrderAvailableStoresFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not fetch order's available stores due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 	
 	/**
@@ -791,7 +799,15 @@ public class StockFuncs {
 	 * and restores gui
 	 */
 	public static void notifyPlaceOrderFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not place order due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 	
 	/**
@@ -799,7 +815,15 @@ public class StockFuncs {
 	 * and restores gui
 	 */
 	public static void notifyOrdersActionFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could invoke action due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 	
 	/**
@@ -807,6 +831,14 @@ public class StockFuncs {
 	 * and restores gui
 	 */
 	public static void notifyRequestsActionFailure(){
-		//TODO
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could invoke action due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
 	}
 }
