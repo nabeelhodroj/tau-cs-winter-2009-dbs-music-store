@@ -116,7 +116,6 @@ public class DBConnectionInterface{
 	 */
 	public static void getAlbumsSearchResults(AlbumSearchQuery albumSearchQuery){
 		Debug.log("DBConnectionInterface.getAlbumsSearchResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcSearch.new GetAlbumsSearchResults(albumSearchQuery))).start();		
 	}
@@ -130,9 +129,7 @@ public class DBConnectionInterface{
 	public static void getSongsResults(long albumID){
 		Debug.log("DBConnectionInterface.getSongsResults is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		
-		//TODO
-		TablesExamples.getSongsResults(albumID);
-		
+		(new Thread(dbcSearch.new GetSongsResults(albumID))).start();
 	}
 	
 	//////////////
