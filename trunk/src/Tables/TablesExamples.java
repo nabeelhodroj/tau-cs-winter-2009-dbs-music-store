@@ -187,7 +187,8 @@ public class TablesExamples {
 	 */
 	public static void removeOrder(int orderID){
 		waitSome(1000);
-		GuiUpdatesInterface.removeOrder(orderID);
+		//GuiUpdatesInterface.removeOrder(orderID);
+		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
 	}
 	
 	/**

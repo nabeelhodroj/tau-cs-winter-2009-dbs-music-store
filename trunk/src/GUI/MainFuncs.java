@@ -176,6 +176,19 @@ public class MainFuncs {
 	public static void switchTab(int tab){
 		Main.getMainTabFolder().setSelection(tab);
 	}
+	
+	//////////////////////////
+	//	DB error handling	//
+	//////////////////////////
+	
+	/**
+	 * notifies the user a DB error has occurred and:
+	 * - if the action was an initial action, allows him to retry or quit program
+	 * - if the action wasn't crucial, notifies and restores gui
+	 */
+	public static void notifyDBFailure(DBActionFailureEnum failure){
+		//TODO
+	}
 
 	
 	//////////////////////////////

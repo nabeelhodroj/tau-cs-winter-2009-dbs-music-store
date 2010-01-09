@@ -25,6 +25,7 @@ public class SearchFuncs {
 		switchAlbumSearchBullet(true);
 		Main.getSearchButtonStockInfoOrder().setEnabled(false);
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
+		Main.getSearchButtonShowSongs().setEnabled(false);
 		// set progress visibility off
 		showDBProgress(false);
 	}
@@ -182,8 +183,8 @@ public class SearchFuncs {
 						// get selected album table item
 						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
 						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
-						// update songs table
-						getSongsResultsTable(album);
+						// enable update songs table button
+						Main.getSearchButtonShowSongs().setEnabled(true);
 						// update stock information
 						setLabelPrice(Integer.toString(album.getPrice()));
 						setLabelStockLocation(Long.toString(album.getStorageLocation()));
@@ -191,6 +192,21 @@ public class SearchFuncs {
 						Main.getSearchButtonStockInfoOrder().setEnabled(true);
 						// enable add to sale
 						Main.getSearchButtonSaleInfoSale().setEnabled(true);
+					}
+				}
+		);
+		
+		// albums table listener
+		Main.getSearchButtonShowSongs().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Search tab: show song list button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						
+						// get selected album table item
+						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
+						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
+						// update songs table
+						getSongsResultsTable(album);
 					}
 				}
 		);

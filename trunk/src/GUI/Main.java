@@ -229,6 +229,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Table manageTableEmployees;
 	private static TableColumn manageTableColumnEmployeeID;
 	private static TableColumn manageTableColumnEmployeePName;
+	private static Button searchButtonShowSongs;
 	private static TableColumn manageTableColumnEmployeeLName;
 	private static TableColumn manageTableColumnEmployeePosition;
 	
@@ -641,7 +642,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchTableSongResults = new Table(searchGroupResults, SWT.BORDER | SWT.FULL_SELECTION
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
-								searchTableSongResults.setBounds(13, 296, 395, 162);
+								searchTableSongResults.setBounds(13, 330, 395, 128);
 								searchTableSongResults.setHeaderVisible(true);
 								searchTableSongResults.setLinesVisible(true);
 								
@@ -686,6 +687,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 										searchPanelDBProgress.add(searchJLabelDBProgressBar);
 									}
 								}
+							}
+							{
+								searchButtonShowSongs = new Button(searchGroupResults, SWT.PUSH | SWT.CENTER);
+								searchButtonShowSongs.setText("Show Song List");
+								searchButtonShowSongs.setBounds(15, 296, 392, 30);
 							}
 						}
 						{
@@ -2115,5 +2121,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	public static void setStockButtonRefreshRequests(
 			Button stockButtonRefreshRequests) {
 		Main.stockButtonRefreshRequests = stockButtonRefreshRequests;
+	}
+
+	public static Button getSearchButtonShowSongs() {
+		return searchButtonShowSongs;
+	}
+
+	public static void setSearchButtonShowSongs(Button searchButtonShowSongs) {
+		Main.searchButtonShowSongs = searchButtonShowSongs;
 	}
 }
