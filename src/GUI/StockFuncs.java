@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.HashMap;
+
 import oracle.net.aso.e;
 
 import org.eclipse.swt.SWT;
@@ -744,5 +746,67 @@ public class StockFuncs {
 		StaticProgramTables.requests = requests;
 		// flag that requests initialization is done
 		MainFuncs.setRequestsInitialized(true);
+	}
+	
+	//////////////////////////
+	//	DB failure handling	//
+	//////////////////////////
+	
+	/**
+	 * notifies the orders table could not be initialized
+	 * and allows retry or exit program
+	 */
+	public static void notifyInitOrdersFailure(){		
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not initialize orders table due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) System.exit(-1);
+	}
+	
+	/**
+	 * notifies the requests table could not be initialized
+	 * and allows retry or exit program
+	 */
+	public static void notifyInitRequestsFailure(){
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not initialize requests table due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) System.exit(-1);
+	}
+	
+	/**
+	 * notifies the order's available stores could not be fetched
+	 * and restores gui
+	 */
+	public static void notifyOrderAvailableStoresFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies that could not place the order
+	 * and restores gui
+	 */
+	public static void notifyPlaceOrderFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies the orders action (refresh, remove, cancel) could not be done
+	 * and restores gui
+	 */
+	public static void notifyOrdersActionFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies the requests action (deny, approve) could not be done
+	 * and restores gui
+	 */
+	public static void notifyRequestsActionFailure(){
+		//TODO
 	}
 }

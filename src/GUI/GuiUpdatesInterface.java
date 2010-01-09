@@ -21,7 +21,7 @@ public class GuiUpdatesInterface {
 	 * @param failure
 	 */
 	public static void notifyDBFailure(final DBActionFailureEnum failure){
-		Debug.log("GuiUpdatesInterface: initStoresTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		Debug.log("GuiUpdatesInterface: notifyDBFailure is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {

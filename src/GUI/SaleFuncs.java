@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import org.eclipse.swt.SWT;
@@ -166,9 +167,9 @@ public class SaleFuncs {
 			int id = Integer.parseInt(tokenizer.nextToken());
 			return id;
 		}catch(NumberFormatException nfe){
-			System.out.println("*** BUG: SaleFuncs.getSalesmanIDFromSelected - salesman id is not an integer");
+			Debug.log("*** BUG: SaleFuncs.getSalesmanIDFromSelected - salesman id is not an integer", DebugOutput.FILE, DebugOutput.STDERR);
 			return -1;
-		}
+		}catch(NoSuchElementException nsee){return -1;}
 	}
 	
 	/**
@@ -250,5 +251,17 @@ public class SaleFuncs {
 		
 		// update view
 		updateSaleTableView();
+	}
+	
+	//////////////////////////
+	//	DB failure handling	//
+	//////////////////////////
+	
+	/**
+	 * notifies the sale could not be made
+	 * and restores gui
+	 */
+	public static void notifyMakeSaleFailure(){
+		//TODO
 	}
 }

@@ -645,4 +645,24 @@ public class SearchFuncs {
 			addToSaleErrorMsg.open();
 		}
 	}
+	
+	//////////////////////////
+	//	DB failure handling	//
+	//////////////////////////
+	
+	/**
+	 * notifies the search could not be done
+	 * and restores gui
+	 */
+	public static void notifySearchFailure(){
+		//TODO
+	}
+	
+	/**
+	 * notifies the songs could not be fetched
+	 * and restores gui
+	 */
+	public static void notifyFetchSongsFailure(){
+		//TODO
+	}
 }

@@ -10,7 +10,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
-import Tables.StoresTableItem;
+import Tables.*;
 import General.*;
 import General.Debug.*;
 
@@ -25,6 +25,11 @@ public class MainFuncs {
 	// DB actions are allowed one at a time
 	public static boolean allowDBAction = false;
 	public static MessageBox msgDBActionNotAllowed;
+	
+	// flags for notifying a table initialization error
+	public static boolean errorInitOrders = false;
+	public static boolean errorInitRequests = false;
+	public static boolean errorInitEmployees = false;
 	
 	// flags for tables initialization
 	public static boolean isOrdersInitialized = false;
@@ -43,9 +48,9 @@ public class MainFuncs {
 	public static void initDBConnection(){
 		// create connection
 		String classPath = System.getProperty("java.class.path").split(";")[0];
-		ConfigurationManager confMan = new ConfigurationManager(classPath+"\\..\\src\\General\\Store.props");
+		StaticProgramTables.confMan = new ConfigurationManager(classPath+"\\..\\src\\General\\Store.props");
 		
-		DBConnectionInterface.initDBConnection(confMan);
+		DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
 	}
 	
 	/**
@@ -65,6 +70,7 @@ public class MainFuncs {
 				System.out.println("*** BUG: sleep failed");
 			}
 		}
+		
 		// initialize all fields:
 		/////////////////////////
 		
@@ -125,7 +131,6 @@ public class MainFuncs {
 						StaticProgramTables.setThisStore(StaticProgramTables.stores.getStore(storeID));
 						// update the stores details representation in main window is done in Main
 						
-						//TODO
 						// update orders, requests and employees table
 						DBConnectionInterface.getOrdersTable();
 						DBConnectionInterface.getRequestsTable();
@@ -166,7 +171,7 @@ public class MainFuncs {
 		Main.getMainLabelStoreDetailsStoreAddress().setText("Address: "+
 				StaticProgramTables.thisStore.getAddress()+", "+StaticProgramTables.getThisStore().getCity());
 		Main.getMainLabelStoreDetailsStorePhone().setText("Phone: "+StaticProgramTables.getThisStore().getPhone());
-		Main.getMainLabelStoreDetailsStoreManager().setText("Manager: "+StaticProgramTables.getThisStore().getManagerID()); //TODO convert manager id to manager name	
+		Main.getMainLabelStoreDetailsStoreManager().setText("Manager: "+StaticProgramTables.getThisStore().getManagerID());	
 	}
 	
 	/**
@@ -188,6 +193,84 @@ public class MainFuncs {
 	 */
 	public static void notifyDBFailure(DBActionFailureEnum failure){
 		//TODO
+		
+		switch (failure){
+		case DB_CONN_FAILURE:
+			// could not initiate connection with DB
+			MainFuncs.notifyDBConnectionFailure();
+			break;
+		case INIT_ORDERS_FAILURE:
+			// could not initialize orders table
+			StockFuncs.notifyInitOrdersFailure();
+			break;
+		case INIT_REQUESTS_FAILURE:
+			// could not initialize requests table
+			StockFuncs.notifyInitRequestsFailure();
+			break;
+		case INIT_EMP_FAILURE:
+			// could not initialize employees table
+			ManageFuncs.notifyInitEmployeesFailure();
+			break;
+		case SEARCH_FAILURE:
+			// could not fetch album search results
+			SearchFuncs.notifySearchFailure();
+			break;
+		case GET_SONGS_FAILURE:
+			// could not get song list
+			SearchFuncs.notifyFetchSongsFailure();
+			break;
+		case MAKE_SALE_FAILURE:
+			// could not make sale
+			SaleFuncs.notifyMakeSaleFailure();
+			break;
+		case CHECK_AVAIL_FAILURE:
+			// could not get order's available stores
+			StockFuncs.notifyOrderAvailableStoresFailure();
+			break;
+		case PLACE_ORDER_FAILURE:
+			// could not place new order
+			StockFuncs.notifyPlaceOrderFailure();
+			break;
+		case ORDERS_ACTION_FAILURE:
+			// could not refresh / remove / cancel orders
+			StockFuncs.notifyOrdersActionFailure();
+			break;
+		case REQUESTS_ACTION_FAILURE:
+			// could not deny / approve requests
+			StockFuncs.notifyRequestsActionFailure();
+			break;
+		case UPDATE_DB_FAILURE:
+			// could not update database
+			ManageFuncs.notifyDBUpdateFailure();
+			break;
+		case INSERT_SAVE_EMP_FAILURE:
+			// could not save / insert employee
+			ManageFuncs.notifySaveInsertEmployeeFailure();
+			break;
+		case REM_EMP_FAILURE:
+			// could not remove employee
+			ManageFuncs.notifyRemoveEmployeeFailure();
+			break;
+		default:
+			Debug.log("*** BUG: MainFuncs.notifyDBFailure bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
+	}
+	
+	/**
+	 * notifies the user the could not initiate a connection with the DB
+	 * and allows retry or exit program
+	 */
+	public static void notifyDBConnectionFailure(){
+		MessageBox errMsg = new MessageBox(InitialDialog.getDialogShell(),SWT.ICON_ERROR | SWT.YES | SWT.NO);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not initiate connection with the data-base.\n"+
+				"Click yes to retry connect or no to quit.");
+		// retry connection
+		if (errMsg.open() == SWT.YES){
+			DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
+		}
+		// otherwise quit program
+		else System.exit(-1);
 	}
 
 	
