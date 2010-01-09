@@ -3,11 +3,7 @@ package Tables;
 import GUI.*;
 import General.Debug;
 import General.Debug.DebugOutput;
-
 import java.util.*;
-
-import javax.naming.directory.SearchControls;
-
 import Queries.*;
 
 /**
@@ -25,8 +21,18 @@ public class TablesExamples {
 	public static boolean debugInitEmployees = false;
 	public static boolean debugSearch = false;
 	public static int searchCounter = 0;
-	public static boolean debugSongList = true;
+	public static boolean debugSongList = false;
 	public static int songListCounter = 0;
+	public static boolean debugSale = false;
+	public static int saleCounter = 0;
+	public static boolean debugAvailableStores = false;
+	public static int availableStoresCounter = 0;
+	public static boolean debugPlaceOrder = false;
+	public static int placeOrerCounter = 0;
+	public static boolean debugOrdersAction = true;
+	public static int ordersActionCounter = 0;
+	public static boolean debugRequestsAction = true;
+	public static int requestsActionCounter = 0;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static SongsResultsTable songsResultsTableExample1;
@@ -188,8 +194,19 @@ public class TablesExamples {
 	 */
 	public static void makeSale(SaleTable sale){
 		waitSome(1000);
-		sales.add(sale);
-		GuiUpdatesInterface.initSaleTable();
+		if (debugSale){
+			if (saleCounter < 1){
+				saleCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.MAKE_SALE_FAILURE);
+			}
+			else {
+				sales.add(sale);
+				GuiUpdatesInterface.initSaleTable();
+			}
+		} else {
+			sales.add(sale);
+			GuiUpdatesInterface.initSaleTable();
+		}
 	}
 	
 	/**
@@ -198,7 +215,12 @@ public class TablesExamples {
 	 */
 	public static void getOrderAvailableStores(OrderAvailableStoresQuery query){
 		waitSome(1000);
-		GuiUpdatesInterface.updateOrderAvailableStores(orderAvailableStoresExample);
+		if (debugAvailableStores){
+			if (availableStoresCounter < 2){
+				availableStoresCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.CHECK_AVAIL_FAILURE);
+			} else GuiUpdatesInterface.updateOrderAvailableStores(orderAvailableStoresExample);
+		} else GuiUpdatesInterface.updateOrderAvailableStores(orderAvailableStoresExample);
 	}
 	
 	/**
@@ -218,7 +240,12 @@ public class TablesExamples {
 	 */
 	public static void refreshOrdersTable(){
 		waitSome(1000);
-		GuiUpdatesInterface.refreshOrdersTable(ordersTableExample);
+		if (debugOrdersAction){
+			if (ordersActionCounter < 4){
+				ordersActionCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+			} else GuiUpdatesInterface.refreshOrdersTable(ordersTableExample);
+		} else GuiUpdatesInterface.refreshOrdersTable(ordersTableExample);
 	}
 	
 	/**
@@ -227,8 +254,12 @@ public class TablesExamples {
 	 */
 	public static void removeOrder(int orderID){
 		waitSome(1000);
-		//GuiUpdatesInterface.removeOrder(orderID);
-		GuiUpdatesInterface.initOrdersTable(ordersTableExample);
+		if (debugOrdersAction){
+			if (ordersActionCounter < 4){
+				ordersActionCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+			} else GuiUpdatesInterface.removeOrder(orderID);
+		} else GuiUpdatesInterface.removeOrder(orderID);
 	}
 	
 	/**
@@ -237,17 +268,38 @@ public class TablesExamples {
 	 */
 	public static void placeOrder(OrdersOrRequestsTableItem order){
 		waitSome(1000);
-		// give order its id and update orders-requests counter
-		order.setOrderID(ordersRequestsCounter++);
-		GuiUpdatesInterface.addOrder(order);
+		if (debugPlaceOrder){
+			if (placeOrerCounter < 2){
+				placeOrerCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
+			} else {
+				// give order its id and update orders-requests counter
+				order.setOrderID(ordersRequestsCounter++);
+				GuiUpdatesInterface.addOrder(order);
+			}
+		} else {
+			// give order its id and update orders-requests counter
+			order.setOrderID(ordersRequestsCounter++);
+			GuiUpdatesInterface.addOrder(order);
+		}
 	}
 	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		waitSome(1000);
 		if (status == OrderStatusEnum.CANCELED) // called by orders
-			GuiUpdatesInterface.updateOrderStatus(orderID, status);
+			if (debugOrdersAction){
+				if (ordersActionCounter < 4){
+					ordersActionCounter++;
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+				} else GuiUpdatesInterface.updateOrderStatus(orderID, status);
+			} else GuiUpdatesInterface.updateOrderStatus(orderID, status);
 		else { // called by requests
-			GuiUpdatesInterface.removeRequest(orderID);
+			if (debugRequestsAction){
+				if (requestsActionCounter < 3){
+					requestsActionCounter++;
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+				} else GuiUpdatesInterface.removeRequest(orderID);
+			} else GuiUpdatesInterface.removeRequest(orderID);
 		}
 	}
 	
@@ -268,7 +320,12 @@ public class TablesExamples {
 	 */
 	public static void refreshRequestsTable(){
 		waitSome(1000);
-		GuiUpdatesInterface.refreshRequestsTable(requestsTableExample);
+		if (debugRequestsAction){
+			if (requestsActionCounter < 3){
+				requestsActionCounter++;
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+			} else GuiUpdatesInterface.refreshRequestsTable(requestsTableExample);
+		} else GuiUpdatesInterface.refreshRequestsTable(requestsTableExample);
 	}
 	
 	// Management tab

@@ -677,7 +677,7 @@ public class SearchFuncs {
 	public static void notifyFetchSongsFailure(){
 		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
 		errMsg.setText("DB Connection Error");
-		errMsg.setMessage("Could not get song list to a connection error.\n"+
+		errMsg.setMessage("Could not get song list due to a connection error.\n"+
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {
