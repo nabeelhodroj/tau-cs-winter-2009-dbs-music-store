@@ -21,6 +21,8 @@ public class DiscDBParser {
 	private	static	int		MIN_ALBUM_PRICE = 30;
 	private	static	int		MAX_ALBUM_PRICE = 120;
 	
+	private	static	boolean	Parsing = false;
+	
 	
 	/** this list holds the albums read from file
 	 * multiple threads can add and remove records from it safely 
@@ -83,7 +85,8 @@ public class DiscDBParser {
 		long startTime = System.nanoTime();		// for performance measuring
 		
 		try
-		{		
+		{
+			setParsing(true);
 			 while ((entry = tarInput.getNextTarEntry()) != null)
 			 {
 				 // read entry
@@ -203,6 +206,7 @@ public class DiscDBParser {
 		}
 		finally
 		{
+			setParsing(false);
 			tarIn.close();
 			tarInput.close();			 
 		}		
@@ -271,5 +275,21 @@ public class DiscDBParser {
 	{
 		int nextOffset = discLenghtSec*TRACK_FRAMES_IN_SEC;
 		return getTrackLengthInSec(offset, nextOffset);		
+	}
+
+
+	public static boolean isParsing() {
+		return Parsing;
+	}
+
+
+	public static void setParsing(boolean parsing) {
+		Parsing = parsing;
+	}
+	
+	
+	public static int	getCurrentAlbumListSize()
+	{
+		return generalAlbumList.size();
 	}
 }
