@@ -274,8 +274,7 @@ public class DBConnectionInterface{
 	 */
 	public static void getEmployeesTable(){
 		Debug.log("DBConnectionInterface.getEmployeesTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
-		
+	
 		(new Thread(dbcManage.new GetEmployeesTable())).start();
 	}
 	
@@ -287,7 +286,6 @@ public class DBConnectionInterface{
 	 */
 	public static void checkIfEmployeeExists(int employeeID){
 		Debug.log("DBConnectionInterface.checkIfEmployeeExists is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcManage.new CheckIfEmployeeExists(employeeID))).start();
 	}
@@ -302,7 +300,6 @@ public class DBConnectionInterface{
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
 		Debug.log("DBConnectionInterface.insertUpdateEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcManage.new InsertUpdateEmployee(employee))).start();
 	}
@@ -315,7 +312,6 @@ public class DBConnectionInterface{
 	 */
 	public static void removeEmployee(int employeeID){
 		Debug.log("DBConnectionInterface.removeEmployee is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcManage.new RemoveEmployee(employeeID))).start();
 	}
@@ -330,7 +326,6 @@ public class DBConnectionInterface{
 	 */
 	public static void updateDataBase(String filename){
 		Debug.log("DBConnectionInterface.updateDataBase is called",DebugOutput.FILE,DebugOutput.STDOUT);
-		//TODO
 		
 		(new Thread(dbcManage.new UpdateDatabase(filename))).start();
 	}
