@@ -101,6 +101,30 @@ public class GuiUpdatesInterface {
 			});
 	}
 	
+	/**
+	 * if called from search tab: updates the given album search result with its stock information
+	 * if called from stock tab: returns the stock store's quantity for the given album
+	 * @param albumID
+	 * @param storageLocation
+	 * @param quantityInStock
+	 * @param price
+	 * @param caller
+	 */
+	public static void updateAlbumStockInformation(final long albumID, final long storageLocation,
+			final int quantityInStock, AlbumStockInfoCallerEnum caller){
+		switch (caller){
+		case CALLED_BY_APPROVE_REQUEST:
+			// in case the caller was approve request
+			StockFuncs.approveRequestInvokation(albumID, caller, quantityInStock);
+			break;
+		case CALLED_BY_SEARCH_RESULT:
+			// in case the caller was get stock information 
+			break;
+		default:
+			Debug.log("*** BUG: GuiUpdatesInterface.updateAlbumStockInformation bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
+	}
+	
 	//////////////
 	// Sale tab //
 	//////////////
