@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import Tables.*;
 import Queries.*;
+import GUI.AlbumStockInfoCallerEnum;
 import GUI.DBActionFailureEnum;
 import GUI.GuiUpdatesInterface;
 import General.*;
@@ -258,6 +259,21 @@ public class DBConnectionInterface{
 		Debug.log("DBConnectionInterface.refreshRequestsTable is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		
 		(new Thread(dbcStock.new RefreshRequestsTable())).start();
+	}
+	
+	/**
+	 * invoked in Main \ stock-tab \ "Approve Request" button
+	 * send album id to receive the stock information for the selected album: price,
+	 * location and quantity in store
+	 *  corresponding method in GUI.GuiUpdatesInterface: updateAlbumStockInformation
+	 *  *** caller can be either get stock info for an album search result or for check before approving request
+	 * @param albumID
+	 */
+	public static void getAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
+		Debug.log("DBConnectionInterface.getAlbumStockInfo is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		
+		// until implemented, use the example:
+		TablesExamples.getAlbumStockInfo(albumID, caller);
 	}
 
 	////////////////////
