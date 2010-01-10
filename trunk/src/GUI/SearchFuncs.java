@@ -26,6 +26,7 @@ public class SearchFuncs {
 		Main.getSearchButtonStockInfoOrder().setEnabled(false);
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
 		Main.getSearchButtonShowSongs().setEnabled(false);
+		Main.getSearchButtonGetStockInfo().setEnabled(false);
 		// set progress visibility off
 		showDBProgress(false);
 	}
@@ -181,17 +182,33 @@ public class SearchFuncs {
 						Debug.log("Search tab: album result selected",DebugOutput.FILE,DebugOutput.STDOUT);
 						
 						// get selected album table item
-						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText());
+						Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText(0));
 						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
 						// enable update songs table button
 						Main.getSearchButtonShowSongs().setEnabled(true);
 						// update stock information
 						setLabelPrice(Integer.toString(album.getPrice()));
-						setLabelStockLocation(Long.toString(album.getStorageLocation()));
-						setLabelStoreStock(Integer.toString(album.getQuantity()));
-						Main.getSearchButtonStockInfoOrder().setEnabled(true);
-						// enable add to sale
-						Main.getSearchButtonSaleInfoSale().setEnabled(true);
+						
+						// check if stock info had already been brought from the DB
+						if (album.getStorageLocation() > -1){
+							setLabelStockLocation(Long.toString(album.getStorageLocation()));
+							setLabelStoreStock(Integer.toString(album.getQuantity()));
+							Main.getSearchButtonStockInfoOrder().setEnabled(true);
+							// enable add to sale and get stock info
+							Main.getSearchButtonSaleInfoSale().setEnabled(true);
+							Main.getSearchButtonGetStockInfo().setEnabled(true);
+						}
+						// else enable only get stock info button
+						else {
+							setLabelStockLocation("");
+							setLabelStoreStock("");
+							Main.getSearchButtonStockInfoOrder().setEnabled(false);
+							// disable add to sale
+							Main.getSearchButtonSaleInfoSale().setEnabled(false);
+							// enable get stock information
+							Main.getSearchButtonGetStockInfo().setEnabled(true);
+						}
+						
 					}
 				}
 		);
@@ -214,6 +231,18 @@ public class SearchFuncs {
 		//////////////////////
 		// Stock info group //
 		//////////////////////
+		
+		// get stock information button
+		Main.getSearchButtonGetStockInfo().addSelectionListener(
+				new SelectionAdapter(){
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Search tab: get stock information button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						
+						getAlbumStockInfoInvokation();
+						
+					}
+				}
+		);
 		
 		// add to order button
 		Main.getSearchButtonStockInfoOrder().addSelectionListener(
@@ -409,6 +438,7 @@ public class SearchFuncs {
 		Main.getSearchButtonSearch().setEnabled(false);
 		Main.getSearchButtonStockInfoOrder().setEnabled(false);
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
+		Main.getSearchButtonGetStockInfo().setEnabled(false);
 
 		// clear all results if search is invoked
 		Main.getSearchTableAlbumResults().removeAll();
@@ -540,6 +570,50 @@ public class SearchFuncs {
 			};
 			item.setText(entry);
 		}
+	}
+	
+	/**
+	 * invoked by "Get Stock Information" button
+	 * calls DB to get storage location and quantity for selected album result
+	 */
+	public static void getAlbumStockInfoInvokation(){
+		// get selected album id
+		Long albumID = Long.valueOf(Main.getSearchTableAlbumResults().getSelection()[0].getText(0));
+		
+		// check if DB is not busy, else pop a message		
+		if (MainFuncs.isAllowDBAction()){
+			// flag DB as busy
+			MainFuncs.setAllowDBAction(false);
+				
+			DBConnectionInterface.getAlbumStockInfo(albumID, AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT);
+			
+		} else {
+			MainFuncs.getMsgDBActionNotAllowed().open();
+		}
+	}
+	
+	/**
+	 * invoked from DB, updates given album's storage location and quantity in store
+	 * updates gui buttons and stock information labels
+	 * @param albumID
+	 * @param storageLocation
+	 * @param quantity
+	 */
+	public static void updateAlbumStockInfo(long albumID, long storageLocation, int quantity){
+		// update results stock information
+		StaticProgramTables.results.getAlbums().get(albumID).setStorageLocation(storageLocation);
+		StaticProgramTables.results.getAlbums().get(albumID).setQuantity(quantity);
+		
+		// update gui view
+		setLabelStockLocation(Long.toString(storageLocation));
+		setLabelStoreStock(Integer.toString(quantity));
+		Main.getSearchButtonStockInfoOrder().setEnabled(true);
+		// enable add to sale and get stock info
+		Main.getSearchButtonSaleInfoSale().setEnabled(true);
+		Main.getSearchButtonGetStockInfo().setEnabled(true);
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	/**
@@ -678,6 +752,22 @@ public class SearchFuncs {
 		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
 		errMsg.setText("DB Connection Error");
 		errMsg.setMessage("Could not get song list due to a connection error.\n"+
+				"Please try again later.");
+		// retry connection
+		if (errMsg.open() == SWT.OK) {
+			// restore gui
+			MainFuncs.setAllowDBAction(true);
+		}
+	}
+	
+	/**
+	 * notifies the stock info could not be fetched
+	 * and restores gui
+	 */
+	public static void notifyGetStockInfoFailure(){
+		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
+		errMsg.setText("DB Connection Error");
+		errMsg.setMessage("Could not get stock information due to a connection error.\n"+
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {

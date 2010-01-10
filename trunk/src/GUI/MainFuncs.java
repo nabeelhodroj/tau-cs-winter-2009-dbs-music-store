@@ -213,6 +213,10 @@ public class MainFuncs {
 			// could not fetch album search results
 			SearchFuncs.notifySearchFailure();
 			break;
+		case GET_STOCK_INFO_FAILURE:
+			// could not get album stock information
+			SearchFuncs.notifyGetStockInfoFailure();
+			break;
 		case GET_SONGS_FAILURE:
 			// could not get song list
 			SearchFuncs.notifyFetchSongsFailure();

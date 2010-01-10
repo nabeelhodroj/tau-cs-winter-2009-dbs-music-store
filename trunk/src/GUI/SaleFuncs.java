@@ -112,6 +112,8 @@ public class SaleFuncs {
 	 * clear sale table when sale is done to enable new sale
 	 */
 	public static void clearSaleTable(){
+		// clear current sale data structure
+		StaticProgramTables.sale.getSaleItems().clear();
 		// clear fields
 		Main.getSaleTableSaleItems().removeAll();
 		Main.getSaleLabelTotalPriceValue().setText("0");
