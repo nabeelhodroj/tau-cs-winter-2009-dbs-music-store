@@ -334,6 +334,15 @@ public class TablesExamples {
 		} else GuiUpdatesInterface.refreshRequestsTable(requestsTableExample);
 	}
 	
+	/**
+	 * invoke get album stock information
+	 * @param albumID
+	 * @param caller
+	 */
+	public static void getAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
+		
+	}
+	
 	// Management tab
 	
 	/**
