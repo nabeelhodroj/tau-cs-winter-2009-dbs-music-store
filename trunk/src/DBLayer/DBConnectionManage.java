@@ -1,15 +1,8 @@
 package DBLayer;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import Tables.EmployeePositionsEnum;
-import Tables.EmployeesTable;
-import Tables.EmployeesTableItem;
-import Tables.TablesExamples;
-import GUI.DBActionFailureEnum;
-import GUI.GuiUpdatesInterface;
-import GUI.StaticProgramTables;
+import java.sql.*;
+import Tables.*;
+import GUI.*;
 import General.Debug;
 import General.Debug.DebugOutput;
 
@@ -56,7 +49,6 @@ public class DBConnectionManage {
 				queryResults.close();
 				return;
 			}
-			
 			
 			GuiUpdatesInterface.initEmployeesTable(employees); */
 			// until implemented, use example
