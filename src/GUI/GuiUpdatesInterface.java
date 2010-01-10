@@ -111,18 +111,27 @@ public class GuiUpdatesInterface {
 	 * @param caller
 	 */
 	public static void updateAlbumStockInformation(final long albumID, final long storageLocation,
-			final int quantityInStock, AlbumStockInfoCallerEnum caller){
-		switch (caller){
-		case CALLED_BY_APPROVE_REQUEST:
-			// in case the caller was approve request
-			StockFuncs.approveRequestInvokation(albumID, caller, quantityInStock);
-			break;
-		case CALLED_BY_SEARCH_RESULT:
-			// in case the caller was get stock information 
-			break;
-		default:
-			Debug.log("*** BUG: GuiUpdatesInterface.updateAlbumStockInformation bug", DebugOutput.FILE, DebugOutput.STDERR);
-		}
+			final int quantityInStock, final AlbumStockInfoCallerEnum caller){
+		Debug.log("GuiUpdatesInterface: updateAlbumStockInformation is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				switch (caller){
+				case CALLED_BY_APPROVE_REQUEST:
+					// in case the caller was approve request
+					StockFuncs.approveRequestInvokation(albumID, quantityInStock);
+					break;
+				case CALLED_BY_SEARCH_RESULT:
+					// in case the caller was get stock information
+					SearchFuncs.updateAlbumStockInfo(albumID, storageLocation, quantityInStock);
+					break;
+				default:
+					Debug.log("*** BUG: GuiUpdatesInterface.updateAlbumStockInformation bug", DebugOutput.FILE, DebugOutput.STDERR);
+				}
+				
+				}
+			});
 	}
 	
 	//////////////

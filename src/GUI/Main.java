@@ -229,6 +229,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Table manageTableEmployees;
 	private static TableColumn manageTableColumnEmployeeID;
 	private static TableColumn manageTableColumnEmployeePName;
+	private static Button searchButtonGetStockInfo;
 	private static Button searchButtonShowSongs;
 	private static TableColumn manageTableColumnEmployeeLName;
 	private static TableColumn manageTableColumnEmployeePosition;
@@ -719,7 +720,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchButtonStockInfoOrder = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonStockInfoOrder.setText("Place an Order...");
-								searchButtonStockInfoOrder.setBounds(12, 91, 147, 45);
+								searchButtonStockInfoOrder.setBounds(12, 113, 147, 23);
+							}
+							{
+								searchButtonGetStockInfo = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
+								searchButtonGetStockInfo.setText("Get Stock Information");
+								searchButtonGetStockInfo.setBounds(12, 87, 147, 26);
 							}
 						}
 						{
@@ -740,7 +746,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchButtonSaleInfoSale = new Button(searchGroupSaleInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonSaleInfoSale.setText("Add to Sale...");
-								searchButtonSaleInfoSale.setBounds(8, 91, 157, 45);
+								searchButtonSaleInfoSale.setBounds(8, 88, 157, 48);
 							}
 						}
 					}
@@ -2131,5 +2137,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static void setSearchButtonShowSongs(Button searchButtonShowSongs) {
 		Main.searchButtonShowSongs = searchButtonShowSongs;
+	}
+
+	public static Button getSearchButtonGetStockInfo() {
+		return searchButtonGetStockInfo;
+	}
+
+	public static void setSearchButtonGetStockInfo(Button searchButtonGetStockInfo) {
+		Main.searchButtonGetStockInfo = searchButtonGetStockInfo;
 	}
 }

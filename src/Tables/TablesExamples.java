@@ -39,6 +39,8 @@ public class TablesExamples {
 	public static int insertSaveEmployeeCounter = 0;
 	public static boolean debugRemEmployee = false;
 	public static int remEmployeeCounter = 0;
+	public static boolean debugGetStockInfo = true;
+	public static int getStockInfoCounter = 0;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
 	public static SongsResultsTable songsResultsTableExample1;
@@ -63,7 +65,7 @@ public class TablesExamples {
 		songsResultsTableExample1.addSong(2,"Here in Ashdod", "Shimon", 200);
 		
 		AlbumsResultsTableItem albumsResultsItem1 = new AlbumsResultsTableItem(1, "Shimon Comes Live",
-				"Shimon", 1998, "Rock", 1800, null, 60, 17, 30);
+				"Shimon", 1998, "Rock", 1800, null, 60, -1, -1);
 		
 		songsResultsTableExample2 = new SongsResultsTable(2);
 		songsResultsTableExample2.addSong(1, "You are my Sima", "Shimon", 180);
@@ -71,7 +73,7 @@ public class TablesExamples {
 		songsResultsTableExample2.addSong(3,"Who is your Susu", "Shimon feat. Susu", 150);
 		
 		AlbumsResultsTableItem albumsResultsItem2 = new AlbumsResultsTableItem(2, "Shimon and Friends",
-				"Various", 1995, "Rock", 2000, null, 49, 19, 56);
+				"Various", 1995, "Rock", 2000, null, 49, -1, -1);
 		
 		albumsResultsTableExample.addAlbum(albumsResultsItem1);
 		albumsResultsTableExample.addAlbum(albumsResultsItem2);
@@ -101,7 +103,7 @@ public class TablesExamples {
 		OrdersOrRequestsTableItem order1 = new OrdersOrRequestsTableItem(1,store1.getStoreID(),
 				store2.getStoreID(),albumsResultsItem1.getAlbumID(),2,"12/04/08",OrderStatusEnum.WAITING);
 		OrdersOrRequestsTableItem order2 = new OrdersOrRequestsTableItem(2,store1.getStoreID(),
-				store3.getStoreID(),albumsResultsItem2.getAlbumID(),19,"15/08/09",OrderStatusEnum.WAITING);
+				store3.getStoreID(),albumsResultsItem2.getAlbumID(),19,"15/08/09",OrderStatusEnum.DENIED);
 		OrdersOrRequestsTableItem order3 = new OrdersOrRequestsTableItem(3,store1.getStoreID(),
 				store2.getStoreID(),albumsResultsItem1.getAlbumID(),5,"30/01/09",OrderStatusEnum.COMPLETED);
 		
@@ -116,7 +118,7 @@ public class TablesExamples {
 		OrdersOrRequestsTableItem request2 = new OrdersOrRequestsTableItem(5,store3.getStoreID(),
 				store1.getStoreID(),albumsResultsItem2.getAlbumID(),9,"23/10/09",OrderStatusEnum.WAITING);
 		OrdersOrRequestsTableItem request3 = new OrdersOrRequestsTableItem(6,store2.getStoreID(),
-				store1.getStoreID(),albumsResultsItem2.getAlbumID(),2,"11/11/09",OrderStatusEnum.COMPLETED);
+				store1.getStoreID(),albumsResultsItem2.getAlbumID(),2,"11/11/09",OrderStatusEnum.WAITING);
 		
 		requestsTableExample.addOrder(request1);
 		requestsTableExample.addOrder(request2);
@@ -340,7 +342,46 @@ public class TablesExamples {
 	 * @param caller
 	 */
 	public static void getAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
+		waitSome(1000);
+		// called from stock
+		if (caller == AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST){
+			if (debugGetStockInfo){
+				if (getStockInfoCounter < 2){
+					getStockInfoCounter ++;
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+				} else {
+					if (albumID == 1) GuiUpdatesInterface.updateAlbumStockInformation(albumID, 17, 1,
+							AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST);
+					else GuiUpdatesInterface.updateAlbumStockInformation(albumID, 43, 56, // album id = 2
+							AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST);			
+				}
+			} else {
+				if (albumID == 1) GuiUpdatesInterface.updateAlbumStockInformation(albumID, 17, 1,
+						AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST);
+				else GuiUpdatesInterface.updateAlbumStockInformation(albumID, 43, 56, // album id = 2
+						AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST);
+			}
+		}
 		
+		// called from search
+		if (caller == AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT){
+			if (debugGetStockInfo){
+				if (getStockInfoCounter < 2){
+					getStockInfoCounter ++;
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.GET_STOCK_INFO_FAILURE);
+				} else {
+					if (albumID == 1) GuiUpdatesInterface.updateAlbumStockInformation(albumID, 17, 1,
+							AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT);
+					else GuiUpdatesInterface.updateAlbumStockInformation(albumID, 43, 56, // album id = 2
+							AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT);			
+				}
+			} else {
+				if (albumID == 1) GuiUpdatesInterface.updateAlbumStockInformation(albumID, 17, 1,
+						AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT);
+				else GuiUpdatesInterface.updateAlbumStockInformation(albumID, 43, 56, // album id = 2
+						AlbumStockInfoCallerEnum.CALLED_BY_SEARCH_RESULT);
+			}
+		}		
 	}
 	
 	// Management tab
