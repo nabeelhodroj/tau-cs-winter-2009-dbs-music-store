@@ -39,7 +39,7 @@ public class TablesExamples {
 	public static int insertSaveEmployeeCounter = 0;
 	public static boolean debugRemEmployee = false;
 	public static int remEmployeeCounter = 0;
-	public static boolean debugGetStockInfo = true;
+	public static boolean debugGetStockInfo = false;
 	public static int getStockInfoCounter = 0;
 	
 	public static AlbumsResultsTable albumsResultsTableExample = new AlbumsResultsTable();
