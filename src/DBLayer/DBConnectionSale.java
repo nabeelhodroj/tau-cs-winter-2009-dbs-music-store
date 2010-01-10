@@ -1,14 +1,20 @@
 package DBLayer;
 
+import java.lang.annotation.Retention;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes.Name;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 
 import GUI.DBActionFailureEnum;
 import GUI.GuiUpdatesInterface;
 import GUI.StaticProgramTables;
 import General.Debug;
 import General.Debug.DebugOutput;
+import Tables.AlbumsResultsTableItem;
 import Tables.SaleTable;
 import Tables.SaleTableItem;
 import Tables.TablesExamples;
@@ -79,4 +85,43 @@ public class DBConnectionSale {
 			
 		}		
 	}
+	
+	public class NameLess implements Runnable{
+		private long albumID;
+		private int storeID;
+		
+		public NameLess(long albumID,int storeID){
+			this.albumID = albumID;
+			this.storeID = storeID;
+		}
+
+		@Override
+		public void run() {
+			Debug.log("DBConnectionSale.NameLess thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT * FROM stock " +
+															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
+			if (dBQRes == null){
+				Debug.log("DBConnectionSale.NameLess [ERROR]: Failed to access DataBase.");
+				// TODO notify the GUI of the failure.
+				return;
+			}
+			ResultSet rs = dBQRes.getResultSet();
+			try {
+				rs.next();
+				AlbumsResultsTableItem retAlbum = new AlbumsResultsTableItem(albumID);
+				retAlbum.setQuantity(rs.getInt("quantity"));
+			} catch (SQLException e) {
+				Debug.log("DBConnectionSale.NameLess [ERROR]: Failed to iterate over the ResultSet.");
+				// TODO notify the GUI of the failure.
+				dBQRes.close();
+				return;
+			}
+			
+			Debug.log("DBConnectionSale.NameLess Done working with DB calling GUI's NameLess.");
+			// TODO return retAlbum to the GUI
+			dBQRes.close();
+		}
+		
+	}	
+
 }
