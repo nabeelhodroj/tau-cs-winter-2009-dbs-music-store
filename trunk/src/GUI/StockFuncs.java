@@ -271,7 +271,7 @@ public class StockFuncs {
 							// flag DB as busy
 							MainFuncs.setAllowDBAction(false);
 							
-							approveRequestInvokation();
+							getAlbumStockQuantity();
 							
 						} else {
 							MainFuncs.getMsgDBActionNotAllowed().open();
@@ -683,14 +683,55 @@ public class StockFuncs {
 	
 	/**
 	 * invoked by "Approve Request" button
-	 * calls status change of order id to "approved"
+	 * calls DB to get back the stock quantity in the current store
+	 * DB will invoke approveRequestInvokation 
+	 */
+	public static void getAlbumStockQuantity(){
+		try{
+			// get album id from selected request
+			long requestedAlbumID = Long.parseLong(Main.getStockTableRequests().getSelection()[0].getText(2));
+			// check quantity in DB
+			DBConnectionInterface.getAlbumStockInfo(requestedAlbumID, AlbumStockInfoCallerEnum.CALLED_BY_APPROVE_REQUEST);
+		} catch (NumberFormatException nfe){
+			Debug.log("*** BUG: StockFuncs.getAlbumStockQuantity bug", DebugOutput.FILE, DebugOutput.STDERR);
+		}
+	}
+	
+	/**
+	 * invoked by "Approve Request" button after the DB returned the quantity in stock
+	 * calls status change of order id to "approved" if have enough in stock, or aborts otherwise
 	 * DB will call its removal from requests table
 	 */
-	public static void approveRequestInvokation(){
-		// call DB action
+	public static void approveRequestInvokation(long albumID, int quantityInStock){
 		try{
-			int selectedRequestID = Integer.parseInt(Main.getStockTableRequests().getSelection()[0].getText(0));
-			DBConnectionInterface.updateOrderStatus(selectedRequestID, OrderStatusEnum.COMPLETED);
+			// check that quantity is ok
+			int requestedQuantity = Integer.parseInt(Main.getStockTableRequests().getSelection()[0].getText(3));
+			// check if album is in current sale
+			TableItem[] saleItems = Main.getSaleTableSaleItems().getItems();
+			int quantityInSale = 0;
+			for (TableItem saleItem: saleItems){
+				if (albumID == Integer.parseInt(saleItem.getText(0))){
+					quantityInSale = Integer.parseInt(saleItem.getText(2));
+					break;
+				}
+			}
+			
+			// check if quantity is ok, else throw a message
+			if (requestedQuantity <= (quantityInStock - quantityInSale)){
+				// quantity is ok
+				int selectedRequestID = Integer.parseInt(Main.getStockTableRequests().getSelection()[0].getText(0));
+				// call DB action
+				DBConnectionInterface.updateOrderStatus(selectedRequestID, OrderStatusEnum.COMPLETED);
+			} else {
+				// quantity is not ok
+				MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
+				errMsg.setText("Not enough in stock");
+				errMsg.setMessage("Store does not have enough in stock to approve the request.");
+				errMsg.open();
+				
+				// flag DB as free
+				MainFuncs.setAllowDBAction(true);
+			}
 		} catch (NumberFormatException nfe){
 			Debug.log("*** BUG: StockFuncs.approveRequestInvokation bug", DebugOutput.FILE, DebugOutput.STDERR);
 		}
