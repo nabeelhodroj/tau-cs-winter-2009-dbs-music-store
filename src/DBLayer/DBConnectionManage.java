@@ -1,7 +1,13 @@
 package DBLayer;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.*;
+
 import Tables.*;
+import DiscsDB.DiscDBAlbumData;
+import DiscsDB.DiscDBParser;
+import DiscsDB.DiscDBTrackData;
 import GUI.*;
 import General.Debug;
 import General.Debug.DebugOutput;
@@ -118,11 +124,6 @@ public class DBConnectionManage {
 			String employeeRemove = 
 				"DELETE FROM Employees\n"+
 				"WHERE employee_id = " + employee.getEmployeeID();
-			/* TODO: return to code
-			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
-				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
-				return;
-			}
 
 			String employeeInsert = 
 				"INSERT INTO Employees(" +
@@ -149,11 +150,16 @@ public class DBConnectionManage {
 				employee.getStoreID()+","+
 				employee.getPosition().getIntRep()+")";
 			
-			if (DBAccessLayer.executeUpdate(employeeInsert) == -1){
+			/* TODO: return to code
+			List<String> sqlCommands = new ArrayList<String>();
+			sqlCommands.add(employeeRemove);
+			sqlCommands.add(employeeInsert);
+			
+			if (DBAccessLayer.executeBatch(sqlCommands) == 0){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				return;
 			}
-			
+
 			GuiUpdatesInterface.insertUpdateEmployee(employee);*/
 			// until implemented, use example:
 			TablesExamples.insertUpdateEmployee(employee);
@@ -191,18 +197,135 @@ public class DBConnectionManage {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public class UpdateDatabase implements Runnable{
-		private String filename;
+		
+		private class ParseFile implements Runnable{
+			private String filename;
+			private boolean finishedSuccessfully = true;
+			
+			public ParseFile(String filename) {
+				this.filename = filename;
+			}
 
+			@Override
+			public void run() {
+				try {
+					DiscDBParser.parseFile(filename);
+				} catch (IOException e) {
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;	
+				}
+			}
+
+			public boolean isFinishedSuccessfully() {
+				return finishedSuccessfully;
+			}
+			
+			
+			
+		}
+		
+		////////////////////////////////////////////////
+		
+		private class BatchAddToDB implements Runnable{
+			Thread parseThread;
+			private boolean finishedSuccessfully = true;
+			
+			public BatchAddToDB(Thread parseThread) {
+				this.parseThread = parseThread;
+			}
+
+			@Override
+			public void run() {
+				List<DiscDBAlbumData> parsedAlbums;
+				while (parseThread.isAlive()){
+					List<String> insertBatch = new ArrayList<String>();
+					String buffer;
+					
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(0);//TODO: set number
+					
+					for (DiscDBAlbumData albumData : parsedAlbums) {
+						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec)\n";
+						buffer += "VALUES(" +
+								albumData.getName() + "," +
+								albumData.getArtist() + "," +
+								albumData.getYear()+ "," +
+								albumData.getGenere() + "," +
+								albumData.getLengthSec()+ ")\n";
+						insertBatch.add(buffer);
+						
+						for (DiscDBTrackData trackData : albumData.getTrackList()) {
+							buffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_name, length_sec)";
+							buffer += "VALUES(" +
+									"ALBUMS_SEQ.CURRVAL, " +
+									trackData.getTrackNum() + ", " +
+									trackData.getName() + ", " +
+									trackData.getArtist() + "," +
+									trackData.getLengthSdc() + ")";
+							insertBatch.add(buffer);
+						}
+					}
+					
+					if (DBAccessLayer.executeBatch(insertBatch) != insertBatch.size()){
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+						finishedSuccessfully = false;
+						return;
+					}	
+				}
+			}
+
+			public boolean isFinishedSuccessfully() {
+				return finishedSuccessfully;
+			}
+			
+		}
+		
+		////////////////////////////////////////////////
+		
+		private String filename;
+		
 		public UpdateDatabase(String filename) {
 			super();
 			this.filename = filename;
 		}
 		
+		
+		
 		@Override
 		public void run() {
 			Debug.log("DBConnectionManage.UpdateDatabase thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			//TODO
 			
+			int lastAlbumID = 0;
+			/* Return to code
+			DBQueryResults maxIDQuery = DBAccessLayer.executeQuery("SELECT MAX(album_id) AS last_album_id\n" +
+					"FROM Albums");
+			if (maxIDQuery == null){
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+				return;
+			}
+			ResultSet rs = maxIDQuery.getResultSet();
+			try {
+				rs.next();
+				lastAlbumID = rs.getInt("last_album_id");
+			} catch (SQLException e) {
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+				return;
+			}
+			
+			ParseFile fileParser = new ParseFile(filename);
+			Thread parseThread = new Thread(fileParser);
+			parseThread.start();
+			
+			BatchAddToDB dbAdder = new BatchAddToDB(parseThread);
+			Thread updateThread = new Thread(dbAdder);
+			updateThread.start();
+
+			if (!fileParser.isFinishedSuccessfully() || !dbAdder.isFinishedSuccessfully()){ // Revert to previous DB state
+				DBAccessLayer.executeUpdate("DELETE FROM Albums\n" +
+						"WHERE album_id > " + lastAlbumID);
+				DBAccessLayer.executeUpdate("DELETE FROM Songs\n" +
+						"WHERE album_id > " + lastAlbumID);
+			}*/
 			// until implemented, use example:
 			TablesExamples.updateDataBase(filename);
 		}
