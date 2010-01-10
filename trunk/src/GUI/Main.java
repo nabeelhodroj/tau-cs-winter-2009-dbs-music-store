@@ -462,6 +462,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchCheckBoxSongNames = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxSongNames.setText("Song name(s):");
 								searchCheckBoxSongNames.setBounds(12, 141, 88, 22);
+								searchCheckBoxSongNames.setToolTipText("Enter song names / partial names separated by semicolons\n"+
+										"e.g. 'first song name;second song name;third song name'");
 							}
 							{
 								searchCheckBoxGenres = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
