@@ -88,11 +88,10 @@ public class DBConnectionSale {
 	
 	public class NameLess implements Runnable{
 		private long albumID;
-		private int storeID;
+		private int storeID = StaticProgramTables.getThisStore().getStoreID();
 		
-		public NameLess(long albumID,int storeID){
+		public NameLess(long albumID){
 			this.albumID = albumID;
-			this.storeID = storeID;
 		}
 
 		@Override
