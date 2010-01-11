@@ -271,9 +271,9 @@ public class DBConnectionInterface{
 	 */
 	public static void getAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
 		Debug.log("DBConnectionInterface.getAlbumStockInfo is called",DebugOutput.FILE,DebugOutput.STDOUT);
+	
+		(new Thread(dbcStock.new GetAlbumStockInfo(albumID, caller))).start();
 		
-		// until implemented, use the example:
-		TablesExamples.getAlbumStockInfo(albumID, caller);
 	}
 
 	////////////////////
