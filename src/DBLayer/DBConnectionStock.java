@@ -474,7 +474,6 @@ public class DBConnectionStock {
 	public class GetAlbumStockInfo implements Runnable{
 		private long albumID;
 		private AlbumStockInfoCallerEnum caller;
-		private int storeID = StaticProgramTables.getThisStore().getStoreID();
 		
 		public GetAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
 			this.albumID = albumID;
@@ -485,6 +484,7 @@ public class DBConnectionStock {
 		public void run() {
 			Debug.log("DBConnectionInterface.GetAlbumStockInfo thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			/*
+			int storeID = StaticProgramTables.getThisStore().getStoreID();
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT quantity, storage_location FROM stock " +
 															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
 			if (dBQRes == null){
