@@ -98,8 +98,8 @@ public class DBConnectionSearch {
 							rs.getInt("length_sec"),
 							new SongsResultsTable(rs.getInt("album_id")),
 							rs.getInt("price"),
-							0, // storageLocation, TODO
-							0); //quantity TODO
+							-1,
+							-1);
 				}
 			} catch (SQLException e) {
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
