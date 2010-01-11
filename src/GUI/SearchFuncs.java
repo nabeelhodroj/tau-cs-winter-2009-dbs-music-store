@@ -189,7 +189,14 @@ public class SearchFuncs {
 						// update stock information
 						setLabelPrice(Integer.toString(album.getPrice()));
 						
-						// check if stock info had already been brought from the DB
+						// update song list view (will be empty if haven't been brought yet)
+						if (album.getSongs() == null){
+							Main.getSearchTableSongResults().removeAll();
+						} else {
+							updateSongsResultsTableView(album.getSongs());
+						}
+						
+						// check if stock info is brought from the DB
 						if (album.getStorageLocation() > -1){
 							setLabelStockLocation(Long.toString(album.getStorageLocation()));
 							setLabelStoreStock(Integer.toString(album.getQuantity()));
