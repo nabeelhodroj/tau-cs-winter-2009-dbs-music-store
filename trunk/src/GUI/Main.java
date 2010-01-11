@@ -288,6 +288,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		
 		// Start GUI
 		showGUI();
+		System.exit(-1);
 	}
 	
 	/**

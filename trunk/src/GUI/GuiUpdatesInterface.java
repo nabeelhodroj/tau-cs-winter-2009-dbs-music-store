@@ -371,7 +371,7 @@ public class GuiUpdatesInterface {
 	 * @param exists
 	 */
 	public static void tryInsertNewEmployee(final int employeeID, final boolean exists){
-		Debug.log("GuiUpdatesInterface: getDoesEmployeeExist is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		Debug.log("GuiUpdatesInterface: tryInsertNewEmployee is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {

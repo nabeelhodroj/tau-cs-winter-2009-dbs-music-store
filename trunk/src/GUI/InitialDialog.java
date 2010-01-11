@@ -130,5 +130,17 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 
 	public static void setDisplay(Display display) {
 		InitialDialog.display = display;
+	}
+
+	public static Display getDisplay() {
+		return display;
+	}
+
+	public static InitialDialog getInst() {
+		return inst;
+	}
+
+	public static Shell getShell() {
+		return shell;
 	}	
 }
