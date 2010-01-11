@@ -3,6 +3,7 @@ package DBLayer;
 import java.sql.*;
 import java.util.*;
 
+import GUI.AlbumStockInfoCallerEnum;
 import GUI.DBActionFailureEnum;
 import GUI.GuiUpdatesInterface;
 import GUI.OrdersRequestsActionsEnum;
@@ -466,4 +467,52 @@ public class DBConnectionStock {
 		}
 		
 	}
+	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void getAlbumStockInfo();"
+	 */
+	public class GetAlbumStockInfo implements Runnable{
+		private long albumID;
+		private AlbumStockInfoCallerEnum caller;
+		private int storeID = StaticProgramTables.getThisStore().getStoreID();
+		
+		public GetAlbumStockInfo(long albumID, AlbumStockInfoCallerEnum caller){
+			this.albumID = albumID;
+			this.caller = caller;
+		}
+		
+		@Override
+		public void run() {
+			Debug.log("DBConnectionInterface.GetAlbumStockInfo thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
+			/*
+			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT quantity, storage_location FROM stock " +
+															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
+			if (dBQRes == null){
+				Debug.log("DBConnectionSale.GetAlbumStockInfo [ERROR]: Failed to access DataBase.");
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.GET_STOCK_INFO_FAILURE);
+				return;
+			}
+			ResultSet rs = dBQRes.getResultSet();
+			long retStorageLocation = -1;
+			int retQuantity = -1;
+			try {
+				rs.next();
+				retStorageLocation = rs.getLong("storage_location");
+				retQuantity = rs.getInt("quantity");
+			} catch (SQLException e) {
+				Debug.log("DBConnectionSale.GetAlbumStockInfo [ERROR]: Failed to iterate over the ResultSet.");
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.GET_STOCK_INFO_FAILURE);
+				dBQRes.close();
+				return;
+			}
+			
+			Debug.log("DBConnectionSale.GetAlbumStockInfo Done working with DB calling GUI's updateAlbumStockInformation.");
+			GuiUpdatesInterface.updateAlbumStockInformation(albumID, retStorageLocation, retQuantity, caller);
+			dBQRes.close();
+			*/
+			// TODO remove
+			TablesExamples.getAlbumStockInfo(albumID, caller);
+		}
+		
+	}	
 }
