@@ -297,7 +297,7 @@ public class DBConnectionInterface{
 	/**
 	 * invoked in Main \ manage-tab \ "Insert" button
 	 * check if employee exists in network employees table
-	 * corresponding method in GUI.GuiUpdatesInterface: getDoesEmployeeExist
+	 * corresponding method in GUI.GuiUpdatesInterface: tryInsertNewEmployee
 	 * @param employeeID
 	 */
 	public static void checkIfEmployeeExists(int employeeID){
