@@ -85,42 +85,5 @@ public class DBConnectionSale {
 			
 		}		
 	}
-	
-	public class NameLess implements Runnable{
-		private long albumID;
-		private int storeID = StaticProgramTables.getThisStore().getStoreID();
-		
-		public NameLess(long albumID){
-			this.albumID = albumID;
-		}
-
-		@Override
-		public void run() {
-			Debug.log("DBConnectionSale.NameLess thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT * FROM stock " +
-															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
-			if (dBQRes == null){
-				Debug.log("DBConnectionSale.NameLess [ERROR]: Failed to access DataBase.");
-				// TODO notify the GUI of the failure.
-				return;
-			}
-			ResultSet rs = dBQRes.getResultSet();
-			try {
-				rs.next();
-				AlbumsResultsTableItem retAlbum = new AlbumsResultsTableItem(albumID);
-				retAlbum.setQuantity(rs.getInt("quantity"));
-			} catch (SQLException e) {
-				Debug.log("DBConnectionSale.NameLess [ERROR]: Failed to iterate over the ResultSet.");
-				// TODO notify the GUI of the failure.
-				dBQRes.close();
-				return;
-			}
-			
-			Debug.log("DBConnectionSale.NameLess Done working with DB calling GUI's NameLess.");
-			// TODO return retAlbum to the GUI
-			dBQRes.close();
-		}
-		
-	}	
 
 }
