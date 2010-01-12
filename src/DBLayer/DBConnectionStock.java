@@ -35,7 +35,7 @@ public class DBConnectionStock {
 			
 			OrderAvailableStoresTable availableStores = new OrderAvailableStoresTable();
 			
-			String queryStr = "SELECT DISTINCT store_id, city, quantity FROM stores, stock " +
+			String queryStr = "SELECT DISTINCT stores.store_id, city, quantity FROM stores, stock " +
 							  "WHERE (stores.store_id=stock.store_id) AND (stock.album_id="+query.getAlbumID()+")";
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr);
 
@@ -76,7 +76,7 @@ public class DBConnectionStock {
 			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
-			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
+			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM orders " +
 								"WHERE ordering_store_id="+thisStoreID;
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
@@ -123,7 +123,7 @@ public class DBConnectionStock {
 			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
-			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
+			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM orders " +
 								"WHERE ordering_store_id="+thisStoreID;
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
@@ -386,7 +386,7 @@ public class DBConnectionStock {
 			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
-			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
+			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM orders " +
 								"WHERE supplying_store_id="+thisStoreID;
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
@@ -432,7 +432,7 @@ public class DBConnectionStock {
 			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
-			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
+			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM orders " +
 								"WHERE supplying_store_id="+thisStoreID;
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
