@@ -292,6 +292,16 @@ public class TablesExamples {
 		}
 	}
 	
+	/**
+	 * invoke approve order from supplier is done
+	 * @param albumID
+	 * @param quantity
+	 */
+	public static void placeOrderFromSupplier(long albumID, int quantity){
+		waitSome(1000);
+		GuiUpdatesInterface.approveOrderFromSupplierDone();
+	}
+	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		waitSome(1000);
 		if (status == OrderStatusEnum.CANCELED) // called by orders
