@@ -712,7 +712,7 @@ public class ManageFuncs {
 	public static void notifySaveInsertEmployeeFailure(){
 		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
 		errMsg.setText("DB Connection Error");
-		errMsg.setMessage("Could not save employee due to a connection error or a file mismatch.\n"+
+		errMsg.setMessage("Could not save employee due to a connection error.\n"+
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {
