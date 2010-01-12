@@ -338,6 +338,25 @@ public class ManageFuncs {
 			throw new EmployeeDetailsValidityException("Employee ID must be an integer");
 		}
 		
+		// check birth date correctness
+		try{
+			String[] date = Main.getManageTextBoxEmployeeBirthInput().getText().split("/");
+			if (date.length != 3) throw new NumberFormatException();
+			
+			if ((date[0].length() != 2) || (date[1].length() != 2) || (date[2].length() != 4))
+				throw new NumberFormatException();
+			
+			int day = Integer.parseInt(date[0]);
+			int month = Integer.parseInt(date[1]);
+			int year = Integer.parseInt(date[2]);
+			
+			if (!(1 <= day && day <= 31) || !(1 <= month && month <= 12) || !(1900 <= year && year <= 2010))
+				throw new NumberFormatException();
+		} catch (NumberFormatException nfe){
+			throw new EmployeeDetailsValidityException("Employee birth-date must be in the format: dd/mm/yyyy\n"+
+					"and year must be reasonable!");
+		}
+		
 		// check that first name and last name are not empty
 		if (Main.getManageTextBoxEmployeeFNameInput().getText().isEmpty() ||
 				Main.getManageTextBoxEmployeeLNameInput().getText().isEmpty())
