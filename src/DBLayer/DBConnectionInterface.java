@@ -68,7 +68,7 @@ public class DBConnectionInterface{
 		
 		public void run() {
 			Debug.log("DBConnectionInterface.InitDBConnection thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			/*
+			
 			DBConnectionPool.SetConnectionParams(confMan.getHost(),
 												 confMan.getPort(), 
 												 confMan.getSID(),
@@ -101,9 +101,9 @@ public class DBConnectionInterface{
 				GuiUpdatesInterface.initStoresTable(stores);
 				dBQRes.close();
 			}
-			*/
+			
 			// TODO remove:
-			TablesExamples.initStoresTable();
+			// TablesExamples.initStoresTable();
 		}
 	}
 	////////////////
