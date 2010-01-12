@@ -48,7 +48,7 @@ public class MainFuncs {
 	public static void initDBConnection(){
 		// create connection
 		String classPath = System.getProperty("java.class.path").split(";")[0];
-		StaticProgramTables.confMan = new ConfigurationManager(classPath+"\\..\\src\\General\\Store.props");
+		StaticProgramTables.confMan = new ConfigurationManager(classPath+"\\..\\External\\Store.props");
 		
 		DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
 	}
@@ -342,7 +342,7 @@ public class MainFuncs {
 		
 		String projectPath = tokenizer.nextToken();  
 		String str = projectPath.replaceAll(" ","%20");
-		String url = "file:///"+str.replaceAll("\\\\","/")+"/../src/GUI/rubi_animation.gif";
+		String url = "file:///"+str.replaceAll("\\\\","/")+"/../External/rubi_animation.gif";
 		return url;
 	}
 

@@ -319,7 +319,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		shell.setLocation(central_x-400,central_y-300);
 		
 		// set program icon
-		Image progIcon = new Image(display,System.getProperty("java.class.path").split(";")[0]+"\\..\\src\\GUI\\icon.png");
+		Image progIcon = new Image(display,System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\icon.png");
 		shell.setImage(progIcon);
 		
 		Main inst = new Main(shell, SWT.NULL);
