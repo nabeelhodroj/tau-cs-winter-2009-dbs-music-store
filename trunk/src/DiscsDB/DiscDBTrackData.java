@@ -27,6 +27,12 @@ public class DiscDBTrackData {
 		{
 			parseTrackTitle();
 		}
+		
+		this.artist = this.artist.replace("'", "''");
+		this.title = this.title.replace("'", "''");
+		this.name = this.name.replace("'", "''");
+		
+		
 	}
 	
 	
