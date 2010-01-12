@@ -32,14 +32,14 @@ public class Debug {
 	public static void log(String message, DebugOutput logger) {
 		switch (logger) {
 			case STDOUT : {
-				System.out.println(message);
+				if (DEBUG_MODE)
+					System.out.println(message);
 				break;
 			}
 			case STDERR : {
-				if (DEBUG_MODE) {
-					System.err.println(message);
-					break;
-				}
+				if (DEBUG_MODE) 
+					System.err.println(message);	
+				break;
 			}
 			case FILE : {
 				try {
