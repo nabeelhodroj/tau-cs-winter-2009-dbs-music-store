@@ -138,6 +138,10 @@ public class StockFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Stock tab: place order from supplier button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
+						MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
+						errMsg.setText("Cannot place order from supplier");
+						errMsg.setMessage("Quantity must be bigger than 0.");
+						
 						try{
 							// get album id and quantity
 							long selectedAlbumID = Long.parseLong(Main.getStockLabelAlbumIDInput().getText());
@@ -145,9 +149,6 @@ public class StockFuncs {
 							
 							// check that quantity is ok
 							if(quantity < 1){
-								MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
-								errMsg.setText("Cannot place order from supplier");
-								errMsg.setMessage("Quantity must be bigger than 0.");
 								errMsg.open();
 							} else {
 								// check if DB is not busy, else pop a message
@@ -163,7 +164,8 @@ public class StockFuncs {
 								}
 							}
 						} catch (NumberFormatException nfe){
-							Debug.log("*** BUG: order from supplier listener bug",DebugOutput.FILE,DebugOutput.STDERR);
+							// quantity is empty (won't be thrown from album id error)
+							errMsg.open();
 						}
 					}
 				}
