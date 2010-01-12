@@ -76,6 +76,10 @@ public class DiscDBTrackData {
 		}		
 	}
 	
+	public	boolean isValid()
+	{
+		return ((this.name.length()) > 0 && (this.artist.length() > 0));
+	}
 	
 	public	String	toString()
 	{
