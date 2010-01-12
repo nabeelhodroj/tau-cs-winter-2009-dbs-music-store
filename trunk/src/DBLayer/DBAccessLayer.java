@@ -417,7 +417,7 @@ public class DBAccessLayer {
 			if (pstmt != null)
 			{
 				pstmt.close();
-				Debug.log("DBAccessLayer::closeStatementAndConnection - closed statement");
+				//Debug.log("DBAccessLayer::closeStatementAndConnection - closed statement");
 			}
 		}
 		catch (SQLException e)
@@ -427,7 +427,7 @@ public class DBAccessLayer {
 		finally
 		{
 			DBConnectionPool.endConnection(conn);
-			Debug.log("DBAccessLayer::closeStatementAndConnection -  ended connection");
+			//Debug.log("DBAccessLayer::closeStatementAndConnection -  ended connection");
 		}
 	}
 }
