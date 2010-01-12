@@ -191,7 +191,7 @@ public class DBConnectionManage {
 		public void run() {
 			Debug.log("DBConnectionManage.RemoveEmployee thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
-			String employeeRemove = "REMOVE FROM Employees\n" +
+			String employeeRemove = "DELETE FROM Employees\n" +
 					"WHERE employee_id = "+employeeID;
 
 			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
