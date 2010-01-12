@@ -26,6 +26,8 @@ public class DBConnectionManage {
 			
 			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeesQuery);
 			if (queryResults == null){
+				Debug.log("DBConnectionInterface.GetEmployeesTable [ERROR]: Got NULL from query");
+				
 				GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_EMP_FAILURE);
 
@@ -49,6 +51,9 @@ public class DBConnectionManage {
 				}
 				queryResults.close();
 			} catch (SQLException e) {
+				Debug.log("DBConnectionInterface.GetEmployeesTable [ERROR]: Failed extracting employees from ResultSet");
+				Debug.log(e.getStackTrace().toString());
+				
 				GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_EMP_FAILURE);
 				
@@ -84,6 +89,8 @@ public class DBConnectionManage {
 			
 			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeeExistsQuery);
 			if (queryResults == null){
+				Debug.log("DBConnectionInterface.CheckIfEmployeeExists [ERROR]: Got NULL from query");
+				
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				return;
 			}
@@ -94,6 +101,9 @@ public class DBConnectionManage {
 			try {
 				empExists = rs.next();
 			} catch (SQLException e) {
+				Debug.log("DBConnectionInterface.InitDBConnection [ERROR]: Failed extracting employee from ResultSet");
+				Debug.log(e.getStackTrace().toString());
+				
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				queryResults.close();
 				
@@ -154,7 +164,9 @@ public class DBConnectionManage {
 			sqlCommands.add(employeeRemove);
 			sqlCommands.add(employeeInsert);
 			
-			if (DBAccessLayer.executeBatch(sqlCommands) == 0){
+			if (DBAccessLayer.executeBatch(sqlCommands) != 2){
+				Debug.log("DBConnectionInterface.InsertUpdateEmployee [ERROR]: Failed Removing and Updating Employees");
+
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				return;
 			}
@@ -183,6 +195,8 @@ public class DBConnectionManage {
 					"WHERE employee_id = "+employeeID;
 
 			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
+				Debug.log("DBConnectionInterface.InitDBConnection [ERROR]: Failed Removing Employee");
+				
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				return;
 			}
