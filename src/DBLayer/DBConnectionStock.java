@@ -517,7 +517,7 @@ public class DBConnectionStock {
 	}
 	
 	/**
-	 * Corresponds to DBConnectionInterface's "public static void getRequestsTable();"
+	 * Corresponds to DBConnectionInterface's "public static void placeOrderFromSupplier();"
 	 */
 	public class PlaceOrderFromSupplier implements Runnable{
 		private long albumID;
