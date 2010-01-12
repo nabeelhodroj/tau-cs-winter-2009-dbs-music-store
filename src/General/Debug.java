@@ -10,6 +10,7 @@ public class Debug {
 	private static final String LOG_FILE = "DB_Music_Store_Log.txt";
 	private static final String QUERY_FILE = "DB_Music_Store_Query_Log.txt";
 	private static BufferedWriter outputFile = null;
+	private static BufferedWriter queryOutputFile = null;
 	private static final boolean DEBUG_MODE = true; 
 	
 	//Time
@@ -65,12 +66,12 @@ public class Debug {
 	 */
 	public static void query(String message) {
 		try {
-			if (outputFile == null) {
-				outputFile = new BufferedWriter(new FileWriter(QUERY_FILE));
+			if (queryOutputFile == null) {
+				queryOutputFile = new BufferedWriter(new FileWriter(QUERY_FILE));
 			}
 			cal = Calendar.getInstance();
-			outputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
-			outputFile.flush();
+			queryOutputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
+			queryOutputFile.flush();
 		} catch (IOException e) {
 			System.err.println(e);
 		}
