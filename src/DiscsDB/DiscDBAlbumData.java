@@ -44,6 +44,13 @@ public class DiscDBAlbumData {
 		
 		parseDiscTitle();
 		checkVariousArtist();
+		
+		// support "'" in strings - so it won't fuck up the DB commands....		
+		this.title = this.title.replace("'", "''");
+		this.name = this.name.replace("'", "''");
+		this.artist = this.artist.replace("'", "''");
+		this.genere = this.genere.replace("'", "''");
+		
 	}
 	
 	/** Add track to track list, according to its' number (1 based - must be at least 1 !!!)  
@@ -161,14 +168,14 @@ public class DiscDBAlbumData {
 			{
 				this.name += artistAndName[i].trim();				
 			}
-		}		
+		}
 	}
 	
-	public	String	toString()
+	public	String	toString()	
 	{
 		String ret = "Disc Title: " + this.title;
 		if (isVariousArtists())
-		{
+		{		this.artist = this.artist.replace("'", "''");
 			ret += "(various Artists)";
 		}
 		ret += "\n";
