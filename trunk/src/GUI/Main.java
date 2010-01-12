@@ -229,6 +229,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Table manageTableEmployees;
 	private static TableColumn manageTableColumnEmployeeID;
 	private static TableColumn manageTableColumnEmployeePName;
+	private static Button stockButtonPlaceOrderSupplier;
 	private static Button searchButtonGetStockInfo;
 	private static Button searchButtonShowSongs;
 	private static TableColumn manageTableColumnEmployeeLName;
@@ -965,31 +966,36 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								stockLabelStorageLocation = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelStorageLocation.setText("Location:");
-								stockLabelStorageLocation.setBounds(551, 50, 52, 22);
+								stockLabelStorageLocation.setBounds(552, 44, 52, 22);
 							}
 							{
 								stockLabelStorageLocationInput = new Label(stockGroupOrderForm, SWT.BORDER);
-								stockLabelStorageLocationInput.setBounds(605, 49, 161, 22);
+								stockLabelStorageLocationInput.setBounds(605, 43, 161, 22);
 							}
 							{
 								stockButtonPlaceOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonPlaceOrder.setText("Place Order");
-								stockButtonPlaceOrder.setBounds(665, 109, 102, 30);
+								stockButtonPlaceOrder.setBounds(646, 116, 121, 23);
 							}
 							{
 								stockButtonClearOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonClearOrder.setText("Clear Fields");
-								stockButtonClearOrder.setBounds(551, 109, 108, 30);
+								stockButtonClearOrder.setBounds(551, 94, 89, 45);
 							}
 							{
 								stockLabelQuantityToOrder = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelQuantityToOrder.setText("Quantity to order:");
-								stockLabelQuantityToOrder.setBounds(551, 83, 108, 22);
+								stockLabelQuantityToOrder.setBounds(551, 72, 108, 22);
 							}
 							{
 								stockTextBoxQuantityToOrder = new Text(stockGroupOrderForm, SWT.BORDER);
 								stockTextBoxQuantityToOrder.setText("1");
-								stockTextBoxQuantityToOrder.setBounds(665, 82, 100, 22);
+								stockTextBoxQuantityToOrder.setBounds(666, 68, 100, 22);
+							}
+							{
+								stockButtonPlaceOrderSupplier = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
+								stockButtonPlaceOrderSupplier.setText("Order from Supplier");
+								stockButtonPlaceOrderSupplier.setBounds(646, 94, 121, 22);
 							}
 						}
 						{
@@ -2146,5 +2152,14 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static void setSearchButtonGetStockInfo(Button searchButtonGetStockInfo) {
 		Main.searchButtonGetStockInfo = searchButtonGetStockInfo;
+	}
+
+	public static Button getStockButtonPlaceOrderSupplier() {
+		return stockButtonPlaceOrderSupplier;
+	}
+
+	public static void setStockButtonPlaceOrderSupplier(
+			Button stockButtonPlaceOrderSupplier) {
+		Main.stockButtonPlaceOrderSupplier = stockButtonPlaceOrderSupplier;
 	}
 }

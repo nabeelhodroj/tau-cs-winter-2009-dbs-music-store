@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.TableItem;
 import DBLayer.DBConnectionInterface;
 import Queries.OrderAvailableStoresQuery;
 import Queries.QueryErrorException;
-import Tables.EmployeePositionsEnum;
 import Tables.InvalidOrderException;
 import Tables.OrderAvailableStoresTableItem;
 import Tables.OrderStatusEnum;
@@ -42,6 +41,7 @@ public class StockFuncs {
 		// disable (almost) all buttons
 		Main.getStockButtonCheckAvailability().setEnabled(false);
 		Main.getStockButtonPlaceOrder().setEnabled(false);
+		Main.getStockButtonPlaceOrderSupplier().setEnabled(false);
 		Main.getStockButtonRemoveOrder().setEnabled(false);
 		Main.getStockButtonCancelOrder().setEnabled(false);
 		Main.getStockButtonApproveRequest().setEnabled(false);
@@ -127,6 +127,43 @@ public class StockFuncs {
 							
 						}catch(InvalidOrderException ioe){
 							ioe.getMsgBox().open();
+						}
+					}
+				}
+		);
+		
+		// place order from supplier button listener
+		Main.getStockButtonPlaceOrderSupplier().addSelectionListener(
+				new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e){
+						Debug.log("Stock tab: place order from supplier button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						
+						try{
+							// get album id and quantity
+							long selectedAlbumID = Long.parseLong(Main.getStockLabelAlbumIDInput().getText());
+							int quantity = Integer.parseInt(Main.getStockTextBoxQuantityToOrder().getText());
+							
+							// check that quantity is ok
+							if(quantity < 1){
+								MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
+								errMsg.setText("Cannot place order from supplier");
+								errMsg.setMessage("Quantity must be bigger than 0.");
+								errMsg.open();
+							} else {
+								// check if DB is not busy, else pop a message
+								if (MainFuncs.isAllowDBAction()){
+									// flag DB as busy
+									MainFuncs.setAllowDBAction(false);
+									
+									// place order from supplier
+									DBConnectionInterface.placeOrderFromSupplier(selectedAlbumID, quantity);
+									
+								} else {
+									MainFuncs.getMsgDBActionNotAllowed().open();
+								}
+							}
+						} catch (NumberFormatException nfe){
+							Debug.log("*** BUG: order from supplier listener bug",DebugOutput.FILE,DebugOutput.STDERR);
 						}
 					}
 				}
@@ -332,6 +369,7 @@ public class StockFuncs {
 		// disable buttons
 		Main.getStockButtonCheckAvailability().setEnabled(false);
 		Main.getStockButtonPlaceOrder().setEnabled(false);
+		Main.getStockButtonPlaceOrderSupplier().setEnabled(false);
 		// clear fields
 		setOrderFields("", "", "", "");
 		// set quantity to default - 1
@@ -442,6 +480,20 @@ public class StockFuncs {
 		StaticProgramTables.orders.addOrder(order);
 		// update orders table view
 		updateOrdersTableView();
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
+	}
+	
+	// place order from supplier button
+	
+	/**
+	 * invoked by DB to approve that an order from supplier is done
+	 * updates gui (clears order form)
+	 */
+	public static void approveOrderFromSupplierDone(){
+		// clear order form (invoke clear button)
+		clearFieldsButtonInvokation();
+		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);
 	}
