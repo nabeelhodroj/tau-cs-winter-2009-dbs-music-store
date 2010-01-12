@@ -31,7 +31,7 @@ public class DBConnectionSearch {
 					"Albums.length_sec, " +
 					"Albums.price\n";
 			String fromPart = "FROM Albums";
-			String wherePart = "WHERE"; 
+			String wherePart = "WHERE "; 
 				
 			if (albumSearchQuery.isByAlbumID()){
 				wherePart += "Albums.album_id = " + albumSearchQuery.getAlbumID();
