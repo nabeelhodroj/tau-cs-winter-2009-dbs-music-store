@@ -32,7 +32,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.GetOrderAvailableStores thread is started");
-			/*
+			
 			OrderAvailableStoresTable availableStores = new OrderAvailableStoresTable();
 			
 			String queryStr = "SELECT DISTINCT store_id, city, quantity FROM stores, stock " +
@@ -60,9 +60,9 @@ public class DBConnectionStock {
 				
 			Debug.log("DBConnectionStock.GetOrderAvailableStores done with DB, calling GUI's updateOrderAvailableStores");
 			GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
-			*/
+			
 			// TODO remove:
-			TablesExamples.getOrderAvailableStores(query);
+			//TablesExamples.getOrderAvailableStores(query);
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.GetOrdersTable thread is started");
-			/*
+			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
@@ -105,9 +105,9 @@ public class DBConnectionStock {
 			
 		Debug.log("DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-		*/
+		
 		// TODO remove:
-		TablesExamples.getOrdersTable();
+		//TablesExamples.getOrdersTable();
 			
 		}
 	}
@@ -120,7 +120,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.RefreshOrdersTable thread is started");
-			/*
+			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(true);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM stores " +
@@ -150,9 +150,9 @@ public class DBConnectionStock {
 			
 		Debug.log("DBConnectionStock.RefreshOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.refreshOrdersTable(ordersOrRequestsTable);
-		*/	
+		
 			// TODO remove:
-			TablesExamples.refreshOrdersTable();
+			//TablesExamples.refreshOrdersTable();
 			
 		}
 		
@@ -171,7 +171,7 @@ public class DBConnectionStock {
 		
 		public void run() {
 			Debug.log("DBConnectionStock.RemoveOrder thread is started");
-			/*
+			
 			String queryStr = "DELETE FROM orders WHERE order_id="+orderID;
  
 			if (DBAccessLayer.executeUpdate(queryStr) < 1){
@@ -183,9 +183,9 @@ public class DBConnectionStock {
 			Debug.log("DBConnectionStock.RemoveOrder done with DB, calling GUI's removeOrder");
 			GuiUpdatesInterface.removeOrder(orderID);
 			
-			*/
+			
 			// TODO remove:
-			TablesExamples.removeOrder(orderID);
+			//TablesExamples.removeOrder(orderID);
 		}
 	}
 	
@@ -203,7 +203,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.PlaceOrder thread is started");
-			/*
+			
 			OrdersOrRequestsTableItem retOrder = new OrdersOrRequestsTableItem(-1, // Default
 																			   StaticProgramTables.getThisStore().getStoreID(),
 																			   order.getSupplyingStoreID(),
@@ -228,9 +228,9 @@ public class DBConnectionStock {
 			
 			Debug.log("DBConnectionStock.PlaceOrder done with DB, calling GUI's addOrder");
 			GuiUpdatesInterface.addOrder(retOrder);			
-			*/
+			
 			// TODO remove:
-			TablesExamples.placeOrder(order);
+			//TablesExamples.placeOrder(order);
 		}
 	}
 	
@@ -249,7 +249,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.UpdateOrderStatus thread is started");
-			/*
+			
 			DBQueryResults dBQres = DBAccessLayer.executeQuery("SELECT * FROM orders WHERE order_id="+orderID);
 			if (dBQres == null) {
 				Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: DB access failed, NULL pointer returned.");
@@ -369,9 +369,9 @@ public class DBConnectionStock {
 					return;
 				}
 			dBQres.close();
-			*/
+			
 			// TODO remove:
-			TablesExamples.updateOrderStatus(orderID, status);
+			//TablesExamples.updateOrderStatus(orderID, status);
 		}
 	}
 	
@@ -383,7 +383,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.GetRequestTable thread is started");
-			/*
+			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
@@ -415,9 +415,9 @@ public class DBConnectionStock {
 			
 		Debug.log("DBConnectionStock.GetRequestTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.initRequestsTable(ordersOrRequestsTable);
-		*/	
+			
 		// TODO remove:
-		TablesExamples.getRequestsTable();
+		//TablesExamples.getRequestsTable();
 		}
 	}
 	
@@ -429,7 +429,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.RefreshRequestsTable thread is started");
-			/*
+			
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM stores " +
@@ -460,9 +460,9 @@ public class DBConnectionStock {
 		Debug.log("DBConnectionStock.RefreshRequestsTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.refreshRequestsTable(ordersOrRequestsTable);
 		
-		*/
+		
 			// TODO remove:
-			TablesExamples.refreshRequestsTable();
+			//TablesExamples.refreshRequestsTable();
 			
 		}
 		
@@ -483,7 +483,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionInterface.GetAlbumStockInfo thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			/*
+			
 			int storeID = StaticProgramTables.getThisStore().getStoreID();
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT quantity, storage_location FROM stock " +
 															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
@@ -509,9 +509,9 @@ public class DBConnectionStock {
 			Debug.log("DBConnectionSale.GetAlbumStockInfo Done working with DB calling GUI's updateAlbumStockInformation.");
 			GuiUpdatesInterface.updateAlbumStockInformation(albumID, retStorageLocation, retQuantity, caller);
 			dBQRes.close();
-			*/
+			
 			// TODO remove
-			TablesExamples.getAlbumStockInfo(albumID, caller);
+			//TablesExamples.getAlbumStockInfo(albumID, caller);
 		}
 		
 	}
@@ -531,7 +531,7 @@ public class DBConnectionStock {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionStock.GetFromSupplier thread is started");
-			/*
+			
 			int storeID = StaticProgramTables.getThisStore().getStoreID();
 			int nRowsUpdated = DBAccessLayer.executeUpdate("UPDATE stock SET quantity=quantity+"+quantity+"" +
 										" WHERE (album_id="+albumID+") AND (store_id="+storeID+")");
@@ -552,9 +552,9 @@ public class DBConnectionStock {
 			
 			Debug.log("DBConnectionStock.GetFromSupplier done working with DB.");
 			GuiUpdatesInterface.approveOrderFromSupplierDone();			
-		*/	
+			
 		// TODO remove:
-		TablesExamples.placeOrderFromSupplier(albumID, quantity);
+		//TablesExamples.placeOrderFromSupplier(albumID, quantity);
 		}
 	}
 }

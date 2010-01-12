@@ -40,7 +40,7 @@ public class DBConnectionSale {
 		@Override
 		public void run() {
 			Debug.log("DBConnectionSale.MakeSale thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
-			/*
+			
 			List<String> queryList = new ArrayList<String>();
 			
 			// UPDATE TABLE "STOCK"
@@ -79,9 +79,9 @@ public class DBConnectionSale {
 			}
 			Debug.log("DBConnectionSale.MakeSale: Done working with DB, calling GUI's initSaleTable");
 			GuiUpdatesInterface.initSaleTable();
-			*/
+			
 			// TODO remove:
-			TablesExamples.makeSale(sale);
+			//TablesExamples.makeSale(sale);
 			
 		}		
 	}
