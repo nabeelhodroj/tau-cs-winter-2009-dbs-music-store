@@ -261,7 +261,8 @@ public class DBConnectionManage {
 					List<String> insertBatch = new ArrayList<String>();
 					String buffer;
 					
-					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(0);//TODO: set number
+					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);//TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
 						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec)\n";
