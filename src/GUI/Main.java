@@ -306,6 +306,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		display = Display.getDefault();
 		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
+		
+		// set program icon
+		Image progIcon = new Image(display,System.getProperty("java.class.path").split(";")[0]+"\\..\\src\\GUI\\icon.png");
+		shell.setImage(progIcon);
+		
 		Main inst = new Main(shell, SWT.NULL);
 		Point size = inst.getSize();
 		shell.setLayout(new FillLayout());
