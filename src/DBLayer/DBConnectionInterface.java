@@ -215,6 +215,19 @@ public class DBConnectionInterface{
 	}
 	
 	/**
+	 * invoked in Main \ stock-tab \ "Order from Supplier" button
+	 * invokes order (immediate) from supplier
+	 * corresponding method in GUI.GuiUpdatesInterface: ---
+	 * @param albumID
+	 * @param quantity
+	 */
+	public static void placeOrderFromSupplier(long albumID, int quantity){
+		Debug.log("DBConnectionInterface.placeOrderFromSupplier is called",DebugOutput.FILE,DebugOutput.STDOUT);
+		
+		(new Thread(dbcStock.new PlaceOrderFromSupplier(albumID, quantity))).start();
+	}
+	
+	/**
 	 * invoked in Main \ stock-tab \
 	 *  	- "Cancel Order" button by current store -> canceled
 	 * 		- "Deny Request" button by requested store -> denied
