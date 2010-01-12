@@ -78,7 +78,7 @@ public class DBConnectionSearch {
 			
 			fromPart += "\n";
 			wherePart += "\n";
-			/* TODO: return to code
+			
 			DBQueryResults searchQueryResults = DBAccessLayer.executeQuery(selectPart+fromPart+wherePart);
 			if (searchQueryResults == null){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
@@ -107,9 +107,9 @@ public class DBConnectionSearch {
 				return;
 			}
 			
-			GuiUpdatesInterface.updateAlbumResultsTable(resultsTable);*/
+			GuiUpdatesInterface.updateAlbumResultsTable(resultsTable);
 			// until implemented, use example:
-			TablesExamples.getAlbumsSearchResults();
+			// TablesExamples.getAlbumsSearchResults();
 		}		
 	}
 	
@@ -126,7 +126,6 @@ public class DBConnectionSearch {
 			songsQuery += "FROM Songs\n";
 			songsQuery += "WHERE album_id = " + albumID + "\n";
 			
-			/* TODO: return to code
 			DBQueryResults songsQueryResults = DBAccessLayer.executeQuery(songsQuery);
 			if (songsQueryResults == null){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
@@ -149,9 +148,9 @@ public class DBConnectionSearch {
 				return;
 			}
 
-			GuiUpdatesInterface.updateSongsResultsTable(albumID, resultsTable); */
+			GuiUpdatesInterface.updateSongsResultsTable(albumID, resultsTable);
 			// until implemented, use example:
-			TablesExamples.getSongsResults(albumID);
+			// TablesExamples.getSongsResults(albumID);
 		}
 	}
 }
