@@ -54,7 +54,7 @@ public class DBConnectionSearch {
 				}
 				if (albumSearchQuery.hasYear()){
 					wherePart += "Albums.year <= " + albumSearchQuery.getYearTo() + " AND\n";
-					wherePart += "Albums.year >= " + albumSearchQuery.getYearFrom() + "AND \n";
+					wherePart += "Albums.year >= " + albumSearchQuery.getYearFrom() + " AND \n";
 				}
 				if (albumSearchQuery.hasSongNames()){
 					fromPart += ", Songs";
@@ -67,7 +67,7 @@ public class DBConnectionSearch {
 				if (albumSearchQuery.getStockOption() == AlbumSearchStockOptionEnum.STORE){
 					fromPart += ", Stock";
 					wherePart += "Albums.album_id = Stock.album_id AND\n";
-					wherePart += "Stock.store_id = " + StaticProgramTables.thisStore.getStoreID() + "AND\n";
+					wherePart += "Stock.store_id = " + StaticProgramTables.thisStore.getStoreID() + " AND\n";
 				} else if (albumSearchQuery.getStockOption() == AlbumSearchStockOptionEnum.NETWORK){
 					fromPart += ", Stock";
 					wherePart += "Albums.album_id = Stock.album_id AND\n";
