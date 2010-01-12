@@ -289,6 +289,9 @@ public class DBAccessLayer {
 			// execute each statement
 			for (int i = 0; i < sqlList.size(); i++)
 			{
+				// insert query to log
+				Debug.query(sqlList.get(i));
+				
 				int updated = stmt.executeUpdate(sqlList.get(i));
 				// not enough rows updated - cancel transaction
 				if (updated < minUpdatesPerCommand[i])
