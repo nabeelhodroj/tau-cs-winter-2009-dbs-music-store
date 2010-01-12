@@ -262,6 +262,7 @@ public class DBConnectionManage {
 					String buffer;
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
+					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + "albums");
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
