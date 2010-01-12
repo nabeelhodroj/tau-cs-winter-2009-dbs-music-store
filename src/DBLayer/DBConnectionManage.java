@@ -70,7 +70,8 @@ public class DBConnectionManage {
 		
 		@SuppressWarnings("deprecation")
 		private String toGUIDate(Date d){
-			return d.getDate()+"/"+d.getMonth()+"/"+d.getYear();
+			String[] dateArr = d.toString().split("-");
+			return dateArr[2]+"/"+dateArr[1]+"/"+dateArr[0];
 		}
 	}
 	
