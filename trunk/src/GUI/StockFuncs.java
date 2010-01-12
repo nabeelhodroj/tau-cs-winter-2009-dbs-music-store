@@ -533,6 +533,8 @@ public class StockFuncs {
 		
 		// pop error message
 		errorMsg.open();
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 		
 		// update view according to action taken
 		// request was canceled by requester
@@ -912,7 +914,7 @@ public class StockFuncs {
 	public static void notifyOrdersActionFailure(){
 		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
 		errMsg.setText("DB Connection Error");
-		errMsg.setMessage("Could invoke action due to a connection error.\n"+
+		errMsg.setMessage("Could not invoke action due to a connection error.\n"+
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {
@@ -928,7 +930,7 @@ public class StockFuncs {
 	public static void notifyRequestsActionFailure(){
 		MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR | SWT.OK);
 		errMsg.setText("DB Connection Error");
-		errMsg.setMessage("Could invoke action due to a connection error.\n"+
+		errMsg.setMessage("Could not invoke action due to a connection error.\n"+
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {
