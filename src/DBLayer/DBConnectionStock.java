@@ -88,11 +88,11 @@ public class DBConnectionStock {
 			ResultSet rs = dBQRes.getResultSet();
 			try {
 				while (rs.next()){
-					String ordStat = rs.getString(6);
+					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
+								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
+									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
 										OrderStatusEnum.CANCELED)))); 
 				}
 			} catch (SQLException e) {
@@ -134,11 +134,11 @@ public class DBConnectionStock {
 			ResultSet rs = dBQRes.getResultSet();
 			try {
 				while (rs.next()){
-					String ordStat = rs.getString(6);
+					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
+								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
+									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
 										OrderStatusEnum.CANCELED)))); 
 				}
 			} catch (SQLException e) {
@@ -216,7 +216,7 @@ public class DBConnectionStock {
 			String toDateString = "'"+dateArr[0]+"/"+dateArr[1]+"/"+dateArr[2]+"','DD/MM/YYYY'";
 			String query = "INSERT INTO orders(ordering_store_id, supplying_store_id, album_id, quantity, order_date, status) " +
 							"VALUES("+StaticProgramTables.getThisStore().getStoreID()+","+order.getSupplyingStoreID()+","+order.getAlbumID()+"," +
-									""+order.getQuantity()+",TO_DATE("+toDateString+"),'Waiting')";
+									""+order.getQuantity()+",TO_DATE("+toDateString+"),"+OrderStatusEnum.WAITING.getIntRep()+")";
 			
 			int retOrderID = DBAccessLayer.insertAndGetID(query, "order_id");
 			if (retOrderID < 0){
@@ -267,15 +267,15 @@ public class DBConnectionStock {
 						dBQres.close();
 						return;
 					}
-					if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){
+					if (rs.getInt("status") != OrderStatusEnum.WAITING.getIntRep()){
 						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.CANCEL_ORDER,
-								(rs.getString("status").compareToIgnoreCase("Completed") == 0 ? 
+								(rs.getInt("status")== OrderStatusEnum.COMPLETED.getIntRep() ? 
 										OrdersRequestsActionsEnum.APPROVE_REQUEST : OrdersRequestsActionsEnum.DENY_REQUEST), orderID);
 						dBQres.close();
 						return;
 					}
-					if (DBAccessLayer.executeUpdate("UPDATE orders SET status=Canceled WHERE order_id="+orderID) != 1){ 
+					if (DBAccessLayer.executeUpdate("UPDATE orders SET status="+OrderStatusEnum.CANCELED.getIntRep()+" WHERE order_id="+orderID) != 1){ 
 						//Filed to execute UPDATE
 						Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: couldn't change order status to "+status);
 						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
@@ -291,7 +291,7 @@ public class DBConnectionStock {
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
 						dBQres.close();
 						return;
-					} else if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){	
+					} else if (rs.getInt("status") != OrderStatusEnum.WAITING.getIntRep()){	
 						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
 						dBQres.close();
@@ -344,7 +344,7 @@ public class DBConnectionStock {
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
 						dBQres.close();
 						return;
-					} else if (rs.getString("status").compareToIgnoreCase("Waiting") != 0){		
+					} else if (rs.getInt("status") != OrderStatusEnum.WAITING.getIntRep()){		
 						Debug.log("DBConnectionStock.UpdateOrderStatus couldn't change order status to "+status+" . Unexpected current status.");
 						GuiUpdatesInterface.denyOrdersOrRequestsTableAction(OrdersRequestsActionsEnum.APPROVE_REQUEST, OrdersRequestsActionsEnum.CANCEL_ORDER, orderID);
 						dBQres.close();
@@ -398,11 +398,11 @@ public class DBConnectionStock {
 			ResultSet rs = dBQRes.getResultSet();
 			try {
 				while (rs.next()){
-					String ordStat = rs.getString(6);
+					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
+								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
+									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
 										OrderStatusEnum.CANCELED)))); 
 				}
 			} catch (SQLException e) {
@@ -443,11 +443,11 @@ public class DBConnectionStock {
 			ResultSet rs = dBQRes.getResultSet();
 			try {
 				while (rs.next()){
-					String ordStat = rs.getString(6);
+					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat.compareToIgnoreCase("Waiting") == 0 ? OrderStatusEnum.WAITING : 
-								(ordStat.compareToIgnoreCase("Completed") == 0 ? OrderStatusEnum.COMPLETED : 
-									(ordStat.compareToIgnoreCase("Denied") == 0 ? OrderStatusEnum.DENIED : 
+							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
+								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
+									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
 										OrderStatusEnum.CANCELED)))); 
 				}
 			} catch (SQLException e) {

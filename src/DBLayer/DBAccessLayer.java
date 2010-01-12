@@ -305,7 +305,6 @@ public class DBAccessLayer {
 					ret++;
 				}
 			}				
-			conn.setAutoCommit(true);
 			Debug.log("DBAccessLayer::executeCommandsAtomic: SUCCESS - transaction complete " + ret + " commands comitted");				
 			return ret;
 		}
@@ -325,6 +324,18 @@ public class DBAccessLayer {
 		}
 		finally
 		{
+			try
+			{
+				if (!conn.getAutoCommit())
+				{		
+					conn.setAutoCommit(true);
+				}
+			}
+			catch	 (SQLException ex)
+			{
+				Debug.log("DBAccessLayer::executeCommandsAtomic: ERROR - exception durring commit: " + ex.toString());					
+			}
+	
 			closeStatementAndConnection(conn, stmt);
 		}	
 	}
@@ -333,7 +344,8 @@ public class DBAccessLayer {
 	/** 
 	 * 
 	 * @param sqlList	- list of commands
-	 * @return			- 1 if transaction completed, 0 otherwise
+	 * @return			- number of commands executed before transaction failed, 
+	 * 						or sqlList.size() if transaction completed
 	 */	
 	public	static	int	executeCommandsAtomic(List<String> sqlList)
 	{
@@ -342,10 +354,10 @@ public class DBAccessLayer {
 		if (executed != sqlList.size())
 		{
 			Debug.log("DBAccessLayer::executeCommandsAtomic: executed only " + executed + " out of " + sqlList.size() + " commands");
-			return 0;
+			//return 0;
 		}
 		Debug.log("DBAccessLayer::executeCommandsAtomic: SUCCEESS - all " + executed + " commands");
-		return 1;		
+		return executed;		
 	}
 
 	
