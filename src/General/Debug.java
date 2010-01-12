@@ -8,6 +8,7 @@ import java.util.*;
 
 public class Debug {
 	private static final String LOG_FILE = "DB_Music_Store_Log.txt";
+	private static final String QUERY_FILE = "DB_Music_Store_Query_Log.txt";
 	private static BufferedWriter outputFile = null;
 	private static final boolean DEBUG_MODE = true; 
 	
@@ -53,6 +54,25 @@ public class Debug {
 				}
 				break;
 			}
+		}
+	}
+	
+	/**
+	 * A method for logging queries.
+	 * The usage is: Debug.log("This message goes to file..", DebugOutput.FILE);
+	 * @param message: The massage explaining the current stage/problem.
+	 * @param logger: The destination to write the message (STDOUT, STDERR, FILE) 
+	 */
+	public static void query(String message) {
+		try {
+			if (outputFile == null) {
+				outputFile = new BufferedWriter(new FileWriter(QUERY_FILE));
+			}
+			cal = Calendar.getInstance();
+			outputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
+			outputFile.flush();
+		} catch (IOException e) {
+			System.err.println(e);
 		}
 	}
 	

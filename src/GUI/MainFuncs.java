@@ -126,9 +126,13 @@ public class MainFuncs {
 						Debug.log("Initial Dialog: Start button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
 						// get selected store id
-						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex();
+						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex()+1;
 						// set current store to selected store
-						StaticProgramTables.setThisStore(StaticProgramTables.stores.getStore(storeID));
+						StoresTableItem thisStore = StaticProgramTables.stores.getStore(storeID);
+						StaticProgramTables.setThisStore(thisStore);
+						
+						// TODO change fetch of store id
+						
 						// update the stores details representation in main window is done in Main
 						
 						// update orders, requests and employees table
