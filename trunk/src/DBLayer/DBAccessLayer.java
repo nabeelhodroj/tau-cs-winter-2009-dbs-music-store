@@ -305,7 +305,7 @@ public class DBAccessLayer {
 					ret++;
 				}
 			}				
-			Debug.log("DBAccessLayer::executeCommandsAtomic: SUCCESS - transaction complete " + ret + " commands comitted");				
+			Debug.log("DBAccessLayer::executeCommandsAtomic: SUCCESS - transaction complete " + ret + " commands commited");				
 			return ret;
 		}
 		catch	 (SQLException e)
@@ -328,6 +328,7 @@ public class DBAccessLayer {
 			{
 				if (!conn.getAutoCommit())
 				{		
+					conn.commit();
 					conn.setAutoCommit(true);
 				}
 			}
