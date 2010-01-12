@@ -514,5 +514,47 @@ public class DBConnectionStock {
 			TablesExamples.getAlbumStockInfo(albumID, caller);
 		}
 		
-	}	
+	}
+	
+	/**
+	 * Corresponds to DBConnectionInterface's "public static void getRequestsTable();"
+	 */
+	public class PlaceOrderFromSupplier implements Runnable{
+		private long albumID;
+		private int quantity;
+		
+		public PlaceOrderFromSupplier(long albumID, int quantity){
+			this.albumID = albumID;
+			this.quantity = quantity;
+		}
+
+		@Override
+		public void run() {
+			Debug.log("DBConnectionStock.GetFromSupplier thread is started");
+			/*
+			int storeID = StaticProgramTables.getThisStore().getStoreID();
+			int nRowsUpdated = DBAccessLayer.executeUpdate("UPDATE stock SET quantity=quantity+"+quantity+"" +
+										" WHERE (album_id="+albumID+") AND (store_id="+storeID+")");
+			if (nRowsUpdated < 0){
+				Debug.log("DBConnectionStock.GetFromSupplier [ERROR]: DB access failure. Failed to update stock table.");
+				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
+				return;
+			}
+			if (nRowsUpdated == 0){ // This is a new album in the store (previous quantity == 0)
+				nRowsUpdated = DBAccessLayer.executeUpdate("INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
+						"VALUES("+albumID+","+storeID+","+quantity+","+((new Random()).nextLong() % 1000)+")");
+				if (nRowsUpdated < 1){
+					Debug.log("DBConnectionStock.GetFromSupplier [ERROR]: DB access failure. Failed to insert values to stock.");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
+					return;
+				}
+			}
+			
+			Debug.log("DBConnectionStock.GetFromSupplier done working with DB.");
+			GuiUpdatesInterface.approveOrderFromSupplierDone();			
+		*/	
+		// TODO remove:
+		TablesExamples.placeOrderFromSupplier(albumID, quantity);
+		}
+	}
 }

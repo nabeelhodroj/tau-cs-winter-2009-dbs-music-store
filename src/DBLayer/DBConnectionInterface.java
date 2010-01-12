@@ -224,8 +224,7 @@ public class DBConnectionInterface{
 	public static void placeOrderFromSupplier(long albumID, int quantity){
 		Debug.log("DBConnectionInterface.placeOrderFromSupplier is called",DebugOutput.FILE,DebugOutput.STDOUT);
 		
-		//(new Thread(dbcStock.new PlaceOrderFromSupplier(albumID, quantity))).start();
-		TablesExamples.placeOrderFromSupplier(albumID, quantity);
+		(new Thread(dbcStock.new PlaceOrderFromSupplier(albumID, quantity))).start();
 	}
 	
 	/**
