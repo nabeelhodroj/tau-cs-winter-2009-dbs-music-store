@@ -31,6 +31,9 @@ public class DBAccessLayer {
 	 */
 	public	static DBQueryResults	executeQuery(String sql)
 	{
+		// insert query to log
+		Debug.query(sql);
+		
 		// get connection to DB, and verify it
 		Connection conn = DBConnectionPool.getConnection();		
 		if (conn == null)
@@ -69,6 +72,9 @@ public class DBAccessLayer {
 	 */
 	public	static int	executeUpdate(String sql)
 	{
+		// insert query to log
+		Debug.query(sql);
+		
 		// get connection to DB, and verify it
 		Connection conn = DBConnectionPool.getConnection();
 		if (conn == null)
@@ -154,6 +160,9 @@ public class DBAccessLayer {
 	 **/
 	public static int	executePatternBatch(String sqlPattern, List<List<String>> argumentLists)
 	{
+		// insert query to log
+		Debug.query(sqlPattern);
+		
 		// get connection to DB, and verify it
 		Connection conn = DBConnectionPool.getConnection();
 		if (conn == null)
@@ -206,6 +215,9 @@ public class DBAccessLayer {
 	public static int	executePatternBatch(String sqlPattern, List<String> firstArgumentList,
 														List<String> secondArgumentList)
 	{
+		// insert query to log
+		Debug.query(sqlPattern);
+		
 		List<List<String>> statementsArgs = new LinkedList<List<String>>();			
 		for (int i = 0; i < firstArgumentList.size(); i++)
 		{
