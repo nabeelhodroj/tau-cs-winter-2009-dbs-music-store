@@ -166,16 +166,7 @@ public class ManageFuncs {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Management tab: Remove employee button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
-						// check if DB is not busy, else pop a message
-						if (MainFuncs.isAllowDBAction()){
-							// flag DB as busy
-							MainFuncs.setAllowDBAction(false);
-							
-							removeEmployeeInvokation();
-							
-						} else {
-							MainFuncs.getMsgDBActionNotAllowed().open();
-						}
+						removeEmployeeInvokation();
 					}
 				}
 		);
@@ -544,7 +535,16 @@ public class ManageFuncs {
 		if (areYouSureMsg.open() == SWT.YES){
 			try{
 				int employeeID = Integer.parseInt(Main.getManageTextBoxEmployeeIDInput().getText());
-				DBConnectionInterface.removeEmployee(employeeID);
+				// check if DB is not busy, else pop a message
+				if (MainFuncs.isAllowDBAction()){
+					// flag DB as busy
+					MainFuncs.setAllowDBAction(false);
+					
+					DBConnectionInterface.removeEmployee(employeeID);
+					
+				} else {
+					MainFuncs.getMsgDBActionNotAllowed().open();
+				}
 			}catch(NumberFormatException nfe){
 				Debug.log("*** BUG: ManageFuncs.removeEmployeeInvokation bug", DebugOutput.FILE, DebugOutput.STDOUT);
 			}

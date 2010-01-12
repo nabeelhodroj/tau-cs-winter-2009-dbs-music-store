@@ -1213,6 +1213,15 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageTextBoxEmployeeIDInput.setBounds(12, 101, 129, 22);
 							}
 							{
+								manageLabelEmployeeBirth = new Label(manageGroupEditEmployee, SWT.NONE);
+								manageLabelEmployeeBirth.setText("Date of birth:");
+								manageLabelEmployeeBirth.setBounds(177, 79, 78, 22);
+							}
+							{
+								manageTextBoxEmployeeBirthInput = new Text(manageGroupEditEmployee, SWT.BORDER);
+								manageTextBoxEmployeeBirthInput.setBounds(177, 101, 129, 22);
+							}
+							{
 								manageLabelEmployeeFName = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeFName.setText("First name:");
 								manageLabelEmployeeFName.setBounds(12, 131, 62, 22);
@@ -1234,15 +1243,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								manageLabelEmployeeEmploymentDate = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeEmploymentDate.setText("Date of employment:");
 								manageLabelEmployeeEmploymentDate.setBounds(12, 24, 112, 22);
-							}
-							{
-								manageLabelEmployeeBirth = new Label(manageGroupEditEmployee, SWT.NONE);
-								manageLabelEmployeeBirth.setText("Date of birth:");
-								manageLabelEmployeeBirth.setBounds(177, 79, 78, 22);
-							}
-							{
-								manageTextBoxEmployeeBirthInput = new Text(manageGroupEditEmployee, SWT.BORDER);
-								manageTextBoxEmployeeBirthInput.setBounds(177, 101, 129, 22);
 							}
 							{
 								manageLabelEmployeeAddress = new Label(manageGroupEditEmployee, SWT.NONE);
