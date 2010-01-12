@@ -23,7 +23,7 @@ public class DBConnectionManage {
 				"SELECT *\n"+
 				"FROM Employees\n"+
 				"WHERE store_id = " + StaticProgramTables.thisStore.getStoreID();
-			/* TODO: return to code
+			
 			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeesQuery);
 			if (queryResults == null){
 				GuiUpdatesInterface.initEmployeesTable(new EmployeesTable(StaticProgramTables.thisStore.getStoreID()));
@@ -56,9 +56,10 @@ public class DBConnectionManage {
 				return;
 			}
 			
-			GuiUpdatesInterface.initEmployeesTable(employees); */
+			GuiUpdatesInterface.initEmployeesTable(employees);
+			
 			// until implemented, use example
-			TablesExamples.getEmployeesTable();
+			//TablesExamples.getEmployeesTable();
 		}
 	}
 	
@@ -81,7 +82,6 @@ public class DBConnectionManage {
 				"FROM Employees\n"+
 				"WHERE employee_id = " + employeeID;
 			
-			/* TODO: return to code
 			DBQueryResults queryResults = DBAccessLayer.executeQuery(employeeExistsQuery);
 			if (queryResults == null){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
@@ -101,9 +101,9 @@ public class DBConnectionManage {
 			}
 
 			
-			GuiUpdatesInterface.tryInsertNewEmployee(employeeID,empExists);*/
+			GuiUpdatesInterface.tryInsertNewEmployee(employeeID,empExists);
 			// until implemented, use example:
-			TablesExamples.checkIfEmployeeExists(employeeID);
+			// TablesExamples.checkIfEmployeeExists(employeeID);
 		}
 	}
 	
@@ -150,7 +150,6 @@ public class DBConnectionManage {
 				employee.getStoreID()+","+
 				employee.getPosition().getIntRep()+")";
 			
-			/* TODO: return to code
 			List<String> sqlCommands = new ArrayList<String>();
 			sqlCommands.add(employeeRemove);
 			sqlCommands.add(employeeInsert);
@@ -160,9 +159,9 @@ public class DBConnectionManage {
 				return;
 			}
 
-			GuiUpdatesInterface.insertUpdateEmployee(employee);*/
+			GuiUpdatesInterface.insertUpdateEmployee(employee);
 			// until implemented, use example:
-			TablesExamples.insertUpdateEmployee(employee);
+			// TablesExamples.insertUpdateEmployee(employee);
 		}
 	}
 	
@@ -182,15 +181,15 @@ public class DBConnectionManage {
 			
 			String employeeRemove = "REMOVE FROM Employees\n" +
 					"WHERE employee_id = "+employeeID;
-			/* TODO: return to code
+
 			if (DBAccessLayer.executeUpdate(employeeRemove) == -1){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
 				return;
 			}
 			
-			GuiUpdatesInterface.removeEmployee(employeeID); */
+			GuiUpdatesInterface.removeEmployee(employeeID);
 			// until implemented, use example:
-			TablesExamples.removeEmployee(employeeID);
+			// TablesExamples.removeEmployee(employeeID);
 		}		
 	}
 
@@ -296,7 +295,7 @@ public class DBConnectionManage {
 			Debug.log("DBConnectionManage.UpdateDatabase thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
 			int lastAlbumID = 0;
-			/* Return to code
+
 			DBQueryResults maxIDQuery = DBAccessLayer.executeQuery("SELECT MAX(album_id) AS last_album_id\n" +
 					"FROM Albums");
 			if (maxIDQuery == null){
@@ -325,9 +324,9 @@ public class DBConnectionManage {
 						"WHERE album_id > " + lastAlbumID);
 				DBAccessLayer.executeUpdate("DELETE FROM Songs\n" +
 						"WHERE album_id > " + lastAlbumID);
-			}*/
+			}
 			// until implemented, use example:
-			TablesExamples.updateDataBase(filename);
+			// TablesExamples.updateDataBase(filename);
 		}
 	}
 }
