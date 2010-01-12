@@ -59,8 +59,7 @@ public class DBConnectionSale {
 			String [] dateArr = sale.getDate().split("/");
 			String toDateString = "'"+timeArr[0]+":"+timeArr[1]+" "+dateArr[0]+"/"+dateArr[1]+"/"+dateArr[2]+"','HH24:MM DD/MM/YYYY'";
 			String insertQuery = "INSERT INTO sales(store_id, salesman_id, sale_time)" +
-								" VALUES('"+StaticProgramTables.getThisStore().getStoreID()+"','"+sale.getSalesman().getEmployeeID()+"', TO_DATE("+toDateString+"))";
-			Debug.log("DBConnectionSale.MakeSale [DEBUG NOTE]: Insert: "+insertQuery);
+								" VALUES("+StaticProgramTables.getThisStore().getStoreID()+","+sale.getSalesman().getEmployeeID()+", TO_DATE("+toDateString+"))";
 			queryList.add(insertQuery);
 						
 			
