@@ -150,13 +150,13 @@ public class DBConnectionManage {
 				
 				"VALUES(" +
 				employee.getEmployeeID()+"," +
-				employee.getFirstName()+"," +
-				employee.getLastName()+"," +
+				"'"+employee.getFirstName()+"'," +
+				"'"+employee.getLastName()+"'," +
 				"TO_DATE('"+employee.getEmploymentDate()+"','DD/MM/YYYY')"+","+
 				"TO_DATE('"+employee.getBirthDate()+"','DD/MM/YYYY')"+","+
-				employee.getAddress()+","+
-				employee.getPhone()+","+
-				employee.getCellPhone()+","+
+				"'"+employee.getAddress()+"',"+
+				"'"+employee.getPhone()+"',"+
+				"'"+employee.getCellPhone()+"',"+
 				employee.getStoreID()+","+
 				employee.getPosition().getIntRep()+")";
 			
@@ -260,10 +260,10 @@ public class DBConnectionManage {
 					for (DiscDBAlbumData albumData : parsedAlbums) {
 						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec)\n";
 						buffer += "VALUES(" +
-								albumData.getName() + "," +
-								albumData.getArtist() + "," +
+								"'"+albumData.getName() + "'," +
+								"'"+albumData.getArtist() + "'," +
 								albumData.getYear()+ "," +
-								albumData.getGenere() + "," +
+								"'"+albumData.getGenere() + "'," +
 								albumData.getLengthSec()+ ")\n";
 						insertBatch.add(buffer);
 						
@@ -272,8 +272,8 @@ public class DBConnectionManage {
 							buffer += "VALUES(" +
 									"ALBUMS_SEQ.CURRVAL, " +
 									trackData.getTrackNum() + ", " +
-									trackData.getName() + ", " +
-									trackData.getArtist() + "," +
+									"'"+trackData.getName() + "', " +
+									"'"+trackData.getArtist() + "'," +
 									trackData.getLengthSdc() + ")";
 							insertBatch.add(buffer);
 						}
