@@ -126,22 +126,26 @@ public class MainFuncs {
 						Debug.log("Initial Dialog: Start button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
 						
 						// get selected store id
-						int storeID = InitialDialog.getInitDialogCombo().getSelectionIndex()+1;
-						// set current store to selected store
-						StoresTableItem thisStore = StaticProgramTables.stores.getStore(storeID);
-						StaticProgramTables.setThisStore(thisStore);
-						
-						// TODO change fetch of store id
-						
-						// update the stores details representation in main window is done in Main
-						
-						// update orders, requests and employees table
-						DBConnectionInterface.getOrdersTable();
-						DBConnectionInterface.getRequestsTable();
-						DBConnectionInterface.getEmployeesTable(); // will initialize also employees combo box
-						
-						// close init dialog
-						InitialDialog.closeInitDialog();
+						String storeIDStr = InitialDialog.getInitDialogCombo().getText().split(":")[0];
+						try{
+							int storeID = Integer.parseInt(storeIDStr);
+							// set current store to selected store
+							StoresTableItem thisStore = StaticProgramTables.stores.getStore(storeID);
+							StaticProgramTables.setThisStore(thisStore);
+							
+							// update the stores details representation in main window is done in Main
+							
+							// update orders, requests and employees table
+							DBConnectionInterface.getOrdersTable();
+							DBConnectionInterface.getRequestsTable();
+							DBConnectionInterface.getEmployeesTable(); // will initialize also employees combo box
+							
+							// close init dialog
+							InitialDialog.closeInitDialog();
+							
+						} catch (NumberFormatException nfe){
+							Debug.log("*** DEBUG: MainFuncs initial dialog \\ start listener", DebugOutput.FILE, DebugOutput.STDERR);
+						}
 					}
 				}
 		);
