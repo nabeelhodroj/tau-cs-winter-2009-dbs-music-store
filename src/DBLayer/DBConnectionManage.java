@@ -2,6 +2,7 @@ package DBLayer;
 
 import java.io.IOException;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import Tables.*;
@@ -42,8 +43,8 @@ public class DBConnectionManage {
 					employees.addEmployee(rs.getInt("Employee_id"), 
 							rs.getString("First_name"),
 							rs.getString("Last_name"),
-							rs.getDate("Hire_date").toString(),
-							rs.getDate("Birth_date").toString(),
+							toGUIDate(rs.getDate("Hire_date")),
+							toGUIDate(rs.getDate("Birth_date")),
 							rs.getString("Address"),
 							rs.getString("Phone_Number"), 
 							rs.getString("Cell_phone_number"), 
@@ -65,6 +66,11 @@ public class DBConnectionManage {
 			
 			// until implemented, use example
 			//TablesExamples.getEmployeesTable();
+		}
+		
+		@SuppressWarnings("deprecation")
+		private String toGUIDate(Date d){
+			return d.getDate()+"/"+d.getMonth()+"/"+d.getYear();
 		}
 	}
 	
