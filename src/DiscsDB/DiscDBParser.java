@@ -123,8 +123,9 @@ public class DiscDBParser {
 					 {
 						if (par.isCddbFormat()) 
 						{
+							boolean parsed = par.run();
 							// Run the parser for the entry
-							if (par.run()) 
+							if (parsed && par.getDtitle().length() > 0) 
 							{
 								// Reset variables
 								String sGenere = "unknown";
@@ -187,7 +188,18 @@ public class DiscDBParser {
 								{
 						//			System.out.println("Disc was not ASCII");
 								}
-							}								
+							}
+							else
+							{
+								if (parsed)
+								{
+									Debug.log("DiscDBParser::parseTarFile: ERROR - Cannot parse file " + (index+1) + /*file +*/ " title: " + par.getDtitle());
+								}
+								else
+								{
+									Debug.log("DiscDBParser::parseTarFile: ERROR - Cannot parse file " + (index+1) + /*file +*/ " parser failed");
+								}
+							}
 						}
 						else 
 						{
