@@ -271,6 +271,21 @@ public class GuiUpdatesInterface {
 	}
 	
 	/**
+	 * alerts gui that order from supplier is made
+	 */
+	public static void approveOrderFromSupplierDone(){
+		Debug.log("GuiUpdatesInterface: approveOrderFromSupplierDone is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
+		
+		Main.getMainDisplay().asyncExec(new Runnable() {
+			public void run() {
+				
+				StockFuncs.approveOrderFromSupplierDone();
+				
+				}
+			});
+	}
+	
+	/**
 	 * update order in orders table to given status. order in orders table will always appear:
 	 * - waiting
 	 * - denied
