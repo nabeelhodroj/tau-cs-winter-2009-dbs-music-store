@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.swing.*;
 
 import DBLayer.DBConnectionInterface;
+import DBLayer.DBConnectionPool;
 import Tables.TablesExamples;
 import General.Debug;
 import General.Debug.DebugOutput;
@@ -294,6 +295,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		
 		// Start GUI
 		showGUI();
+		
+		// close all DB connections and exit
+		DBConnectionPool.closeAllConnections();		
 		System.exit(-1);
 	}
 	
