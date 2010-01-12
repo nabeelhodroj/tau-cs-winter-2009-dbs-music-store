@@ -171,6 +171,12 @@ public class DiscDBAlbumData {
 		}
 	}
 	
+	
+	public	boolean isValid()
+	{
+		return ((this.name.length()) > 0 && (this.artist.length() > 0));
+	}	
+	
 	public	String	toString()	
 	{
 		String ret = "Disc Title: " + this.title;

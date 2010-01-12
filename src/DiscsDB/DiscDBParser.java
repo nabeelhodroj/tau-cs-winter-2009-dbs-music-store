@@ -123,9 +123,8 @@ public class DiscDBParser {
 					 {
 						if (par.isCddbFormat()) 
 						{
-							boolean parsed = par.run();
 							// Run the parser for the entry
-							if (parsed && par.getDtitle().length() > 0) 
+							if (par.run()) 
 							{
 								// Reset variables
 								String sGenere = "unknown";
@@ -141,7 +140,8 @@ public class DiscDBParser {
 								DiscDBAlbumData discData = new DiscDBAlbumData(par.getDtitle(), sGenere, par.getDyear(), par.getDiscLength(), price); 								
 								Pattern _notAsciiPattern = Pattern.compile("[^\\p{ASCII}]"); 
 								boolean ascii = !(_notAsciiPattern.matcher(par.getDtitle()).find());
-								for (int i = 0; i < par.getTrackOffsets().size() && ascii ; i++)
+								boolean valid = discData.isValid();	// make sure disc name and artist is in valid format
+								for (int i = 0; i < par.getTrackOffsets().size() && (ascii && valid) ; i++)
 								{
 									/* Get track length - in seconds */
 									int trackLnegthSec;
@@ -162,12 +162,13 @@ public class DiscDBParser {
 									}
 									DiscDBTrackData trackData = new DiscDBTrackData(i+1, par.getTtitle()[i], albumArtist, trackLnegthSec);
 									discData.addTrackToList(trackData);
-									ascii = !(_notAsciiPattern.matcher(par.getTtitle()[i]).find());								
+									ascii = !(_notAsciiPattern.matcher(par.getTtitle()[i]).find());
+									valid = trackData.isValid();
 								}
 								
 								/* Disc and tracks titles are all in ASCII format */
 					//			System.out.println(discData.toString());
-								if (ascii)
+								if (ascii && valid)
 								{
 									legalsDiscs++;
 									// Add genere to list
@@ -188,18 +189,7 @@ public class DiscDBParser {
 								{
 						//			System.out.println("Disc was not ASCII");
 								}
-							}
-							else
-							{
-								if (parsed)
-								{
-									Debug.log("DiscDBParser::parseTarFile: ERROR - Cannot parse file " + (index+1) + /*file +*/ " title: " + par.getDtitle());
-								}
-								else
-								{
-									Debug.log("DiscDBParser::parseTarFile: ERROR - Cannot parse file " + (index+1) + /*file +*/ " parser failed");
-								}
-							}
+							}								
 						}
 						else 
 						{
