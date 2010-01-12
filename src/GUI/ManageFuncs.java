@@ -417,6 +417,10 @@ public class ManageFuncs {
 			EmployeeDetailsValidityException ndve = new EmployeeDetailsValidityException(
 					"Employee already employed by the network");
 			ndve.getMsgBox().open();
+			
+			// flag DB as free
+			MainFuncs.setAllowDBAction(true);
+			
 		}else{ // insert employee
 			// by now the employee details are correct
 			// insert employee to DB
