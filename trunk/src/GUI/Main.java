@@ -24,16 +24,6 @@ import org.eclipse.swt.awt.SWT_AWT;
 /**
  * created by Ariel
  * 
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class Main extends org.eclipse.swt.widgets.Composite {
 
@@ -65,6 +55,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	private static int central_x;
 	private static int central_y;
+	
+	private static String externalPath = System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\";
 	
 	// Quick tips
 	private static Group mainGroupWelcome;
@@ -323,7 +315,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		shell.setLocation(central_x-400,central_y-300);
 		
 		// set program icon
-		Image progIcon = new Image(display,System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\icon.png");
+		Image progIcon = new Image(display,externalPath+"\\icon.png");
 		shell.setImage(progIcon);
 		
 		Main inst = new Main(shell, SWT.NULL);
@@ -2197,5 +2189,13 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 
 	public static void setCentral_y(int centralY) {
 		central_y = centralY;
+	}
+
+	public static String getExternalPath() {
+		return externalPath;
+	}
+
+	public static void setExternalPath(String externalPath) {
+		Main.externalPath = externalPath;
 	}
 }
