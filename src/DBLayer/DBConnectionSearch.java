@@ -54,7 +54,7 @@ public class DBConnectionSearch {
 				}
 				if (albumSearchQuery.hasYear()){
 					wherePart += "Albums.year <= " + albumSearchQuery.getYearTo() + " AND\n";
-					wherePart += "Albums.year >= " + albumSearchQuery.getYearFrom() + " AND \n";
+					wherePart += "Albums.year >= " + albumSearchQuery.getYearFrom() + " AND\n";
 				}
 				if (albumSearchQuery.hasSongNames()){
 					fromPart += ", Songs";
