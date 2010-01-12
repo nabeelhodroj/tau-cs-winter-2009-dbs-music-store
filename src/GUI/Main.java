@@ -1,7 +1,9 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Panel;
+import java.awt.Toolkit;
 import java.net.URL;
 
 import javax.swing.*;
@@ -59,6 +61,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Label mainLabelStoreDetailsStoreAddress;
 	private static Label mainLabelStoreDetailsStorePhone;
 	private static Label mainLabelStoreDetailsStoreManager;
+	
+	private static int central_x;
+	private static int central_y;
 	
 	// Quick tips
 	private static Group mainGroupWelcome;
@@ -306,6 +311,12 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		display = Display.getDefault();
 		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
+		
+		// set shell position
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		central_x = (int)dim.getWidth()/2;
+		central_y = (int)dim.getHeight()/2;
+		shell.setLocation(central_x-400,central_y-300);
 		
 		// set program icon
 		Image progIcon = new Image(display,System.getProperty("java.class.path").split(";")[0]+"\\..\\src\\GUI\\icon.png");
@@ -2166,5 +2177,21 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	public static void setStockButtonPlaceOrderSupplier(
 			Button stockButtonPlaceOrderSupplier) {
 		Main.stockButtonPlaceOrderSupplier = stockButtonPlaceOrderSupplier;
+	}
+
+	public static int getCentral_x() {
+		return central_x;
+	}
+
+	public static void setCentral_x(int centralX) {
+		central_x = centralX;
+	}
+
+	public static int getCentral_y() {
+		return central_y;
+	}
+
+	public static void setCentral_y(int centralY) {
+		central_y = centralY;
 	}
 }
