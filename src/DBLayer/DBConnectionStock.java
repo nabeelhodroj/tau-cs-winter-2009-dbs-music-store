@@ -90,10 +90,7 @@ public class DBConnectionStock {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
-								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
-									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
-										OrderStatusEnum.CANCELED)))); 
+							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.GetOrdersTable [ERROR] encountered an database access error:");
@@ -136,10 +133,7 @@ public class DBConnectionStock {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
-								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
-									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
-										OrderStatusEnum.CANCELED)))); 
+							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.RefreshOrdersTable [ERROR] encountered an database access error:");
@@ -400,10 +394,7 @@ public class DBConnectionStock {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
-								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
-									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
-										OrderStatusEnum.CANCELED)))); 
+							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.GetRequestTable [ERROR] encountered an database access error:");
@@ -445,10 +436,7 @@ public class DBConnectionStock {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
 					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
-							(ordStat == OrderStatusEnum.WAITING.getIntRep() ? OrderStatusEnum.WAITING : 
-								(ordStat == OrderStatusEnum.COMPLETED.getIntRep() ? OrderStatusEnum.COMPLETED : 
-									(ordStat == OrderStatusEnum.DENIED.getIntRep() ? OrderStatusEnum.DENIED : 
-										OrderStatusEnum.CANCELED)))); 
+							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.RefreshRequestsTable [ERROR] encountered an database access error:");
