@@ -262,10 +262,10 @@ public class DBConnectionManage {
 					String buffer;
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
-					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);//TODO: set number
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
-						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec)\n";
+						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec) ";
 						buffer += "VALUES(" +
 								"'"+albumData.getName() + "'," +
 								"'"+albumData.getArtist() + "'," +
@@ -275,7 +275,7 @@ public class DBConnectionManage {
 						insertBatch.add(buffer);
 						
 						for (DiscDBTrackData trackData : albumData.getTrackList()) {
-							buffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_name, length_sec)";
+							buffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_name, length_sec) ";
 							buffer += "VALUES(" +
 									"ALBUMS_SEQ.CURRVAL, " +
 									trackData.getTrackNum() + ", " +
