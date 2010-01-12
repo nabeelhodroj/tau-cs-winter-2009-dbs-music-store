@@ -488,7 +488,7 @@ public class DBConnectionStock {
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery("SELECT quantity, storage_location FROM stock " +
 															   "WHERE (album_id="+albumID+" ) AND (store_id="+storeID+")");
 			if (dBQRes == null){
-				Debug.log("DBConnectionSale.GetAlbumStockInfo [ERROR]: Failed to access DataBase.");
+				Debug.log("DBConnectionSale.GetAlbumStockInfo [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.GET_STOCK_INFO_FAILURE);
 				return;
 			}
