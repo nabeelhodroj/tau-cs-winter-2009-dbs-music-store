@@ -10,6 +10,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.*;
 
 import DBLayer.DBConnectionInterface;
+import DBLayer.DBConnectionPool;
 import Tables.*;
 import General.*;
 import General.Debug.*;
@@ -154,6 +155,8 @@ public class MainFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Initial Dialog: Exit button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
+						// close all DB connections and exit
+						DBConnectionPool.closeAllConnections();
 						System.exit(-1);
 					}
 				}
@@ -280,7 +283,11 @@ public class MainFuncs {
 			DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
 		}
 		// otherwise quit program
-		else System.exit(-1);
+		else {
+			// close all DB connections and exit
+			DBConnectionPool.closeAllConnections();
+			System.exit(-1);
+		}
 	}
 
 	
