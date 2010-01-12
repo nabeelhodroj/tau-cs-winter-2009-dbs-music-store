@@ -40,4 +40,13 @@ public enum OrderStatusEnum {
 	public String getStrRep(){
 		return this.strRepresentation;
 	}
+	
+	/**
+	 * A static method that converts the integer i to its OrderStatusEnum enum value
+	 * @param i
+	 * @return
+	 */
+	public static OrderStatusEnum convertFromInt(int i){
+		return values()[i];
+	}
 }
