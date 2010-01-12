@@ -215,8 +215,8 @@ public class DBConnectionStock {
 			String [] dateArr = order.getDate().split("/");
 			String toDateString = "'"+dateArr[0]+"/"+dateArr[1]+"/"+dateArr[2]+"','DD/MM/YYYY'";
 			String query = "INSERT INTO orders(ordering_store_id, supplying_store_id, album_id, quantity, order_date, status) " +
-							"VALUES('"+StaticProgramTables.getThisStore().getStoreID()+"','"+order.getSupplyingStoreID()+"','"+order.getAlbumID()+"'," +
-									"'"+order.getQuantity()+"',TO_DATE("+toDateString+"),'Waiting')";
+							"VALUES("+StaticProgramTables.getThisStore().getStoreID()+","+order.getSupplyingStoreID()+","+order.getAlbumID()+"," +
+									""+order.getQuantity()+",TO_DATE("+toDateString+"),'Waiting')";
 			
 			int retOrderID = DBAccessLayer.insertAndGetID(query, "order_id");
 			if (retOrderID < 0){
@@ -322,8 +322,8 @@ public class DBConnectionStock {
 						if (retCode == 1){// The receiver doesn't have the CD in stock table.
 							queryList.remove(1);
 							queryList.add(1, "INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
-											"VALUES('"+rs.getInt("album_id")+"','"+rs.getInt("ordering_store_id")+"','"+
-												rs.getInt("quantity")+"','"+(new Random()).nextLong() % 1000+"')");
+											"VALUES("+rs.getInt("album_id")+","+rs.getInt("ordering_store_id")+","+
+												rs.getInt("quantity")+","+(new Random()).nextLong() % 1000+")");
 							retCode = DBAccessLayer.executeCommandsAtomic(queryList, minUpdatesPerCommand);
 						}
 						
