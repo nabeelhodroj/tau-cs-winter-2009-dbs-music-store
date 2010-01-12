@@ -265,8 +265,9 @@ public class SearchFuncs {
 						StockFuncs.setOrderFields(albumID, selectedAlbum.getStorageLocation(),
 								selectedAlbum.getQuantity(), selectedAlbum.getPrice());
 						
-						// enable check availability button in stock tab
+						// enable check availability button in stock tab and place order from supplier
 						Main.getStockButtonCheckAvailability().setEnabled(true);
+						Main.getStockButtonPlaceOrderSupplier().setEnabled(true);
 						
 						// move to stock tab
 						MainFuncs.switchTab(2);
