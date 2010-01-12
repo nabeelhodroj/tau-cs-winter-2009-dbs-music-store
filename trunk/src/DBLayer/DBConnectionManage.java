@@ -44,7 +44,7 @@ public class DBConnectionManage {
 							rs.getString("Last_name"),
 							rs.getDate("Hire_date").toString(),
 							rs.getDate("Birth_date").toString(),
-							rs.getString("Adress"),
+							rs.getString("Address"),
 							rs.getString("Phone_Number"), 
 							rs.getString("Cell_phone_number"), 
 							EmployeePositionsEnum.convertFromInt(rs.getInt("Position")));
