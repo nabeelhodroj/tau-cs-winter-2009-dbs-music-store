@@ -164,7 +164,7 @@ public class DBConnectionManage {
 			sqlCommands.add(employeeRemove);
 			sqlCommands.add(employeeInsert);
 			
-			if (DBAccessLayer.executeBatch(sqlCommands) != 2){
+			if (DBAccessLayer.executeCommandsAtomic(sqlCommands) != 2){
 				Debug.log("DBConnectionInterface.InsertUpdateEmployee [ERROR]: Failed Removing and Updating Employees");
 
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
