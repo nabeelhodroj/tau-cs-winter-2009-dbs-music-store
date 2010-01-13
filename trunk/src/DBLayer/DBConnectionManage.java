@@ -247,11 +247,56 @@ public class DBConnectionManage {
 		////////////////////////////////////////////////
 		
 		private class BatchAddToDB implements Runnable{
-			Thread parseThread;
+			private Thread parseThread;
 			private boolean finishedSuccessfully = true;
+			private Map<String,Integer> genres = new HashMap<String,Integer>();
+			private Map<String,Integer> artistNames= new HashMap<String,Integer>();
 			
 			public BatchAddToDB(Thread parseThread) {
 				this.parseThread = parseThread;
+				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get all current genres");
+				DBQueryResults genresQueryResults = DBAccessLayer.executeQuery("SELECT genre_id, genre_name FROM genres");
+				if (genresQueryResults == null) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while getting genres from DB");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;
+				}
+				
+				ResultSet genresRS = genresQueryResults.getResultSet();
+				try {
+					while (genresRS.next()){
+						genres.put(genresRS.getString("genre_name"), genresRS.getInt("genre_id"));
+					}
+				} catch (SQLException e) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting genres");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					genresQueryResults.close();
+					return;
+				}
+				
+				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get all current artist names");
+				DBQueryResults artistNamesQueryResults = DBAccessLayer.executeQuery("SELECT artist_id, artist_name FROM artists");
+				if (artistNamesQueryResults == null) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while getting artists from DB");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;
+				}
+				
+				ResultSet artistsRS = artistNamesQueryResults.getResultSet();
+				try {
+					while (artistsRS.next()){
+						artistNames.put(artistsRS.getString("artist_name"), artistsRS.getInt("artist_id"));
+					}
+				} catch (SQLException e) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting artists");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					artistNamesQueryResults.close();
+					return;
+				}	
 			}
 
 			@Override
@@ -259,7 +304,12 @@ public class DBConnectionManage {
 				List<DiscDBAlbumData> parsedAlbums;
 				while (parseThread.isAlive() || DiscDBParser.getCurrentAlbumListSize() > 0){
 					List<String> insertBatch = new ArrayList<String>();
-					String buffer;
+					String albumBuffer;
+					String songBuffer;
+					String artistBuffer;
+					int artistID;
+					String genreBuffer;
+					int genreID;
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
 					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + "albums");
@@ -273,25 +323,52 @@ public class DBConnectionManage {
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
-						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec,price) ";
-						buffer += "VALUES(" +
+						if (!genres.containsKey(albumData.getGenere())){
+							genreID = genres.size();
+							genres.put(albumData.getGenere(), genreID);
+							genreBuffer = "INSERT INTO genres(genre_id,genre_name) VALUES(" + genreID + ",'" + albumData.getGenere() + "')";
+							insertBatch.add(genreBuffer);
+						} else {
+							genreID = genres.get(albumData.getGenere());
+						}
+						
+						if (!artistNames.containsKey(albumData.getArtist())){
+							artistID = artistNames.size();
+							artistNames.put(albumData.getArtist(), artistID);
+							artistBuffer = "INSERT INTO artists(artist_id,artist_name) VALUES(" + artistID + ",'" + albumData.getArtist() + "')";
+							insertBatch.add(artistBuffer);
+						} else {
+							artistID = artistNames.get(albumData.getArtist());
+						}
+						
+						albumBuffer = "INSERT INTO Albums(album_name, artist_id, year, genre_id, length_sec,price) ";
+						albumBuffer += "VALUES(" +
 								"'"+albumData.getName() + "'," +
-								"'"+albumData.getArtist() + "'," +
+								artistID + "," +
 								albumData.getYear()+ "," +
-								"'"+albumData.getGenere() + "'," +
+								genreID + "," +
 								albumData.getLengthSec()+ "," +
 								albumData.getPrice() +")\n";
-						insertBatch.add(buffer);
+						insertBatch.add(albumBuffer);
 						
 						for (DiscDBTrackData trackData : albumData.getTrackList()) {
-							buffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_name, length_sec) ";
-							buffer += "VALUES(" +
+							if (!artistNames.containsKey(trackData.getArtist())){
+								artistID = artistNames.size();
+								artistNames.put(trackData.getArtist(), artistID);
+								artistBuffer = "INSERT INTO artists(artist_id,artist_name) VALUES(" + artistID + ",'" + trackData.getArtist() + "')";
+								insertBatch.add(artistBuffer);
+							} else {
+								artistID = artistNames.get(trackData.getArtist());
+							}
+							
+							songBuffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_id, length_sec) ";
+							songBuffer += "VALUES(" +
 									"ALBUMS_SEQ.CURRVAL, " +
 									trackData.getTrackNum() + ", " +
-									"'"+trackData.getName() + "', " +
-									"'"+trackData.getArtist() + "'," +
+									"'" + trackData.getName() + "', " +
+									artistID + "," +
 									trackData.getLengthSdc() + ")";
-							insertBatch.add(buffer);
+							insertBatch.add(songBuffer);
 						}
 					}
 					
