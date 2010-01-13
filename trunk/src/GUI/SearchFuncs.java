@@ -197,7 +197,7 @@ public class SearchFuncs {
 						}
 						
 						// check if stock info is brought from the DB
-						if (album.getStorageLocation() > -1){
+						if (album.getStorageLocation() > 0){
 							setLabelStockLocation(Long.toString(album.getStorageLocation()));
 							setLabelStoreStock(Integer.toString(album.getQuantity()));
 							Main.getSearchButtonStockInfoOrder().setEnabled(true);
@@ -207,8 +207,8 @@ public class SearchFuncs {
 						}
 						// else enable only get stock info button
 						else {
-							setLabelStockLocation("-");
-							setLabelStoreStock("0");
+							setLabelStockLocation("");
+							setLabelStoreStock("");
 							Main.getSearchButtonStockInfoOrder().setEnabled(false);
 							// disable add to sale
 							Main.getSearchButtonSaleInfoSale().setEnabled(false);
@@ -613,7 +613,7 @@ public class SearchFuncs {
 		StaticProgramTables.results.getAlbums().get(albumID).setQuantity(quantity);
 		
 		// update gui view
-		setLabelStockLocation((storageLocation > -1)?(Long.toString(storageLocation)):("-"));
+		setLabelStockLocation((storageLocation > 0)?(Long.toString(storageLocation)):("0"));
 		setLabelStoreStock(Integer.toString(quantity));
 		Main.getSearchButtonStockInfoOrder().setEnabled(true);
 		// enable add to sale and get stock info
