@@ -32,7 +32,7 @@ public class DBConnectionSearch {
 					"Albums.price\n";
 			String fromPart = "FROM Albums, artists, genres";
 			String wherePart = "WHERE Albums.artist_id = artists.artist_id AND\n" +
-					"Albums.genre_id = genres.genre_name"; 
+					"Albums.genre_id = genres.genre_id"; 
 				
 			if (albumSearchQuery.isByAlbumID()){
 				wherePart += " AND\n" +
@@ -91,6 +91,7 @@ public class DBConnectionSearch {
 			
 			DBQueryResults searchQueryResults = DBAccessLayer.executeQuery(selectPart+fromPart+wherePart);
 			if (searchQueryResults == null){
+				Debug.log("DBConnectionSearch.GetAlbumsSearchResults: [ERROR] got null pointer from search query");
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
 				return;
 			}
@@ -104,7 +105,7 @@ public class DBConnectionSearch {
 							rs.getString("album_name"), 
 							rs.getString("artist_name"),
 							rs.getInt("year"),
-							rs.getString("genre"), 
+							rs.getString("genre_name"), 
 							rs.getInt("length_sec"),
 							new SongsResultsTable(rs.getInt("album_id")),
 							rs.getInt("price"),
@@ -112,6 +113,7 @@ public class DBConnectionSearch {
 							-1);
 				}
 			} catch (SQLException e) {
+				Debug.log("DBConnectionSearch.GetAlbumsSearchResults: [ERROR] SQLException in RS traversal");
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
 				searchQueryResults.close();
 				return;
