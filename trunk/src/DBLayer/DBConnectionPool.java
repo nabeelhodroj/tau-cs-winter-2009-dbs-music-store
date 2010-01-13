@@ -22,6 +22,8 @@ public class DBConnectionPool {
 	private	static	String SID;
 	private static	String username;
 	private static	String password;
+	
+	private static int nPassedConnections = 0;
 		
 	/**
 	 * This method MUST BE CALLED before any connections can be created
@@ -77,6 +79,7 @@ public class DBConnectionPool {
 				FirstConnection = false;
 			}
 			
+			nPassedConnections++;
 			// No connections ? create a new one and add to pool
 			if (connectionPool.isEmpty())
 			{				
@@ -118,6 +121,7 @@ public class DBConnectionPool {
 		try
 		{	
 			lock.lock();
+			nPassedConnections--;
 			connectionPool.add(conn);			
 		}
 		finally
@@ -148,6 +152,7 @@ public class DBConnectionPool {
 					Debug.log("DBConnectionPool::closeAllConnections: ERROR - exception when closing connection: " + e.toString());
 				}					
 			}
+			Debug.log("DBConnectionPool::closeAllConnections [INFO]: The number of requested and not returned connections is: "+nPassedConnections);
 		}
 		finally
 		{
