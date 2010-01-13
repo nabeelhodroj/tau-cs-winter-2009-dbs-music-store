@@ -70,9 +70,9 @@ public class DBConnectionSale {
 
 			}
 			
-			if (DBAccessLayer.executeCommandsAtomic(queryList) != 1){
+			if (DBAccessLayer.executeCommandsAtomic(queryList) != queryList.size()){
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.MAKE_SALE_FAILURE);
-				Debug.log("DBConnectionSale.MakeSale thread failed to execute changes to DB");
+				Debug.log("DBConnectionSale.MakeSale [ERROR]: Failed to execute changes to DB");
 				return;
 				
 			}
