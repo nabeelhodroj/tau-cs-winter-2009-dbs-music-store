@@ -66,7 +66,7 @@ public class DBConnectionSale {
 			// UPDATE TABLE "ALBUM_SALES"
 			for (SaleTableItem saleTableItem : sale.getSaleItems().values()) {
 				queryList.add( "INSERT INTO album_sales(sale_id, album_id, quantity) " +
-						"VALUES(sales_seq.curval, "+saleTableItem.getAlbumID()+", "+saleTableItem.getQuantity()+")");
+						"VALUES(sales_seq.currval, "+saleTableItem.getAlbumID()+", "+saleTableItem.getQuantity()+")");
 
 			}
 			
