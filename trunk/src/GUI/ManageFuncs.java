@@ -94,6 +94,8 @@ public class ManageFuncs {
 							if (MainFuncs.isAllowDBAction()){
 								// flag DB as busy
 								MainFuncs.setAllowDBAction(false);
+								// disable exit without saving button
+								Main.getManageButtonEmployeeNoSave().setEnabled(false);
 								
 								DBConnectionInterface.checkIfEmployeeExists(employeeID);
 								
@@ -146,6 +148,9 @@ public class ManageFuncs {
 							if (MainFuncs.isAllowDBAction()){
 								// flag DB as busy
 								MainFuncs.setAllowDBAction(false);
+								
+								// disable exit without saving button
+								Main.getManageButtonEmployeeNoSave().setEnabled(false);
 								
 								DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
 								
@@ -420,6 +425,8 @@ public class ManageFuncs {
 			EmployeeDetailsValidityException ndve = new EmployeeDetailsValidityException(
 					"Employee already employed by the network");
 			ndve.getMsgBox().open();
+			// enable exit without saving button
+			Main.getManageButtonEmployeeNoSave().setEnabled(true);
 			
 			// flag DB as free
 			MainFuncs.setAllowDBAction(true);
