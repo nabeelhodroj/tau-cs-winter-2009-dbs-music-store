@@ -77,6 +77,8 @@ public class GuiUpdatesInterface {
 				
 				// update albums results table
 				SearchFuncs.updateAlbumsResultsTable(albumResults);
+				// pop up message
+				SearchFuncs.popSearchResultsDoneMessage(albumResults.getAlbums().size());
 				// set gui environment
 				SearchFuncs.setEnvSearchDone();
 				
@@ -151,6 +153,8 @@ public class GuiUpdatesInterface {
 				
 				// initialize new sale table and clear gui view
 				SaleFuncs.initCurrentSale();
+				// pop message
+				SaleFuncs.popSaleDoneMessage();
 				
 				}
 			});
@@ -340,13 +344,13 @@ public class GuiUpdatesInterface {
 	 * will be invoked from DB when a request is denied or approved
 	 * @param orderID
 	 */
-	public static void removeRequest(final int requestID){
+	public static void removeRequest(final int requestID, final boolean isApproved){
 		Debug.log("GuiUpdatesInterface: removeRequest is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
 		Main.getMainDisplay().asyncExec(new Runnable() {
 			public void run() {
 				
-				StockFuncs.removeRequest(requestID);
+				StockFuncs.removeRequest(requestID, isApproved);
 				
 				}
 			});

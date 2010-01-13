@@ -186,6 +186,8 @@ public class SearchFuncs {
 						AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
 						// enable update songs table button
 						Main.getSearchButtonShowSongs().setEnabled(true);
+						// enable get stock information
+						Main.getSearchButtonGetStockInfo().setEnabled(true);
 						// update stock information
 						setLabelPrice(Integer.toString(album.getPrice()));
 						
@@ -201,9 +203,8 @@ public class SearchFuncs {
 							setLabelStockLocation(Long.toString(album.getStorageLocation()));
 							setLabelStoreStock(Integer.toString(album.getQuantity()));
 							Main.getSearchButtonStockInfoOrder().setEnabled(true);
-							// enable add to sale and get stock info
+							// enable add to sale
 							Main.getSearchButtonSaleInfoSale().setEnabled(true);
-							Main.getSearchButtonGetStockInfo().setEnabled(true);
 						}
 						// else enable only get stock info button
 						else {
@@ -212,10 +213,7 @@ public class SearchFuncs {
 							Main.getSearchButtonStockInfoOrder().setEnabled(false);
 							// disable add to sale
 							Main.getSearchButtonSaleInfoSale().setEnabled(false);
-							// enable get stock information
-							Main.getSearchButtonGetStockInfo().setEnabled(true);
 						}
-						
 					}
 				}
 		);
@@ -447,6 +445,7 @@ public class SearchFuncs {
 		Main.getSearchButtonStockInfoOrder().setEnabled(false);
 		Main.getSearchButtonSaleInfoSale().setEnabled(false);
 		Main.getSearchButtonGetStockInfo().setEnabled(false);
+		Main.getSearchButtonShowSongs().setEnabled(false);
 
 		// clear all results if search is invoked
 		Main.getSearchTableAlbumResults().removeAll();
@@ -507,6 +506,24 @@ public class SearchFuncs {
 		
 		// set progress visibility off
 		showDBProgress(false);
+	}
+	
+	/**
+	 * pops a message to the user with number of results 
+	 * @param numOfResults
+	 */
+	public static void popSearchResultsDoneMessage(int numOfResults){
+		MessageBox msg = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION);
+		msg.setText("Search done");
+		if (numOfResults == 0){
+			msg.setMessage("No albums found.");
+		} else if (numOfResults <= StaticProgramTables.getMaxNumOfResults()){
+			msg.setMessage("Search done, found "+numOfResults+" albums.");
+		} else {
+			msg.setMessage("Found more than "+StaticProgramTables.getMaxNumOfResults()+" results.\n"+
+					"Only first "+StaticProgramTables.getMaxNumOfResults()+" results will be shown, to get other results please refine your search.");
+		}
+		msg.open();
 	}
 	
 	/**
