@@ -495,11 +495,8 @@ public class StockFuncs {
 	public static void approveOrderFromSupplierDone(){
 		// clear order form (invoke clear button)
 		clearFieldsButtonInvokation();
-		// update orders table
-		updateOrdersTableView();
-		
-		// flag DB as free
-		MainFuncs.setAllowDBAction(true);
+		// refresh orders table
+		DBConnectionInterface.refreshOrdersTable();
 	}
 	
 	///////////////////////////////////
