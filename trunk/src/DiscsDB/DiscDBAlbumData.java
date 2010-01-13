@@ -165,8 +165,14 @@ public class DiscDBAlbumData {
 		this.artist = "";
 		if (this.title.indexOf(" / ") != -1)
 		{		
-			String[] artistAndName = 	this.title.split(" / ");		
-			for (int i = 0; i < artistAndName.length-1; i++)
+			String[] artistAndName = 	this.title.split(" / ");
+			if (artistAndName.length == 2)
+			{
+				this.artist = artistAndName[0].trim();
+				this.name = artistAndName[1].trim();	
+			}
+			
+			/*for (int i = 0; i < artistAndName.length-1; i++)
 			{
 				if (this.artist.length() > 0)
 				{
@@ -179,7 +185,7 @@ public class DiscDBAlbumData {
 			{
 		//		Debug.log("DiscDBParser::parseTarFile: INFO - multiple slash title: " + this.title +
 			//			"\n artist: " + this.artist + "\n name: " + this.name);				
-			}
+			}*/
 		}
 		else
 		{
@@ -192,6 +198,15 @@ public class DiscDBAlbumData {
 	
 	public	boolean isValid()
 	{
+		// valid disc is of from: artist / name (or it doesn't contain a " / ")
+		if (this.title.indexOf(" / ") != -1)
+		{		
+			String[] artistAndName = 	this.title.split(" / ");
+			if (artistAndName.length != 2)
+			{
+				return false;
+			}
+		}
 		return  ((this.name.length() > 0) && (this.artist.length() > 0) 
 				&& (this.name.length() <= MAX_ALBUM_NAME_LENGTH) &&
 				(this.artist.length() <= MAX_ARTIST_NAME_LENGTH) &&
