@@ -3,6 +3,7 @@ package GUI;
 import org.eclipse.swt.*;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
+import org.omg.CORBA.CharSeqHolder;
 
 import DBLayer.*;
 import General.Debug;
@@ -348,10 +349,21 @@ public class ManageFuncs {
 					"and year must be reasonable!");
 		}
 		
-		// check that first name and last name are not empty
+		// check that first name, last name and address are not empty
+		// and that there are no "'" in them
 		if (Main.getManageTextBoxEmployeeFNameInput().getText().isEmpty() ||
-				Main.getManageTextBoxEmployeeLNameInput().getText().isEmpty())
+				Main.getManageTextBoxEmployeeLNameInput().getText().isEmpty() ||
+				Main.getManageTextBoxEmployeeAddressInput().getText().isEmpty())
 			throw new EmployeeDetailsValidityException("Employee full name must be specified");
+		char[] fName = Main.getManageTextBoxEmployeeFNameInput().getText().toCharArray();
+		char[] lName = Main.getManageTextBoxEmployeeLNameInput().getText().toCharArray();
+		char[] addr = Main.getManageTextBoxEmployeeAddressInput().getText().toCharArray();
+		for(char c: fName)
+			if (c == '\'') throw new EmployeeDetailsValidityException("Employee first name illegal");
+		for(char c: lName)
+			if (c == '\'') throw new EmployeeDetailsValidityException("Employee last name illegal");
+		for(char c: addr)
+			if (c == '\'') throw new EmployeeDetailsValidityException("Employee address illegal");
 		
 		// check that phone and cell phone are numbers
 		String[] tokens = Main.getManageTextBoxEmployeePhoneInput().getText().split("-");
