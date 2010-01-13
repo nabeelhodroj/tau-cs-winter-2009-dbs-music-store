@@ -347,7 +347,7 @@ public class DBConnectionStock {
 						}
 						
 						Debug.log("DBConnectionStock.UpdateOrderStatus updated Orders and Stock tables");
-						GuiUpdatesInterface.removeRequest(orderID);
+						GuiUpdatesInterface.removeRequest(orderID, true);
 					}
 					break;
 				case DENIED: 
@@ -370,7 +370,7 @@ public class DBConnectionStock {
 							return;
 						}else{//SUCCESS
 							Debug.log("DBConnectionStock.UpdateOrderStatus updated order status to Denied.");
-							GuiUpdatesInterface.removeRequest(orderID);
+							GuiUpdatesInterface.removeRequest(orderID, false);
 						}
 					}
 					break;
