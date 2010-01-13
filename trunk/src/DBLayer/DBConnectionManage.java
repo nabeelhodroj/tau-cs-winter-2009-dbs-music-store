@@ -50,7 +50,6 @@ public class DBConnectionManage {
 							rs.getString("Cell_phone_number"), 
 							EmployeePositionsEnum.convertFromInt(rs.getInt("Position")));
 				}
-				queryResults.close();
 			} catch (SQLException e) {
 				Debug.log("DBConnectionInterface.GetEmployeesTable [ERROR]: Failed extracting employees from ResultSet");
 				Debug.log(e.getStackTrace().toString());
