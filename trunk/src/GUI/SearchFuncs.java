@@ -207,8 +207,8 @@ public class SearchFuncs {
 						}
 						// else enable only get stock info button
 						else {
-							setLabelStockLocation("");
-							setLabelStoreStock("");
+							setLabelStockLocation("-");
+							setLabelStoreStock("0");
 							Main.getSearchButtonStockInfoOrder().setEnabled(false);
 							// disable add to sale
 							Main.getSearchButtonSaleInfoSale().setEnabled(false);
