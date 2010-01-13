@@ -141,6 +141,16 @@ public class SaleFuncs {
 	}
 	
 	/**
+	 * pops up a message that sale is complete
+	 */
+	public static void popSaleDoneMessage(){
+		MessageBox msgSaleComplete = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION);
+		msgSaleComplete.setText("Sale completed");
+		msgSaleComplete.setMessage("Sale has been made successfully");
+		msgSaleComplete.open();
+	}
+	
+	/**
 	 * updates salesmen list according to current employees table
 	 */
 	public static void updateSalesmenList(){

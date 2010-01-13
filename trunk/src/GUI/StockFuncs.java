@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.TableItem;
 import DBLayer.DBConnectionInterface;
 import Queries.OrderAvailableStoresQuery;
 import Queries.QueryErrorException;
+import Tables.AlbumsResultsTableItem;
 import Tables.InvalidOrderException;
 import Tables.OrderAvailableStoresTableItem;
 import Tables.OrderStatusEnum;
@@ -802,13 +803,39 @@ public class StockFuncs {
 	
 	/**
 	 * invoked from DB after a request was approved or denied
-	 * removes request from requests table
+	 * removes request from requests table and updates stock accordingly
 	 * @param requestID
 	 */
-	public static void removeRequest(int requestID){
+	public static void removeRequest(int requestID, boolean isApproved){
+		// first save album id and requested quantity for later
+		long albumID = StaticProgramTables.requests.getOrder(requestID).getAlbumID();
+		int requestedQuantity = StaticProgramTables.requests.getOrder(requestID).getQuantity();
+			
 		// remove request from requests table
 		StaticProgramTables.requests.getOrders().remove(requestID);
-		System.out.println("999");
+		
+		// if order is approved and album results aren't null
+		if (isApproved && (StaticProgramTables.results != null)){
+			// check if album appears in search results and its stock info is already fetched
+			// (since here album is approved for request, it must have storage location in this store
+			// thus if storage location is 0, stock info for this album hasn't been fetched yet in search tab)
+			AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
+			if ((album != null) && (album.getStorageLocation() != 0)){
+				int newQuantity = album.getQuantity()-requestedQuantity;
+				// update its stock info
+				album.setQuantity(newQuantity);
+				// if this album is selected in results, update also the stock info in search tab
+				if (Main.getSearchTableAlbumResults().getSelection().length > 0){
+					if (Main.getSearchTableAlbumResults().getSelection()[0].getText(0).equals(
+							Long.toString(album.getAlbumID()))){
+						// update stock label
+						Main.getSearchLabelStockInfoStoreStock().setText("Store stock: "+
+								Integer.toString(newQuantity));
+					}
+				}
+			}
+		}
+		
 		// update view
 		updateRequestsTableView();
 		

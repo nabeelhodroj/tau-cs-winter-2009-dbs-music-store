@@ -35,6 +35,8 @@ public class StaticProgramTables {
 	public static OrdersOrRequestsTable requests = null;
 	// employees table
 	public static EmployeesTable employees = null;
+	// max number of results
+	public static int maxNumOfResults = 1000;
 	
 	// getters and setters
 	
@@ -43,5 +45,8 @@ public class StaticProgramTables {
 	}
 	public static void setThisStore(StoresTableItem thisStore) {
 		StaticProgramTables.thisStore = thisStore;
+	}
+	public static int getMaxNumOfResults() {
+		return maxNumOfResults;
 	}
 }
