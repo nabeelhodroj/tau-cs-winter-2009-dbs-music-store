@@ -1,6 +1,7 @@
 package DBLayer;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import GUI.AlbumStockInfoCallerEnum;
@@ -18,6 +19,20 @@ import Tables.*;
  * 	Each class corresponds to a single method in DBConnectionInterface class.
  */
 public class DBConnectionStock {
+	/**
+	 * Date converter
+	 */
+	private String toGUIDate(Date d){
+		String[] dateArr = d.toString().split("-");
+		return dateArr[2]+"/"+dateArr[1]+"/"+dateArr[0];
+	}
+	
+	private long getRandLocation(){
+		long precision = 1000000000 * 100; 
+		return ((new Random()).nextLong() % precision);
+		
+		
+	}
 	
 	/**
 	 * Corresponds to DBConnectionInterface's "public static void getOrderAvailableStores(OrderAvailableStoresQuery query);"
@@ -60,7 +75,7 @@ public class DBConnectionStock {
 				
 			Debug.log("DBConnectionStock.GetOrderAvailableStores done with DB, calling GUI's updateOrderAvailableStores");
 			GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
-			
+			dBQRes.close();
 			// TODO remove:
 			//TablesExamples.getOrderAvailableStores(query);
 		}
@@ -89,7 +104,7 @@ public class DBConnectionStock {
 			try {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
-					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), toGUIDate(rs.getDate(5)), 
 							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
@@ -97,12 +112,13 @@ public class DBConnectionStock {
 				Debug.log(e.getStackTrace().toString());
 				GuiUpdatesInterface.initOrdersTable(new OrdersOrRequestsTable(true));
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_ORDERS_FAILURE);
+				dBQRes.close();
 				return;
 			}
 			
 		Debug.log("DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-		
+		dBQRes.close();
 		// TODO remove:
 		//TablesExamples.getOrdersTable();
 			
@@ -132,19 +148,20 @@ public class DBConnectionStock {
 			try {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
-					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+					ordersOrRequestsTable.addOrder(rs.getInt(1), thisStoreID, rs.getInt(2), rs.getLong(3), rs.getInt(4), toGUIDate(rs.getDate(5)), 
 							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.RefreshOrdersTable [ERROR] encountered an database access error:");
 				Debug.log(e.getStackTrace().toString());
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.ORDERS_ACTION_FAILURE);
+				dBQRes.close();
 				return;
 			}
 			
 		Debug.log("DBConnectionStock.RefreshOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.refreshOrdersTable(ordersOrRequestsTable);
-		
+		dBQRes.close();
 			// TODO remove:
 			//TablesExamples.refreshOrdersTable();
 			
@@ -304,7 +321,7 @@ public class DBConnectionStock {
 						"WHERE (store_id="+rs.getInt("ordering_store_id")+") AND (album_id="+rs.getLong("album_id")+")");
 						
 						// Change order status to COMPLETED
-						queryList.add("UPDATE orders SET status=Completed WHERE order_id="+orderID);
+						queryList.add("UPDATE orders SET status="+OrderStatusEnum.COMPLETED.getIntRep()+" WHERE order_id="+orderID);
 						
 						// Update the Stock table
 						queryList.add("DELETE FROM stock WHERE quantity=0");
@@ -317,7 +334,7 @@ public class DBConnectionStock {
 							queryList.remove(1);
 							queryList.add(1, "INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
 											"VALUES("+rs.getInt("album_id")+","+rs.getInt("ordering_store_id")+","+
-												rs.getInt("quantity")+","+(new Random()).nextLong() % 1000+")");
+												rs.getInt("quantity")+","+getRandLocation()+")");
 							retCode = DBAccessLayer.executeCommandsAtomic(queryList, minUpdatesPerCommand);
 						}
 						
@@ -345,11 +362,14 @@ public class DBConnectionStock {
 						return;
 					} else { 
 						// Denying request
-						if (DBAccessLayer.executeUpdate("UPDATE orders SET status=Denied WHERE order_id="+orderID) < 1){
-							Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: Failed to update statuc of the order to 'Denied'");
+						if (DBAccessLayer.executeUpdate("UPDATE orders SET status="+OrderStatusEnum.DENIED.getIntRep()+" WHERE order_id="+orderID) < 1){
+							Debug.log("DBConnectionStock.UpdateOrderStatus [ERROR]: Failed to update status of the order to 'Denied'");
 							GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
 							dBQres.close();
 							return;
+						}else{//SUCCESS
+							Debug.log("DBConnectionStock.UpdateOrderStatus updated order status to Denied.");
+							GuiUpdatesInterface.removeRequest(orderID);
 						}
 					}
 					break;
@@ -393,7 +413,7 @@ public class DBConnectionStock {
 			try {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
-					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), toGUIDate(rs.getDate(5)), 
 							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
@@ -401,12 +421,13 @@ public class DBConnectionStock {
 				Debug.log(e.getStackTrace().toString());
 				GuiUpdatesInterface.initRequestsTable(new OrdersOrRequestsTable(false));
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INIT_REQUESTS_FAILURE);
+				dBQRes.close();
 				return;
 			}
 			
 		Debug.log("DBConnectionStock.GetRequestTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.initRequestsTable(ordersOrRequestsTable);
-			
+		dBQRes.close();
 		// TODO remove:
 		//TablesExamples.getRequestsTable();
 		}
@@ -424,7 +445,7 @@ public class DBConnectionStock {
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM orders " +
-								"WHERE supplying_store_id="+thisStoreID;
+								"WHERE (supplying_store_id="+thisStoreID+") AND (status="+OrderStatusEnum.WAITING.getIntRep()+")";
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
 				Debug.log("DBConnectionStock.RefreshRequestsTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
@@ -435,18 +456,20 @@ public class DBConnectionStock {
 			try {
 				while (rs.next()){
 					int ordStat = rs.getInt(6);
-					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), rs.getDate(5).toString(), 
+					ordersOrRequestsTable.addOrder(rs.getInt(1), rs.getInt(2), thisStoreID, rs.getLong(3), rs.getInt(4), toGUIDate(rs.getDate(5)), 
 							OrderStatusEnum.convertFromInt(ordStat)); 
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionStock.RefreshRequestsTable [ERROR] encountered an database access error:");
 				Debug.log(e.getStackTrace().toString());
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
+				dBQRes.close();
 				return;
 			}
 			
 		Debug.log("DBConnectionStock.RefreshRequestsTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.refreshRequestsTable(ordersOrRequestsTable);
+		dBQRes.close();
 		
 		
 			// TODO remove:
@@ -530,7 +553,7 @@ public class DBConnectionStock {
 			}
 			if (nRowsUpdated == 0){ // This is a new album in the store (previous quantity == 0)
 				nRowsUpdated = DBAccessLayer.executeUpdate("INSERT INTO stock(album_id, store_id, quantity, storage_location) " +
-						"VALUES("+albumID+","+storeID+","+quantity+","+((new Random()).nextLong() % 1000)+")");
+						"VALUES("+albumID+","+storeID+","+quantity+","+getRandLocation()+")");
 				if (nRowsUpdated < 1){
 					Debug.log("DBConnectionStock.GetFromSupplier [ERROR]: DB access failure. Failed to insert values to stock.");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
