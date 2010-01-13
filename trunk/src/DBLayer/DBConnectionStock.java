@@ -236,8 +236,8 @@ public class DBConnectionStock {
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.PLACE_ORDER_FAILURE);
 				return;
 			}
-			retOrder.setAlbumID(retOrderID);
-			
+			retOrder.setOrderID(retOrderID);
+			Debug.log("DBConnectionStock.PlaceOrder [INFO]: OrderID="+retOrder.getOrderID()+", AlbumID="+retOrder.getAlbumID());
 			Debug.log("DBConnectionStock.PlaceOrder done with DB, calling GUI's addOrder");
 			GuiUpdatesInterface.addOrder(retOrder);			
 			
@@ -402,7 +402,7 @@ public class DBConnectionStock {
 			OrdersOrRequestsTable ordersOrRequestsTable = new OrdersOrRequestsTable(false);
 			int thisStoreID = StaticProgramTables.getThisStore().getStoreID();
 			String queryStr = "SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM orders " +
-								"WHERE supplying_store_id="+thisStoreID;
+								"WHERE (supplying_store_id="+thisStoreID+") AND (status="+OrderStatusEnum.WAITING.getIntRep()+")";
 			DBQueryResults dBQRes = DBAccessLayer.executeQuery(queryStr); 
 			if (dBQRes == null) {
 				Debug.log("DBConnectionStock.GetRequestTable [ERROR]: DB access failed, NULL pointer returned.", DebugOutput.FILE, DebugOutput.STDERR);
