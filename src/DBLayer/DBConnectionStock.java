@@ -29,9 +29,10 @@ public class DBConnectionStock {
 	
 	private long getRandLocation(){
 		long precision = 1000000000 * 100; 
-		return ((new Random()).nextLong() % precision);
-		
-		
+		long ret = ((new Random()).nextLong() % precision);
+		while (ret <= 0)
+			ret = ((new Random()).nextLong() % precision);
+		return ret;
 	}
 	
 	/**
@@ -504,10 +505,15 @@ public class DBConnectionStock {
 				return;
 			}
 			ResultSet rs = dBQRes.getResultSet();
-			long retStorageLocation = -1;
-			int retQuantity = -1;
+			long retStorageLocation = 0;
+			int retQuantity = 0;
 			try {
-				rs.next();
+				if (!rs.next()){//The album doesn't appear in the STOCK table.
+					Debug.log("DBConnectionSale.GetAlbumStockInfo Done working with DB  \n(The album doesn't appear in the STOCK table) calling GUI's updateAlbumStockInformation.");
+					GuiUpdatesInterface.updateAlbumStockInformation(albumID, retStorageLocation, retQuantity, caller);
+					dBQRes.close();
+					return;
+				}
 				retStorageLocation = rs.getLong("storage_location");
 				retQuantity = rs.getInt("quantity");
 			} catch (SQLException e) {
