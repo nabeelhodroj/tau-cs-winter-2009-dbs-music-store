@@ -196,9 +196,10 @@ public class DBAccessLayer {
 				// Add to batch
 				pstmt.addBatch();
 			}
-				
-				return doBatch(conn, pstmt);
-			}
+		
+			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + argumentLists.size() + " commands");
+			return doBatch(conn, pstmt);
+		}
 			catch (SQLException e)
 			{
 				Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
@@ -251,7 +252,9 @@ public class DBAccessLayer {
 			{
 				// Add to batch
 				stmt.addBatch(s);
-			}	
+			}
+			
+			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + sqlCommands.size() + " commands");
 			return doBatch(conn, stmt);
 		}
 		catch (SQLException e)
@@ -373,8 +376,13 @@ public class DBAccessLayer {
 		int[] res = null;
 		try
 		{
+			long startTime = System.nanoTime();		// for performance measuring
 			// Execute the statement
-			res = stmt.executeBatch();			
+			res = stmt.executeBatch();
+			 // calculate how much time the process took
+			 long estimatedTime = System.nanoTime() - startTime;
+			 estimatedTime /= 1000000000;	// convert to seconds		
+			 Debug.log("DBAccessLayer::doBatch: INFO - batch done in " + estimatedTime + " seconds");
 			
 			// Check how many commands where executed
 			for (int i = 0; i < res.length; i++)
