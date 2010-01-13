@@ -217,7 +217,7 @@ public class DBConnectionInterface{
 	/**
 	 * invoked in Main \ stock-tab \ "Order from Supplier" button
 	 * invokes order (immediate) from supplier
-	 * corresponding method in GUI.GuiUpdatesInterface: ---
+	 * corresponding method in GUI.GuiUpdatesInterface: approveOrderFromSupplierDone
 	 * @param albumID
 	 * @param quantity
 	 */
