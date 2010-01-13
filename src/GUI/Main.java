@@ -43,7 +43,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	
 	// Main Menu
 
-	// Main Window Details
+	// Main Window Details 
 	//////////////////////
 	// Store details
 	private static Group mainGroupStoreDetails;
