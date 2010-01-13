@@ -313,7 +313,7 @@ public class DBConnectionManage {
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
 					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + " albums");
-					if (numToRemove == 0)
+					if (numToRemove == 0) {
 						try {
 							Thread.sleep(1000);
 							continue;
@@ -321,6 +321,7 @@ public class DBConnectionManage {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+					}
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
