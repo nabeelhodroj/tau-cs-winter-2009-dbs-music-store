@@ -119,9 +119,9 @@ public class DBConnectionSearch {
 				return;
 			}
 			
+			searchQueryResults.close();
+			
 			GuiUpdatesInterface.updateAlbumResultsTable(resultsTable);
-			// until implemented, use example:
-			// TablesExamples.getAlbumsSearchResults();
 		}		
 	}
 	
@@ -160,10 +160,10 @@ public class DBConnectionSearch {
 				songsQueryResults.close();
 				return;
 			}
-
+			
+			songsQueryResults.close();
+			
 			GuiUpdatesInterface.updateSongsResultsTable(albumID, resultsTable);
-			// until implemented, use example:
-			// TablesExamples.getSongsResults(albumID);
 		}
 	}
 }
