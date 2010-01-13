@@ -273,13 +273,14 @@ public class DBConnectionManage {
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
-						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec) ";
+						buffer = "INSERT INTO Albums(album_name, artist_name, year, genre, length_sec,price) ";
 						buffer += "VALUES(" +
 								"'"+albumData.getName() + "'," +
 								"'"+albumData.getArtist() + "'," +
 								albumData.getYear()+ "," +
 								"'"+albumData.getGenere() + "'," +
-								albumData.getLengthSec()+ ")\n";
+								albumData.getLengthSec()+ "," +
+								albumData.getPrice() +")\n";
 						insertBatch.add(buffer);
 						
 						for (DiscDBTrackData trackData : albumData.getTrackList()) {
