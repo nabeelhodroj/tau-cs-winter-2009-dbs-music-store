@@ -9,6 +9,8 @@ public class DiscDBTrackData {
 	private	int		trackNum;
 	
 	public static final String DB_NULL_VALUE = "NULL";
+	private static	int		MAX_ARTIST_NAME_LENGTH = 150;
+	private static	int		MAX_TRACK_NAME_LENGTH = 150;	
 	
 	// C'tor	
 	public DiscDBTrackData(int trackNum, String trackTitle, String trackArtist, int trackLengthSec)
@@ -99,7 +101,9 @@ public class DiscDBTrackData {
 	
 	public	boolean isValid()
 	{
-		return ((this.name.length()) > 0 && (this.artist.length() > 0));
+		return ((this.name.length() > 0) && (this.artist.length() > 0)
+				&& (this.artist.length() <= MAX_ARTIST_NAME_LENGTH) &&
+				(this.name.length() <= MAX_TRACK_NAME_LENGTH));
 	}
 	
 	public	String	toString()
