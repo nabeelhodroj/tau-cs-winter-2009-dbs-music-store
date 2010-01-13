@@ -495,8 +495,16 @@ public class StockFuncs {
 	public static void approveOrderFromSupplierDone(){
 		// clear order form (invoke clear button)
 		clearFieldsButtonInvokation();
-		// refresh orders table
-		DBConnectionInterface.refreshOrdersTable();
+
+		// notify user that order is done
+		MessageBox msgOrderDone = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION);
+		msgOrderDone.setText("Order done");
+		msgOrderDone.setMessage("Order from supplier is done.\n"+
+				"Store's stock has been updated.");
+		msgOrderDone.open();
+		
+		// flag DB as free
+		MainFuncs.setAllowDBAction(true);
 	}
 	
 	///////////////////////////////////
