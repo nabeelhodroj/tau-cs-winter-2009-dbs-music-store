@@ -8,7 +8,13 @@ import java.util.Map;
 
 import General.Debug;
 
+
 public class DiscDBAlbumData {	
+	
+	// field length constraints
+	private static	int		MAX_GENRE_LENGTH = 50;
+	private static	int		MAX_ARTIST_NAME_LENGTH = 150;
+	private static	int		MAX_ALBUM_NAME_LENGTH = 150;
 
 	private List<DiscDBTrackData> trackList = new LinkedList<DiscDBTrackData>();
 	private	String	title;	/* disc title, may include artist name */
@@ -186,8 +192,12 @@ public class DiscDBAlbumData {
 	
 	public	boolean isValid()
 	{
-		return ((this.name.length()) > 0 && (this.artist.length() > 0));
-	}	
+		return  ((this.name.length() > 0) && (this.artist.length() > 0) 
+				&& (this.name.length() <= MAX_ALBUM_NAME_LENGTH) &&
+				(this.artist.length() <= MAX_ARTIST_NAME_LENGTH) &&
+				(this.genere.length() <= MAX_GENRE_LENGTH) );
+	}
+	
 	
 	public	String	toString()	
 	{
