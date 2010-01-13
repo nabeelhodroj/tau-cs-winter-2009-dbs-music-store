@@ -1,0 +1,7 @@
+# DB Properties
+DBUser = store
+DBPassword = store
+DBHost = localhost
+DBPort = 1521
+SID = xe
+MaxDBConnections = 10
