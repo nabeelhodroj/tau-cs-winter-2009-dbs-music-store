@@ -312,10 +312,11 @@ public class DBConnectionManage {
 					int genreID;
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
-					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + "albums");
+					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + " albums");
 					if (numToRemove == 0)
 						try {
 							Thread.sleep(1000);
+							continue;
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -426,12 +427,23 @@ public class DBConnectionManage {
 			Thread updateThread = new Thread(dbAdder);
 			updateThread.start();
 
+			while (parseThread.isAlive() || updateThread.isAlive()){
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			if (!fileParser.isFinishedSuccessfully() || !dbAdder.isFinishedSuccessfully()){ // Revert to previous DB state
 				DBAccessLayer.executeUpdate("DELETE FROM Albums\n" +
 						"WHERE album_id > " + lastAlbumID);
 				DBAccessLayer.executeUpdate("DELETE FROM Songs\n" +
 						"WHERE album_id > " + lastAlbumID);
 			}
+			GuiUpdatesInterface.notifyDataBaseUpdated(filename); 
+			
 			// until implemented, use example:
 			// TablesExamples.updateDataBase(filename);
 		}
