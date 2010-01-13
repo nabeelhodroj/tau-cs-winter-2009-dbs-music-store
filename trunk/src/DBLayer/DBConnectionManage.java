@@ -257,12 +257,19 @@ public class DBConnectionManage {
 			@Override
 			public void run() {
 				List<DiscDBAlbumData> parsedAlbums;
-				while (parseThread.isAlive()){
+				while (parseThread.isAlive() || DiscDBParser.getCurrentAlbumListSize() > 0){
 					List<String> insertBatch = new ArrayList<String>();
 					String buffer;
 					
 					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
 					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + "albums");
+					if (numToRemove == 0)
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
