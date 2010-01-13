@@ -1,6 +1,8 @@
 package Queries;
 
 import GUI.Main;
+import GUI.MainFuncs;
+
 import org.eclipse.swt.widgets.*;
 
 /**
@@ -78,6 +80,7 @@ public class AlbumSearchQuery extends Query {
 			this.hasAlbumName = Main.getSearchCheckBoxAlbumName().getSelection();
 			if (hasAlbumName){
 				String albumNameText = Main.getSearchTextBoxAlbumName().getText();
+				albumNameText = MainFuncs.replaceSubString(albumNameText, "'", "''");
 				if (albumNameText == null || albumNameText.isEmpty()) // album name text is empty
 					throw new QueryErrorException("Album name option selected, field must have value", this.getQueryType());
 				else this.albumName = albumNameText;
@@ -87,6 +90,7 @@ public class AlbumSearchQuery extends Query {
 			this.hasArtist = Main.getSearchCheckBoxArtist().getSelection();
 			if (hasArtist){
 				String artistText = Main.getSearchTextBoxArtist().getText();
+				artistText = MainFuncs.replaceSubString(artistText, "'", "''");
 				if (artistText == null || artistText.isEmpty()) // artist name text is empty
 					throw new QueryErrorException("Artist option selected, field must have value", this.getQueryType());
 				else this.artist = artistText;
@@ -122,6 +126,7 @@ public class AlbumSearchQuery extends Query {
 			this.hasSongNames = Main.getSearchCheckBoxSongNames().getSelection();
 			if (hasSongNames){
 				String songNamesText = Main.getSearchTextBoxSongNames().getText();
+				songNamesText = MainFuncs.replaceSubString(songNamesText, "'", "''");
 				if (songNamesText == null || songNamesText.isEmpty()) // song names text is empty
 					throw new QueryErrorException("Song names option selected, field must have value", this.getQueryType());
 				else this.songNames = songNamesText;
@@ -144,6 +149,7 @@ public class AlbumSearchQuery extends Query {
 				}
 				
 				String otherGenreText = Main.getSearchTextBoxGenreOther().getText();
+				otherGenreText = MainFuncs.replaceSubString(otherGenreText, "'", "''");
 				if (Main.getSearchCheckBoxGenreOther().getSelection() &&
 						(otherGenreText.isEmpty() || otherGenreText == null))
 					throw new QueryErrorException("Other genre option selected, field must have value", this.getQueryType()); // in case other genre selected but has no value
