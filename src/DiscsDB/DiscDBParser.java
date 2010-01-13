@@ -178,7 +178,7 @@ public class DiscDBParser {
 									}*/
 									
 									// move albums to "main" list, so someone else may read them
-									if (albumList.size() > MAX_ALBUMS_IN_LIST)
+									if (albumList.size() >= MAX_ALBUMS_IN_LIST )
 									{
 										addAlbumDataToList(albumList);
 										albumList.clear();											
@@ -210,6 +210,11 @@ public class DiscDBParser {
 					 }
 				 }
 			 }
+
+			// move rest of the albums to "main" list, so someone else may read them
+			 addAlbumDataToList(albumList);
+			 albumList.clear();														 
+			 
 			 // calculate how much time the process took
 			 long estimatedTime = System.nanoTime() - startTime;
 			 estimatedTime /= 1000000000;	// convert to seconds
