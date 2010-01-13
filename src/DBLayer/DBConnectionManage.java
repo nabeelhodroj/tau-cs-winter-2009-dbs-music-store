@@ -62,10 +62,8 @@ public class DBConnectionManage {
 				return;
 			}
 			
+			queryResults.close();
 			GuiUpdatesInterface.initEmployeesTable(employees);
-			
-			// until implemented, use example
-			//TablesExamples.getEmployeesTable();
 		}
 		
 		private String toGUIDate(Date d){
@@ -115,11 +113,9 @@ public class DBConnectionManage {
 				
 				return;	
 			}
-
+			queryResults.close();
 			
 			GuiUpdatesInterface.tryInsertNewEmployee(employeeID,empExists);
-			// until implemented, use example:
-			// TablesExamples.checkIfEmployeeExists(employeeID);
 		}
 	}
 	
@@ -178,8 +174,6 @@ public class DBConnectionManage {
 			}
 
 			GuiUpdatesInterface.insertUpdateEmployee(employee);
-			// until implemented, use example:
-			// TablesExamples.insertUpdateEmployee(employee);
 		}
 	}
 	
@@ -208,8 +202,6 @@ public class DBConnectionManage {
 			}
 			
 			GuiUpdatesInterface.removeEmployee(employeeID);
-			// until implemented, use example:
-			// TablesExamples.removeEmployee(employeeID);
 		}		
 	}
 
@@ -322,7 +314,7 @@ public class DBConnectionManage {
 							e.printStackTrace();
 						}
 					}
-					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove); //TODO: set number
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
 						if (!genres.containsKey(albumData.getGenere())){
@@ -444,9 +436,6 @@ public class DBConnectionManage {
 						"WHERE album_id > " + lastAlbumID);
 			}
 			GuiUpdatesInterface.notifyDataBaseUpdated(filename); 
-			
-			// until implemented, use example:
-			// TablesExamples.updateDataBase(filename);
 		}
 	}
 }
