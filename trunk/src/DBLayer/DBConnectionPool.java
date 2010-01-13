@@ -79,7 +79,6 @@ public class DBConnectionPool {
 				FirstConnection = false;
 			}
 			
-			nPassedConnections++;
 			// No connections ? create a new one and add to pool
 			if (connectionPool.isEmpty())
 			{				
@@ -102,6 +101,7 @@ public class DBConnectionPool {
 			}
 			
 			// Now list is not empty, return one of the connections
+			nPassedConnections++;
 			return (connectionPool.remove(0));
 		}
 		finally
