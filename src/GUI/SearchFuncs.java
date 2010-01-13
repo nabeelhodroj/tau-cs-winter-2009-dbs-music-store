@@ -613,7 +613,7 @@ public class SearchFuncs {
 		StaticProgramTables.results.getAlbums().get(albumID).setQuantity(quantity);
 		
 		// update gui view
-		setLabelStockLocation(Long.toString(storageLocation));
+		setLabelStockLocation((storageLocation > -1)?(Long.toString(storageLocation)):("-"));
 		setLabelStoreStock(Integer.toString(quantity));
 		Main.getSearchButtonStockInfoOrder().setEnabled(true);
 		// enable add to sale and get stock info
