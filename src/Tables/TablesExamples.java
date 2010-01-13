@@ -304,6 +304,8 @@ public class TablesExamples {
 	
 	public static void updateOrderStatus(int orderID, OrderStatusEnum status){
 		waitSome(1000);
+		boolean isApproved = (status == OrderStatusEnum.COMPLETED); 
+		
 		if (status == OrderStatusEnum.CANCELED) // called by orders
 			if (debugOrdersAction){
 				if (ordersActionCounter < 4){
@@ -316,8 +318,8 @@ public class TablesExamples {
 				if (requestsActionCounter < 3){
 					requestsActionCounter++;
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.REQUESTS_ACTION_FAILURE);
-				} else GuiUpdatesInterface.removeRequest(orderID);
-			} else GuiUpdatesInterface.removeRequest(orderID);
+				} else GuiUpdatesInterface.removeRequest(orderID,isApproved);
+			} else GuiUpdatesInterface.removeRequest(orderID,isApproved);
 		}
 	}
 	
