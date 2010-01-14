@@ -8,6 +8,7 @@ public class DiscDBTrackData {
 	private	String	name;
 	private	int		trackNum;
 	
+	
 	// C'tor	
 	public DiscDBTrackData(int trackNum, String trackTitle, int trackLengthSec)
 	{	
