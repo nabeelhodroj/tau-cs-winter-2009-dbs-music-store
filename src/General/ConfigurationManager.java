@@ -10,6 +10,7 @@ public class ConfigurationManager {
 	String	host;
 	int		port;
 	int		maxDBConnections;
+	String	OS;
 	
 	
 	public ConfigurationManager(String fileName)
@@ -30,7 +31,8 @@ public class ConfigurationManager {
 			setSID(p.getProperty("SID"));
 			setHost(p.getProperty("DBHost"));
 			setPort(Integer.parseInt(p.getProperty("DBPort")));
-			setMaxDBConnections(Integer.parseInt(p.getProperty("MaxDBConnections")));			
+			setMaxDBConnections(Integer.parseInt(p.getProperty("MaxDBConnections")));
+			setOS(p.getProperty("OS"));
 			
 		}
 	    catch (Exception e) {
@@ -99,6 +101,20 @@ public class ConfigurationManager {
 	public void setMaxDBConnections(int maxDBConnections) {
 		this.maxDBConnections = maxDBConnections;
 	}
+
+
+	public String getOS() {
+		return OS;
+	}
+
+
+	public void setOS(String os) {
+		OS = os;
+	}
 	
 	
+	public	boolean isOSWindows()
+	{
+		return OS.equals("Windows");
+	}	
 }
