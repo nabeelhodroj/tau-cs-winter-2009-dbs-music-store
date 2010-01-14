@@ -176,7 +176,7 @@ public class DiscDBAlbumData {
 	public	void	parseDiscTitle()	
 	{
 		this.name = "";
-		this.artist = "";
+		this.artist = Constants.NOT_AVAILABLE;
 		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
 			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
