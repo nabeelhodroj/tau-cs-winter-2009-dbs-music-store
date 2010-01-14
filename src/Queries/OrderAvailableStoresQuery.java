@@ -20,7 +20,7 @@ public class OrderAvailableStoresQuery extends Query {
 		QueryErrorException qee = new QueryErrorException("Album ID must be an integer greater than 0",this.getQueryType());
 		String albumIDText = Main.getStockLabelAlbumIDInput().getText();
 		
-		if (albumIDText == null || albumIDText.isEmpty()) throw qee; // the album id text is null or empty
+		if (albumIDText == null || albumIDText.length() == 0) throw qee; // the album id text is null or empty
 		try{
 			long albumID = Long.parseLong(albumIDText);
 			if (albumID <= 0) throw qee; // the album id text is an integer <= 0
