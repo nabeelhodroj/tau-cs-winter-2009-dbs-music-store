@@ -64,7 +64,7 @@ public class AlbumSearchQuery extends Query {
 			QueryErrorException qee = new QueryErrorException("Album ID must be an integer greater than 0",this.getQueryType());
 			String albumIDText = Main.getSearchTextBoxAlbumID().getText();
 			
-			if (albumIDText == null || albumIDText.isEmpty()) throw qee; // the album id text is null or empty
+			if (albumIDText == null || albumIDText.length() == 0) throw qee; // the album id text is null or empty
 			try{
 				long albumID = Long.parseLong(albumIDText);
 				if (albumID <= 0) throw qee; // the album id text is an integer <= 0
@@ -81,7 +81,7 @@ public class AlbumSearchQuery extends Query {
 			if (hasAlbumName){
 				String albumNameText = Main.getSearchTextBoxAlbumName().getText();
 				albumNameText = MainFuncs.replaceSubString(albumNameText, "'", "''");
-				if (albumNameText == null || albumNameText.isEmpty()) // album name text is empty
+				if (albumNameText == null || albumNameText.length() == 0) // album name text is empty
 					throw new QueryErrorException("Album name option selected, field must have value", this.getQueryType());
 				else this.albumName = albumNameText;
 			}
@@ -91,7 +91,7 @@ public class AlbumSearchQuery extends Query {
 			if (hasArtist){
 				String artistText = Main.getSearchTextBoxArtist().getText();
 				artistText = MainFuncs.replaceSubString(artistText, "'", "''");
-				if (artistText == null || artistText.isEmpty()) // artist name text is empty
+				if (artistText == null || artistText.length() == 0) // artist name text is empty
 					throw new QueryErrorException("Artist option selected, field must have value", this.getQueryType());
 				else this.artist = artistText;
 			}
@@ -105,8 +105,8 @@ public class AlbumSearchQuery extends Query {
 						+"integer values between 1900 and "+thisYear+" with 'from' year less than or equals "
 						+"'to' year", this.getQueryType());
 				
-				if (yearFromText == null || yearFromText.isEmpty() ||
-						yearToText == null || yearToText.isEmpty()) throw qee; // year from / to text is empty
+				if (yearFromText == null || yearFromText.length() == 0 ||
+						yearToText == null || yearToText.length() == 0) throw qee; // year from / to text is empty
 				else {
 					try{
 						int fromYear = Integer.parseInt(yearFromText);
@@ -127,7 +127,7 @@ public class AlbumSearchQuery extends Query {
 			if (hasSongNames){
 				String songNamesText = Main.getSearchTextBoxSongNames().getText();
 				songNamesText = MainFuncs.replaceSubString(songNamesText, "'", "''");
-				if (songNamesText == null || songNamesText.isEmpty()) // song names text is empty
+				if (songNamesText == null || songNamesText.length() == 0) // song names text is empty
 					throw new QueryErrorException("Song names option selected, field must have value", this.getQueryType());
 				else this.songNames = songNamesText;
 			}
@@ -151,7 +151,7 @@ public class AlbumSearchQuery extends Query {
 				String otherGenreText = Main.getSearchTextBoxGenreOther().getText();
 				otherGenreText = MainFuncs.replaceSubString(otherGenreText, "'", "''");
 				if (Main.getSearchCheckBoxGenreOther().getSelection() &&
-						(otherGenreText.isEmpty() || otherGenreText == null))
+						(otherGenreText.length() == 0 || otherGenreText == null))
 					throw new QueryErrorException("Other genre option selected, field must have value", this.getQueryType()); // in case other genre selected but has no value
 				else { // SET OTHER GENRE
 					this.otherGenre = otherGenreText;

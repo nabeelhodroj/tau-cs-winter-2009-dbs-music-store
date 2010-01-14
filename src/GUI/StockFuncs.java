@@ -141,7 +141,7 @@ public class StockFuncs {
 						
 						MessageBox errMsg = new MessageBox(Main.getMainShell(),SWT.ICON_ERROR);
 						errMsg.setText("Cannot place order from supplier");
-						errMsg.setMessage("Quantity must be bigger than 0.");
+						errMsg.setMessage("Quantity must be bigger than 0 and reasonable!");
 						
 						try{
 							// get album id and quantity
