@@ -42,7 +42,7 @@ public class DiscDBAlbumData {
 		}
 		else
 		{
-			this.year = "";
+			this.year = "0";
 		}
 		
 		parseDiscTitle();
