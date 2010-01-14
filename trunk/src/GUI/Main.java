@@ -319,6 +319,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		display = Display.getDefault();
 		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
+		shell.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 		
 		// set shell position
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -367,7 +368,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 			this.layout();
 			pack();
 			this.setSize(800, 590);
-			this.setFont(SWTResourceManager.getFont("Tahoma", 8, 0, false, false));
 
 			// initialize allow DB message box
 			MainFuncs.initMsgDBActionNotAllowed();
@@ -400,26 +400,32 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				mainGroupStoreDetails.setLayout(null);
 				mainGroupStoreDetails.setText("Store Details");
 				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
+				mainGroupStoreDetails.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				{
 					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
+					mainLabelStoreDetailsStoreID.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 				{
 					mainLabelStoreDetailsStoreAddress = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsStoreAddress.setBounds(5, 41, 245, 20);
+					mainLabelStoreDetailsStoreAddress.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 				{
 					mainLabelStoreDetailsStorePhone = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsStorePhone.setBounds(5, 63, 133, 20);
+					mainLabelStoreDetailsStorePhone.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 				{
 					mainLabelStoreDetailsStoreManager = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsStoreManager.setBounds(150, 62, 162, 22);
+					mainLabelStoreDetailsStoreManager.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 				{
 					mainLabelStoreDetailsDateTime = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsDateTime.setBounds(150, 19, 167, 20);
 					mainLabelStoreDetailsDateTime.setText(MainFuncs.getDay() + ", " + MainFuncs.getDate()+ ", "+ MainFuncs.getTime());
+					mainLabelStoreDetailsDateTime.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 			}
 			{
@@ -427,15 +433,18 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				mainGroupWelcome.setLayout(null);
 				mainGroupWelcome.setBounds(337, 0, 460, 86);
 				mainGroupWelcome.setText("Welcome");
+				mainGroupWelcome.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				{
 					mainLabelWelcomeText = new Label(mainGroupWelcome, SWT.NONE);
 					mainLabelWelcomeText.setBounds(8, 19, 445, 61);
+					mainLabelWelcomeText.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 				}
 			}
 			{
 				mainTabFolder = new TabFolder(this, SWT.NONE);
 				mainTabFolder.setSelection(0);
 				mainTabFolder.setBounds(7, 92, 793, 491);
+				mainTabFolder.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 
 				{
 					/*
@@ -455,36 +464,43 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupOptions.setLayout(null);
 							searchGroupOptions.setText("Search by");
 							searchGroupOptions.setBounds(5, 0, 355, 313);
+							searchGroupOptions.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							{
 								searchBulletByAlbum = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
 								searchBulletByAlbum.setText("Search by album ID:");
 								searchBulletByAlbum.setBounds(12, 16, 118, 22);
 								searchBulletByAlbum.setSelection(true);
+								searchBulletByAlbum.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchBulletOtherParameters = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
 								searchBulletOtherParameters.setText("Search by other parameters:");
 								searchBulletOtherParameters.setBounds(12, 42, 173, 22);
+								searchBulletOtherParameters.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxAlbumID = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxAlbumID.setBounds(138, 16, 205, 22);
 								searchTextBoxAlbumID.setToolTipText("Enter album ID");
+								searchTextBoxAlbumID.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxAlbumName = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxAlbumName.setText("Album name:");
 								searchCheckBoxAlbumName.setBounds(12, 69, 82, 22);
+								searchCheckBoxAlbumName.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxArtist = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxArtist.setText("Artist:");
 								searchCheckBoxArtist.setBounds(12, 93, 82, 21);
+								searchCheckBoxArtist.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxYear = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxYear.setText("Year from:");
 								searchCheckBoxYear.setBounds(12, 117, 82, 23);
+								searchCheckBoxYear.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxSongNames = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
@@ -492,105 +508,127 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchCheckBoxSongNames.setBounds(12, 141, 88, 22);
 								searchCheckBoxSongNames.setToolTipText("Enter song names / partial names separated by semicolons\n"+
 										"e.g. 'first song name;second song name;third song name'");
+								searchCheckBoxSongNames.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenres = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenres.setText("Genre(s):");
 								searchCheckBoxGenres.setBounds(12, 165, 82, 22);
+								searchCheckBoxGenres.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxAlbumName = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxAlbumName.setBounds(106, 69, 237, 22);
+								searchTextBoxAlbumName.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxArtist = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxArtist.setBounds(106, 93, 237, 22);
+								searchTextBoxArtist.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxYearFrom = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxYearFrom.setBounds(106, 117, 54, 22);
+								searchTextBoxYearFrom.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchLabelYearTo = new Label(searchGroupOptions, SWT.NONE);
 								searchLabelYearTo.setText("To:");
 								searchLabelYearTo.setBounds(168, 120, 20, 16);
+								searchLabelYearTo.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxYearTo = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxYearTo.setBounds(188, 117, 60, 22);
+								searchTextBoxYearTo.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxSongNames = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxSongNames.setBounds(106, 141, 237, 22);
+								searchTextBoxSongNames.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[0] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[0].setText("Rock");
 								searchCheckBoxGenresArr[0].setBounds(12, 186, 60, 16);
+								searchCheckBoxGenresArr[0].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[1] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[1].setText("Jazz");
 								searchCheckBoxGenresArr[1].setBounds(12, 206, 60, 16);
+								searchCheckBoxGenresArr[1].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[2] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[2].setText("Genre03");
 								searchCheckBoxGenresArr[2].setBounds(76, 186, 60, 16);
+								searchCheckBoxGenresArr[2].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[3] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[3].setText("Genre04");
 								searchCheckBoxGenresArr[3].setBounds(76, 206, 60, 16);
+								searchCheckBoxGenresArr[3].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[4] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[4].setText("Genre05");
 								searchCheckBoxGenresArr[4].setBounds(141, 186, 60, 16);
+								searchCheckBoxGenresArr[4].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[5] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[5].setText("Genre06");
 								searchCheckBoxGenresArr[5].setBounds(141, 206, 60, 16);
+								searchCheckBoxGenresArr[5].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[6] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[6].setText("Genre07");
 								searchCheckBoxGenresArr[6].setBounds(205, 186, 60, 16);
+								searchCheckBoxGenresArr[6].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[7] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[7].setText("Genre08");
 								searchCheckBoxGenresArr[7].setBounds(205, 206, 60, 16);
+								searchCheckBoxGenresArr[7].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[8] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[8].setText("Genre09");
 								searchCheckBoxGenresArr[8].setBounds(270, 186, 60, 16);
+								searchCheckBoxGenresArr[8].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[9] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[9].setText("Genre10");
 								searchCheckBoxGenresArr[9].setBounds(270, 206, 60, 16);
+								searchCheckBoxGenresArr[9].setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCheckBoxGenreOther = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreOther.setText("Other:");
 								searchCheckBoxGenreOther.setBounds(12, 223, 54, 22);
+								searchCheckBoxGenreOther.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxGenreOther = new Text(searchGroupOptions, SWT.BORDER);
 								searchTextBoxGenreOther.setBounds(76, 224, 273, 22);
+								searchTextBoxGenreOther.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchButtonClear = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
 								searchButtonClear.setText("Clear Fields");
 								searchButtonClear.setBounds(12, 273, 156, 33);
+								searchButtonClear.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchButtonSearch = new Button(searchGroupOptions, SWT.PUSH | SWT.CENTER);
 								searchButtonSearch.setText("Search");
 								searchButtonSearch.setBounds(174, 273, 169, 33);
+								searchButtonSearch.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchCompositeStockField = new Composite(searchGroupOptions, SWT.NONE);
@@ -600,22 +638,26 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 									searchLabelStock = new Label(searchCompositeStockField, SWT.NONE);
 									searchLabelStock.setText("Stock:");
 									searchLabelStock.setBounds(0, 3, 36, 16);
+									searchLabelStock.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 								}
 								{
 									searchBulletInStockInStore = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockInStore.setText("In store");
 									searchBulletInStockInStore.setBounds(191, 0, 60, 22);
+									searchBulletInStockInStore.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 								}
 								{
 									searchBulletInStockInNetwork = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockInNetwork.setText("In network");
 									searchBulletInStockInNetwork.setBounds(115, 0, 76, 22);
+									searchBulletInStockInNetwork.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 								}
 								{
 									searchBulletInStockAll = new Button(searchCompositeStockField, SWT.RADIO | SWT.LEFT);
 									searchBulletInStockAll.setText("All");
 									searchBulletInStockAll.setBounds(64, 0, 33, 22);
 									searchBulletInStockAll.setSelection(true);
+									searchBulletInStockAll.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 								}
 							}
 						}
@@ -624,12 +666,14 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupResults.setLayout(null);
 							searchGroupResults.setText("Search Results");
 							searchGroupResults.setBounds(366, 0, 419, 465);
+							searchGroupResults.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							{
 								searchTableAlbumResults = new Table(searchGroupResults, SWT.BORDER | SWT.FULL_SELECTION
 										| SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE); // single row selection
 								searchTableAlbumResults.setBounds(13, 23, 395, 200);
 								searchTableAlbumResults.setHeaderVisible(true);
 								searchTableAlbumResults.setLinesVisible(true);
+								searchTableAlbumResults.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 								int numOfColumns = 6;
 								int tableWidth = searchTableAlbumResults.getClientArea().width - getBorderWidth()*2;
 								
@@ -675,7 +719,8 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchTableSongResults.setBounds(13, 330, 395, 128);
 								searchTableSongResults.setHeaderVisible(true);
 								searchTableSongResults.setLinesVisible(true);
-								
+								searchTableSongResults.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
+
 								int tableWidth = searchTableSongResults.getClientArea().width - getBorderWidth()*2;
 								int numOfColumns = 4;
 								
@@ -722,6 +767,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								searchButtonShowSongs = new Button(searchGroupResults, SWT.PUSH | SWT.CENTER);
 								searchButtonShowSongs.setText("Show Song List");
 								searchButtonShowSongs.setBounds(15, 296, 392, 30);
+								searchButtonShowSongs.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 						}
 						{
@@ -729,30 +775,36 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupStockInfo.setLayout(null);
 							searchGroupStockInfo.setText("Stock Information");
 							searchGroupStockInfo.setBounds(5, 319, 171, 146);
+							searchGroupStockInfo.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							{
 								searchLabelStockInfoStoreStock = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoStoreStock.setText("Store stock:");
 								searchLabelStockInfoStoreStock.setBounds(12, 22, 152, 19);
+								searchLabelStockInfoStoreStock.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchLabelStockInfoLocation = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoLocation.setText("Storage location: ");
 								searchLabelStockInfoLocation.setBounds(12, 44, 152, 19);
+								searchLabelStockInfoLocation.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchLabelStockInfoPrice = new Label(searchGroupStockInfo, SWT.NONE);
 								searchLabelStockInfoPrice.setText("Price:");
 								searchLabelStockInfoPrice.setBounds(12, 66, 152, 19);
+								searchLabelStockInfoPrice.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchButtonStockInfoOrder = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonStockInfoOrder.setText("Place an Order...");
 								searchButtonStockInfoOrder.setBounds(12, 113, 147, 23);
+								searchButtonStockInfoOrder.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchButtonGetStockInfo = new Button(searchGroupStockInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonGetStockInfo.setText("Get Stock Information");
 								searchButtonGetStockInfo.setBounds(12, 87, 147, 26);
+								searchButtonGetStockInfo.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 						}
 						{
@@ -760,20 +812,24 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							searchGroupSaleInfo.setLayout(null);
 							searchGroupSaleInfo.setText("Sale");
 							searchGroupSaleInfo.setBounds(182, 319, 177, 146);
+							searchGroupSaleInfo.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							{
 								searchLabelSaleInfoQuantity = new Label(searchGroupSaleInfo, SWT.NONE);
 								searchLabelSaleInfoQuantity.setText("Add to sale with quantity:");
 								searchLabelSaleInfoQuantity.setBounds(8, 22, 127, 22);
+								searchLabelSaleInfoQuantity.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchTextBoxSaleInfoQuantity = new Text(searchGroupSaleInfo, SWT.BORDER);
 								searchTextBoxSaleInfoQuantity.setText("1");
 								searchTextBoxSaleInfoQuantity.setBounds(137, 19, 28, 22);
+								searchTextBoxSaleInfoQuantity.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 							{
 								searchButtonSaleInfoSale = new Button(searchGroupSaleInfo, SWT.PUSH | SWT.CENTER);
 								searchButtonSaleInfoSale.setText("Add to Sale...");
 								searchButtonSaleInfoSale.setBounds(8, 88, 157, 48);
+								searchButtonSaleInfoSale.setFont(SWTResourceManager.getFont("Times New Roman", 8, 0, false, false));
 							}
 						}
 					}
