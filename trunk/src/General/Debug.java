@@ -69,8 +69,8 @@ public class Debug {
 			if (queryOutputFile == null) {
 				queryOutputFile = new BufferedWriter(new FileWriter(QUERY_FILE));
 			}
-			cal = Calendar.getInstance();
-			queryOutputFile.write(sdf.format(cal.getTime())+" > "+message + "\r\n");
+		//	queryOutputFile.write(message + "\n");
+			queryOutputFile.write(message);
 			queryOutputFile.flush();
 		} catch (IOException e) {
 			System.err.println(e);
