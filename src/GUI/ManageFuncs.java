@@ -760,6 +760,7 @@ public class ManageFuncs {
 		if (errMsg.open() == SWT.OK) {
 			// restore gui
 			MainFuncs.setAllowDBAction(true);
+			Main.getManageButtonEmployeeNoSave().setEnabled(true);
 		}
 	}
 	

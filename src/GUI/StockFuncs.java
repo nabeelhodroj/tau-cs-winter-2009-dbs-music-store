@@ -331,7 +331,16 @@ public class StockFuncs {
 	 */
 	public static void updateOrderAvailableStoresTable(){
 		// update table results
-		updateOrderAvailableStoresTableView();		
+		updateOrderAvailableStoresTableView();
+		
+		// if results are empty, pop a message
+		if (StaticProgramTables.availableStores.getAvailableStores().isEmpty()){
+			MessageBox msg = new MessageBox(Main.getMainShell(),SWT.ICON_INFORMATION);
+			msg.setText("No available stores");
+			msg.setMessage("Search did not find any available stores.");
+			msg.open();
+		}
+		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);
 	}
@@ -426,7 +435,11 @@ public class StockFuncs {
 	 * sets place order button available
 	 */
 	public static void availableStoreSelected(){
-		Main.getStockButtonPlaceOrder().setEnabled(true);
+		// if selected store is not this store, enable place order
+		int selectedStoreID = Integer.valueOf(Main.getStockTableOrderAvailableStores().getSelection()[0].getText(0));
+		if (selectedStoreID == StaticProgramTables.getThisStore().getStoreID()){
+			Main.getStockButtonPlaceOrder().setEnabled(false);
+		} else Main.getStockButtonPlaceOrder().setEnabled(true);
 	}
 	
 	// place order button
@@ -814,6 +827,9 @@ public class StockFuncs {
 		// remove request from requests table
 		StaticProgramTables.requests.getOrders().remove(requestID);
 		
+		// update view
+		updateRequestsTableView();
+		
 		// if order is approved and album results aren't null
 		if (isApproved && (StaticProgramTables.results != null)){
 			// check if album appears in search results and its stock info is already fetched
@@ -824,20 +840,16 @@ public class StockFuncs {
 				int newQuantity = album.getQuantity()-requestedQuantity;
 				// update its stock info
 				album.setQuantity(newQuantity);
-				// if this album is selected in results, update also the stock info in search tab
-				if (Main.getSearchTableAlbumResults().getSelection().length > 0){
-					if (Main.getSearchTableAlbumResults().getSelection()[0].getText(0).equals(
-							Long.toString(album.getAlbumID()))){
-						// update stock label
-						Main.getSearchLabelStockInfoStoreStock().setText("Store stock: "+
-								Integer.toString(newQuantity));
-					}
-				}
+				
+				// unselect any result selected in search tab, and update its view
+				Main.getSearchTableAlbumResults().deselectAll();
+				SearchFuncs.clearStockInfo();
+				Main.getSearchButtonGetStockInfo().setEnabled(false);
+				Main.getSearchButtonStockInfoOrder().setEnabled(false);
+				Main.getSearchButtonShowSongs().setEnabled(false);
+				Main.getSearchButtonSaleInfoSale().setEnabled(false);
 			}
 		}
-		
-		// update view
-		updateRequestsTableView();
 		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);
