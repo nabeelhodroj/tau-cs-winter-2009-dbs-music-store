@@ -316,13 +316,14 @@ public class DBConnectionManage {
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);
 					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
-						if (!genres.containsKey(albumData.getGenere())){
+						String genreName = albumData.getGenere().toLowerCase();
+						if (!genres.containsKey(genreName)){
 							genreID = genres.size();
-							genres.put(albumData.getGenere(), genreID);
-							genreBuffer = "INSERT INTO genres(genre_id,genre_name) VALUES(" + genreID + ",'" + albumData.getGenere() + "')";
+							genres.put(genreName, genreID);
+							genreBuffer = "INSERT INTO genres(genre_id,genre_name) VALUES(" + genreID + ",'" + genreName + "')";
 							insertBatch.add(genreBuffer);
 						} else {
-							genreID = genres.get(albumData.getGenere());
+							genreID = genres.get(genreName);
 						}
 						
 						if (!artistNames.containsKey(albumData.getArtist())){
