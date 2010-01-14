@@ -210,6 +210,7 @@ public class DiscDBAlbumData {
 		return  ((this.name.length() > 0) &&
 				(this.name.length() <= Constants.MAX_ALBUM_NAME_LENGTH) &&
 				(this.artist.length() <=  Constants.MAX_ARTIST_NAME_LENGTH) &&
+				(this.artist.length() > 0) &&
 				(this.genere.length() <=  Constants.MAX_GENRE_LENGTH) );
 	}
 	
