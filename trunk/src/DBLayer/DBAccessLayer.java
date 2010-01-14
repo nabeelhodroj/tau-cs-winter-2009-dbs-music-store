@@ -252,6 +252,9 @@ public class DBAccessLayer {
 			{
 				// Add to batch
 				stmt.addBatch(s);
+				
+				// insert command to log
+				Debug.query(s);				
 			}
 			
 			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + sqlCommands.size() + " commands");
@@ -292,7 +295,7 @@ public class DBAccessLayer {
 			// execute each statement
 			for (int i = 0; i < sqlList.size(); i++)
 			{
-				// insert query to log
+				// insert command to log
 				Debug.query(sqlList.get(i));
 				
 				int updated = stmt.executeUpdate(sqlList.get(i));
@@ -378,6 +381,7 @@ public class DBAccessLayer {
 		{
 			long startTime = System.nanoTime();		// for performance measuring
 			// Execute the statement
+			 Debug.log("DBAccessLayer::doBatch: INFO - Starting batch...");
 			res = stmt.executeBatch();
 			 // calculate how much time the process took
 			 long estimatedTime = System.nanoTime() - startTime;
