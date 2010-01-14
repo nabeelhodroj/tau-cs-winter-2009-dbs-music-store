@@ -14,7 +14,7 @@ import General.Debug.DebugOutput;
 import Queries.*;
 import Tables.*;
 
-/**
+/** 
  *	This class contains the Runnable classes for handling the GUI tab "SALE".
  * 	Each class corresponds to a single method in DBConnectionInterface class.
  */
