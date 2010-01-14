@@ -94,4 +94,14 @@ public class Debug {
 	public static void log(String message){
 		log(message, DebugOutput.FILE);
 	}
+	
+	/**
+	 * Closing file handles.
+	 */
+	public static void closeLog(){
+		try {
+			outputFile.close();
+			queryOutputFile.close();
+		} catch (IOException e) {}	
+	}
 }
