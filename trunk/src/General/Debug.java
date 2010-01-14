@@ -66,11 +66,12 @@ public class Debug {
 	 */
 	public static void query(String message) {
 		try {
-			if (queryOutputFile == null) {
+			if (queryOutputFile == null) 
+			{
 				queryOutputFile = new BufferedWriter(new FileWriter(QUERY_FILE));
 			}
-		//	queryOutputFile.write(message + "\n");
-			queryOutputFile.write(message);
+		//	queryOutputFile.write(message + "\n");		
+			queryOutputFile.write(message + ";\r\n");	// for running it as sql script
 			queryOutputFile.flush();
 		} catch (IOException e) {
 			System.err.println(e);
