@@ -4,11 +4,9 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.Toolkit;
+import java.io.File;
 import java.net.URL;
-
 import javax.swing.*;
-
-import DBLayer.DBConnectionInterface;
 import DBLayer.DBConnectionPool;
 import Tables.TablesExamples;
 import General.Debug;
@@ -22,9 +20,8 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.awt.SWT_AWT;
 
 /**
- * created by Ariel
- * 
-*/
+ * Main
+ */
 public class Main extends org.eclipse.swt.widgets.Composite {
 
 	{
@@ -56,7 +53,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static int central_x;
 	private static int central_y;
 	
-	private static String externalPath = System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\";
+	//private static String externalPath = System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\";
+	private static String sep = File.separator;
+	private static String relPath = "."+sep+"External"+sep;
 	
 	// Quick tips
 	private static Group mainGroupWelcome;
@@ -288,8 +287,9 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		// Start GUI
 		showGUI();
 		
-		// close all DB connections and exit
-		DBConnectionPool.closeAllConnections();		
+		// close all DB connections and log files and exit
+		DBConnectionPool.closeAllConnections();
+		Debug.closeLog();
 		System.exit(-1);
 	}
 	
@@ -315,7 +315,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		shell.setLocation(central_x-400,central_y-300);
 		
 		// set program icon
-		Image progIcon = new Image(display,externalPath+"\\icon.png");
+		Image progIcon = new Image(display,relPath+"icon.png");
 		shell.setImage(progIcon);
 		
 		Main inst = new Main(shell, SWT.NULL);
@@ -2191,11 +2191,11 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		central_y = centralY;
 	}
 
-	public static String getExternalPath() {
-		return externalPath;
+	public static String getSep() {
+		return sep;
 	}
 
-	public static void setExternalPath(String externalPath) {
-		Main.externalPath = externalPath;
+	public static String getRelPath() {
+		return relPath;
 	}
 }

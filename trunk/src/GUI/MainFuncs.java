@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -48,7 +49,8 @@ public class MainFuncs {
 	 */
 	public static void initDBConnection(){
 		// create connection
-		StaticProgramTables.confMan = new ConfigurationManager(Main.getExternalPath()+"\\Store.props");
+		StaticProgramTables.confMan = new ConfigurationManager(Main.getRelPath()+"Store.props");
+		System.out.println(System.getProperties());
 		
 		DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
 	}
@@ -154,8 +156,9 @@ public class MainFuncs {
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e){
 						Debug.log("Initial Dialog: Exit button clicked",DebugOutput.FILE,DebugOutput.STDOUT);
-						// close all DB connections and exit
+						// close all DB connections and log files and exit
 						DBConnectionPool.closeAllConnections();
+						Debug.closeLog();
 						System.exit(-1);
 					}
 				}
@@ -298,8 +301,9 @@ public class MainFuncs {
 		}
 		// otherwise quit program
 		else {
-			// close all DB connections and exit
+			// close all DB connections and log files and exit
 			DBConnectionPool.closeAllConnections();
+			Debug.closeLog();
 			System.exit(-1);
 		}
 	}
@@ -357,13 +361,10 @@ public class MainFuncs {
 	/////////////////////
 	
 	public static String getAnimationURL(){
-		// get class path
-		String classPath = Main.getExternalPath();
-		StringTokenizer tokenizer = new StringTokenizer(classPath, ";");
-		
-		String projectPath = tokenizer.nextToken();  
-		String str = projectPath.replaceAll(" ","%20");
-		String url = "file:///"+str.replaceAll("\\\\","/")+"/rubi_animation.gif";
+		File anim = new File(Main.getRelPath()+"rubi_animation.gif");
+		String animPath = anim.getAbsolutePath();  
+		String str = animPath.replaceAll(" ","%20");
+		String url = "file:///"+str.replaceAll("\\\\","/");
 		return url;
 	}
 

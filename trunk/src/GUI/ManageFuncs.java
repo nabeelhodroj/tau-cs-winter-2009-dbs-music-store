@@ -356,9 +356,9 @@ public class ManageFuncs {
 		
 		// check that first name, last name and address are not empty
 		// and that there are no "'" in them
-		if (Main.getManageTextBoxEmployeeFNameInput().getText().isEmpty() ||
-				Main.getManageTextBoxEmployeeLNameInput().getText().isEmpty() ||
-				Main.getManageTextBoxEmployeeAddressInput().getText().isEmpty())
+		if (Main.getManageTextBoxEmployeeFNameInput().getText().length() == 0 ||
+				Main.getManageTextBoxEmployeeLNameInput().getText().length() == 0 ||
+				Main.getManageTextBoxEmployeeAddressInput().getText().length() == 0)
 			throw new EmployeeDetailsValidityException("Employee full name must be specified");
 		char[] fName = Main.getManageTextBoxEmployeeFNameInput().getText().toCharArray();
 		char[] lName = Main.getManageTextBoxEmployeeLNameInput().getText().toCharArray();
@@ -392,7 +392,7 @@ public class ManageFuncs {
 		}
 		
 		// check that position is valid - not empty and no double managers
-		if (Main.getManageComboEmployeePositionInput().getText().isEmpty())
+		if (Main.getManageComboEmployeePositionInput().getText().length() == 0)
 			throw new EmployeeDetailsValidityException("Must select employee position");
 		if (Main.getManageComboEmployeePositionInput().getText().equals(EmployeePositionsEnum.MANAGER.getStrRep())
 				&& alreadyHasManager() && !amIManager)
