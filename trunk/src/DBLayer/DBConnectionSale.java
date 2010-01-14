@@ -37,7 +37,7 @@ public class DBConnectionSale {
 
 
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionSale.MakeSale thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			

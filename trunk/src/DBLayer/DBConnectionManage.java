@@ -16,7 +16,7 @@ import General.Debug.DebugOutput;
 public class DBConnectionManage {
 	
 	public class GetEmployeesTable implements Runnable{
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionManage.GetEmployeesTable thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
@@ -81,7 +81,7 @@ public class DBConnectionManage {
 			this.employeeID = employeeID;
 		}
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionManage.CheckIfEmployeeExists thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
@@ -128,7 +128,7 @@ public class DBConnectionManage {
 			this.employee = employee;
 		}
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionManage.InsertUpdateEmployee thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 
@@ -186,7 +186,7 @@ public class DBConnectionManage {
 			this.employeeID = employeeID;
 		}
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionManage.RemoveEmployee thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
@@ -216,7 +216,7 @@ public class DBConnectionManage {
 				this.filename = filename;
 			}
 
-			@Override
+			
 			public void run() {
 				try {
 					DiscDBParser.parseFile(filename);
@@ -290,7 +290,7 @@ public class DBConnectionManage {
 				}	
 			}
 
-			@Override
+			
 			public void run() {
 				List<DiscDBAlbumData> parsedAlbums;
 				while (parseThread.isAlive() || DiscDBParser.getCurrentAlbumListSize() > 0){
@@ -390,7 +390,7 @@ public class DBConnectionManage {
 		
 		
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionManage.UpdateDatabase thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			

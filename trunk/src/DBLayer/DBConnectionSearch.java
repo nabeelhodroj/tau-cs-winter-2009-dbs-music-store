@@ -19,7 +19,7 @@ public class DBConnectionSearch {
 		
 		// TODO: Deal with unique in case of Songs search
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionSearch.GetAlbumsSearchResults thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
@@ -130,7 +130,7 @@ public class DBConnectionSearch {
 		public GetSongsResults(long albumID) {
 			this.albumID = albumID;
 		}
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionSearch.GetSongsResults thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
