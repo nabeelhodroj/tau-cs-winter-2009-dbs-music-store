@@ -154,8 +154,8 @@ public class TablesExamples {
 			if (searchCounter < 1){
 				searchCounter++;
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.SEARCH_FAILURE);
-			} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
-		} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample);
+			} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample,55);
+		} else GuiUpdatesInterface.updateAlbumResultsTable(albumsResultsTableExample,55);
 	}
 	
 	/**
