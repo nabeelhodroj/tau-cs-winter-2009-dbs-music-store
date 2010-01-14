@@ -19,19 +19,6 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.awt.SWT_AWT;
 
-
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 /**
  * Main
  */
@@ -50,6 +37,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	// Main
 	private static Shell shell;
 	private static Display display;
+	public static final Font defaultFont = SWTResourceManager.getFont("Times New Roman", 9, 0, false, false);
 	
 	// Main Menu
 
@@ -319,7 +307,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		display = Display.getDefault();
 		shell = new Shell(display, SWT.TITLE | SWT.CLOSE | SWT.MIN);
 		shell.setText("SSDA Music Store Manager");
-		shell.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
+		shell.setFont(defaultFont);
 		
 		// set shell position
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -332,6 +320,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 		shell.setImage(progIcon);
 		
 		Main inst = new Main(shell, SWT.NULL);
+		inst.setFont(defaultFont);
 		Point size = inst.getSize();
 		shell.setLayout(new FillLayout());
 		shell.layout();
@@ -400,7 +389,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 				mainGroupStoreDetails.setLayout(null);
 				mainGroupStoreDetails.setText("Store Details");
 				mainGroupStoreDetails.setBounds(7, 0, 324, 86);
-				mainGroupStoreDetails.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
+				mainGroupStoreDetails.setFont(defaultFont);
 				{
 					mainLabelStoreDetailsStoreID = new Label(mainGroupStoreDetails, SWT.NONE);
 					mainLabelStoreDetailsStoreID.setBounds(5, 19, 101, 20);
