@@ -50,7 +50,6 @@ public class MainFuncs {
 	public static void initDBConnection(){
 		// create connection
 		StaticProgramTables.confMan = new ConfigurationManager(Main.getRelPath()+"Store.props");
-		System.out.println(System.getProperties());
 		
 		DBConnectionInterface.initDBConnection(StaticProgramTables.confMan);
 	}
