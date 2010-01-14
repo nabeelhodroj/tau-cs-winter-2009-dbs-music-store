@@ -53,7 +53,6 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static int central_x;
 	private static int central_y;
 	
-	//private static String externalPath = System.getProperty("java.class.path").split(";")[0]+"\\..\\External\\";
 	private static String sep = File.separator;
 	private static String relPath = "."+sep+"External"+sep;
 	
