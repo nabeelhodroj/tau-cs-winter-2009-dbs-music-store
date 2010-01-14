@@ -157,6 +157,7 @@ public class DBConnectionPool {
 		finally
 		{
 			lock.unlock();
+			Debug.log("DBConnectionPool::closeAllConnections: INFO - closed all connections");		
 		}
 	}
 }
