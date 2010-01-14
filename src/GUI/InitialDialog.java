@@ -1,5 +1,5 @@
 package GUI;
-
+import com.cloudgarden.resource.SWTResourceManager;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.*;
 
@@ -46,6 +46,13 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 		try {
 			Shell parent = getParent();
 			dialogShell = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+
+			{
+				//Register as a resource user - SWTResourceManager will
+				//handle the obtaining and disposing of resources
+				SWTResourceManager.registerResourceUser(dialogShell);
+			}
+			
 			dialogShell.setText("SSDA Music Store Manager");
 
 			dialogShell.setLayout(null);
@@ -54,19 +61,24 @@ public class InitialDialog extends org.eclipse.swt.widgets.Dialog {
 				initDialogGroup.setLayout(null);
 				initDialogGroup.setText("Select store");
 				initDialogGroup.setBounds(0, 4, 306, 113);
+				initDialogGroup.setFont(Main.defaultFont);
 				{
 					initDialogCombo = new Combo(initDialogGroup, SWT.READ_ONLY);
 					initDialogCombo.setBounds(12, 29, 276, 21);
+					initDialogCombo.setFont(Main.defaultFont);
+					initDialogCombo.setEnabled(false);
 				}
 				{
 					initDialogButtonStart = new Button(initDialogGroup, SWT.PUSH | SWT.CENTER);
 					initDialogButtonStart.setText("Start");
 					initDialogButtonStart.setBounds(12, 62, 135, 33);
+					initDialogButtonStart.setFont(Main.defaultFont);
 				}
 				{
 					initDialogButtonExit = new Button(initDialogGroup, SWT.PUSH | SWT.CENTER);
 					initDialogButtonExit.setText("Exit");
 					initDialogButtonExit.setBounds(153, 62, 135, 33);
+					initDialogButtonExit.setFont(Main.defaultFont);
 				}
 			}
 			dialogShell.layout();

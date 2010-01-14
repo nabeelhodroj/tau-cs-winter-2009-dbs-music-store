@@ -168,6 +168,8 @@ public class MainFuncs {
 	 * initialize initial dialog combo box
 	 */
 	public static void initDialogComboBoxItems(){
+		// enable combo box
+		InitialDialog.getInitDialogCombo().setEnabled(true);
 		for(StoresTableItem store : StaticProgramTables.stores.getStores().values()){
 			InitialDialog.getInitDialogCombo().add(store.getStoreID()+": "+store.getCity());
 		}
