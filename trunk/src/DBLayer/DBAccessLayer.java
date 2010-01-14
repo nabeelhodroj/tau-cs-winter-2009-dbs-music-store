@@ -379,6 +379,7 @@ public class DBAccessLayer {
 		int[] res = null;
 		try
 		{
+			conn.setAutoCommit(false);
 			long startTime = System.nanoTime();		// for performance measuring
 			// Execute the statement
 			 Debug.log("DBAccessLayer::doBatch: INFO - Starting batch...");
@@ -397,6 +398,7 @@ public class DBAccessLayer {
 					return i;
 				}
 			}
+			conn.commit();
 			return res.length;
 		}
 		catch (SQLException e)
@@ -414,7 +416,15 @@ public class DBAccessLayer {
 		}
 		// release connection and statement - no matter what
 		finally
-		{		
+		{
+			try
+			{
+				conn.setAutoCommit(true);
+			}
+			catch (SQLException e)
+			{
+				
+			}
 			closeStatementAndConnection(conn, stmt);
 		}			
 	}	
