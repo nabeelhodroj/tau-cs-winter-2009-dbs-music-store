@@ -8,33 +8,18 @@ public class DiscDBTrackData {
 	private	String	name;
 	private	int		trackNum;
 	
-	public static final String DB_NULL_VALUE = "NULL";
-	private static	int		MAX_ARTIST_NAME_LENGTH = 150;
-	private static	int		MAX_TRACK_NAME_LENGTH = 150;	
-	
 	// C'tor	
-	public DiscDBTrackData(int trackNum, String trackTitle, String trackArtist, int trackLengthSec)
+	public DiscDBTrackData(int trackNum, String trackTitle, int trackLengthSec)
 	{	
 		this.trackNum = trackNum;
-		this.title = trackTitle;
-		this.artist = trackArtist;		
+		this.title = trackTitle;	
 		this.lengthSdc = trackLengthSec;
 								
-		if (trackArtist != null)
-		{
-			this.artist = trackArtist;
-			this.name = trackTitle;
-		}
-		else
-		{
-			parseTrackTitle();
-		}
+		parseTrackTitle();
 		
 		this.artist = this.artist.replace("'", "''");
 		this.title = this.title.replace("'", "''");
-		this.name = this.name.replace("'", "''");
-		
-		
+		this.name = this.name.replace("'", "''");		
 	}
 	
 	
@@ -63,6 +48,12 @@ public class DiscDBTrackData {
 		this.trackNum = trackNum;
 	}
 	
+	public	boolean	hasArtist()
+	{
+		return (this.artist.length() > 0);
+	}		
+	
+	
 	/** Try to get track's name and artist, if the title is in the format of:
 	 *		artist / name
 	 *		possible other titles:
@@ -72,34 +63,19 @@ public class DiscDBTrackData {
 	{		
 		this.name = "";
 		this.artist = "";
-		if (this.title.indexOf(" / ") != -1)
+		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
-			String[] artistAndName = 	this.title.split(" / ");
+			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
 			if (artistAndName.length == 2)
 			{
 				this.artist = artistAndName[0].trim();
 				this.name = artistAndName[1].trim();	
-			}			
-				
-			/*for (int i = 0; i < artistAndName.length-1; i++)
-			{
-				if (this.artist.length() > 0)
-				{
-					this.artist += ", ";
-				}	
-				this.artist += artistAndName[i].trim();				
-			}
-			this.name = artistAndName[artistAndName.length-1].trim();
-			if (artistAndName.length > 2)
-			{
-		//		Debug.log("DiscDBParser::parseTarFile: INFO - multiple slash title: " + this.title +
-			//			"\n artist: " + this.artist + "\n name: " + this.name);				
-			}*/
+			}						
 		}
+		// No slash, no artist defined for track	
 		else
 		{
-			this.name = this.title;
-			this.artist = DB_NULL_VALUE;			
+			this.name = this.title;	
 //			Debug.log("DiscDBParser::parseTarFile: INFO - no slash title: " + this.title);								
 		}		
 	}
@@ -108,18 +84,19 @@ public class DiscDBTrackData {
 	public	boolean isValid()
 	{
 		// valid track is of from: artist / name (or it doesn't contain a " / ")
-		if (this.title.indexOf(" / ") != -1)
+		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
-			String[] artistAndName = 	this.title.split(" / ");
+			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
 			if (artistAndName.length != 2)
 			{
 				return false;
 			}
 		}		
-		return ((this.name.length() > 0) && (this.artist.length() > 0)
-				&& (this.artist.length() <= MAX_ARTIST_NAME_LENGTH) &&
-				(this.name.length() <= MAX_TRACK_NAME_LENGTH));
+		return ((this.name.length() > 0) && 
+				(this.name.length() <= Constants.MAX_TRACK_NAME_LENGTH) &&
+				(this.artist.length() <= Constants.MAX_ARTIST_NAME_LENGTH));
 	}
+	
 	
 	public	String	toString()
 	{
