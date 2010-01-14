@@ -520,7 +520,7 @@ public class SearchFuncs {
 		} else if (numOfResults <= StaticProgramTables.getMaxNumOfResults()){
 			msg.setMessage("Search done, found "+numOfResults+" albums.");
 		} else {
-			msg.setMessage("Found more than "+StaticProgramTables.getMaxNumOfResults()+" results.\n"+
+			msg.setMessage("Found "+numOfResults+" results.\n"+
 					"Only first "+StaticProgramTables.getMaxNumOfResults()+" results will be shown, to get other results please refine your search.");
 		}
 		msg.open();
