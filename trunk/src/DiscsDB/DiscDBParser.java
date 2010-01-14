@@ -15,9 +15,6 @@ public class DiscDBParser {
 	private static String 	BZIP2_SUFFIX = ".bz2";
 	private static String 	BZIP2_TAR_SUFFIX = ".tar.tar";
 	private	static	int		TRACK_FRAMES_IN_SEC = 75;
-	private static 	int		MAX_ALBUMS_IN_LIST = 10000;
-	private	static	int		MIN_ALBUM_PRICE = 30;
-	private	static	int		MAX_ALBUM_PRICE = 120;
 	
 	private	static	boolean	Parsing = false;
 	
@@ -127,7 +124,7 @@ public class DiscDBParser {
 							if (par.run()) 
 							{
 								// Reset variables
-								String sGenere = "unknown";
+								String sGenere = Constants.UNKNOWN_GENRE;
 								// Get name of genre
 								if (par.getDgenre().trim().length() > 0) 
 								{
@@ -135,10 +132,10 @@ public class DiscDBParser {
 								}			
 								
 								// Generate (random) price for albums
-								int price = MIN_ALBUM_PRICE + random.nextInt(MAX_ALBUM_PRICE - MIN_ALBUM_PRICE + 1);								
+								int price = Constants.MIN_ALBUM_PRICE + random.nextInt(Constants.MAX_ALBUM_PRICE - Constants.MIN_ALBUM_PRICE + 1);								
 								
 								DiscDBAlbumData discData = new DiscDBAlbumData(par.getDtitle(), sGenere, par.getDyear(), par.getDiscLength(), price); 								
-								Pattern _notAsciiPattern = Pattern.compile("[^\\p{ASCII}]"); 
+								Pattern _notAsciiPattern = Pattern.compile(Constants.NON_ASCII_REGEX); 
 								boolean ascii = !(_notAsciiPattern.matcher(par.getDtitle()).find());
 								boolean valid = discData.isValid();	// make sure disc name and artist is in valid format
 								for (int i = 0; i < par.getTrackOffsets().size() && (ascii && valid) ; i++)
@@ -154,13 +151,7 @@ public class DiscDBParser {
 										trackLnegthSec = getLastTrackLengthInSec(par.getTrackOffsets().get(i), discData.getLengthSec());
 									}									
 									
-									// does album has an artist ? if so - add it to all the tracks
-									String albumArtist = null;
-									if (!discData.isVariousArtists())
-									{
-										albumArtist = discData.getArtist(); 
-									}
-									DiscDBTrackData trackData = new DiscDBTrackData(i+1, par.getTtitle()[i], albumArtist, trackLnegthSec);
+									DiscDBTrackData trackData = new DiscDBTrackData(i+1, par.getTtitle()[i], trackLnegthSec);
 									discData.addTrackToList(trackData);
 									ascii = !(_notAsciiPattern.matcher(par.getTtitle()[i]).find());
 									valid = trackData.isValid();
@@ -171,14 +162,9 @@ public class DiscDBParser {
 								if (ascii && valid)
 								{
 									legalsDiscs++;
-									// Add genere to list
-							/*		if (!genereList.contains(sGenere))
-									{
-										genereList.add(sGenere);
-									}*/
 									
 									// move albums to "main" list, so someone else may read them
-									if (albumList.size() >= MAX_ALBUMS_IN_LIST )
+									if (albumList.size() >= Constants.ALBUMS_BATCH_SIZE )
 									{
 										addAlbumDataToList(albumList);
 										albumList.clear();											
@@ -236,31 +222,15 @@ public class DiscDBParser {
 	/* Extract file in Bzip2 format, into tar file */
 	private static void parseZipFile(String fileName)	 throws IOException
 	{
-/*		String tarFileName = TEMP_TAR_ARCHIVE;
-		
-		FileInputStream in = new FileInputStream(fileName);
-		FileOutputStream out = new FileOutputStream(tarFileName);
-		BZip2CompressorInputStream bzIn = new BZip2CompressorInputStream(in);
-		final byte[] buffer = new byte[bufferSize];
-		int n = 0;
-		try
-		{
-			while (-1 != (n = bzIn.read(buffer))) {
-				out.write(buffer, 0, n);
-			}
-		}
-		finally
-		{
-			out.close();
-			bzIn.close();
-		}		*/
 		parseTarFile(fileName, false);
 	}
 	
 	
 	public static void parseFile(String fileName) throws IOException 
 	{
-		// read bz2 file (which can come in form of *.tar.tar) into tar file
+		// Always act as zip file
+		parseZipFile(fileName);
+	/*	// read bz2 file (which can come in form of *.tar.tar) into tar file
 		if (fileName.endsWith(BZIP2_SUFFIX) || fileName.endsWith(BZIP2_TAR_SUFFIX))
 		{
 			parseZipFile(fileName);
@@ -269,7 +239,7 @@ public class DiscDBParser {
 		else
 		{		
 			parseTarFile(fileName, true);
-		}
+		}*/
 	}
 		
 	/** Calculate track length in seconds, according to its' and the successor offsets **?

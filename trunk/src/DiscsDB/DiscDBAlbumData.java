@@ -11,10 +11,6 @@ import General.Debug;
 
 public class DiscDBAlbumData {	
 	
-	// field length constraints
-	private static	int		MAX_GENRE_LENGTH = 50;
-	private static	int		MAX_ARTIST_NAME_LENGTH = 150;
-	private static	int		MAX_ALBUM_NAME_LENGTH = 150;
 
 	private List<DiscDBTrackData> trackList = new LinkedList<DiscDBTrackData>();
 	private	String	title;	/* disc title, may include artist name */
@@ -26,7 +22,6 @@ public class DiscDBAlbumData {
 	private int		Price;
 	private boolean isVariousArtists ;
 	
-	public static final String DB_NULL_VALUE = "NULL";
 
 	
 	public DiscDBAlbumData(String title, String genere, int year, int lengthSec)	
@@ -47,7 +42,7 @@ public class DiscDBAlbumData {
 		}
 		else
 		{
-			this.year = DB_NULL_VALUE;
+			this.year = "";
 		}
 		
 		parseDiscTitle();
@@ -67,6 +62,14 @@ public class DiscDBAlbumData {
 	 */
 	public	void addTrackToList(DiscDBTrackData track)
 	{
+		/*
+		 *  If albums has a single artist and track doesn't:
+		 *  set track artist to be the album's artist 
+		*/
+		if (!isVariousArtists() && hasArtist() && !track.hasArtist())
+		{
+			track.setArtist(this.artist);
+		}
 		trackList.add(track.getTrackNum()-1, track);		
 	}
 	
@@ -136,12 +139,23 @@ public class DiscDBAlbumData {
 
 	public void setPrice(int price) {
 		Price = price;
+	}
+	
+	public	boolean	hasYear()
+	{
+		return (this.year.length() > 0);
+	}
+
+	public	boolean	hasArtist()
+	{
+		return (this.artist.length() > 0);
 	}	
+	
 	
 	public boolean checkVariousArtist()
 	{
-		if (this.artist.toLowerCase().contains("various") ||
-			this.artist.toLowerCase().contains("va."))
+		if (this.artist.toLowerCase().contains(Constants.VARIOUS_ARTITSTS_INDICATOR1) ||
+			this.artist.toLowerCase().contains(Constants.VARIOUS_ARTITSTS_INDICATOR2))
 		{
 			setVariousArtists(true);			
 		}
@@ -163,34 +177,20 @@ public class DiscDBAlbumData {
 	{
 		this.name = "";
 		this.artist = "";
-		if (this.title.indexOf(" / ") != -1)
+		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
-			String[] artistAndName = 	this.title.split(" / ");
+			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
 			if (artistAndName.length == 2)
 			{
 				this.artist = artistAndName[0].trim();
 				this.name = artistAndName[1].trim();	
 			}
-			
-			/*for (int i = 0; i < artistAndName.length-1; i++)
-			{
-				if (this.artist.length() > 0)
-				{
-					this.artist += ", ";
-				}	
-				this.artist += artistAndName[i].trim();				
-			}
-			this.name = artistAndName[artistAndName.length-1].trim();
-			if (artistAndName.length > 2)
-			{
-		//		Debug.log("DiscDBParser::parseTarFile: INFO - multiple slash title: " + this.title +
-			//			"\n artist: " + this.artist + "\n name: " + this.name);				
-			}*/
 		}
+		// No slash, handle it as various artists album
 		else
 		{
 			this.name = this.title;
-			this.artist = DB_NULL_VALUE;			
+			this.artist = Constants.VARIOUS_ARTITSTS;			
 //			Debug.log("DiscDBParser::parseTarFile: INFO - no slash title: " + this.title);								
 		}
 	}
@@ -199,18 +199,18 @@ public class DiscDBAlbumData {
 	public	boolean isValid()
 	{
 		// valid disc is of from: artist / name (or it doesn't contain a " / ")
-		if (this.title.indexOf(" / ") != -1)
+		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
-			String[] artistAndName = 	this.title.split(" / ");
+			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
 			if (artistAndName.length != 2)
 			{
 				return false;
 			}
 		}
-		return  ((this.name.length() > 0) && (this.artist.length() > 0) 
-				&& (this.name.length() <= MAX_ALBUM_NAME_LENGTH) &&
-				(this.artist.length() <= MAX_ARTIST_NAME_LENGTH) &&
-				(this.genere.length() <= MAX_GENRE_LENGTH) );
+		return  ((this.name.length() > 0) &&
+				(this.name.length() <= Constants.MAX_ALBUM_NAME_LENGTH) &&
+				(this.artist.length() <=  Constants.MAX_ARTIST_NAME_LENGTH) &&
+				(this.genere.length() <=  Constants.MAX_GENRE_LENGTH) );
 	}
 	
 	
