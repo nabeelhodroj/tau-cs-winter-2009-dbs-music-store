@@ -45,7 +45,7 @@ public class DBConnectionStock {
 			this.query = query;
 		}
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.GetOrderAvailableStores thread is started");
 			
@@ -86,7 +86,7 @@ public class DBConnectionStock {
 	 * Corresponds to DBConnectionInterface's "public static void getOrdersTable();"
 	 */
 	public class GetOrdersTable implements Runnable{
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.GetOrdersTable thread is started");
 			
@@ -131,7 +131,7 @@ public class DBConnectionStock {
 	 */
 	public class RefreshOrdersTable implements Runnable{
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.RefreshOrdersTable thread is started");
 			
@@ -212,7 +212,7 @@ public class DBConnectionStock {
 			this.order = order;
 		}
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.PlaceOrder thread is started");
 			
@@ -258,7 +258,7 @@ public class DBConnectionStock {
 			this.status = status;
 		}
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.UpdateOrderStatus thread is started");
 			
@@ -395,7 +395,7 @@ public class DBConnectionStock {
 	 */
 	public class GetRequestTable implements Runnable{
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.GetRequestTable thread is started");
 			
@@ -439,7 +439,7 @@ public class DBConnectionStock {
 	 */
 	public class RefreshRequestsTable implements Runnable{
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.RefreshRequestsTable thread is started");
 			
@@ -492,7 +492,7 @@ public class DBConnectionStock {
 			this.caller = caller;
 		}
 		
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionInterface.GetAlbumStockInfo thread is started",DebugOutput.FILE,DebugOutput.STDOUT);
 			
@@ -545,7 +545,7 @@ public class DBConnectionStock {
 			this.quantity = quantity;
 		}
 
-		@Override
+		
 		public void run() {
 			Debug.log("DBConnectionStock.GetFromSupplier thread is started");
 			
