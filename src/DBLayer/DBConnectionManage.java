@@ -302,7 +302,7 @@ public class DBConnectionManage {
 					String genreBuffer;
 					int genreID;
 					
-					int numToRemove = Math.min(10000,DiscDBParser.getCurrentAlbumListSize());
+					int numToRemove = Math.min(DiscsDB.Constants.ALBUMS_BATCH_SIZE,DiscDBParser.getCurrentAlbumListSize());
 					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + " albums");
 					if (numToRemove == 0) {
 						try {
