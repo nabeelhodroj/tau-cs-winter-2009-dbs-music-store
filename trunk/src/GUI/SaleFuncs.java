@@ -2,8 +2,7 @@ package GUI;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,6 +13,7 @@ import org.eclipse.swt.widgets.TableItem;
 import DBLayer.DBConnectionInterface;
 import General.Debug;
 import General.Debug.DebugOutput;
+import Tables.AlbumsResultsTableItem;
 import Tables.EmployeesTableItem;
 import Tables.SaleTable;
 import Tables.SaleTableItem;
@@ -128,6 +128,9 @@ public class SaleFuncs {
 	 * initialize current sale with current salesman, update date and time
 	 */
 	public static void initCurrentSale(){
+		// save old sale for later
+		SaleTable oldSale = StaticProgramTables.sale;
+		
 		// initialize new sale table
 		StaticProgramTables.sale = new SaleTable();
 		// set salesman to current salesman
@@ -135,6 +138,36 @@ public class SaleFuncs {
 
 		// update view
 		clearSaleTable();
+		
+		// if albums results aren't null
+		if (StaticProgramTables.results != null){
+			// update search tab items' quantities for those that were in sale
+			Set<Long> albumsSold = oldSale.getSaleItems().keySet();
+			boolean foundAtLeastOne = false;
+			for (long albumID: albumsSold){
+				// check if album appears in search results and its stock info is already fetched
+				// (since here album is approved for request, it must have storage location in this store
+				// thus if storage location is 0, stock info for this album hasn't been fetched yet in search tab)
+				AlbumsResultsTableItem album = StaticProgramTables.results.getAlbum(albumID);
+				if ((album != null) && (album.getStorageLocation() != 0)){
+					int newQuantity = album.getQuantity()-oldSale.getSaleItem(albumID).getQuantity();
+					// update its stock info
+					album.setQuantity(newQuantity);
+					// flag that found one
+					foundAtLeastOne = true;
+				}
+			}
+			
+			// if found at least one, unselect any result selected in search tab, and update its view
+			if (foundAtLeastOne){
+				Main.getSearchTableAlbumResults().deselectAll();
+				SearchFuncs.clearStockInfo();
+				Main.getSearchButtonGetStockInfo().setEnabled(false);
+				Main.getSearchButtonStockInfoOrder().setEnabled(false);
+				Main.getSearchButtonShowSongs().setEnabled(false);
+				Main.getSearchButtonSaleInfoSale().setEnabled(false);
+			}
+		}
 		
 		// flag DB as free
 		MainFuncs.setAllowDBAction(true);

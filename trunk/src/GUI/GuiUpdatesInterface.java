@@ -69,6 +69,7 @@ public class GuiUpdatesInterface {
 	 * and sets the search tab gui environment (enables search button)
 	 * @param albumResults
 	 */
+	//public static void updateAlbumResultsTable(final AlbumsResultsTable albumResults, final int numOfResults){ //TODO
 	public static void updateAlbumResultsTable(final AlbumsResultsTable albumResults){
 		Debug.log("GuiUpdatesInterface: updateAlbumResultsTable is invoked", DebugOutput.FILE, DebugOutput.STDOUT);
 		
@@ -78,6 +79,7 @@ public class GuiUpdatesInterface {
 				// update albums results table
 				SearchFuncs.updateAlbumsResultsTable(albumResults);
 				// pop up message
+				//SearchFuncs.popSearchResultsDoneMessage(numOfResults);//TODO
 				SearchFuncs.popSearchResultsDoneMessage(albumResults.getAlbums().size());
 				// set gui environment
 				SearchFuncs.setEnvSearchDone();
