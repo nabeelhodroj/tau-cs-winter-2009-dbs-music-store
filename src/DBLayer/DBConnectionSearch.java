@@ -98,19 +98,22 @@ public class DBConnectionSearch {
 			ResultSet rs = searchQueryResults.getResultSet();
 			
 			AlbumsResultsTable resultsTable = new AlbumsResultsTable();
+			int numOfResults = 0;
 			
 			try {
 				while (rs.next()){
-					resultsTable.addAlbum(rs.getInt("album_id"), 
-							rs.getString("album_name"), 
-							rs.getString("artist_name"),
-							rs.getInt("year"),
-							rs.getString("genre_name"), 
-							rs.getInt("length_sec"),
-							new SongsResultsTable(rs.getInt("album_id")),
-							rs.getInt("price"),
-							-1,
-							-1);
+					if (numOfResults < StaticProgramTables.maxNumOfResults)
+						resultsTable.addAlbum(rs.getInt("album_id"), 
+								rs.getString("album_name"), 
+								rs.getString("artist_name"),
+								rs.getInt("year"),
+								rs.getString("genre_name"), 
+								rs.getInt("length_sec"),
+								new SongsResultsTable(rs.getInt("album_id")),
+								rs.getInt("price"),
+								-1,
+								-1);
+					numOfResults++;
 				}
 			} catch (SQLException e) {
 				Debug.log("DBConnectionSearch.GetAlbumsSearchResults: [ERROR] SQLException in RS traversal");
@@ -121,7 +124,7 @@ public class DBConnectionSearch {
 			
 			searchQueryResults.close();
 			
-			GuiUpdatesInterface.updateAlbumResultsTable(resultsTable);
+			GuiUpdatesInterface.updateAlbumResultsTable(resultsTable,numOfResults);
 		}		
 	}
 	
