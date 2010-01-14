@@ -26,4 +26,6 @@ public class Constants {
 	public	static	final	String	VARIOUS_ARTITSTS_INDICATOR1 = "various";
 	public	static	final	String	VARIOUS_ARTITSTS_INDICATOR2 = "va.";
 	
+	public static final 	String	 NOT_AVAILABLE = "N/A";
+	
 }
