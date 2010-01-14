@@ -266,6 +266,8 @@ public class DBConnectionManage {
 					genresQueryResults.close();
 					return;
 				}
+				genresQueryResults.close();
+				
 				
 				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get all current artist names");
 				DBQueryResults artistNamesQueryResults = DBAccessLayer.executeQuery("SELECT artist_id, artist_name FROM artists");
@@ -287,7 +289,8 @@ public class DBConnectionManage {
 					finishedSuccessfully = false;
 					artistNamesQueryResults.close();
 					return;
-				}	
+				}
+				artistNamesQueryResults.close();
 			}
 
 			
@@ -411,6 +414,7 @@ public class DBConnectionManage {
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
 				return;
 			}
+			maxIDQuery.close();
 			
 			ParseFile fileParser = new ParseFile(filename);
 			Thread parseThread = new Thread(fileParser);
