@@ -468,7 +468,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchBulletByAlbum = new Button(searchGroupOptions, SWT.RADIO | SWT.LEFT);
 								searchBulletByAlbum.setText("Search by album ID:");
-								searchBulletByAlbum.setBounds(12, 16, 118, 22);
+								searchBulletByAlbum.setBounds(12, 16, 129, 22);
 								searchBulletByAlbum.setSelection(true);
 								searchBulletByAlbum.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
@@ -480,7 +480,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchTextBoxAlbumID = new Text(searchGroupOptions, SWT.BORDER);
-								searchTextBoxAlbumID.setBounds(138, 16, 205, 22);
+								searchTextBoxAlbumID.setBounds(151, 16, 192, 22);
 								searchTextBoxAlbumID.setToolTipText("Enter album ID");
 								searchTextBoxAlbumID.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
@@ -853,34 +853,41 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleGroupSaleDetails.setLayout(null);
 							saleGroupSaleDetails.setText("Manage Current Sale");
 							saleGroupSaleDetails.setBounds(12, 0, 761, 56);
+							saleGroupSaleDetails.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							{
 								saleLabelSalesmanIDName = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSalesmanIDName.setText("Salesman:");
 								saleLabelSalesmanIDName.setBounds(25, 24, 47, 18);
+								saleLabelSalesmanIDName.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								saleComboSalesmanIDNameInput = new Combo(saleGroupSaleDetails, SWT.READ_ONLY);
 								saleComboSalesmanIDNameInput.setBounds(84, 23, 309, 21);
+								saleComboSalesmanIDNameInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}							
 							{
 								saleLabelSaleDate = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleDate.setText("Date of sale:");
-								saleLabelSaleDate.setBounds(405, 24, 73, 18);
+								saleLabelSaleDate.setBounds(405, 24, 92, 18);
+								saleLabelSaleDate.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								saleLabelSaleTime = new Label(saleGroupSaleDetails, SWT.NONE);
 								saleLabelSaleTime.setText("Time of sale:");
-								saleLabelSaleTime.setBounds(583, 24, 73, 18);
+								saleLabelSaleTime.setBounds(583, 24, 86, 18);
+								saleLabelSaleTime.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								saleLabelDateInput = new Label(saleGroupSaleDetails, SWT.BORDER);
-								saleLabelDateInput.setBounds(485, 24, 75, 18);
+								saleLabelDateInput.setBounds(502, 24, 75, 18);
 								saleLabelDateInput.setText(MainFuncs.getDate());
+								saleLabelDateInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								saleLabelTimeInput = new Label(saleGroupSaleDetails, SWT.BORDER);
-								saleLabelTimeInput.setBounds(663, 24, 69, 18);
+								saleLabelTimeInput.setBounds(674, 24, 69, 18);
 								saleLabelTimeInput.setText(MainFuncs.getTime());
+								saleLabelTimeInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 						}
 						{
@@ -889,6 +896,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							saleTableSaleItems.setBounds(12, 63, 759, 315);
 							saleTableSaleItems.setHeaderVisible(true);
 							saleTableSaleItems.setLinesVisible(true);
+							saleTableSaleItems.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							int tableWidth = saleTableSaleItems.getClientArea().width - getBorderWidth()*2;
 							int numOfColumns = 5;
 							
@@ -927,27 +935,32 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 						{
 							saleLabelTotalPriceValue = new Label(saleCompositeMain, SWT.BORDER);
 							saleLabelTotalPriceValue.setBounds(679, 383, 94, 22);
+							saleLabelTotalPriceValue.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							saleLabelTotalPrice = new Label(saleCompositeMain, SWT.NONE);
 							saleLabelTotalPrice.setText("Total price:");
-							saleLabelTotalPrice.setBounds(598, 384, 76, 22);
+							saleLabelTotalPrice.setBounds(587, 384, 87, 22);
 							saleLabelTotalPrice.setAlignment(SWT.RIGHT);
+							saleLabelTotalPrice.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							saleButtonRemoveItem = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
 							saleButtonRemoveItem.setText("Remove Item");
 							saleButtonRemoveItem.setBounds(18, 384, 110, 30);
+							saleButtonRemoveItem.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							saleButtonClearSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
 							saleButtonClearSale.setText("Clear Sale");
 							saleButtonClearSale.setBounds(134, 384, 110, 30);
+							saleButtonClearSale.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							saleButtonMakeSale = new Button(saleCompositeMain, SWT.PUSH | SWT.CENTER);
 							saleButtonMakeSale.setText("Make Sale");
 							saleButtonMakeSale.setBounds(680, 412, 93, 41);
+							saleButtonMakeSale.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 					}
 				}
@@ -970,34 +983,41 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockGroupOrderForm.setLayout(null);
 							stockGroupOrderForm.setText("Order Albums");
 							stockGroupOrderForm.setBounds(2, 0, 779, 147);
+							stockGroupOrderForm.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							{
 								stockLabelAlbumID = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelAlbumID.setText("Album ID:");
 								stockLabelAlbumID.setBounds(8, 38, 74, 22);
+								stockLabelAlbumID.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelAlbumIDInput = new Label(stockGroupOrderForm, SWT.BORDER);
 								stockLabelAlbumIDInput.setBounds(90, 36, 154, 22);
+								stockLabelAlbumIDInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelDate = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelDate.setText("Order date:");
 								stockLabelDate.setBounds(12, 71, 74, 22);
+								stockLabelDate.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelOrderDateInput = new Label(stockGroupOrderForm, SWT.BORDER);
 								stockLabelOrderDateInput.setBounds(92, 71, 70, 22);
 								stockLabelOrderDateInput.setText(MainFuncs.getDate());
+								stockLabelOrderDateInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockButtonCheckAvailability = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonCheckAvailability.setText("Check Availability");
 								stockButtonCheckAvailability.setBounds(8, 105, 235, 33);
+								stockButtonCheckAvailability.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelOrderFromStore = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelOrderFromStore.setText("Order from:");
 								stockLabelOrderFromStore.setBounds(256, 18, 79, 24);
+								stockLabelOrderFromStore.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockTableOrderAvailableStores = new Table(stockGroupOrderForm, SWT.BORDER | SWT.FULL_SELECTION
@@ -1005,6 +1025,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								stockTableOrderAvailableStores.setBounds(254, 42, 284, 94);
 								stockTableOrderAvailableStores.setHeaderVisible(true);
 								stockTableOrderAvailableStores.setLinesVisible(true);
+								stockTableOrderAvailableStores.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 								int numOfColumns = 3;
 								int tableWidth = stockTableOrderAvailableStores.getClientArea().width - getBorderWidth()*2;
 								
@@ -1030,53 +1051,64 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 								stockLabelQuantityInStock = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelQuantityInStock.setText("Quantity:");
 								stockLabelQuantityInStock.setBounds(656, 19, 52, 22);
+								stockLabelQuantityInStock.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelQuantityInStockInput = new Label(stockGroupOrderForm, SWT.BORDER);
 								stockLabelQuantityInStockInput.setBounds(709, 18, 57, 22);
+								stockLabelQuantityInStockInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelPrice = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelPrice.setText("Price:");
 								stockLabelPrice.setBounds(552, 20, 52, 22);
+								stockLabelPrice.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelStorePriceInput = new Label(stockGroupOrderForm, SWT.BORDER);
 								stockLabelStorePriceInput.setBounds(604, 18, 46, 22);
+								stockLabelStorePriceInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelStorageLocation = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelStorageLocation.setText("Location:");
 								stockLabelStorageLocation.setBounds(552, 44, 52, 22);
+								stockLabelStorageLocation.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelStorageLocationInput = new Label(stockGroupOrderForm, SWT.BORDER);
 								stockLabelStorageLocationInput.setBounds(605, 43, 161, 22);
+								stockLabelStorageLocationInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockButtonPlaceOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonPlaceOrder.setText("Place Order");
 								stockButtonPlaceOrder.setBounds(646, 116, 121, 23);
+								stockButtonPlaceOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockButtonClearOrder = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonClearOrder.setText("Clear Fields");
 								stockButtonClearOrder.setBounds(551, 94, 89, 45);
+								stockButtonClearOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockLabelQuantityToOrder = new Label(stockGroupOrderForm, SWT.NONE);
 								stockLabelQuantityToOrder.setText("Quantity to order:");
 								stockLabelQuantityToOrder.setBounds(551, 72, 108, 22);
+								stockLabelQuantityToOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockTextBoxQuantityToOrder = new Text(stockGroupOrderForm, SWT.BORDER);
 								stockTextBoxQuantityToOrder.setText("1");
 								stockTextBoxQuantityToOrder.setBounds(666, 68, 100, 22);
+								stockTextBoxQuantityToOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								stockButtonPlaceOrderSupplier = new Button(stockGroupOrderForm, SWT.PUSH | SWT.CENTER);
 								stockButtonPlaceOrderSupplier.setText("Order from Supplier");
 								stockButtonPlaceOrderSupplier.setBounds(646, 94, 121, 22);
+								stockButtonPlaceOrderSupplier.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 						}
 						{
@@ -1085,6 +1117,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableOrders.setBounds(5, 174, 770, 110);
 							stockTableOrders.setHeaderVisible(true);
 							stockTableOrders.setLinesVisible(true);
+							stockTableOrders.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							int numOfColumns = 6; //7
 							int tableWidth = stockTableOrders.getClientArea().width - getBorderWidth()*2;
 							
@@ -1138,6 +1171,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockTableRequests.setBounds(4, 317, 770, 104);
 							stockTableRequests.setHeaderVisible(true);
 							stockTableRequests.setLinesVisible(true);
+							stockTableRequests.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							int numOfColumns = 6; // 7
 							int tableWidth = stockTableRequests.getClientArea().width - getBorderWidth()*2;
 							
@@ -1189,41 +1223,49 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							stockLabelRequests = new Label(stockTabComposite, SWT.NONE);
 							stockLabelRequests.setText("Requests:");
 							stockLabelRequests.setBounds(6, 295, 64, 20);
+							stockLabelRequests.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonApproveRequest = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonApproveRequest.setText("Approve Request");
 							stockButtonApproveRequest.setBounds(674, 429, 101, 24);
+							stockButtonApproveRequest.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonDenyRequest = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonDenyRequest.setText("Deny Request");
 							stockButtonDenyRequest.setBounds(567, 429, 101, 24);
+							stockButtonDenyRequest.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonRefreshRequests = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonRefreshRequests.setText("Refresh");
 							stockButtonRefreshRequests.setBounds(460, 429, 101, 24);
+							stockButtonRefreshRequests.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockLabelOrders = new Label(stockTabComposite, SWT.NONE);
 							stockLabelOrders.setText("Orders:");
 							stockLabelOrders.setBounds(7, 153, 60, 20);
+							stockLabelOrders.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonCancelOrder = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonCancelOrder.setText("Cancel Order");
 							stockButtonCancelOrder.setBounds(672, 286, 101, 24);
+							stockButtonCancelOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonRemoveOrder = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonRemoveOrder.setText("Remove Order");
 							stockButtonRemoveOrder.setBounds(565, 286, 101, 24);
+							stockButtonRemoveOrder.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							stockButtonRefreshOrders = new Button(stockTabComposite, SWT.PUSH | SWT.CENTER);
 							stockButtonRefreshOrders.setText("Refresh");
 							stockButtonRefreshOrders.setBounds(458, 286, 101, 24);
+							stockButtonRefreshOrders.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 					}
 				}
@@ -1245,6 +1287,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageLabelEmployees = new Label(manageMainComposite, SWT.NONE);
 							manageLabelEmployees.setText("Employees:");
 							manageLabelEmployees.setBounds(12, 12, 60, 22);
+							manageLabelEmployees.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 						}
 						{
 							manageTableEmployees = new Table(manageMainComposite, SWT.BORDER | SWT.FULL_SELECTION
@@ -1252,6 +1295,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageTableEmployees.setBounds(14, 34, 430, 216);
 							manageTableEmployees.setHeaderVisible(true);
 							manageTableEmployees.setLinesVisible(true);
+							manageTableEmployees.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							int numOfColumns = 4;
 							int tableWidth = manageTableEmployees.getClientArea().width - getBorderWidth()*2;
 							
@@ -1284,125 +1328,152 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageGroupEditEmployee.setLayout(null);
 							manageGroupEditEmployee.setText("Edit Employee Details");
 							manageGroupEditEmployee.setBounds(449, 12, 324, 441);
+							manageGroupEditEmployee.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							{
 								manageLabelEmployeeID = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeID.setText("ID:");
 								manageLabelEmployeeID.setBounds(12, 79, 25, 22);
+								manageLabelEmployeeID.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeIDInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeIDInput.setBounds(12, 101, 129, 22);
+								manageTextBoxEmployeeIDInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeBirth = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeBirth.setText("Date of birth:");
 								manageLabelEmployeeBirth.setBounds(177, 79, 78, 22);
+								manageLabelEmployeeBirth.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeBirthInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeBirthInput.setBounds(177, 101, 129, 22);
+								manageTextBoxEmployeeBirthInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeFName = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeFName.setText("First name:");
 								manageLabelEmployeeFName.setBounds(12, 131, 62, 22);
+								manageLabelEmployeeFName.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeFNameInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeFNameInput.setBounds(12, 153, 129, 22);
+								manageTextBoxEmployeeFNameInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeLName = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeLName.setText("Last name:");
 								manageLabelEmployeeLName.setBounds(177, 131, 60, 22);
+								manageLabelEmployeeLName.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeLNameInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeLNameInput.setBounds(178, 153, 129, 22);
+								manageTextBoxEmployeeLNameInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeEmploymentDate = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeEmploymentDate.setText("Date of employment:");
 								manageLabelEmployeeEmploymentDate.setBounds(12, 24, 112, 22);
+								manageLabelEmployeeEmploymentDate.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeAddress = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeAddress.setText("Address:");
 								manageLabelEmployeeAddress.setBounds(12, 183, 51, 22);
+								manageLabelEmployeeAddress.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeAddressInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeAddressInput.setBounds(12, 205, 296, 22);
+								manageTextBoxEmployeeAddressInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeStoreID = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeStoreID.setText("Employing store ID:");
 								manageLabelEmployeeStoreID.setBounds(176, 24, 106, 22);
+								manageLabelEmployeeStoreID.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeEmployeeStoreIDInput = new Label(manageGroupEditEmployee, SWT.BORDER);
 								manageLabelEmployeeEmployeeStoreIDInput.setBounds(176, 49, 130, 22);
+								manageLabelEmployeeEmployeeStoreIDInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeEmploymentDateInput = new Label(manageGroupEditEmployee, SWT.BORDER);
 								manageLabelEmployeeEmploymentDateInput.setBounds(12, 50, 130, 22);
+								manageLabelEmployeeEmploymentDateInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeePhone = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeePhone.setText("Phone:");
 								manageLabelEmployeePhone.setBounds(12, 235, 60, 22);
+								manageLabelEmployeePhone.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeeCellPhone = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeeCellPhone.setText("Cellular Phone:");
 								manageLabelEmployeeCellPhone.setBounds(180, 235, 80, 22);
+								manageLabelEmployeeCellPhone.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeePhoneInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeePhoneInput.setBounds(12, 257, 131, 22);
+								manageTextBoxEmployeePhoneInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxEmployeeCellPhoneInput = new Text(manageGroupEditEmployee, SWT.BORDER);
 								manageTextBoxEmployeeCellPhoneInput.setBounds(177, 257, 131, 22);
+								manageTextBoxEmployeeCellPhoneInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageLabelEmployeePosition = new Label(manageGroupEditEmployee, SWT.NONE);
 								manageLabelEmployeePosition.setText("Position:");
 								manageLabelEmployeePosition.setBounds(12, 291, 60, 22);
+								manageLabelEmployeePosition.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageComboEmployeePositionInput = new Combo(manageGroupEditEmployee, SWT.READ_ONLY);
 								manageComboEmployeePositionInput.setBounds(78, 291, 229, 21);
+								manageComboEmployeePositionInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeNew = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeNew.setText("New");
 								manageButtonEmployeeNew.setBounds(12, 363, 60, 30);
+								manageButtonEmployeeNew.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeInsert = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeInsert.setText("Insert");
 								manageButtonEmployeeInsert.setBounds(81, 363, 60, 30);
+								manageButtonEmployeeInsert.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeEdit = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeEdit.setText("Edit");
 								manageButtonEmployeeEdit.setBounds(12, 399, 60, 30);
+								manageButtonEmployeeEdit.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeSave = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeSave.setText("Save");
 								manageButtonEmployeeSave.setBounds(81, 399, 60, 30);
+								manageButtonEmployeeSave.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeRemove = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeRemove.setText("Remove Employee");
 								manageButtonEmployeeRemove.setBounds(150, 399, 157, 30);
+								manageButtonEmployeeRemove.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonEmployeeNoSave = new Button(manageGroupEditEmployee, SWT.PUSH | SWT.CENTER);
 								manageButtonEmployeeNoSave.setText("Exit Without Saving");
 								manageButtonEmployeeNoSave.setBounds(150, 363, 157, 30);
+								manageButtonEmployeeNoSave.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 						}
 						{
@@ -1410,25 +1481,30 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							manageGroupDBSManage.setLayout(null);
 							manageGroupDBSManage.setText("Manage Database");
 							manageGroupDBSManage.setBounds(12, 296, 425, 157);
+							manageGroupDBSManage.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							{
 								manageLabelDBSUpdate = new Label(manageGroupDBSManage, SWT.NONE);
 								manageLabelDBSUpdate.setText("Select update file:");
 								manageLabelDBSUpdate.setBounds(12, 21, 96, 18);
+								manageLabelDBSUpdate.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageTextBoxDBSUpdateFileInput = new Text(manageGroupDBSManage, SWT.BORDER);
 								manageTextBoxDBSUpdateFileInput.setBounds(14, 42, 399, 22);
 								manageTextBoxDBSUpdateFileInput.setEnabled(false);
+								manageTextBoxDBSUpdateFileInput.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonDBSBrowse = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
 								manageButtonDBSBrowse.setText("Browse...");
 								manageButtonDBSBrowse.setBounds(221, 69, 74, 23);
+								manageButtonDBSBrowse.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageButtonDBSUpdate = new Button(manageGroupDBSManage, SWT.PUSH | SWT.CENTER);
 								manageButtonDBSUpdate.setText("Update Database");
 								manageButtonDBSUpdate.setBounds(301, 69, 112, 23);
+								manageButtonDBSUpdate.setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								manageCompositeDBProgressContainer = new Composite(manageGroupDBSManage, SWT.EMBEDDED);
