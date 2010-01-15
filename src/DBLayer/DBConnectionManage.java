@@ -365,7 +365,7 @@ public class DBConnectionManage {
 					artistArgumentsList.add(artistIDList);
 					artistArgumentsList.add(artistNameList);
 					
-					String albumInsertStatement = "INSERT INTO albums(album_id,album_name, artist_id, year, genre_id, length_sec,price) VALUES(?,?,?,?,?,?)";
+					String albumInsertStatement = "INSERT INTO albums(album_id,album_name, artist_id, year, genre_id, length_sec,price) VALUES(?,?,?,?,?,?,?)";
 					List<FieldTypes> albumFieldTypes = new ArrayList<FieldTypes>();
 					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
 					albumFieldTypes.add(FieldTypes.FIELD_TYPE_STRING);
