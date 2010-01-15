@@ -242,6 +242,7 @@ public class DBConnectionManage {
 			private boolean finishedSuccessfully = true;
 			private Map<String,Integer> genres = new HashMap<String,Integer>();
 			private Map<String,Integer> artistNames= new HashMap<String,Integer>();
+			private int albumID;
 			
 			public BatchAddToDB(Thread parseThread) {
 				this.parseThread = parseThread;
@@ -291,6 +292,29 @@ public class DBConnectionManage {
 					return;
 				}
 				artistNamesQueryResults.close();
+				
+				
+				// Get last album id from DB.
+				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get last album_id");
+				DBQueryResults maxAlbumID = DBAccessLayer.executeQuery("SELCET max(album_id) AS max_id FROM Albums");
+				if (maxAlbumID == null) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while attempting to get max album_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;
+				}
+				ResultSet rs = maxAlbumID.getResultSet();
+				try {
+					rs.next();
+					albumID = rs.getInt("max_id");
+				} catch (SQLException e) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max album_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					maxAlbumID.close();
+					return;
+				}
+				maxAlbumID.close();
 			}
 
 			
@@ -302,7 +326,6 @@ public class DBConnectionManage {
 					String songBuffer;
 					String artistBuffer;
 					int artistID;
-					String genreBuffer;
 					int genreID;
 					
 					int numToRemove = Math.min(DiscsDB.Constants.ALBUMS_BATCH_SIZE,DiscDBParser.getCurrentAlbumListSize());
@@ -318,13 +341,87 @@ public class DBConnectionManage {
 					}
 					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);
 					
+					String genreInsertStatement = "INSERT INTO genres(genre_id, genre_name) VALUES(?,?)";
+					List<FieldTypes> genreFieldTypes = new ArrayList<FieldTypes>();
+					genreFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					genreFieldTypes.add(FieldTypes.FIELD_TYPE_STRING);
+					
+					List<Object> genreIDList = new ArrayList<Object>();
+					List<Object> genreNameList = new ArrayList<Object>();
+					
+					List<List<Object>> genreArgumentsList = new ArrayList<List<Object>>();
+					genreArgumentsList.add(genreIDList);
+					genreArgumentsList.add(genreNameList);
+					
+					String artistInsertStatement = "INSERT INTO artists(artist_id, artist_name) VALUES(?,?)";
+					List<FieldTypes> artistFieldTypes = new ArrayList<FieldTypes>();
+					artistFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					artistFieldTypes.add(FieldTypes.FIELD_TYPE_STRING);
+					
+					List<Object> artistIDList = new ArrayList<Object>();
+					List<Object> artistNameList = new ArrayList<Object>();
+					
+					List<List<Object>> artistArgumentsList = new ArrayList<List<Object>>();
+					artistArgumentsList.add(artistIDList);
+					artistArgumentsList.add(artistNameList);
+					
+					String albumInsertStatement = "INSERT INTO albums(album_id,album_name, artist_id, year, genre_id, length_sec,price) VALUES(?,?,?,?,?,?)";
+					List<FieldTypes> albumFieldTypes = new ArrayList<FieldTypes>();
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_STRING);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					albumFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+
+					List<Object> albumIDList = new ArrayList<Object>();
+					List<Object> albumNameList = new ArrayList<Object>();
+					List<Object> albumArtistIDList = new ArrayList<Object>();
+					List<Object> albumYearList = new ArrayList<Object>();
+					List<Object> albumGenreIDList = new ArrayList<Object>();
+					List<Object> albumLengthList = new ArrayList<Object>();
+					List<Object> albumPriceList = new ArrayList<Object>();
+					
+					List<List<Object>> albumArgumentsList = new ArrayList<List<Object>>();
+					albumArgumentsList.add(albumIDList);
+					albumArgumentsList.add(albumNameList);
+					albumArgumentsList.add(albumArtistIDList);
+					albumArgumentsList.add(albumYearList);
+					albumArgumentsList.add(albumGenreIDList);
+					albumArgumentsList.add(albumLengthList);
+					albumArgumentsList.add(albumPriceList);
+					
+					String songInsertStatement = "INSERT INTO songs(album_id, track_num, song_name, artist_id, length_sec) VALUES(?,?,?,?,?)";
+					List<FieldTypes> songFieldTypes = new ArrayList<FieldTypes>();
+					songFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					songFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					songFieldTypes.add(FieldTypes.FIELD_TYPE_STRING);
+					songFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+					songFieldTypes.add(FieldTypes.FIELD_TYPE_INT);
+
+					List<Object> songAlbumIDList = new ArrayList<Object>();
+					List<Object> songTrackNumList = new ArrayList<Object>();
+					List<Object> songNameList = new ArrayList<Object>();
+					List<Object> songArtistIDList = new ArrayList<Object>();
+					List<Object> songLengthList = new ArrayList<Object>();
+
+					List<List<Object>> songArgumentsList = new ArrayList<List<Object>>();
+					songArgumentsList.add(songAlbumIDList);
+					songArgumentsList.add(songTrackNumList);
+					songArgumentsList.add(songNameList);
+					songArgumentsList.add(songArtistIDList);
+					songArgumentsList.add(songLengthList);
+
+					
 					for (DiscDBAlbumData albumData : parsedAlbums) {
+						
 						String genreName = albumData.getGenere().toLowerCase();
 						if (!genres.containsKey(genreName)){
 							genreID = genres.size();
 							genres.put(genreName, genreID);
-							genreBuffer = "INSERT INTO genres(genre_id,genre_name) VALUES(" + genreID + ",'" + genreName + "')";
-							insertBatch.add(genreBuffer);
+							genreIDList.add(genreID);
+							genreNameList.add(genreName);
 						} else {
 							genreID = genres.get(genreName);
 						}
@@ -332,48 +429,68 @@ public class DBConnectionManage {
 						if (!artistNames.containsKey(albumData.getArtist())){
 							artistID = artistNames.size();
 							artistNames.put(albumData.getArtist(), artistID);
-							artistBuffer = "INSERT INTO artists(artist_id,artist_name) VALUES(" + artistID + ",'" + albumData.getArtist() + "')";
-							insertBatch.add(artistBuffer);
+							artistIDList.add(artistID);
+							artistNameList.add(albumData.getArtist());
 						} else {
 							artistID = artistNames.get(albumData.getArtist());
 						}
 						
-						albumBuffer = "INSERT INTO Albums(album_name, artist_id, year, genre_id, length_sec,price) ";
-						albumBuffer += "VALUES(" +
-								"'"+albumData.getName() + "'," +
-								artistID + "," +
-								albumData.getYear()+ "," +
-								genreID + "," +
-								albumData.getLengthSec()+ "," +
-								albumData.getPrice() +")\n";
-						insertBatch.add(albumBuffer);
+						albumIDList.add(albumID);
+						albumNameList.add(albumData.getName());
+						albumArtistIDList.add(artistID);
+						albumYearList.add(albumData.getYear());
+						albumGenreIDList.add(genreID);
+						albumLengthList.add(albumData.getLengthSec());
+						albumPriceList.add(albumData.getPrice());	
 						
 						for (DiscDBTrackData trackData : albumData.getTrackList()) {
 							if (!artistNames.containsKey(trackData.getArtist())){
 								artistID = artistNames.size();
 								artistNames.put(trackData.getArtist(), artistID);
-								artistBuffer = "INSERT INTO artists(artist_id,artist_name) VALUES(" + artistID + ",'" + trackData.getArtist() + "')";
-								insertBatch.add(artistBuffer);
+								
+								artistIDList.add(artistID);
+								artistNameList.add(trackData.getArtist());
 							} else {
 								artistID = artistNames.get(trackData.getArtist());
 							}
 							
 							songBuffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_id, length_sec) ";
-							songBuffer += "VALUES(" +
-									"ALBUMS_SEQ.CURRVAL, " +
-									trackData.getTrackNum() + ", " +
-									"'" + trackData.getName() + "', " +
-									artistID + "," +
-									trackData.getLengthSdc() + ")";
-							insertBatch.add(songBuffer);
+							songAlbumIDList.add(albumID);
+							songTrackNumList.add(trackData.getTrackNum());
+							songNameList.add(trackData.getName());
+							songArtistIDList.add(artistID);
+							songLengthList.add(trackData.getLengthSdc());
 						}
+						albumID++;
 					}
 					
-					if (DBAccessLayer.executeBatch(insertBatch) != insertBatch.size()){
+					if (DBAccessLayer.executePatternBatch(genreInsertStatement, genreArgumentsList, genreFieldTypes) != genreIDList.size()){
+						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of genre inserts executed");
 						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
 						finishedSuccessfully = false;
 						return;
-					}	
+					}
+										
+					if (DBAccessLayer.executePatternBatch(artistInsertStatement, artistArgumentsList, artistFieldTypes) != artistIDList.size()){
+						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of artist inserts executed");
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+						finishedSuccessfully = false;
+						return;
+					}
+					
+					if (DBAccessLayer.executePatternBatch(albumInsertStatement, albumArgumentsList, albumFieldTypes) != albumIDList.size()){
+						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of album inserts executed");
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+						finishedSuccessfully = false;
+						return;
+					}
+					
+					if (DBAccessLayer.executePatternBatch(songInsertStatement, songArgumentsList, songFieldTypes) != songAlbumIDList.size()){
+						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of song inserts executed");
+						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+						finishedSuccessfully = false;
+						return;
+					}
 				}
 			}
 
