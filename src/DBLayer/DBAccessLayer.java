@@ -158,7 +158,7 @@ public class DBAccessLayer {
 	 * each statment's arguments are found in a different list (variable length)
 	 * @return	the number of statements executed successfully
 	 **/
-	public static int	executePatternBatch(String sqlPattern, List<List<String>> argumentLists)
+/*	public static int	executePatternBatch(String sqlPattern, List<List<String>> argumentLists)
 	{
 		// insert query to log
 		Debug.query(sqlPattern);
@@ -184,12 +184,12 @@ public class DBAccessLayer {
 					// Handle null values 
 					if (argumentLists.get(statementIndex).get(argumentIndex) == null)
 					{
-						pstmt.setNull(statementIndex+1 /* 1 based*/, java.sql.Types.VARCHAR);
+						pstmt.setNull(statementIndex+1, java.sql.Types.VARCHAR);
 					}
 					else
 					{
 						System.out.println(argumentLists.get(statementIndex).get(argumentIndex));
-						pstmt.setString(argumentIndex+1 /* 1 based*/, argumentLists.get(statementIndex).get(argumentIndex));
+						pstmt.setString(argumentIndex+1, argumentLists.get(statementIndex).get(argumentIndex));
 					}
 				}
 				
@@ -205,7 +205,100 @@ public class DBAccessLayer {
 				Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
 				return 0;
 			}				
-		}			
+		}	*/		
+	
+	
+	public static int	executePatternBatch(String sqlPattern, List<List<Object>> argumentLists, List<FieldTypes> typesList)
+	{
+		// insert query to log
+		Debug.query(sqlPattern);
+		
+		// get connection to DB, and verify it
+		Connection conn = DBConnectionPool.getConnection();
+		if (conn == null)
+		{
+			Debug.log("DBAccessLayer::executePatternBatch: ERROR - failed getting connection to DB");			
+			return 0;
+		}
+		
+		int statementsNum = argumentLists.get(0).size();
+		int	argsInStatement = typesList.size();
+		
+		PreparedStatement	pstmt = null;
+		try
+		{
+			pstmt	=	conn.prepareStatement(sqlPattern);
+			// run over the statements
+			for (int statementIndex = 0; statementIndex < statementsNum; statementIndex++)				
+			{
+				// parse each statement's arguments
+				for (int argumentIndex = 0; argumentIndex < argsInStatement; argumentIndex++)
+				{
+					switch (typesList.get(argumentIndex))
+					{						
+						case FIELD_TYPE_INT:
+						{
+							if (argumentLists.get(argumentIndex).get(statementIndex) == null)
+							{
+								pstmt.setNull(argumentIndex+1, java.sql.Types.NUMERIC);
+							}
+							else
+							{
+								pstmt.setInt(argumentIndex+1, (Integer)argumentLists.get(argumentIndex).get(statementIndex));
+							}
+							break;
+						}
+						case FIELD_TYPE_LONG:
+						{
+							if (argumentLists.get(argumentIndex).get(statementIndex) == null)
+							{
+								pstmt.setNull(argumentIndex+1, java.sql.Types.NUMERIC);
+							}
+							else
+							{							
+								pstmt.setLong(argumentIndex+1, (Long)argumentLists.get(argumentIndex).get(statementIndex));
+							}
+							break;							
+						}
+						case FIELD_TYPE_STRING:
+						{
+							if (argumentLists.get(argumentIndex).get(statementIndex) == null)
+							{
+								pstmt.setNull(argumentIndex+1, java.sql.Types.VARCHAR);
+							}
+							else							
+							{
+								pstmt.setString(argumentIndex+1, argumentLists.get(argumentIndex).get(statementIndex).toString());
+							}
+							break;							
+						}
+						case FIELD_TYPE_DATE:
+						{
+							if (argumentLists.get(argumentIndex).get(statementIndex) == null)
+							{
+								pstmt.setNull(argumentIndex+1, java.sql.Types.DATE);
+							}
+							else							
+							{												
+								pstmt.setDate(argumentIndex+1, (Date)argumentLists.get(argumentIndex).get(statementIndex));
+							}
+							break;							
+						}									
+					}
+				}				
+				// Add to batch
+				pstmt.addBatch();
+			}
+		
+			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + statementsNum + " commands");
+			return doBatch(conn, pstmt);
+		}
+			catch (SQLException e)
+			{
+				Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
+				return 0;
+			}				
+		}	
 	
 	
 	/** Run the SQL pattern in a batch
@@ -213,7 +306,7 @@ public class DBAccessLayer {
 	 * @pre:	the lists have the same length
 	 * @return	the number of statements executed successfully
 	 **/	
-	public static int	executePatternBatch(String sqlPattern, List<String> firstArgumentList,
+/*	public static int	executePatternBatch(String sqlPattern, List<String> firstArgumentList,
 														List<String> secondArgumentList)
 	{
 		// insert query to log
@@ -228,7 +321,7 @@ public class DBAccessLayer {
 			statementsArgs.add(currStatementArgs);
 		}
 		return executePatternBatch(sqlPattern, statementsArgs);
-	}	
+	}	*
 	
 	
 	/** Run the SQL commands in a batch
