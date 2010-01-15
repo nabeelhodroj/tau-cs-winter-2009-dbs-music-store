@@ -438,7 +438,7 @@ public class DBConnectionManage {
 						albumIDList.add(albumID);
 						albumNameList.add(albumData.getName());
 						albumArtistIDList.add(artistID);
-						albumYearList.add(albumData.getYear());
+						albumYearList.add(new Integer(albumData.getYear()));
 						albumGenreIDList.add(genreID);
 						albumLengthList.add(albumData.getLengthSec());
 						albumPriceList.add(albumData.getPrice());	
