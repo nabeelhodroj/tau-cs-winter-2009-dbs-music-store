@@ -296,7 +296,7 @@ public class DBConnectionManage {
 				
 				// Get last album id from DB.
 				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get last album_id");
-				DBQueryResults maxAlbumID = DBAccessLayer.executeQuery("SELCET max(album_id) AS max_id FROM Albums");
+				DBQueryResults maxAlbumID = DBAccessLayer.executeQuery("SELECT max(album_id) AS max_id FROM Albums");
 				if (maxAlbumID == null) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while attempting to get max album_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
