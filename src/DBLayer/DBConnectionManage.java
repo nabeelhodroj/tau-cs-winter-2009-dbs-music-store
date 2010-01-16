@@ -321,10 +321,6 @@ public class DBConnectionManage {
 			public void run() {
 				List<DiscDBAlbumData> parsedAlbums;
 				while (parseThread.isAlive() || DiscDBParser.getCurrentAlbumListSize() > 0){
-					List<String> insertBatch = new ArrayList<String>();
-					String albumBuffer;
-					String songBuffer;
-					String artistBuffer;
 					int artistID;
 					int genreID;
 					
@@ -454,7 +450,6 @@ public class DBConnectionManage {
 								artistID = artistNames.get(trackData.getArtist());
 							}
 							
-							songBuffer = "INSERT INTO Songs(album_id, track_num, song_name, artist_id, length_sec) ";
 							songAlbumIDList.add(albumID);
 							songTrackNumList.add(trackData.getTrackNum());
 							songNameList.add(trackData.getName());
