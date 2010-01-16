@@ -306,7 +306,7 @@ public class DBConnectionManage {
 				ResultSet rs = maxAlbumID.getResultSet();
 				try {
 					rs.next();
-					albumID = rs.getInt("max_id");
+					albumID = rs.getInt("max_id")+1;
 				} catch (SQLException e) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max album_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
@@ -556,7 +556,8 @@ public class DBConnectionManage {
 				DBAccessLayer.executeUpdate("DELETE FROM Songs\n" +
 						"WHERE album_id > " + lastAlbumID);
 			}
-			GuiUpdatesInterface.notifyDataBaseUpdated(filename); 
+			if (fileParser.isFinishedSuccessfully() && dbAdder.isFinishedSuccessfully()) // only return finished successfully message when relevant.
+				GuiUpdatesInterface.notifyDataBaseUpdated(filename); 
 		}
 	}
 }
