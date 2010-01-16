@@ -464,14 +464,16 @@ public class DBConnectionManage {
 						albumID++;
 					}
 					
-					if (DBAccessLayer.executePatternBatch(genreInsertStatement, genreArgumentsList, genreFieldTypes) != genreIDList.size()){
+					if ((genreIDList.size() != 0) &&
+							(DBAccessLayer.executePatternBatch(genreInsertStatement, genreArgumentsList, genreFieldTypes) != genreIDList.size())){
 						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of genre inserts executed");
 						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
 						finishedSuccessfully = false;
 						return;
 					}
 										
-					if (DBAccessLayer.executePatternBatch(artistInsertStatement, artistArgumentsList, artistFieldTypes) != artistIDList.size()){
+					if ((artistIDList.size() != 0) &&
+							(DBAccessLayer.executePatternBatch(artistInsertStatement, artistArgumentsList, artistFieldTypes) != artistIDList.size())){
 						Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: bad number of artist inserts executed");
 						GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
 						finishedSuccessfully = false;
