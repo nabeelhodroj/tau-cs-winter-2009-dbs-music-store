@@ -63,7 +63,7 @@ public class DiscDBTrackData {
 	public	void	parseTrackTitle()	
 	{		
 		this.name = "";
-		this.artist = "";	//Constants.VARIOUS_ARTITSTS;
+		this.artist = Constants.VARIOUS_ARTITSTS;
 		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
 			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
