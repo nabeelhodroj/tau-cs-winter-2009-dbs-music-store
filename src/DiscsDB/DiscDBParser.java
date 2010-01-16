@@ -88,6 +88,7 @@ public class DiscDBParser {
 		int legalsDiscs = 0;
 		
 		long startTime = System.nanoTime();		// for performance measuring
+		long batchStartTime = System.nanoTime();		// for performance measuring
 		
 		try
 		{
@@ -165,9 +166,13 @@ public class DiscDBParser {
 									
 									// move albums to "main" list, so someone else may read them
 									if (albumList.size() >= Constants.ALBUMS_BATCH_SIZE )
-									{
+									{										
 										addAlbumDataToList(albumList);
-										albumList.clear();											
+										albumList.clear();
+										long estimatedTime = System.nanoTime() - startTime;
+										estimatedTime /= 1000000;	// convert to ms
+										 Debug.log("DiscDBParser::parseTarFile: INFO - Parsed batch of files in " +  estimatedTime + " miliseconds");			 										
+										batchStartTime = System.nanoTime();
 									}
 									albumList.add(discData);
 								}
@@ -205,6 +210,10 @@ public class DiscDBParser {
 			 long estimatedTime = System.nanoTime() - startTime;
 			 estimatedTime /= 1000000000;	// convert to seconds
 			 Debug.log("DiscDBParser::parseTarFile: SUCCESS - Parsed " + index + " albums (" + legalsDiscs + " valid), " /*+ genereList.size() + " generes.*/ + "Parse time: " + estimatedTime + " seconds");			 
+		}
+		catch (Exception exc)
+		{
+			Debug.log("DiscDBParser::parseTarFile: ERROR - Exception occurred during reading of file: " + (index+1) +/*+ file*/ " (" + exc.toString() + ") - parsing is terminated");			
 		}
 		finally
 		{
