@@ -169,7 +169,7 @@ public class DiscDBParser {
 									{										
 										addAlbumDataToList(albumList);
 										albumList.clear();
-										long estimatedTime = System.nanoTime() - startTime;
+										long estimatedTime = System.nanoTime() - batchStartTime;
 										estimatedTime /= 1000000;	// convert to ms
 										 Debug.log("DiscDBParser::parseTarFile: INFO - Parsed batch of files in " +  estimatedTime + " miliseconds");			 										
 										batchStartTime = System.nanoTime();
