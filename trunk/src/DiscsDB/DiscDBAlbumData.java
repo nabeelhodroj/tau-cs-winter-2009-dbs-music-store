@@ -148,7 +148,7 @@ public class DiscDBAlbumData {
 
 	public	boolean	hasArtist()
 	{
-		return (this.artist.length() > 0);
+		return ((this.artist.length() > 0) && (this.artist != Constants.NOT_AVAILABLE));
 	}	
 	
 	

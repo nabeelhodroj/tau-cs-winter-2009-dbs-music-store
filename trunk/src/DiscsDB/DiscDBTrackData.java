@@ -51,7 +51,7 @@ public class DiscDBTrackData {
 	
 	public	boolean	hasArtist()
 	{
-		return (this.artist.length() > 0);
+		return ((this.artist.length() > 0) && (this.artist != Constants.NOT_AVAILABLE));
 	}		
 	
 	
@@ -63,7 +63,7 @@ public class DiscDBTrackData {
 	public	void	parseTrackTitle()	
 	{		
 		this.name = "";
-		this.artist = Constants.VARIOUS_ARTITSTS;
+		this.artist = Constants.NOT_AVAILABLE;
 		if (this.title.indexOf(Constants.TITLE_DELIMITER) != -1)
 		{		
 			String[] artistAndName = 	this.title.split(Constants.TITLE_DELIMITER);
