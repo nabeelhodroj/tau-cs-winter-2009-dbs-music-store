@@ -479,8 +479,8 @@ public class DBAccessLayer {
 			res = stmt.executeBatch();
 			 // calculate how much time the process took
 			 long estimatedTime = System.nanoTime() - startTime;
-			 estimatedTime /= 1000000000;	// convert to seconds		
-			 Debug.log("DBAccessLayer::doBatch: INFO - batch done in " + estimatedTime + " seconds");
+			 estimatedTime /= 1000000;	// convert to ms		
+			 Debug.log("DBAccessLayer::doBatch: INFO - batch done in " + estimatedTime + " miliseconds");
 			
 			// Check how many commands where executed
 			for (int i = 0; i < res.length; i++)
