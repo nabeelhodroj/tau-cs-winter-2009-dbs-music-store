@@ -40,14 +40,14 @@ public class AlbumSearchQuery extends Query {
 	private String songNames = null;
 	
 	private boolean hasGenres = false;
-	private boolean[] genresArr = new boolean[10];
+	private boolean[] genresArr = new boolean[8];
 	private boolean hasOtherGenre = false;
 	private String otherGenre = null;
 	
 	private AlbumSearchStockOptionEnum stockOption = AlbumSearchStockOptionEnum.ALL;
 
-	private static String[] genreNames = {"Jazz", "Rock", "Genre03", "Genre04",
-		"Genre05", "Genre06", "Genre07", "Genre08", "Genre09", "Genre10"};
+	private static String[] genreNames = {"Rock", "Jazz", "Pop", "Blues",
+		"World", "Hip-Hop", "R&B", "Classical"};
 	private static int thisYear = 2010; // holds the current year
 	
 	/**
