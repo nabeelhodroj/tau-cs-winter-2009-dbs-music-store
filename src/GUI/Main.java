@@ -19,6 +19,19 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.awt.SWT_AWT;
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 /**
  * Main
  */
@@ -90,7 +103,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 	private static Button searchBulletInStockInStore;
 	private static Button searchBulletInStockInNetwork;
 	private static Button searchCheckBoxGenres;
-	private static Button[] searchCheckBoxGenresArr = new Button[10];
+	private static Button[] searchCheckBoxGenresArr = new Button[8];
 	private static Button searchCheckBoxGenreOther;
 	private static Text searchTextBoxGenreOther;
 	private static Button searchButtonClear;
@@ -539,63 +552,63 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							{
 								searchCheckBoxGenresArr[0] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[0].setText("Rock");
-								searchCheckBoxGenresArr[0].setBounds(12, 186, 60, 16);
+								searchCheckBoxGenresArr[0].setBounds(12, 186, 78, 16);
 								searchCheckBoxGenresArr[0].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[1] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenresArr[1].setText("Jazz");
-								searchCheckBoxGenresArr[1].setBounds(12, 206, 60, 16);
+								searchCheckBoxGenresArr[1].setBounds(12, 206, 78, 16);
 								searchCheckBoxGenresArr[1].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[2] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[2].setText("Genre03");
-								searchCheckBoxGenresArr[2].setBounds(76, 186, 60, 16);
+								searchCheckBoxGenresArr[2].setText("Pop");
+								searchCheckBoxGenresArr[2].setBounds(96, 186, 78, 16);
 								searchCheckBoxGenresArr[2].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[3] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[3].setText("Genre04");
-								searchCheckBoxGenresArr[3].setBounds(76, 206, 60, 16);
+								searchCheckBoxGenresArr[3].setText("Blues");
+								searchCheckBoxGenresArr[3].setBounds(96, 206, 78, 16);
 								searchCheckBoxGenresArr[3].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[4] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[4].setText("Genre05");
-								searchCheckBoxGenresArr[4].setBounds(141, 186, 60, 16);
+								searchCheckBoxGenresArr[4].setText("World");
+								searchCheckBoxGenresArr[4].setBounds(180, 186, 73, 16);
 								searchCheckBoxGenresArr[4].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[5] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[5].setText("Genre06");
-								searchCheckBoxGenresArr[5].setBounds(141, 206, 60, 16);
+								searchCheckBoxGenresArr[5].setText("Hip-Hop");
+								searchCheckBoxGenresArr[5].setBounds(180, 206, 79, 16);
 								searchCheckBoxGenresArr[5].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[6] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[6].setText("Genre07");
-								searchCheckBoxGenresArr[6].setBounds(205, 186, 60, 16);
+								searchCheckBoxGenresArr[6].setText("R&&B");
+								searchCheckBoxGenresArr[6].setBounds(265, 186, 78, 16);
 								searchCheckBoxGenresArr[6].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[7] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[7].setText("Genre08");
-								searchCheckBoxGenresArr[7].setBounds(205, 206, 60, 16);
+								searchCheckBoxGenresArr[7].setText("Classical");
+								searchCheckBoxGenresArr[7].setBounds(265, 206, 78, 16);
 								searchCheckBoxGenresArr[7].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
-							{
+							/*{
 								searchCheckBoxGenresArr[8] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[8].setText("Genre09");
+								searchCheckBoxGenresArr[8].setText("Metal");
 								searchCheckBoxGenresArr[8].setBounds(270, 186, 60, 16);
 								searchCheckBoxGenresArr[8].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}
 							{
 								searchCheckBoxGenresArr[9] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[9].setText("Genre10");
+								searchCheckBoxGenresArr[9].setText("Electronic");
 								searchCheckBoxGenresArr[9].setBounds(270, 206, 60, 16);
 								searchCheckBoxGenresArr[9].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
-							}
+							}*/
 							{
 								searchCheckBoxGenreOther = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
 								searchCheckBoxGenreOther.setText("Other:");
