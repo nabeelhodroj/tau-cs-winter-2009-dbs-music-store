@@ -743,9 +743,12 @@ public class ManageFuncs {
 				"Please try again later.");
 		// retry connection
 		if (errMsg.open() == SWT.OK) {
-			// restore gui
+			// restore gui - clear update fields
+			Main.getManageTextBoxDBSUpdateFileInput().setText(""); // TODO enable again after failure notification problem is fixed
+			Main.getManageButtonDBSUpdate().setEnabled(false);
+			
+			// flag DB as free
 			MainFuncs.setAllowDBAction(true);
-			Main.getManageButtonDBSUpdate().setEnabled(true);
 		}
 	}
 	
