@@ -587,7 +587,7 @@ public class Main extends org.eclipse.swt.widgets.Composite {
 							}
 							{
 								searchCheckBoxGenresArr[6] = new Button(searchGroupOptions, SWT.CHECK | SWT.LEFT);
-								searchCheckBoxGenresArr[6].setText("R&&B");
+								searchCheckBoxGenresArr[6].setText("Electronic");
 								searchCheckBoxGenresArr[6].setBounds(265, 186, 78, 16);
 								searchCheckBoxGenresArr[6].setFont(SWTResourceManager.getFont("Times New Roman", 9, 0, false, false));
 							}

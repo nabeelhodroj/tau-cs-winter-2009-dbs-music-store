@@ -46,8 +46,8 @@ public class AlbumSearchQuery extends Query {
 	
 	private AlbumSearchStockOptionEnum stockOption = AlbumSearchStockOptionEnum.ALL;
 
-	private static String[] genreNames = {"Rock", "Jazz", "Pop", "Blues",
-		"World", "Hip-Hop", "R&B", "Classical"};
+	private static String[] genreNames = {"rock", "jazz", "pop", "blues",
+		"world", "hip hop", "electronic", "Classical"};
 	private static int thisYear = 2010; // holds the current year
 	
 	/**
