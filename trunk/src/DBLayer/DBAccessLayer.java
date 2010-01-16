@@ -155,63 +155,16 @@ public class DBAccessLayer {
 	
 	
 	/** Run the SQL pattern in a batch
-	 * each statment's arguments are found in a different list (variable length)
+	 * Each argument is in a different list 
+	 * (a list for argument 1 in all statements, a list for argument 2, ...)
+	 * and a list which indicates the type of each argument.
+	 * @pre		ALL arguments lists must be in the same order (duh...)
 	 * @return	the number of statements executed successfully
-	 **/
-/*	public static int	executePatternBatch(String sqlPattern, List<List<String>> argumentLists)
-	{
-		// insert query to log
-		Debug.query(sqlPattern);
-		
-		// get connection to DB, and verify it
-		Connection conn = DBConnectionPool.getConnection();
-		if (conn == null)
-		{
-			Debug.log("DBAccessLayer::executePatternBatch: ERROR - failed getting connection to DB");			
-			return 0;
-		}
-		
-		PreparedStatement	pstmt = null;
-		try
-		{
-			pstmt	=	conn.prepareStatement(sqlPattern);
-			// run over the statements
-			for (int statementIndex = 0; statementIndex < argumentLists.size(); statementIndex++)				
-			{
-				// parse each statement's arguments
-				for (int argumentIndex = 0; argumentIndex < argumentLists.get(statementIndex).size(); argumentIndex++)
-				{					
-					// Handle null values 
-					if (argumentLists.get(statementIndex).get(argumentIndex) == null)
-					{
-						pstmt.setNull(statementIndex+1, java.sql.Types.VARCHAR);
-					}
-					else
-					{
-						System.out.println(argumentLists.get(statementIndex).get(argumentIndex));
-						pstmt.setString(argumentIndex+1, argumentLists.get(statementIndex).get(argumentIndex));
-					}
-				}
-				
-				// Add to batch
-				pstmt.addBatch();
-			}
-		
-			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + argumentLists.size() + " commands");
-			return doBatch(conn, pstmt);
-		}
-			catch (SQLException e)
-			{
-				Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
-				return 0;
-			}				
-		}	*/		
-	
-	
+	 **/		
 	public static int	executePatternBatch(String sqlPattern, List<List<Object>> argumentLists, List<FieldTypes> typesList)
 	{
 		// insert query to log
-		Debug.query(sqlPattern);
+//		Debug.query(sqlPattern);
 		
 		// get connection to DB, and verify it
 		Connection conn = DBConnectionPool.getConnection();
@@ -293,39 +246,20 @@ public class DBAccessLayer {
 			Debug.log("DBAccessLayer::executeBatch: INFO - exceuting batch with " + statementsNum + " commands");
 			return doBatch(conn, pstmt);
 		}
-			catch (SQLException e)
-			{
-				Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
-				return 0;
-			}				
-		}	
-	
-	
-	/** Run the SQL pattern in a batch
-	 * supports 2 lists of arguments
-	 * @pre:	the lists have the same length
-	 * @return	the number of statements executed successfully
-	 **/	
-/*	public static int	executePatternBatch(String sqlPattern, List<String> firstArgumentList,
-														List<String> secondArgumentList)
-	{
-		// insert query to log
-		Debug.query(sqlPattern);
-		
-		List<List<String>> statementsArgs = new LinkedList<List<String>>();			
-		for (int i = 0; i < firstArgumentList.size(); i++)
+		catch (SQLException e)
 		{
-			List<String> currStatementArgs = new   LinkedList<String>();				
-			currStatementArgs.add(firstArgumentList.get(i));
-			currStatementArgs.add(secondArgumentList.get(i));
-			statementsArgs.add(currStatementArgs);
-		}
-		return executePatternBatch(sqlPattern, statementsArgs);
-	}	*
+			Debug.log("DBAccessLayer::executeBatch: ERROR - exception occured when adding command to batch");
+			return 0;
+		}				
+	}	
 	
 	
 	/** Run the SQL commands in a batch
 	 * @return	the number of statements executed successfully
+	 * NOTE:	use this method only for small batches of commands from different types.
+	 * 			for big batches, consider split them into groups of commands from the
+	 * 			same type and use executePatternBatch which uses PreparedStatement
+	 * 			and the performance will be about 60 times better....
 	 **/	
 	public	static	int	executeBatch(List<String> sqlCommands)
 	{
@@ -382,6 +316,7 @@ public class DBAccessLayer {
 		int ret = 0;
 		try
 		{
+			// Disabling auto commit improves performance at about 40%... 
 			conn.setAutoCommit(false);			
 			stmt = conn.createStatement();
 			
