@@ -12,7 +12,7 @@ public class Constants {
 	
 	public	static	final	String	TITLE_DELIMITER = " " + "/" + " ";
 	
-	public	static	final	int		ALBUMS_BATCH_SIZE = 1000;
+	public	static	final	int		ALBUMS_BATCH_SIZE = 5000;
 	
 	public	static	final	String	UNKNOWN_GENRE = "unknown";
 	
