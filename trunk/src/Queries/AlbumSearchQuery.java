@@ -155,7 +155,7 @@ public class AlbumSearchQuery extends Query {
 					throw new QueryErrorException("Other genre option selected, field must have value", this.getQueryType()); // in case other genre selected but has no value
 				else { // SET OTHER GENRE
 					this.otherGenre = otherGenreText.toLowerCase();
-					this.hasOtherGenre = true;
+					this.hasOtherGenre = Main.getSearchCheckBoxGenreOther().getSelection();
 				}
 			}
 			
