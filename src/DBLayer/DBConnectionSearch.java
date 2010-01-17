@@ -40,12 +40,12 @@ public class DBConnectionSearch {
 			} else {
 				if (albumSearchQuery.hasAlbumName()){
 					wherePart += " AND\n" +
-							"Albums.album_name LIKE '%" + albumSearchQuery.getAlbumName()+"%'";
+							"LOWER(Albums.album_name) LIKE '%" + albumSearchQuery.getAlbumName()+"%'";
 					
 				}
 				if (albumSearchQuery.hasArtist()) {
 					wherePart += " AND\n" +
-							"artists.artist_name LIKE '%" + albumSearchQuery.getArtist()+"%'";
+							"LOWER(artists.artist_name) LIKE '%" + albumSearchQuery.getArtist()+"%'";
 				}
 				if (albumSearchQuery.hasGenres()) {
 					wherePart += " AND\n(";
@@ -85,7 +85,7 @@ public class DBConnectionSearch {
 							"Albums.Album_id = Songs.album_id";
 					for (String songName : albumSearchQuery.getSongNames().split(";")) {
 						wherePart += " AND\n" +
-								"Songs.song_name LIKE '%" + songName + "%'";
+								"LOWER(Songs.song_name LIKE '%" + songName + "%'";
 					}
 				}
 				
