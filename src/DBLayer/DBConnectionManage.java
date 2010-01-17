@@ -218,7 +218,7 @@ public class DBConnectionManage {
 		
 		private class ParseFile implements Runnable{
 			private String filename;
-			private boolean finishedSuccessfully = true;
+			private boolean finishedSuccessfully = false;
 			
 			public ParseFile(String filename) {
 				this.filename = filename;
@@ -233,6 +233,7 @@ public class DBConnectionManage {
 					finishedSuccessfully = false;
 					return;	
 				}
+				finishedSuccessfully = true;
 			}
 
 			public boolean isFinishedSuccessfully() {
@@ -247,7 +248,7 @@ public class DBConnectionManage {
 		
 		private class BatchAddToDB implements Runnable{
 			private Thread parseThread;
-			private boolean finishedSuccessfully = true;
+			private boolean finishedSuccessfully = false;
 			private Map<String,Integer> genres = new HashMap<String,Integer>();
 			private Map<String,Integer> artistNames= new HashMap<String,Integer>();
 			private int albumID;
@@ -540,6 +541,7 @@ public class DBConnectionManage {
 						return;
 					}
 				}
+				finishedSuccessfully = true;
 			}
 
 			public boolean isFinishedSuccessfully() {
