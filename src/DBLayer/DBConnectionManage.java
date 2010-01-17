@@ -250,9 +250,9 @@ public class DBConnectionManage {
 			private boolean finishedSuccessfully = true;
 			private Map<String,Integer> genres = new HashMap<String,Integer>();
 			private Map<String,Integer> artistNames= new HashMap<String,Integer>();
-			private int albumID;
-			private int nextGenreID;
-			private int nextArtistID;
+			private int albumID = 0;
+			private int nextGenreID = 0;
+			private int nextArtistID = 0;
 			
 			public BatchAddToDB(Thread parseThread) {
 				this.parseThread = parseThread;
@@ -315,8 +315,7 @@ public class DBConnectionManage {
 				}
 				ResultSet albumIDRS = maxAlbumID.getResultSet();
 				try {
-					albumIDRS.next();
-					albumID = albumIDRS.getInt("max_id")+1;
+					if (albumIDRS.next()) albumID = albumIDRS.getInt("max_id")+1;
 				} catch (SQLException e) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max album_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
@@ -337,8 +336,7 @@ public class DBConnectionManage {
 				}
 				ResultSet genresIDRS = maxGenreID.getResultSet();
 				try {
-					genresIDRS.next();
-					nextGenreID = genresIDRS.getInt("max_id")+1;
+					if (genresIDRS.next()) nextGenreID = genresIDRS.getInt("max_id")+1;
 				} catch (SQLException e) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max genre_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
@@ -359,8 +357,7 @@ public class DBConnectionManage {
 				}
 				ResultSet artistIDRS = maxArtistID.getResultSet();
 				try {
-					artistIDRS.next();
-					nextArtistID = artistIDRS.getInt("max_id")+1;
+					if (artistIDRS.next()) nextArtistID = artistIDRS.getInt("max_id")+1;
 				} catch (SQLException e) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max artist_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
