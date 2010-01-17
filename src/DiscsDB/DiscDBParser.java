@@ -50,7 +50,7 @@ public class DiscDBParser {
 				{
 					albumList.add(i, generalAlbumList.remove(0));
 				}
-				Debug.log("DiscDBParser::removeAllbumsDataFromList: - retrived " + size + "albums from list", Debug.DebugOutput.STDOUT);				
+				Debug.log("DiscDBParser::removeAllbumsDataFromList: - retrieved " + size + " albums from list", Debug.DebugOutput.STDOUT);				
 			}
 			else
 			{
