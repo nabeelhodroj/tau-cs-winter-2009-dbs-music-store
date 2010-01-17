@@ -165,7 +165,15 @@ public class DBConnectionManage {
 			sqlCommands.add(employeeRemove);
 			sqlCommands.add(employeeInsert);
 			
-			if (DBAccessLayer.executeCommandsAtomic(sqlCommands) != 2){
+			if (employee.getPosition() == EmployeePositionsEnum.MANAGER){
+				String storeManagerUpdate = "UPDATE Stores\n" +
+					"SET manager_id = " + employee.getEmployeeID() + "\n" +
+					"WHERE store_id = " + StaticProgramTables.thisStore.getStoreID();
+				sqlCommands.add(storeManagerUpdate);
+			}
+
+			
+			if (DBAccessLayer.executeCommandsAtomic(sqlCommands) != sqlCommands.size()){
 				Debug.log("DBConnectionInterface.InsertUpdateEmployee [ERROR]: Failed Removing and Updating Employees");
 
 				GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.INSERT_SAVE_EMP_FAILURE);
