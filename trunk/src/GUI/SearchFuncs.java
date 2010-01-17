@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.*;
+
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.*;
@@ -585,7 +587,9 @@ public class SearchFuncs {
 		// first clear songs table
 		Main.getSearchTableSongResults().removeAll();
 		// now enter songs
-		for(SongsResultsTableItem song: songs.getSongs().values()){
+		HashMap<Integer,SongsResultsTableItem> songsResults = (HashMap<Integer,SongsResultsTableItem>)songs.getSongs();
+		for(int i = 1; i <= songsResults.size(); i++){
+			SongsResultsTableItem song = songsResults.get(i);
 			TableItem item = new TableItem(Main.getSearchTableSongResults(), SWT.NONE);
 			String[] entry = new String[]{
 					Integer.toString(song.getTrack()),
