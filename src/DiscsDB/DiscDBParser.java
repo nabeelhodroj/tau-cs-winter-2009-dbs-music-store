@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.*;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Condition;
 import java.util.Random;
 import General.*;
 
@@ -16,47 +17,72 @@ public class DiscDBParser {
 	private static String 	BZIP2_TAR_SUFFIX = ".tar.tar";
 	private	static	int		TRACK_FRAMES_IN_SEC = 75;
 	
-	private	static	boolean	Parsing = false;
-	
+	private static	boolean	parseEnded = false;
 	
 	/** this list holds the albums read from file
 	 * multiple threads can add and remove records from it safely 
 	 * **/
 	private static List<DiscDBAlbumData> generalAlbumList = new LinkedList<DiscDBAlbumData>();
 	protected static final ReentrantLock lock = new ReentrantLock();
-	
+	protected static final Condition albumsListSizeDecreasedCondition = lock.newCondition();
+	protected static final Condition albumsListSizeIncreasedCondition = lock.newCondition();
+		
 	
 	/** adds a list of albums to the general albums list **/
 	public static void addAlbumDataToList(List<DiscDBAlbumData> listToAdd)
 	{
 		lock.lock();
-		generalAlbumList.addAll(listToAdd);
-		lock.unlock();
-		Debug.log("DiscDBParser::addAlbumDataToList: Added " + listToAdd.size() + " albums to outer list", Debug.DebugOutput.STDOUT);
+		try
+		{		
+			while ((generalAlbumList.size()+listToAdd.size()) > Constants.MAX_ALBUMS_LIST_SIZE)
+			{
+				// wait for other thread to remove elements
+				albumsListSizeDecreasedCondition.await();
+			}			
+			generalAlbumList.addAll(listToAdd);
+			Debug.log("DiscDBParser::addAlbumDataToList: Added " + listToAdd.size() + " albums to outer list", Debug.DebugOutput.STDOUT);
+			// signal for anyone who is waiting for the list size to increase (in order to get elements)
+			albumsListSizeIncreasedCondition.signalAll();
+		}
+		catch (InterruptedException ex)
+		{
+			Debug.log("DiscDBParser::addAlbumDataToList: ERROR - waiting for list to decrease was interupted: " + ex.toString());
+		}
+		finally
+		{
+			lock.unlock();	
+		}		
 	}
 	
 	
 	/** returns (and removes) a list of albums from the general albums list **/
-	public static List<DiscDBAlbumData> removeAllbumsDataFromList(int size)	
+	public static List<DiscDBAlbumData> removeAllbumsDataFromList(int size)
 	{
-		List<DiscDBAlbumData> albumList = null;
+		List<DiscDBAlbumData> albumList = new LinkedList<DiscDBAlbumData>();
 		try
 		{
 			lock.lock();
-			if (generalAlbumList.size() >= size)
+			// get elements if list is long enough, or parser has finished
+			while ((generalAlbumList.size() < size) && !parseEnded)					
 			{
-				albumList = new LinkedList<DiscDBAlbumData>();
-				for (int i = 0; i< size; i++)
-				{
-					albumList.add(i, generalAlbumList.remove(0));
-				}
-				Debug.log("DiscDBParser::removeAllbumsDataFromList: - retrieved " + size + " albums from list", Debug.DebugOutput.STDOUT);				
+				// not enough elements to read - wait until there will be
+				Debug.log("DiscDBParser::removeAllbumsDataFromList: can't retrieve " + size + " albums, because list contains only " + generalAlbumList.size(), Debug.DebugOutput.STDOUT);
+				//Debug.log("DiscDBParser::removeAllbumsDataFromList: can't retrieve " + size + " albums, because list contains only " + generalAlbumList.size());
+				// wait for other thread to insert elements
+				albumsListSizeIncreasedCondition.await();				
 			}
-			else
+						
+			for (int i = 0; i< size && (!generalAlbumList.isEmpty()) ; i++)
 			{
-				Debug.log("DiscDBParser::removeAllbumsDataFromList: ERROR - can't retrive " + size + "albums, because list contains only " + generalAlbumList.size(), Debug.DebugOutput.STDOUT);
-				Debug.log("DiscDBParser::removeAllbumsDataFromList: ERROR - can't retrive " + size + "albums, because list contains only " + generalAlbumList.size());
+				albumList.add(i, generalAlbumList.remove(0));
 			}
+			Debug.log("DiscDBParser::removeAllbumsDataFromList: - retrieved " + albumList.size() + " albums from list", Debug.DebugOutput.STDOUT);
+			// signal for anyone who is waiting for the list size to decrease (in order to add elements)
+			albumsListSizeDecreasedCondition.signalAll();								
+		}
+		catch (InterruptedException ex)
+		{
+			Debug.log("DiscDBParser::removeAllbumsDataFromList: ERROR - waiting for list to grow was interupted: " + ex.toString());
 		}
 		finally
 		{
@@ -92,7 +118,7 @@ public class DiscDBParser {
 		
 		try
 		{
-			setParsing(true);
+			parseEnded = false;
 			 while ((entry = tarInput.getNextTarEntry()) != null)
 			 {
 				 // read entry
@@ -218,7 +244,7 @@ public class DiscDBParser {
 		}
 		finally
 		{
-			setParsing(false);	
+			parseEnded = true;
 			tarInput.close();
 			if (isTarFile)
 			{
@@ -279,17 +305,6 @@ public class DiscDBParser {
 		int nextOffset = discLenghtSec*TRACK_FRAMES_IN_SEC;
 		return getTrackLengthInSec(offset, nextOffset);		
 	}
-
-
-	public static boolean isParsing() {
-		return Parsing;
-	}
-
-
-	public static void setParsing(boolean parsing) {
-		Parsing = parsing;
-	}
-	
 	
 	public static int	getCurrentAlbumListSize()
 	{
