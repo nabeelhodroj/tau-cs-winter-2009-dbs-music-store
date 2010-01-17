@@ -83,7 +83,7 @@ public class AlbumSearchQuery extends Query {
 				albumNameText = MainFuncs.replaceSubString(albumNameText, "'", "''");
 				if (albumNameText == null || albumNameText.length() == 0) // album name text is empty
 					throw new QueryErrorException("Album name option selected, field must have value", this.getQueryType());
-				else this.albumName = albumNameText;
+				else this.albumName = albumNameText.toLowerCase();
 			}
 			
 			// artist
@@ -93,7 +93,7 @@ public class AlbumSearchQuery extends Query {
 				artistText = MainFuncs.replaceSubString(artistText, "'", "''");
 				if (artistText == null || artistText.length() == 0) // artist name text is empty
 					throw new QueryErrorException("Artist option selected, field must have value", this.getQueryType());
-				else this.artist = artistText;
+				else this.artist = artistText.toLowerCase();
 			}
 			
 			// year from / to
@@ -129,7 +129,7 @@ public class AlbumSearchQuery extends Query {
 				songNamesText = MainFuncs.replaceSubString(songNamesText, "'", "''");
 				if (songNamesText == null || songNamesText.length() == 0) // song names text is empty
 					throw new QueryErrorException("Song names option selected, field must have value", this.getQueryType());
-				else this.songNames = songNamesText;
+				else this.songNames = songNamesText.toLowerCase();
 			}
 			
 			// genres
