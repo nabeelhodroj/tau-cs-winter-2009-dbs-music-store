@@ -656,9 +656,9 @@ public class ManageFuncs {
 		// initialize and open file dialog
 		FileDialog openUpdateFile = new FileDialog(Main.getMainShell(),SWT.OPEN);
 		openUpdateFile.setText("Open update file");
-		String[] extensions = new String[]{"*.bz2","*.tar","*.*"};
+		String[] extensions = new String[]{"*.tar","*.bz2","*.*"};
 		openUpdateFile.setFilterExtensions(extensions);
-		String[] filters = new String[]{"B2Z files (*.b2z)","TAR files (*.tar)","All files (*.*)"};
+		String[] filters = new String[]{"TAR files (*.tar)","B2Z files (*.b2z)","All files (*.*)"};
 		openUpdateFile.setFilterNames(filters);
 		try{
 			String selected = openUpdateFile.open();
