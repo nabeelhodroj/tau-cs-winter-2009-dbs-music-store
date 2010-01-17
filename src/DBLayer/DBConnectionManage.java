@@ -243,6 +243,8 @@ public class DBConnectionManage {
 			private Map<String,Integer> genres = new HashMap<String,Integer>();
 			private Map<String,Integer> artistNames= new HashMap<String,Integer>();
 			private int albumID;
+			private int nextGenreID;
+			private int nextArtistID;
 			
 			public BatchAddToDB(Thread parseThread) {
 				this.parseThread = parseThread;
@@ -303,10 +305,10 @@ public class DBConnectionManage {
 					finishedSuccessfully = false;
 					return;
 				}
-				ResultSet rs = maxAlbumID.getResultSet();
+				ResultSet albumIDRS = maxAlbumID.getResultSet();
 				try {
-					rs.next();
-					albumID = rs.getInt("max_id")+1;
+					albumIDRS.next();
+					albumID = albumIDRS.getInt("max_id")+1;
 				} catch (SQLException e) {
 					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max album_id");
 					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
@@ -315,6 +317,51 @@ public class DBConnectionManage {
 					return;
 				}
 				maxAlbumID.close();
+				
+				// Get last genre id from DB.
+				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get last genre_id");
+				DBQueryResults maxGenreID = DBAccessLayer.executeQuery("SELECT max(genre_id) AS max_id FROM genres");
+				if (maxGenreID == null) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while attempting to get max genre_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;
+				}
+				ResultSet genresIDRS = maxGenreID.getResultSet();
+				try {
+					genresIDRS.next();
+					nextGenreID = genresIDRS.getInt("max_id")+1;
+				} catch (SQLException e) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max genre_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					maxGenreID.close();
+					return;
+				}
+				maxGenreID.close();
+
+				// Get last artist id from DB.
+				Debug.log("DBConnectionManage.BatchAddToDB: access DB to get last artist_id");
+				DBQueryResults maxArtistID = DBAccessLayer.executeQuery("SELECT max(artist_id) AS max_id FROM artists");
+				if (maxArtistID == null) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: failed while attempting to get max artist_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					return;
+				}
+				ResultSet artistIDRS = maxArtistID.getResultSet();
+				try {
+					artistIDRS.next();
+					nextArtistID = artistIDRS.getInt("max_id")+1;
+				} catch (SQLException e) {
+					Debug.log("DBConnectionManage.BatchAddToDB [ERROR]: RS failure while getting max artist_id");
+					GuiUpdatesInterface.notifyDBFailure(DBActionFailureEnum.UPDATE_DB_FAILURE);
+					finishedSuccessfully = false;
+					maxArtistID.close();
+					return;
+				}
+				maxArtistID.close();
+
 			}
 
 			
@@ -414,7 +461,7 @@ public class DBConnectionManage {
 						
 						String genreName = albumData.getGenere().toLowerCase();
 						if (!genres.containsKey(genreName)){
-							genreID = genres.size();
+							genreID = nextGenreID++;
 							genres.put(genreName, genreID);
 							genreIDList.add(genreID);
 							genreNameList.add(genreName);
@@ -423,7 +470,7 @@ public class DBConnectionManage {
 						}
 						
 						if (!artistNames.containsKey(albumData.getArtist())){
-							artistID = artistNames.size();
+							artistID = nextArtistID++;
 							artistNames.put(albumData.getArtist(), artistID);
 							artistIDList.add(artistID);
 							artistNameList.add(albumData.getArtist());
