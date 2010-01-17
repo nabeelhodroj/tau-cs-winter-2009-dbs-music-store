@@ -138,6 +138,7 @@ public class DiscDBParser {
 								DiscDBAlbumData discData = new DiscDBAlbumData(par.getDtitle(), sGenere, par.getDyear(), par.getDiscLength(), price); 								
 								Pattern _notAsciiPattern = Pattern.compile(Constants.NON_ASCII_REGEX); 
 								boolean ascii = !(_notAsciiPattern.matcher(par.getDtitle()).find());
+								ascii = (ascii && !(_notAsciiPattern.matcher(par.getDgenre()).find())); 
 								boolean valid = discData.isValid();	// make sure disc name and artist is in valid format
 								for (int i = 0; i < par.getTrackOffsets().size() && (ascii && valid) ; i++)
 								{
