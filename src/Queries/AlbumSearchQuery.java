@@ -154,7 +154,7 @@ public class AlbumSearchQuery extends Query {
 						(otherGenreText.length() == 0 || otherGenreText == null))
 					throw new QueryErrorException("Other genre option selected, field must have value", this.getQueryType()); // in case other genre selected but has no value
 				else { // SET OTHER GENRE
-					this.otherGenre = otherGenreText;
+					this.otherGenre = otherGenreText.toLowerCase();
 					this.hasOtherGenre = true;
 				}
 			}
