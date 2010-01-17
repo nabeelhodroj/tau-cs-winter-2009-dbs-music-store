@@ -48,17 +48,32 @@ public class DBConnectionSearch {
 							"artists.artist_name LIKE '%" + albumSearchQuery.getArtist()+"%'";
 				}
 				if (albumSearchQuery.hasGenres()) {
+					wherePart += " AND\n(";
+					boolean firstGenre = true;
 					for (int i = 0;i < albumSearchQuery.getGenresArr().length;i++){
 						if (albumSearchQuery.getGenresArr()[i]){
-							wherePart += " AND\n" +
-									"genres.genre_name LIKE '%" + AlbumSearchQuery.getGenreNames()[i] + "%'";
+							if (firstGenre) {
+								firstGenre = false;
+							}else {						
+								wherePart += " OR\n";
+							}
+							
+							wherePart += "genres.genre_name LIKE '%" + AlbumSearchQuery.getGenreNames()[i] + "%'";
 						}
 					}
+					if (albumSearchQuery.hasOtherGenre()){
+						wherePart += " OR\n" +
+								"genres.genre_name LIKE '%" + albumSearchQuery.getOtherGenre()+"%'";
+					}
+					
+					wherePart += ")\n";
+				} else {
+					if (albumSearchQuery.hasOtherGenre()){
+						wherePart += " AND\n" +
+								"genres.genre_name LIKE '%" + albumSearchQuery.getOtherGenre()+"%'";
+					}
 				}
-				if (albumSearchQuery.hasOtherGenre()){
-					wherePart += " AND\n" +
-							"genres.genre_name LIKE '%" + albumSearchQuery.getOtherGenre()+"%'";
-				}
+				
 				if (albumSearchQuery.hasYear()){
 					wherePart += " AND\n" +
 							"Albums.year <= " + albumSearchQuery.getYearTo() + " AND\n" +
