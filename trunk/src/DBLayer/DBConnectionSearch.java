@@ -140,7 +140,8 @@ public class DBConnectionSearch {
 			String songsQuery = "SELECT Songs.track_num, Songs.song_name, artists.artist_name, Songs.length_sec\n";
 			songsQuery += "FROM Songs, Artists\n";
 			songsQuery += "WHERE Songs.album_id = " + albumID + " AND\n" +
-					"Songs.artist_id = artists.artist_id";
+					"Songs.artist_id = artists.artist_id\n";
+			songsQuery += "ORDER BY Songs.track_num";
 			
 			DBQueryResults songsQueryResults = DBAccessLayer.executeQuery(songsQuery);
 			if (songsQueryResults == null){
