@@ -377,7 +377,8 @@ public class DBConnectionManage {
 					int artistID;
 					int genreID;
 					
-					int numToRemove = Math.min(DiscsDB.Constants.ALBUMS_BATCH_SIZE,DiscDBParser.getCurrentAlbumListSize());
+				// the code below was commented in by Rotem - 18/1/2010
+				/*	int numToRemove = Math.min(DiscsDB.Constants.ALBUMS_BATCH_SIZE,DiscDBParser.getCurrentAlbumListSize());
 					Debug.log("DBConnectionManage.BatchAddToDB read " + numToRemove + " albums");
 					if (numToRemove == 0) {
 						try {
@@ -388,7 +389,17 @@ public class DBConnectionManage {
 							e.printStackTrace();
 						}
 					}
-					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(numToRemove);*/
+					
+					/**
+					 * this line handles it all:
+					 * Tries to read ALBUMS_BATCH_SIZE data
+					 * Waits till there is enough data to read, or parsing ends
+					 * Reads data
+					 * Signal the thread who inserts the data that the list size was decreased
+					 */ 
+					parsedAlbums = DiscDBParser.removeAllbumsDataFromList(DiscsDB.Constants.ALBUMS_BATCH_SIZE);
+					Debug.log("DBConnectionManage.BatchAddToDB read " + parsedAlbums.size() + " albums");
 					
 					String genreInsertStatement = "INSERT INTO genres(genre_id, genre_name) VALUES(?,?)";
 					List<FieldTypes> genreFieldTypes = new ArrayList<FieldTypes>();
