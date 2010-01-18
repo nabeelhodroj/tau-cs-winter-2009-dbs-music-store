@@ -36,6 +36,7 @@ public class DiscDBParser {
 		{		
 			while ((generalAlbumList.size()+listToAdd.size()) > Constants.MAX_ALBUMS_LIST_SIZE)
 			{
+				Debug.log("DiscDBParser::addAlbumDataToList: can't add " + listToAdd.size() + " albums, because list is to long, waiting for it to get shorted", Debug.DebugOutput.STDOUT);
 				// wait for other thread to remove elements
 				albumsListSizeDecreasedCondition.await();
 			}			
@@ -193,13 +194,15 @@ public class DiscDBParser {
 									
 									// move albums to "main" list, so someone else may read them
 									if (albumList.size() >= Constants.ALBUMS_BATCH_SIZE )
-									{										
-										addAlbumDataToList(albumList);
-										albumList.clear();
+									{
 										long estimatedTime = System.nanoTime() - batchStartTime;
 										estimatedTime /= 1000000;	// convert to ms
-										 Debug.log("DiscDBParser::parseTarFile: INFO - Parsed batch of files in " +  estimatedTime + " miliseconds");			 										
-										batchStartTime = System.nanoTime();
+										 Debug.log("DiscDBParser::parseTarFile: INFO - Parsed batch of files in " +  estimatedTime + " miliseconds");			 																			
+										
+										addAlbumDataToList(albumList);
+										albumList.clear();
+
+										batchStartTime = System.nanoTime();											
 									}
 									albumList.add(discData);
 								}
