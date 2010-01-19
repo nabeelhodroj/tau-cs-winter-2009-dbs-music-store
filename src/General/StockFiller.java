@@ -13,7 +13,8 @@ import General.Debug.DebugOutput;
  */
 public class StockFiller {
 	
-	private static int N = 10;
+	private static int START_INDEX = 16000;
+	private static int N = 1000;
 	private static int quantity = 100;
 	private static final String STOCK_FILLER = "stores_stock_filler_transaction.sql";
 	private static BufferedWriter outputFile = null;
@@ -24,8 +25,8 @@ public class StockFiller {
 		String trans = "";
 		
 		// values for each store
-		int lower = 1;
-		int upper = N;
+		int lower = START_INDEX;
+		int upper = N+START_INDEX;
 		for (int store_id: StaticProgramTables.stores.getStores().keySet()){
 			// initiate command
 			trans +=	"INSERT INTO stock(album_id, store_id, quantity)\n"+
