@@ -1,0 +1,7 @@
+# DB Properties
+DBUser = rotemdru
+DBPassword = store
+DBHost = orasrv
+DBPort = 1521
+SID = csodb
+MaxDBConnections = 10
