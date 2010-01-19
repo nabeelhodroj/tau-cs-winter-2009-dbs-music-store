@@ -1,0 +1,6 @@
+SELECT store_id, city, address, phone_number, manager_id FROM stores;
+SELECT order_id, supplying_store_id, album_id, quantity, order_date, status FROM orders WHERE ordering_store_id=84;
+SELECT order_id, ordering_store_id, album_id, quantity, order_date, status FROM orders WHERE (supplying_store_id=84) AND (status=0);
+SELECT *
+FROM Employees
+WHERE store_id = 84;

@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import GUI.Main;
+
 public class Debug {
-	private static final String LOG_FILE = "DB_Music_Store_Log.txt";
-	private static final String QUERY_FILE = "DB_Music_Store_Query_Log.txt";
+	private static final String LOG_FILE = "log"+Main.getSep()+"DB_Music_Store_Log.txt";
+	private static final String QUERY_FILE = "log"+Main.getSep()+"DB_Music_Store_Query_Log.txt";
 	private static BufferedWriter outputFile = null;
 	private static BufferedWriter queryOutputFile = null;
 	private static final boolean DEBUG_MODE = true; 
@@ -34,12 +36,12 @@ public class Debug {
 		switch (logger) {
 			case STDOUT : {
 				if (DEBUG_MODE)
-					//System.out.println(message);
+					System.out.println(message);
 				break;
 			}
 			case STDERR : {
 				if (DEBUG_MODE) 
-					//System.err.println(message);	
+					System.err.println(message);	
 				break;
 			}
 			case FILE : {
