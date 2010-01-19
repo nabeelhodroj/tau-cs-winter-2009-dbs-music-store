@@ -87,6 +87,7 @@ public class DBConnectionSearch {
 								"Albums.Album_id = s"+i+".album_id";						
 						wherePart += " AND\n" +
 								"LOWER(s"+i+".song_name) LIKE '%" + songName + "%'";
+						i++;
 					}
 				}
 				
