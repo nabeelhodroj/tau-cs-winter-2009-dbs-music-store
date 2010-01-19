@@ -1,0 +1,23 @@
+16:04:44 > DBConnectionInterface.initDBConnection is called
+16:04:44 > DBConnectionInterface.InitDBConnection thread is started
+16:04:44 > DBConnectionInterface.InitDBConnection initialized DBConnectionPool
+16:04:44 > DBConnectionInterface.InitDBConnection done with the DB.
+16:04:44 > GuiUpdatesInterface: initStoresTable is invoked
+16:04:44 > DBQueryResults::close - closed result set
+16:04:45 > Initial Dialog: Start button clicked
+16:04:45 > DBConnectionInterface.getOrdersTable is called
+16:04:45 > DBConnectionInterface.getRequestsTable is called
+16:04:45 > DBConnectionStock.GetOrdersTable thread is started
+16:04:45 > DBConnectionInterface.getEmployeesTable is called
+16:04:45 > DBConnectionStock.GetRequestTable thread is started
+16:04:45 > DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable
+16:04:45 > GuiUpdatesInterface: initOrdersTable is invoked
+16:04:45 > DBQueryResults::close - closed result set
+16:04:45 > DBConnectionManage.GetEmployeesTable thread is started
+16:04:45 > DBConnectionStock.GetRequestTable done with DB, calling GUI's initRequestsTable
+16:04:45 > GuiUpdatesInterface: initRequestsTable is invoked
+16:04:45 > DBQueryResults::close - closed result set
+16:04:45 > DBQueryResults::close - closed result set
+16:04:45 > GuiUpdatesInterface: initEmployeesTable is invoked
+16:04:47 > DBConnectionPool::closeAllConnections [INFO]: The number of requested and not returned connections is: 0
+16:04:47 > DBConnectionPool::closeAllConnections: INFO - closed all connections
