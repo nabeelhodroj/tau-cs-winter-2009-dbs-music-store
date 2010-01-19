@@ -85,7 +85,7 @@ public class DBConnectionSearch {
 							"Albums.Album_id = Songs.album_id";
 					for (String songName : albumSearchQuery.getSongNames().split(";")) {
 						wherePart += " AND\n" +
-								"LOWER(Songs.song_name LIKE '%" + songName + "%'";
+								"LOWER(Songs.song_name LIKE '%" + songName + "%')";
 					}
 				}
 				
