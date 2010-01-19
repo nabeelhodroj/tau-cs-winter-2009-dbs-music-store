@@ -233,6 +233,7 @@ public class DiscDBParser {
 			 }
 
 			// move rest of the albums to "main" list, so someone else may read them
+			 parseEnded = true;
 			 addAlbumDataToList(albumList);
 			 albumList.clear();														 
 			 
