@@ -80,12 +80,13 @@ public class DBConnectionSearch {
 							"Albums.year >= " + albumSearchQuery.getYearFrom();
 				}
 				if (albumSearchQuery.hasSongNames()){
-					fromPart += ", Songs";
-					wherePart += " AND\n" +
-							"Albums.Album_id = Songs.album_id";
+					int i = 0;
 					for (String songName : albumSearchQuery.getSongNames().split(";")) {
+						fromPart += ", Songs s"+i;
 						wherePart += " AND\n" +
-								"LOWER(Songs.song_name) LIKE '%" + songName + "%'";
+								"Albums.Album_id = s"+i+".album_id";						
+						wherePart += " AND\n" +
+								"LOWER(s"+i+".song_name) LIKE '%" + songName + "%'";
 					}
 				}
 				
