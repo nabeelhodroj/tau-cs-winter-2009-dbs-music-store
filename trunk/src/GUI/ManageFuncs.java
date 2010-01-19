@@ -17,6 +17,8 @@ import Tables.*;
  */
 public class ManageFuncs {
 	
+	public static boolean isStoreManagerChanged = false;
+	
 	/**
 	 * initializes the manage tab view: enabled and disabled fields, default values etc.
 	 */
@@ -433,6 +435,7 @@ public class ManageFuncs {
 			
 		}else{ // insert employee
 			// by now the employee details are correct
+			
 			// insert employee to DB
 			DBConnectionInterface.insertUpdateEmployee(getEmployeeFromDetails(employeeID));
 		}
@@ -480,8 +483,15 @@ public class ManageFuncs {
 	 */
 	public static void insertUpdateEmployee(EmployeesTableItem employee){
 		// first check if employee exists in table, if so remove it
-		if (StaticProgramTables.employees.getEmployee(employee.getEmployeeID()) != null)
+		if (StaticProgramTables.employees.getEmployee(employee.getEmployeeID()) != null){
+			// if employee was store manager and now is not, update store manager in store details
+			if (StaticProgramTables.employees.getEmployee(employee.getEmployeeID()).getPosition()
+					== EmployeePositionsEnum.MANAGER){
+				Main.getMainLabelStoreDetailsStoreManager().setText("Manager: -");
+			}
+			
 			StaticProgramTables.employees.removeEmployee(employee.getEmployeeID());
+		}
 		
 		// insert new employee
 		StaticProgramTables.employees.addEmployee(employee);
@@ -576,6 +586,11 @@ public class ManageFuncs {
 	 * @param employeeID
 	 */
 	public static void removeEmployee(int employeeID){
+		// if employee is store manager, update the manager label in store details
+		if (StaticProgramTables.employees.getEmployee(employeeID).getPosition() == EmployeePositionsEnum.MANAGER){
+			Main.getMainLabelStoreDetailsStoreManager().setText("Manager: -");
+		}
+		
 		// remove employee from employees table
 		StaticProgramTables.employees.removeEmployee(employeeID);
 		
