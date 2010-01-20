@@ -77,11 +77,7 @@ public class DBConnectionSale {
 				
 			}
 			Debug.log("DBConnectionSale.MakeSale: Done working with DB, calling GUI's initSaleTable");
-			GuiUpdatesInterface.initSaleTable();
-			
-			// TODO remove:
-			//TablesExamples.makeSale(sale);
-			
+			GuiUpdatesInterface.initSaleTable();			
 		}		
 	}
 

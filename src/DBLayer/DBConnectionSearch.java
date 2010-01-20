@@ -15,10 +15,7 @@ public class DBConnectionSearch {
 
 		public GetAlbumsSearchResults(AlbumSearchQuery albumSearchQuery) {
 			this.albumSearchQuery = albumSearchQuery;
-		}
-		
-		// TODO: Deal with unique in case of Songs search
-		
+		}		
 		
 		public void run() {
 			Debug.log("DBConnectionSearch.GetAlbumsSearchResults thread is started",DebugOutput.FILE,DebugOutput.STDOUT);

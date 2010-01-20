@@ -12,8 +12,6 @@ import General.*;
 import General.Debug.DebugOutput;
 
 /**
- * created by Ariel
- * *** will be updated by Kalev and Vadim ***
  * 
  * DB Connection Interface
  * =======================
@@ -23,13 +21,14 @@ import General.Debug.DebugOutput;
  * 
  * *** System out prints are for debugging ***
  * 
- * ///////////////////////////////////////////////
- * //											//
- * //	to be implemented by Kalev and Vadim	//
- * //											//
- * ///////////////////////////////////////////////
- * 
- */
+ * __      __   _ _         _         ___  ___
+ * \ \    / / _(_) |_ ___  | |_ ___  |   \| _ )
+ *  \ \/\/ / '_| |  _/ -_) |  _/ _ \ | |) | _ \
+ *   \_/\_/|_| |_|\__\___|  \__\___/ |___/|___/ 
+ *  
+ **/
+
+
 public class DBConnectionInterface{
 	
 	// static fields for all thread holders:
@@ -101,9 +100,6 @@ public class DBConnectionInterface{
 				GuiUpdatesInterface.initStoresTable(stores);
 				dBQRes.close();
 			}
-			
-			// TODO remove:
-			// TablesExamples.initStoresTable();
 		}
 	}
 	////////////////
