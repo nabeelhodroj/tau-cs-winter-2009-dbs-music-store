@@ -77,8 +77,6 @@ public class DBConnectionStock {
 			Debug.log("DBConnectionStock.GetOrderAvailableStores done with DB, calling GUI's updateOrderAvailableStores");
 			GuiUpdatesInterface.updateOrderAvailableStores(availableStores);
 			dBQRes.close();
-			// TODO remove:
-			//TablesExamples.getOrderAvailableStores(query);
 		}
 	}
 	
@@ -119,10 +117,7 @@ public class DBConnectionStock {
 			
 		Debug.log("DBConnectionStock.GetOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.initOrdersTable(ordersOrRequestsTable);
-		dBQRes.close();
-		// TODO remove:
-		//TablesExamples.getOrdersTable();
-			
+		dBQRes.close();			
 		}
 	}
 	
@@ -163,9 +158,6 @@ public class DBConnectionStock {
 		Debug.log("DBConnectionStock.RefreshOrdersTable done with DB, calling GUI's initOrdersTable");
 		GuiUpdatesInterface.refreshOrdersTable(ordersOrRequestsTable);
 		dBQRes.close();
-			// TODO remove:
-			//TablesExamples.refreshOrdersTable();
-			
 		}
 		
 	}
@@ -194,10 +186,6 @@ public class DBConnectionStock {
 			
 			Debug.log("DBConnectionStock.RemoveOrder done with DB, calling GUI's removeOrder");
 			GuiUpdatesInterface.removeOrder(orderID);
-			
-			
-			// TODO remove:
-			//TablesExamples.removeOrder(orderID);
 		}
 	}
 	
@@ -240,9 +228,6 @@ public class DBConnectionStock {
 			Debug.log("DBConnectionStock.PlaceOrder [INFO]: OrderID="+retOrder.getOrderID()+", AlbumID="+retOrder.getAlbumID());
 			Debug.log("DBConnectionStock.PlaceOrder done with DB, calling GUI's addOrder");
 			GuiUpdatesInterface.addOrder(retOrder);			
-			
-			// TODO remove:
-			//TablesExamples.placeOrder(order);
 		}
 	}
 	
@@ -384,9 +369,6 @@ public class DBConnectionStock {
 					return;
 				}
 			dBQres.close();
-			
-			// TODO remove:
-			//TablesExamples.updateOrderStatus(orderID, status);
 		}
 	}
 	
@@ -429,8 +411,6 @@ public class DBConnectionStock {
 		Debug.log("DBConnectionStock.GetRequestTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.initRequestsTable(ordersOrRequestsTable);
 		dBQRes.close();
-		// TODO remove:
-		//TablesExamples.getRequestsTable();
 		}
 	}
 	
@@ -471,11 +451,6 @@ public class DBConnectionStock {
 		Debug.log("DBConnectionStock.RefreshRequestsTable done with DB, calling GUI's initRequestsTable");
 		GuiUpdatesInterface.refreshRequestsTable(ordersOrRequestsTable);
 		dBQRes.close();
-		
-		
-			// TODO remove:
-			//TablesExamples.refreshRequestsTable();
-			
 		}
 		
 	}
@@ -526,9 +501,6 @@ public class DBConnectionStock {
 			Debug.log("DBConnectionSale.GetAlbumStockInfo Done working with DB calling GUI's updateAlbumStockInformation.");
 			GuiUpdatesInterface.updateAlbumStockInformation(albumID, retStorageLocation, retQuantity, caller);
 			dBQRes.close();
-			
-			// TODO remove
-			//TablesExamples.getAlbumStockInfo(albumID, caller);
 		}
 		
 	}
@@ -569,9 +541,6 @@ public class DBConnectionStock {
 			
 			Debug.log("DBConnectionStock.GetFromSupplier done working with DB.");
 			GuiUpdatesInterface.approveOrderFromSupplierDone();			
-			
-		// TODO remove:
-		//TablesExamples.placeOrderFromSupplier(albumID, quantity);
 		}
 	}
 }

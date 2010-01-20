@@ -606,8 +606,9 @@ public class DBConnectionManage {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.println("Caught an insomniac exception.\n" +
+							"Don't really know what to do.\n" +
+							"Will continue");	
 				}
 			}
 			
