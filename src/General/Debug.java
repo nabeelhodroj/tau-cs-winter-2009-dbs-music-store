@@ -13,7 +13,7 @@ public class Debug {
 	private static final String QUERY_FILE = "log"+Main.getSep()+"DB_Music_Store_Query_Log.txt";
 	private static BufferedWriter outputFile = null;
 	private static BufferedWriter queryOutputFile = null;
-	private static final boolean DEBUG_MODE = true; 
+	private static final boolean DEBUG_MODE = false; 
 	
 	//Time
 	private static final String DATE_FORMAT = "HH:mm:ss";
